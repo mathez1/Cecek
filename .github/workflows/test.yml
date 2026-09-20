@@ -1,0 +1,43 @@
+name: test
+
+on:
+  push:
+    branches-ignore: []
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          pip install --disable-pip-version-check -r requirements.txt
+          pip install --disable-pip-version-check pytest
+
+      - name: Run tests
+        run: python -m pytest tests/ -q
+
+      # Catches an unparseable feeds.txt or a syntax error in the bot before
+      # the hourly job finds it at 03:23 on a Sunday.
+      - name: Check the bot loads and the feed list parses
+        run: |
+          python -c "
+          import bot.main, bot.brain, bot.x_client, bot.explore
+          from bot.config import FEEDS_PATH
+          sources = bot.explore.load_sources(FEEDS_PATH)
+          assert sources, 'prompts/feeds.txt parsed to zero feeds'
+          print(f'{len(sources)} feeds parsed OK')
+          "
