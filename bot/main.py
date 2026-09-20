@@ -17,7 +17,7 @@ import random
 import sys
 from pathlib import Path
 
-from bot import explore, guard, memory
+from bot import cost, explore, guard, memory
 from bot.brain import Brain, BrainError, Draft, Exploration
 from bot.config import POST_CHAR_LIMIT, Config, ConfigError, load_config
 from bot.x_client import (
@@ -130,6 +130,23 @@ def write_draft(
     )
 
 
+def _spend_note(meter: cost.Meter, state: dict, cfg: Config) -> str:
+    """The line that turns one run's price into the number that matters."""
+    spent = meter.cost(cfg.model)
+    if spent is None:
+        return ""
+
+    memory.record_spend(state, spent)
+
+    runs_per_day = 24
+    note = f"\nAt this rate: {cost.project(spent, runs_per_day)}.\n"
+
+    month = memory.spend_this_month(state)
+    if month:
+        note += f"\nModel spend so far this month: ${month:.2f}.\n"
+    return note
+
+
 def tripped_breaker(state: dict, cfg: Config, manual_run: bool) -> str | None:
     """Refuse to spend anything when the last N runs all failed.
 
@@ -236,6 +253,7 @@ def run() -> int:
         draft = write_draft(brain, exploration, recent, persona, cfg)
     except BrainError as exc:
         log.error("could not write a post: %s", exc)
+        memory.record_spend(state, brain.meter.cost(cfg.model))
         memory.record_failure(state, str(exc))
         memory.save_state(STATE_PATH, state)
         summary(f"## Run failed\n\nCould not write a post:\n\n> {exc}\n")
@@ -247,13 +265,16 @@ def run() -> int:
         log.info("DRY_RUN is on; not posting")
         memory.record_skip(state, "dry run")
         memory.save_state(STATE_PATH, state)
+        log.info("this run used %s", brain.meter.report(cfg.model))
         summary(
             "## Dry run\n\nNothing was posted. The draft was:\n\n"
             f"> {draft.post}\n\n"
             f"**Topic:** {draft.topic}  \n"
             f"**Why:** {draft.rationale}  \n"
             f"**Confidence:** {draft.confidence}  \n"
-            f"**Length:** {guard.weighted_length(draft.post)}/{POST_CHAR_LIMIT}\n"
+            f"**Length:** {guard.weighted_length(draft.post)}/{POST_CHAR_LIMIT}  \n"
+            f"**Cost:** {brain.meter.report(cfg.model)}\n"
+            + _spend_note(brain.meter, state, cfg)
         )
         return EXIT_OK
 
@@ -304,13 +325,16 @@ def run() -> int:
         log.error("could not save state after posting: %s", exc)
 
     log.info("done: %s", result.url)
+    log.info("this run used %s", brain.meter.report(cfg.model))
     summary(
         f"## Posted\n\n> {result.text}\n\n"
         f"[View on X]({result.url})\n\n"
         f"**Topic:** {draft.topic}  \n"
         f"**Why:** {draft.rationale}  \n"
         f"**Confidence:** {draft.confidence}  \n"
-        f"**Length:** {guard.weighted_length(result.text)}/{POST_CHAR_LIMIT}\n"
+        f"**Length:** {guard.weighted_length(result.text)}/{POST_CHAR_LIMIT}  \n"
+        f"**Cost:** {brain.meter.report(cfg.model)}\n"
+        + _spend_note(brain.meter, state, cfg)
     )
     return EXIT_OK
 

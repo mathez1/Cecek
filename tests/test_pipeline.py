@@ -16,6 +16,7 @@ import bot.config as config
 import bot.explore as explore
 import bot.main as main
 from bot.brain import BrainError, Draft, Exploration
+from bot.cost import Meter
 from bot.memory import load_posts, load_state
 from bot.x_client import (
     PostResult,
@@ -43,6 +44,14 @@ class FakeBrain:
         self.drafts = list(getattr(FakeBrain, "queue", [Draft(post=GOOD_POST)]))
         self.feedback_seen = []
         self.explore_calls = 0
+        # A plausible run's worth of usage, so the cost path is exercised
+        # rather than stepped around.
+        self.meter = Meter(
+            calls=2,
+            input_tokens=20_000,
+            output_tokens=4_000,
+            web_searches=4,
+        )
 
     def explore(self, digest, recent, persona):
         self.explore_calls += 1

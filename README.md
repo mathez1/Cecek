@@ -32,29 +32,34 @@ want sources in the posts and accept roughly $144/month instead of $11.
 
 ### What an hour-by-hour account costs to run
 
-Hourly is about 720 posts a month. The X side is the cheap half. Claude is not.
+Hourly is about 720 posts a month. The X side is the cheap half at around $11.
+Claude is the rest, and how much depends almost entirely on how far the model
+decides to go when it searches, which is not knowable in advance.
 
-These are estimates from the actual prompt sizes this bot builds, not measured
-bills, and real usage swings either way by roughly half depending on how much
-the model decides to search. Treat the ordering as reliable and the absolute
-numbers as a starting point.
+**So the bot meters itself.** Every run reports its real token counts and price
+in the Actions summary, and `memory/state.json` keeps a running monthly total:
 
-| Settings | Per run | X, monthly | Claude, monthly |
-|---|---|---|---|
-| **Default**: Opus 5, web search, effort `high` | ~$0.65 | ~$11 | ~$470 |
-| `EFFORT=medium` | ~$0.49 | ~$11 | ~$355 |
-| `MODEL=claude-sonnet-5` + `EFFORT=medium` | ~$0.22 | ~$11 | ~$160 |
-| `ENABLE_WEB_SEARCH=false` + `EFFORT=low` | ~$0.13 | ~$11 | ~$95 |
+> **Cost:** $0.287 (2 calls, 28,400 in, 3,900 out, 5 searches)
+> At this rate: $6.89/day, $207/month at 24 runs a day.
+> Model spend so far this month: $14.32.
+
+Run it in dry-run mode a few times and you will know your number within a day.
+Until then, the plausible range on the defaults, worked from the prompt sizes
+this bot actually builds:
+
+| Per run | Claude, monthly at hourly | When |
+|---|---|---|
+| ~$0.18 | ~$130 | short exploration, compact results |
+| **~$0.30** | **~$215** | **the typical case** |
+| ~$0.44 | ~$315 | heavy searching |
+| ~$0.65 | ~$470 | long exploration and two compose retries |
+
+On `claude-sonnet-5` every row is roughly halved, and `EFFORT=medium` takes
+another third off the output side.
 
 Cadence multiplies all of it. Every two hours halves the bill, every three
 hours thirds it, and an account that posts eight good things a day reads better
-than one that posts twenty four mediocre ones.
-
-The honest recommendation: run it on the defaults for a day, read what it
-writes, then decide what that quality is worth to you. `EFFORT=medium` with
-web search on is the sweet spot for most people. Turning web search off makes
-it noticeably less interesting, because searching is most of how it finds
-anything you could not have guessed.
+than one that posts twenty-four mediocre ones.
 
 GitHub Actions adds nothing. This repository is public, and public repos get
 unmetered standard runners, so 24 runs a day costs nothing and consumes no
@@ -71,6 +76,10 @@ The levers are all one-line changes and they are listed in
 then decide what it is worth to you.
 
 ---
+
+> Prices in this file and in `bot/cost.py` are a snapshot. They are the first
+> thing here to go stale, so they live in one table in that module and can be
+> corrected without touching anything else.
 
 ## Setup
 

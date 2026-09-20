@@ -107,6 +107,11 @@ DEFAULT_STATE: dict[str, Any] = {
     "consecutive_failures": 0,
     "total_posts": 0,
     "monthly": {},
+    # Model spend in dollars, per month, from the token counts the API
+    # reports. Recorded for every run that called Claude, including the ones
+    # that then failed to publish: those cost money too, and leaving them out
+    # is how a bill surprises someone.
+    "monthly_spend": {},
 }
 
 
@@ -133,6 +138,12 @@ def load_state(path: Path) -> dict[str, Any]:
         key: _as_int(value) for key, value in merged["monthly"].items()
     }
 
+    if not isinstance(merged.get("monthly_spend"), dict):
+        merged["monthly_spend"] = {}
+    merged["monthly_spend"] = {
+        key: _as_float(value) for key, value in merged["monthly_spend"].items()
+    }
+
     # memory/README.md invites hand edits, so a null or a string here is a
     # realistic thing to find. Coerce once, rather than letting int() raise
     # somewhere downstream on every run until someone notices.
@@ -147,6 +158,13 @@ def _as_int(value: Any) -> int:
         return int(value)
     except (TypeError, ValueError):
         return 0
+
+
+def _as_float(value: Any) -> float:
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return 0.0
 
 
 def save_state(path: Path, state: dict[str, Any]) -> None:
@@ -168,6 +186,23 @@ def save_state(path: Path, state: dict[str, Any]) -> None:
 
 def posts_this_month(state: dict[str, Any], when: datetime | None = None) -> int:
     return int(state.get("monthly", {}).get(month_key(when), 0))
+
+
+def spend_this_month(state: dict[str, Any], when: datetime | None = None) -> float:
+    return float(state.get("monthly_spend", {}).get(month_key(when), 0.0))
+
+
+def record_spend(
+    state: dict[str, Any], dollars: float | None, when: datetime | None = None
+) -> None:
+    """Add this run's model spend to the running monthly total."""
+    if not dollars:
+        return
+
+    spend = state.setdefault("monthly_spend", {})
+    key = month_key(when)
+    spend[key] = round(float(spend.get(key, 0.0)) + float(dollars), 4)
+    _prune(spend)
 
 
 def record_success(state: dict[str, Any], when: datetime | None = None) -> None:
@@ -213,11 +248,15 @@ def touch_run(state: dict[str, Any], when: datetime | None = None) -> None:
 
 def _prune_monthly(state: dict[str, Any], keep: int = 24) -> None:
     """Keep the state file small forever; it is committed on every run."""
-    monthly = state.get("monthly", {})
-    if len(monthly) <= keep:
+    _prune(state.get("monthly", {}), keep)
+    _prune(state.get("monthly_spend", {}), keep)
+
+
+def _prune(buckets: dict[str, Any], keep: int = 24) -> None:
+    if len(buckets) <= keep:
         return
-    for key in sorted(monthly)[: len(monthly) - keep]:
-        monthly.pop(key, None)
+    for key in sorted(buckets)[: len(buckets) - keep]:
+        buckets.pop(key, None)
 
 
 def recent_texts(records: Iterable[PostRecord]) -> list[str]:

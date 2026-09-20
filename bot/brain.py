@@ -23,6 +23,8 @@ from typing import Any
 
 import anthropic
 
+from bot.cost import Meter
+
 log = logging.getLogger(__name__)
 
 WEB_SEARCH_TOOL = {"type": "web_search_20260209", "name": "web_search"}
@@ -173,6 +175,8 @@ class Brain:
         )
         self._deadline: float | None = None
         self._fallbacks_enabled = cfg.enable_refusal_fallback
+        # Every call's usage lands here, so a run can price itself.
+        self.meter = Meter()
 
     # ------------------------------------------------------------------ core
 
@@ -200,10 +204,13 @@ class Brain:
                         fallbacks="default",
                         **kwargs,
                     ) as stream:
-                        return stream.get_final_message()
+                        response = stream.get_final_message()
+                else:
+                    with self.client.messages.stream(**kwargs) as stream:
+                        response = stream.get_final_message()
 
-                with self.client.messages.stream(**kwargs) as stream:
-                    return stream.get_final_message()
+                self.meter.add(response)
+                return response
 
             except anthropic.BadRequestError as exc:
                 if self._fallbacks_enabled and _looks_like_fallback_rejection(exc):
