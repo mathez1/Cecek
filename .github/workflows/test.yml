@@ -26,9 +26,7 @@ jobs:
           cache: pip
 
       - name: Install dependencies
-        run: |
-          pip install --disable-pip-version-check -r requirements.txt
-          pip install --disable-pip-version-check pytest
+        run: pip install --disable-pip-version-check -r requirements-dev.txt
 
       - name: Run tests
         run: python -m pytest tests/ -q

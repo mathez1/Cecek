@@ -326,5 +326,6 @@ python -m bot.main          # DRY_RUN=true in .env means nothing is published
 Tests need no credentials and no network:
 
 ```bash
-pip install pytest && python -m pytest tests/ -q
+pip install -r requirements-dev.txt
+python -m pytest tests/ -q
 ```
