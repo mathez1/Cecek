@@ -247,13 +247,19 @@ class TestBudget:
 
 
 class TestXFailures:
-    def test_rate_limit_is_a_soft_skip(self, repo):
+    def test_rate_limit_ends_green_but_counts_toward_the_breaker(self, repo):
         FakeXClient.queue = [XRateLimitError("slow down")]
-        assert main.run() == main.EXIT_OK, "a self-healing limit should not go red"
 
+        # Green, because it clears on its own and a red run here would train
+        # everyone to ignore red runs.
+        assert main.run() == main.EXIT_OK
         assert repo.posts == []
         assert repo.state["last_status"] == "skipped: rate limited by X"
-        assert repo.state["consecutive_failures"] == 0
+
+        # But counted, because the model call was already paid for. A bot
+        # that is permanently rate limited must not keep buying posts it
+        # cannot publish.
+        assert repo.state["consecutive_failures"] == 1
 
     def test_quota_exhaustion_needs_a_human(self, repo):
         FakeXClient.queue = [XQuotaError("usage cap exceeded")]
@@ -289,7 +295,7 @@ class TestXFailures:
 
         assert main.run() == main.EXIT_OK
         assert repo.state["last_status"] == "skipped: rate limited by X"
-        assert repo.state["consecutive_failures"] == 0
+        assert repo.state["consecutive_failures"] == 1
 
     def test_a_quota_error_during_the_rewrite_is_classified_properly(self, repo):
         FakeXClient.queue = [XDuplicateError("dup"), XQuotaError("usage cap exceeded")]
@@ -354,6 +360,23 @@ class TestCircuitBreaker:
 
         assert main.run() == main.EXIT_NEEDS_HUMAN
         assert called == [], "called Claude despite the breaker being tripped"
+
+    def test_repeated_rate_limits_eventually_trip_the_breaker(self, repo, monkeypatch):
+        # The scenario the breaker is really for: X is permanently refusing
+        # posts, so every run pays for a model call and publishes nothing.
+        self._fail_n_runs(repo, 5)
+        FakeXClient.queue = [XRateLimitError("slow down")]
+        assert main.run() == main.EXIT_OK
+        assert repo.state["consecutive_failures"] == 6
+
+        called = []
+        monkeypatch.setattr(
+            FakeBrain, "explore",
+            lambda self, d, r, p: called.append(1) or Exploration(notes="x"),
+        )
+        FakeBrain.queue = [Draft(post=OTHER_POST)]
+        assert main.run() == main.EXIT_NEEDS_HUMAN
+        assert called == [], "kept paying for model calls after six dead runs"
 
     def test_five_failures_still_runs(self, repo):
         self._fail_n_runs(repo, 5)

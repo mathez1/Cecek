@@ -17,10 +17,10 @@ on:
         type: boolean
         default: true
       effort:
-        description: 'Reasoning effort'
+        description: 'Reasoning effort (repo-default uses the EFFORT variable)'
         type: choice
-        options: [low, medium, high, xhigh, max]
-        default: high
+        options: [repo-default, low, medium, high, xhigh, max]
+        default: repo-default
 
 # contents: write is what lets the run commit memory/ back. Naming any
 # permission sets every unnamed one to none, which is the least privilege we
@@ -53,6 +53,11 @@ jobs:
 
       - name: Write a post
         id: post
+        # Deliberately below the job's 15, so that if the model call stalls
+        # this step fails on its own budget and the always() commit step still
+        # has runway to record the failure. Otherwise the run is cancelled
+        # outright, memory/ is untouched, and six stalls never trip the breaker.
+        timeout-minutes: 12
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           X_API_KEY: ${{ secrets.X_API_KEY }}
@@ -61,11 +66,19 @@ jobs:
           X_ACCESS_TOKEN_SECRET: ${{ secrets.X_ACCESS_TOKEN_SECRET }}
           DRY_RUN: ${{ inputs.dry_run || vars.DRY_RUN || 'false' }}
           MODEL: ${{ vars.MODEL }}
-          EFFORT: ${{ inputs.effort || vars.EFFORT }}
+          # A choice input always has a value, so a plain `inputs.effort ||
+          # vars.EFFORT` could never fall through to the variable. The
+          # sentinel makes "leave it alone" expressible.
+          EFFORT: ${{ (inputs.effort != 'repo-default' && inputs.effort) || vars.EFFORT }}
           ENABLE_WEB_SEARCH: ${{ vars.ENABLE_WEB_SEARCH }}
           ALLOW_LINKS: ${{ vars.ALLOW_LINKS }}
           MONTHLY_POST_BUDGET: ${{ vars.MONTHLY_POST_BUDGET }}
           FEED_SAMPLE_SIZE: ${{ vars.FEED_SAMPLE_SIZE }}
+          RECENT_POSTS_IN_CONTEXT: ${{ vars.RECENT_POSTS_IN_CONTEXT }}
+          MAX_CONSECUTIVE_FAILURES: ${{ vars.MAX_CONSECUTIVE_FAILURES }}
+          FEED_ITEMS_PER_SOURCE: ${{ vars.FEED_ITEMS_PER_SOURCE }}
+          MAX_SEARCH_ROUNDS: ${{ vars.MAX_SEARCH_ROUNDS }}
+          ENABLE_REFUSAL_FALLBACK: ${{ vars.ENABLE_REFUSAL_FALLBACK }}
         run: python -m bot.main
 
       # always(): a failed run still has something worth remembering, such as
@@ -78,7 +91,10 @@ jobs:
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add -A memory/
+          # ':!' excludes the atomic-write temp file, which a run killed
+          # mid-save can leave behind. Committing it would put it in public
+          # history permanently.
+          git add -A memory/ -- ':!memory/*.tmp'
 
           if git diff --cached --quiet; then
             echo "Nothing changed in memory/."

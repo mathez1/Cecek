@@ -56,11 +56,15 @@ def _env_str(name: str, default: str) -> str:
 @dataclass(frozen=True)
 class Config:
     # --- credentials ---
-    anthropic_api_key: str
-    x_api_key: str
-    x_api_secret: str
-    x_access_token: str
-    x_access_token_secret: str
+    # repr=False on every one of these. state.json records failure text and is
+    # committed to a public repository, where GitHub's log masking does not
+    # apply and history is permanent. A Config that reached an exception
+    # message would otherwise publish all five secrets.
+    anthropic_api_key: str = field(repr=False)
+    x_api_key: str = field(repr=False)
+    x_api_secret: str = field(repr=False)
+    x_access_token: str = field(repr=False)
+    x_access_token_secret: str = field(repr=False)
 
     # --- model ---
     model: str = "claude-opus-5"

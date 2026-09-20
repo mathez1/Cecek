@@ -408,9 +408,11 @@ def publish(
             # Self-healing. The next hourly tick will try again; a red run here
             # would train everyone to ignore red runs.
             log.warning("%s", exc)
-            # X answered, which means the credentials and the network are
-            # fine. That is worth clearing the failure streak for.
-            memory.record_skip(state, "rate limited by X", clears_failures=True)
+            # Green, because it clears on its own and a red run here would
+            # train everyone to ignore red runs. But it still counts toward
+            # the breaker: we paid for a post we could not publish, and six
+            # of those in a row means something is genuinely stuck.
+            memory.record_skip(state, "rate limited by X", counts_as_failure=True)
             summary(
                 f"## Skipped\n\nX rate limited this run:\n\n> {exc}\n\n"
                 "This clears on its own. The next scheduled run will try again.\n"

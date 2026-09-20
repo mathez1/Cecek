@@ -152,14 +152,24 @@ class TestState:
         record_skip(state, "dry run")
         assert state["consecutive_failures"] == 2
 
-    def test_a_skip_that_proves_reachability_clears_the_streak(self):
-        # A rate-limit response means X answered us, so the credentials and
-        # the network are fine.
+    def test_a_skip_that_cost_money_counts_toward_the_breaker(self):
+        # A rate limit ends the run green because it clears on its own, but
+        # the model call was already paid for. Six in a row means the bot is
+        # buying posts it cannot publish, which is what the breaker is for.
         state = load_state(Path("/nonexistent"))
         record_failure(state, "boom")
-        record_failure(state, "boom again")
 
-        record_skip(state, "rate limited by X", clears_failures=True)
+        record_skip(state, "rate limited by X", counts_as_failure=True)
+        assert state["consecutive_failures"] == 2
+
+    def test_only_a_published_post_clears_the_streak(self):
+        state = load_state(Path("/nonexistent"))
+        record_failure(state, "boom")
+        record_skip(state, "dry run")
+        record_skip(state, "budget reached")
+        assert state["consecutive_failures"] == 1
+
+        record_success(state, JAN)
         assert state["consecutive_failures"] == 0
 
     def test_monthly_history_is_pruned(self):

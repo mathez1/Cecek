@@ -183,19 +183,23 @@ def record_success(state: dict[str, Any], when: datetime | None = None) -> None:
 
 
 def record_skip(
-    state: dict[str, Any], reason: str, *, clears_failures: bool = False
+    state: dict[str, Any], reason: str, *, counts_as_failure: bool = False
 ) -> None:
-    """Note a run that did not post but did not fail either.
+    """Note a run that did not publish but should not alarm anyone.
 
-    Most skips are neutral and must leave the failure streak alone: a dry run
-    or a budget stop says nothing about whether the credentials work, and
-    clearing the streak on one would re-arm the circuit breaker for another
-    six expensive runs. Pass clears_failures=True only where the skip proves
-    the far end is reachable, as a rate-limit response from X does.
+    A skip never clears the failure streak. Only a published post does, via
+    record_success. A dry run or a budget stop says nothing about whether the
+    credentials work, so clearing on one would re-arm the circuit breaker for
+    another six expensive runs.
+
+    Pass counts_as_failure=True when the skip cost real money and produced
+    nothing, as an X rate limit does: the run still exits green because it
+    fixes itself, but six in a row means the bot is stuck paying for posts it
+    cannot publish, which is exactly what the breaker is for.
     """
     state["last_status"] = f"skipped: {reason}"
-    if clears_failures:
-        state["consecutive_failures"] = 0
+    if counts_as_failure:
+        state["consecutive_failures"] = int(state.get("consecutive_failures", 0)) + 1
 
 
 def record_failure(state: dict[str, Any], reason: str) -> None:

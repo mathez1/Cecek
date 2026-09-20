@@ -215,9 +215,15 @@ half that can fail: a revoked X token or an empty credit balance would
 otherwise let the bot spend a full month of model budget writing posts that can
 never be published.
 
-Fix the cause, then hit **Run workflow**. A manual run always gets through the
-breaker and clears the streak, so recovery is one click. Any successful post
-clears it too.
+Fix the cause, then hit **Run workflow** with the dry-run box **unticked**. A
+manual run always gets through the breaker, but only a post that actually
+publishes clears the streak, because a dry run cannot prove that the
+credentials work and those are usually what broke.
+
+An X rate limit counts toward the streak even though the run ends green. The
+model call happens before the post, so a run that gets rate limited has already
+been paid for, and six of those in a row means the bot is buying posts it
+cannot publish.
 
 ---
 
@@ -259,6 +265,9 @@ Actions → Variables). All have working defaults.
 | `ALLOW_LINKS` | `false` | On costs about 13x per post. |
 | `MONTHLY_POST_BUDGET` | `0` | `0` is unlimited. Set e.g. `400` to stop after 400 posts in a month. |
 | `FEED_SAMPLE_SIZE` | `12` | Feeds read per run. |
+| `FEED_ITEMS_PER_SOURCE` | `6` | Headlines taken from each one. |
+| `MAX_SEARCH_ROUNDS` | `6` | How long it may keep searching within one run. |
+| `ENABLE_REFUSAL_FALLBACK` | `true` | If Claude declines a request, retry it on a fallback model. Harmless to leave on: if your account is not enrolled, the bot notices once and carries on without it. |
 | `RECENT_POSTS_IN_CONTEXT` | `40` | How much history the model sees. |
 | `MAX_CONSECUTIVE_FAILURES` | `6` | Stop calling Claude after this many failed runs in a row. `0` disables it. |
 
