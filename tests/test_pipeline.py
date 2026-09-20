@@ -357,8 +357,24 @@ class TestConfigFailures:
 
 
 class TestBrainFailure:
-    def test_api_failure_is_recorded_and_goes_red(self, repo):
-        FakeBrain.queue = [BrainError("the API is down")]
+    def test_a_transient_compose_failure_is_retried(self, repo):
+        # The exploration is already paid for, so one bad response should not
+        # throw the run away.
+        FakeBrain.queue = [BrainError("truncated JSON"), Draft(post=GOOD_POST)]
+        assert main.run() == main.EXIT_OK
+        assert [p.text for p in repo.posts] == [GOOD_POST]
+
+    def test_persistent_compose_failure_goes_red(self, repo):
+        FakeBrain.queue = [BrainError("the API is down")] * 3
+        assert main.run() == main.EXIT_NEEDS_HUMAN
+        assert repo.posts == []
+        assert repo.state["consecutive_failures"] == 1
+
+    def test_exploration_failure_goes_red_immediately(self, repo, monkeypatch):
+        def boom(self, digest, recent, persona):
+            raise BrainError("web search is unavailable")
+
+        monkeypatch.setattr(FakeBrain, "explore", boom)
         assert main.run() == main.EXIT_NEEDS_HUMAN
         assert repo.state["consecutive_failures"] == 1
 

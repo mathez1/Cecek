@@ -84,7 +84,17 @@ def write_draft(
 
     for attempt in range(1, cfg.max_compose_attempts + 1):
         log.info("composing (attempt %d of %d)", attempt, cfg.max_compose_attempts)
-        draft = brain.compose(exploration, recent, persona, feedback=feedback)
+
+        try:
+            draft = brain.compose(exploration, recent, persona, feedback=feedback)
+        except BrainError as exc:
+            # A truncated or unparseable response is worth another go; we
+            # already paid for the exploration that produced these notes.
+            if attempt == cfg.max_compose_attempts:
+                raise
+            log.warning("composition failed (%s); retrying", exc)
+            last_error = str(exc)
+            continue
 
         result = guard.check_draft(
             draft.post,

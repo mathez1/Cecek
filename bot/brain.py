@@ -296,9 +296,13 @@ class Brain:
         """Turn the notes into one post, as validated JSON."""
         prompt = _compose_prompt(exploration, recent_posts, feedback)
 
+        # Adaptive thinking counts toward max_tokens, and at effort `high` it
+        # can be far larger than the ~300 tokens of JSON we actually want. Being
+        # generous here costs nothing (max_tokens is a cap, not a charge) and
+        # avoids a truncated response that will not parse.
         response = self._create(
             model=self.cfg.model,
-            max_tokens=8000,
+            max_tokens=16000,
             system=[
                 {
                     "type": "text",
