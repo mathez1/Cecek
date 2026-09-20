@@ -178,12 +178,12 @@ def run() -> int:
     state = memory.load_state(STATE_PATH)
     memory.touch_run(state)
 
-    # A run started by hand is a deliberate "try again", so it always gets
-    # through the breaker and clears the streak.
+    # A run started by hand is a deliberate "try again", so it gets through
+    # the breaker. It does NOT clear the streak by itself: the default manual
+    # run is a dry run, and a dry run proves nothing about the credentials
+    # that caused the streak. Only a published post clears it, via
+    # record_success.
     manual_run = os.environ.get("GITHUB_EVENT_NAME") == "workflow_dispatch"
-    if manual_run and state.get("consecutive_failures"):
-        log.info("manual run: clearing a streak of %d failures", state["consecutive_failures"])
-        state["consecutive_failures"] = 0
 
     breaker = tripped_breaker(state, cfg, manual_run)
     if breaker:
@@ -192,8 +192,9 @@ def run() -> int:
         summary(
             f"## Stopped, needs you\n\n{breaker}\n\n"
             "Nothing was sent to Claude, so this run cost nothing. Fix the "
-            "cause, then use **Run workflow** to clear the streak and resume. "
-            "The last error was:\n\n"
+            "cause, then use **Run workflow** with the dry-run box **unticked** "
+            "to resume: a real published post is what clears the streak, and a "
+            "dry run cannot prove the credentials work. The last error was:\n\n"
             f"> {state.get('last_status')}\n"
         )
         return EXIT_NEEDS_HUMAN
@@ -264,19 +265,43 @@ def run() -> int:
         status = str(state.get("last_status", ""))
         return EXIT_NEEDS_HUMAN if status.startswith("failed") else EXIT_OK
 
-    memory.append_post(
-        POSTS_PATH,
-        memory.PostRecord(
-            text=result.text,
-            topic=draft.topic,
-            rationale=draft.rationale,
-            sources=draft.sources or exploration.sources[:5],
-            tweet_id=result.tweet_id,
-            url=result.url,
-        ),
-    )
+    # The post is already live at this point, so a disk failure here must not
+    # lose it silently: record what we can, and put the text in the summary so
+    # a human can restore it by hand.
+    try:
+        memory.append_post(
+            POSTS_PATH,
+            memory.PostRecord(
+                text=result.text,
+                topic=draft.topic,
+                rationale=draft.rationale,
+                sources=draft.sources or exploration.sources[:5],
+                tweet_id=result.tweet_id,
+                url=result.url,
+            ),
+        )
+    except OSError as exc:
+        log.error("posted %s but could not write it to memory: %s", result.url, exc)
+        summary(
+            f"## Posted, but not recorded\n\nThe post is live at {result.url} "
+            f"but `memory/posts.jsonl` could not be written:\n\n> {exc}\n\n"
+            "The bot does not know it said this, so it may repeat itself. Add "
+            "the line by hand:\n\n```\n"
+            + memory.PostRecord(
+                text=result.text,
+                topic=draft.topic,
+                rationale=draft.rationale,
+                tweet_id=result.tweet_id,
+                url=result.url,
+            ).to_json()
+            + "\n```\n"
+        )
+
     memory.record_success(state)
-    memory.save_state(STATE_PATH, state)
+    try:
+        memory.save_state(STATE_PATH, state)
+    except OSError as exc:
+        log.error("could not save state after posting: %s", exc)
 
     log.info("done: %s", result.url)
     summary(
@@ -300,26 +325,56 @@ def publish(
     cfg: Config,
     state: dict,
 ) -> PostResult | None:
-    """Post it. Returns None if the run should end without a published post."""
-    try:
-        return client.post(draft.post)
+    """Post it. Returns None if the run should end without a published post.
 
-    except XDuplicateError as exc:
-        # X's duplicate detection is fuzzy and undocumented, so it can reject
-        # something our own similarity check passed. Worth exactly one retry.
-        log.warning("%s; rewriting once", exc)
+    The duplicate path loops back into the same try rather than posting from
+    inside the except clause, because an error raised in a handler cannot be
+    caught by that handler's siblings: a rate limit hit while retrying a
+    duplicate would otherwise be recorded as a hard failure and go red, when
+    it is the one X error that fixes itself.
+    """
+    rewrites_left = 1
+
+    while True:
         try:
-            retry = brain.compose(
-                exploration,
-                recent,
-                persona,
-                feedback=(
-                    "X rejected that post as duplicate content. Its matching is "
-                    "fuzzy, so a light rewording will be rejected too. Write "
-                    "about a different angle entirely.\n\n"
-                    f"Rejected draft:\n  {draft.post}"
-                ),
-            )
+            return client.post(draft.post)
+
+        except XDuplicateError as exc:
+            # X's duplicate detection is fuzzy and undocumented, so it can
+            # reject something our own similarity check passed.
+            if rewrites_left <= 0:
+                log.error("still duplicate after a rewrite: %s", exc)
+                memory.record_failure(state, "duplicate after a rewrite")
+                summary(
+                    "## Run failed\n\nX rejected both the post and its rewrite "
+                    f"as duplicate content:\n\n> {exc}\n"
+                )
+                return None
+
+            rewrites_left -= 1
+            log.warning("%s; rewriting once", exc)
+
+            try:
+                retry = brain.compose(
+                    exploration,
+                    recent,
+                    persona,
+                    feedback=(
+                        "X rejected that post as duplicate content. Its matching "
+                        "is fuzzy, so a light rewording will be rejected too. "
+                        "Write about a different angle entirely.\n\n"
+                        f"Rejected draft:\n  {draft.post}"
+                    ),
+                )
+            except BrainError as brain_exc:
+                log.error("could not rewrite the duplicate: %s", brain_exc)
+                memory.record_failure(state, f"duplicate, rewrite failed: {brain_exc}")
+                summary(
+                    "## Run failed\n\nX rejected the post as duplicate content "
+                    f"and the rewrite failed:\n\n> {brain_exc}\n"
+                )
+                return None
+
             check = guard.check_draft(
                 retry.post,
                 recent,
@@ -328,51 +383,61 @@ def publish(
                 similarity_threshold=cfg.similarity_threshold,
                 allow_links=cfg.allow_links,
             )
-            if not check.ok:
-                raise BrainError("; ".join(check.problems))
+            # The rewrite is held to exactly the same bar as the original,
+            # low-confidence check included.
+            if not check.ok or retry.confidence == "low":
+                reason = "; ".join(check.problems) or "low self-reported confidence"
+                log.error("the rewrite did not pass the guards: %s", reason)
+                memory.record_failure(state, f"duplicate, rewrite rejected: {reason}")
+                summary(
+                    "## Run failed\n\nX rejected the post as duplicate content, "
+                    f"and the rewrite did not pass the guards:\n\n> {reason}\n"
+                )
+                return None
+
+            # Carry every field across, not just the text, or posts.jsonl and
+            # the run summary describe the draft that was thrown away.
             draft.post = retry.post
             draft.topic = retry.topic
             draft.rationale = retry.rationale
-            return client.post(retry.post)
-        except (BrainError, XError) as retry_exc:
-            log.error("the rewrite failed too: %s", retry_exc)
-            memory.record_failure(state, f"duplicate, rewrite failed: {retry_exc}")
-            summary(f"## Run failed\n\nX rejected the post as duplicate content, "
-                    f"and the rewrite also failed:\n\n> {retry_exc}\n")
+            draft.sources = retry.sources
+            draft.confidence = retry.confidence
+            continue
+
+        except XRateLimitError as exc:
+            # Self-healing. The next hourly tick will try again; a red run here
+            # would train everyone to ignore red runs.
+            log.warning("%s", exc)
+            # X answered, which means the credentials and the network are
+            # fine. That is worth clearing the failure streak for.
+            memory.record_skip(state, "rate limited by X", clears_failures=True)
+            summary(
+                f"## Skipped\n\nX rate limited this run:\n\n> {exc}\n\n"
+                "This clears on its own. The next scheduled run will try again.\n"
+            )
             return None
 
-    except XRateLimitError as exc:
-        # Self-healing. The next hourly tick will try again; a red run here
-        # would train everyone to ignore red runs.
-        log.warning("%s", exc)
-        memory.record_skip(state, "rate limited by X")
-        summary(
-            f"## Skipped\n\nX rate limited this run:\n\n> {exc}\n\n"
-            "This clears on its own. The next scheduled run will try again.\n"
-        )
-        return None
+        except XQuotaError as exc:
+            log.error("%s", exc)
+            memory.record_failure(state, "X usage cap exceeded")
+            summary(
+                f"## Run failed, needs you\n\n> {exc}\n\n"
+                "Add credit in the X developer console, or lower the posting "
+                "frequency in `.github/workflows/post.yml`.\n"
+            )
+            return None
 
-    except XQuotaError as exc:
-        log.error("%s", exc)
-        memory.record_failure(state, "X usage cap exceeded")
-        summary(
-            f"## Run failed, needs you\n\n> {exc}\n\n"
-            "Add credit in the X developer console, or lower the posting "
-            "frequency in `.github/workflows/post.yml`.\n"
-        )
-        return None
+        except XAuthError as exc:
+            log.error("%s", exc)
+            memory.record_failure(state, "X rejected the credentials")
+            summary(f"## Run failed, needs you\n\n> {exc}\n")
+            return None
 
-    except XAuthError as exc:
-        log.error("%s", exc)
-        memory.record_failure(state, "X rejected the credentials")
-        summary(f"## Run failed, needs you\n\n> {exc}\n")
-        return None
-
-    except XError as exc:
-        log.error("posting failed: %s", exc)
-        memory.record_failure(state, str(exc))
-        summary(f"## Run failed\n\n> {exc}\n")
-        return None
+        except XError as exc:
+            log.error("posting failed: %s", exc)
+            memory.record_failure(state, str(exc))
+            summary(f"## Run failed\n\n> {exc}\n")
+            return None
 
 
 def main() -> None:

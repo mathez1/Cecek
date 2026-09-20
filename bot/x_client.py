@@ -17,15 +17,23 @@ the response body's `title`, not on the status code.
 
 from __future__ import annotations
 
+import functools
 import logging
 from dataclasses import dataclass
 from typing import Any
 
+import requests
 import tweepy
 
 log = logging.getLogger(__name__)
 
 POST_URL_TEMPLATE = "https://x.com/i/web/status/{tweet_id}"
+
+# tweepy builds its own requests.Session and never sets a timeout, so a stalled
+# api.twitter.com would block in recv until GitHub kills the job. Worse, the
+# POST may already have landed, which means a published post with nothing
+# recorded about it.
+REQUEST_TIMEOUT = 30
 
 
 class XError(RuntimeError):
@@ -100,6 +108,11 @@ class XClient:
         # inline time.sleep() until the reset timestamp, which on a 24 hour
         # window blocks the runner for hours. Failing fast and letting the next
         # hourly run try again is the correct behaviour for a cron job.
+        # tweepy exposes no timeout setting, so bind one onto the session it
+        # will use for every request.
+        session = requests.Session()
+        session.request = functools.partial(session.request, timeout=REQUEST_TIMEOUT)
+
         self.client = tweepy.Client(
             consumer_key=cfg.x_api_key,
             consumer_secret=cfg.x_api_secret,
@@ -107,6 +120,7 @@ class XClient:
             access_token_secret=cfg.x_access_token_secret,
             wait_on_rate_limit=False,
         )
+        self.client.session = session
 
     def post(self, text: str) -> PostResult:
         try:
@@ -160,6 +174,15 @@ class XClient:
 
         except tweepy.errors.TweepyException as exc:
             raise XError(f"posting to X failed: {_describe(exc)}") from exc
+
+        except requests.exceptions.RequestException as exc:
+            # Transport-level failures (DNS, reset connection, timeout) come
+            # straight from requests and are NOT TweepyException subclasses, so
+            # without this they escape every handler above and kill the run
+            # with a raw traceback.
+            err = XError(f"network problem talking to X: {exc}")
+            err.retryable = True
+            raise err from exc
 
         data = getattr(response, "data", None) or {}
         tweet_id = str(data.get("id", "")) if isinstance(data, dict) else ""

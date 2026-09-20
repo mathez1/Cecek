@@ -9,6 +9,7 @@ from bot.config import POST_CHAR_LIMIT, Config
 from bot.guard import (
     TCO_URL_WEIGHT,
     check_draft,
+    contains_link,
     normalize_for_compare,
     similarity,
     weighted_length,

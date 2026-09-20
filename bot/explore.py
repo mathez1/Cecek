@@ -11,11 +11,13 @@ whichever source posts most often.
 
 from __future__ import annotations
 
+import contextlib
 import html
 import json
 import logging
 import random
 import re
+import socket
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
@@ -28,6 +30,13 @@ log = logging.getLogger(__name__)
 USER_AGENT = (
     "Mozilla/5.0 (compatible; CecekBot/1.0; +https://github.com/mathez1/Cecek)"
 )
+
+# feedparser.parse() takes no timeout and sets none internally, and Python's
+# default socket timeout is None, meaning block forever. A server that accepts
+# the connection and then goes quiet would pin a worker thread until the job
+# hits its 15 minute ceiling and the whole run is wasted. The only lever
+# feedparser leaves is the process-wide default, so we set it around the fetch
+# and put it back afterwards.
 FETCH_TIMEOUT = 15
 MAX_ITEM_AGE = timedelta(hours=48)
 SUMMARY_CHARS = 240
@@ -57,6 +66,21 @@ class FeedItem:
 class Source:
     name: str
     url: str
+
+
+@contextlib.contextmanager
+def socket_timeout(seconds: float):
+    """Temporarily set the process-wide socket timeout, then restore it.
+
+    Scoped as tightly as possible: the Claude calls happen after this block
+    closes, so they keep the SDK's own timeout handling.
+    """
+    previous = socket.getdefaulttimeout()
+    socket.setdefaulttimeout(seconds)
+    try:
+        yield
+    finally:
+        socket.setdefaulttimeout(previous)
 
 
 def load_sources(path: Path) -> list[Source]:
@@ -250,21 +274,28 @@ def gather(
         return []
 
     rng = rng or random.Random()
-    sample = rng.sample(sources, k=min(sample_size, len(sources)))
+    sample = rng.sample(sources, k=max(0, min(sample_size, len(sources))))
+    if not sample:
+        # FEED_SAMPLE_SIZE=0 is a legitimate way to turn the digest off and
+        # lean entirely on web search. ThreadPoolExecutor(max_workers=0) would
+        # raise instead.
+        log.info("feed sampling is disabled; no digest this run")
+        return []
     log.info("sampling %d of %d feeds", len(sample), len(sources))
 
     items: list[FeedItem] = []
-    with ThreadPoolExecutor(max_workers=min(8, len(sample))) as pool:
-        futures = {
-            pool.submit(fetch_source, src, items_per_source, cache): src
-            for src in sample
-        }
-        for future in as_completed(futures):
-            src = futures[future]
-            try:
-                items.extend(future.result())
-            except Exception as exc:
-                log.warning("unexpected error fetching %s: %s", src.name, exc)
+    with socket_timeout(FETCH_TIMEOUT):
+        with ThreadPoolExecutor(max_workers=min(8, len(sample))) as pool:
+            futures = {
+                pool.submit(fetch_source, src, items_per_source, cache): src
+                for src in sample
+            }
+            for future in as_completed(futures):
+                src = futures[future]
+                try:
+                    items.extend(future.result())
+                except Exception as exc:
+                    log.warning("unexpected error fetching %s: %s", src.name, exc)
 
     # Interleave sources so one prolific feed cannot dominate the digest.
     by_source: dict[str, list[FeedItem]] = {}

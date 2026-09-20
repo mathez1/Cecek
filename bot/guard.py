@@ -29,31 +29,67 @@ _SINGLE_WEIGHT_RANGES: tuple[tuple[int, int], ...] = (
     (0x2032, 0x2037),
 )
 
-_URL_RE = re.compile(r"https?://\S+", re.IGNORECASE)
+# X linkifies a bare host, so "archive.org/x" is a link and is billed as one,
+# at roughly thirteen times the rate of a plain post. Matching only on a
+# scheme would let those through the link guard and under-count them by 23.
+_TLDS = (
+    "com|org|net|edu|gov|mil|int|info|biz|io|ai|co|me|tv|fm|gg|sh|ly|to|so|is"
+    "|dev|app|xyz|news|blog|tech|site|online|store|cloud|space|wiki|press"
+    "|us|uk|ca|au|nz|de|fr|es|it|nl|be|ch|at|se|no|dk|fi|pl|pt|ie|gr|cz"
+    "|ru|ua|jp|cn|kr|in|br|mx|ar|za|il|tr|eu"
+)
+_URL_RE = re.compile(
+    r"(?:https?://|www\.)[^\s<>\"']+"
+    r"|(?<![@\w.])(?:[a-z0-9](?:[a-z0-9\-]*[a-z0-9])?\.)+(?:" + _TLDS + r")"
+    r"(?:/[^\s<>\"']*)?(?!\w)",
+    re.IGNORECASE,
+)
+
+# Punctuation that ends a sentence rather than the link inside it.
+_TRAILING_PUNCT = ".,;:!?)]}'\"…"
+
 _WS_RE = re.compile(r"\s+")
 _PUNCT_RE = re.compile(r"[^\w\s]", re.UNICODE)
 
-# One emoji costs 2 whether it is a single code point or a seven-code-point ZWJ
-# family sequence, because X parses emoji before weighting. This matches whole
-# sequences (base + modifiers + ZWJ-joined parts + flag tags + keycaps). If a
-# sequence slips past it the parts are counted separately, which over-counts:
-# the safe direction to be wrong in.
+# One emoji costs 2 whether it is a single code point, a two-code-point flag,
+# or a seven-code-point ZWJ family sequence, because X parses emoji before
+# weighting. If a sequence slips past this the parts are counted separately,
+# which over-counts: the safe direction to be wrong in.
 _EMOJI_CORE = (
     r"[\U0001F000-\U0001FAFF\U00002600-\U000027BF\U00002B00-\U00002BFF"
-    r"\U00002190-\U000021FF\U0001F1E6-\U0001F1FF\U00002B50\U00002934-\U00002935"
+    r"\U00002190-\U000021FF\U00002B50\U00002934-\U00002935"
     r"\U000025A0-\U000025FF\U00002049\U0000203C\U00002122\U00002139]"
 )
-_EMOJI_MODS = r"[\U0001F3FB-\U0001F3FF\uFE0F\uFE0E\u20E3\U000E0020-\U000E007F]"
+_EMOJI_MODS = r"[\U0001F3FB-\U0001F3FF️︎⃣\U000E0020-\U000E007F]"
 _EMOJI_RE = re.compile(
-    rf"(?:[0-9#*]\uFE0F?\u20E3)"                     # keycap sequences
-    rf"|(?:{_EMOJI_CORE}{_EMOJI_MODS}*(?:\u200D{_EMOJI_CORE}{_EMOJI_MODS}*)*)"
+    r"(?:[\U0001F1E6-\U0001F1FF]{2})"                 # regional-indicator flags
+    rf"|(?:[0-9#*]️?⃣)"                     # keycap sequences
+    rf"|(?:{_EMOJI_CORE}{_EMOJI_MODS}*(?:‍{_EMOJI_CORE}{_EMOJI_MODS}*)*)"
 )
+
+
+def contains_link(text: str) -> bool:
+    return bool(_URL_RE.search(text))
+
+
+def _replace_urls(text: str) -> tuple[str, int]:
+    """Strip links, keeping any sentence punctuation they swallowed."""
+    count = 0
+
+    def repl(match: re.Match) -> str:
+        nonlocal count
+        count += 1
+        whole = match.group(0)
+        link = whole.rstrip(_TRAILING_PUNCT)
+        return whole[len(link):]
+
+    return _URL_RE.sub(repl, text), count
 
 
 def weighted_length(text: str) -> int:
     """X's weighted character count for a standard post. Budget is 280."""
     # 1. Links collapse to a fixed weight whatever their real length.
-    without_urls, url_count = _URL_RE.subn("", text)
+    without_urls, url_count = _replace_urls(text)
     total = url_count * TCO_URL_WEIGHT
 
     normalized = unicodedata.normalize("NFC", without_urls)
@@ -62,10 +98,11 @@ def weighted_length(text: str) -> int:
     without_emoji, emoji_count = _EMOJI_RE.subn("", normalized)
     total += emoji_count * DEFAULT_WEIGHT
 
-    # 3. Everything left is weighted by code point range.
+    # 3. Every remaining code point is weighted by range. Combining marks are
+    #    NOT skipped: twitter-text counts code points, not grapheme clusters,
+    #    so Hebrew points and Arabic harakat each cost their own weight. NFC
+    #    has already folded away the ones that have a precomposed form.
     for char in without_emoji:
-        if unicodedata.combining(char):
-            continue  # rides along with its base character
         total += 1 if _is_single_weight(ord(char)) else DEFAULT_WEIGHT
 
     return total
@@ -121,7 +158,10 @@ def similarity(a: str, b: str) -> float:
     if na == nb:
         return 1.0
 
-    ratio = SequenceMatcher(None, na, nb).ratio()
+    # autojunk would treat frequent characters as noise once a sequence
+    # reaches 200 characters, quietly degrading this view for exactly the
+    # long posts we most want to compare.
+    ratio = SequenceMatcher(None, na, nb, autojunk=False).ratio()
 
     tokens_a = {t for t in na.split() if len(t) > 3}
     tokens_b = {t for t in nb.split() if len(t) > 3}
@@ -182,7 +222,7 @@ def check_draft(
     if stripped and length < 25:
         problems.append(f"too short to be worth posting ({length} characters)")
 
-    if not allow_links and _URL_RE.search(stripped):
+    if not allow_links and contains_link(stripped):
         problems.append(
             "contains a link. Links are disabled: X bills a post containing a "
             "URL at roughly 13x the price of a plain one. Say the thing itself "

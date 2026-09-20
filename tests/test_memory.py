@@ -1,5 +1,7 @@
 import json
 import sys
+
+import pytest
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -64,6 +66,20 @@ class TestPostLog:
         )
         assert load_posts(path)[0].text == "hi"
 
+    def test_limit_zero_returns_nothing(self, tmp_path):
+        # Regression: records[-0:] is the whole list, so limit=0 used to inline
+        # the entire post log into the prompt instead of none of it.
+        path = tmp_path / "posts.jsonl"
+        for i in range(10):
+            append_post(path, PostRecord(text=f"post {i}"))
+        assert load_posts(path, limit=0) == []
+
+    def test_limit_none_returns_everything(self, tmp_path):
+        path = tmp_path / "posts.jsonl"
+        for i in range(10):
+            append_post(path, PostRecord(text=f"post {i}"))
+        assert len(load_posts(path, limit=None)) == 10
+
     def test_limit_returns_the_newest(self, tmp_path):
         path = tmp_path / "posts.jsonl"
         for i in range(10):
@@ -119,12 +135,32 @@ class TestState:
         assert state["consecutive_failures"] == 0
         assert state["last_status"] == "posted"
 
-    def test_skip_does_not_count_as_failure(self):
+    def test_a_skip_does_not_count_as_a_failure(self):
         state = load_state(Path("/nonexistent"))
-        record_failure(state, "boom")
         record_skip(state, "budget reached")
         assert state["consecutive_failures"] == 0
         assert "budget reached" in state["last_status"]
+
+    def test_a_neutral_skip_leaves_the_failure_streak_alone(self):
+        # A dry run or a budget stop says nothing about whether the
+        # credentials work, so clearing the streak would re-arm the circuit
+        # breaker for another six expensive runs.
+        state = load_state(Path("/nonexistent"))
+        record_failure(state, "boom")
+        record_failure(state, "boom again")
+
+        record_skip(state, "dry run")
+        assert state["consecutive_failures"] == 2
+
+    def test_a_skip_that_proves_reachability_clears_the_streak(self):
+        # A rate-limit response means X answered us, so the credentials and
+        # the network are fine.
+        state = load_state(Path("/nonexistent"))
+        record_failure(state, "boom")
+        record_failure(state, "boom again")
+
+        record_skip(state, "rate limited by X", clears_failures=True)
+        assert state["consecutive_failures"] == 0
 
     def test_monthly_history_is_pruned(self):
         state = load_state(Path("/nonexistent"))
@@ -134,6 +170,61 @@ class TestState:
         assert len(state["monthly"]) <= 24
         # the most recent month survives pruning
         assert month_key(datetime(2025, 12, 1, tzinfo=timezone.utc)) in state["monthly"]
+
+    def test_null_counters_from_a_hand_edit_are_coerced(self):
+        # memory/README.md invites hand edits, and a null here used to make
+        # every later run die on int(None).
+        import json as _json
+
+        path = Path("/nonexistent")
+        state = load_state(path)
+        state.update({"consecutive_failures": None, "total_posts": "twelve"})
+        # simulate a reload of that hand-edited file
+        import tempfile
+
+        with tempfile.TemporaryDirectory() as d:
+            p = Path(d) / "state.json"
+            p.write_text(
+                _json.dumps({
+                    "consecutive_failures": None,
+                    "total_posts": "twelve",
+                    "monthly": {"2026-01": None},
+                }),
+                encoding="utf-8",
+            )
+            reloaded = load_state(p)
+
+        assert reloaded["consecutive_failures"] == 0
+        assert reloaded["total_posts"] == 0
+        assert reloaded["monthly"]["2026-01"] == 0
+
+    def test_save_is_atomic_and_leaves_no_temp_file(self, tmp_path):
+        path = tmp_path / "state.json"
+        state = load_state(path)
+        record_success(state, JAN)
+        save_state(path, state)
+
+        assert not (tmp_path / "state.json.tmp").exists()
+        assert load_state(path)["total_posts"] == 1
+
+    def test_a_failed_save_leaves_the_old_file_intact(self, tmp_path, monkeypatch):
+        path = tmp_path / "state.json"
+        state = load_state(path)
+        record_success(state, JAN)
+        save_state(path, state)
+
+        import os as _os
+
+        def boom(src, dst):
+            raise OSError("no space left on device")
+
+        monkeypatch.setattr(_os, "replace", boom)
+        state["total_posts"] = 999
+        with pytest.raises(OSError):
+            save_state(path, state)
+
+        # The old, good file is still there rather than a truncated one.
+        assert load_state(path)["total_posts"] == 1
 
     def test_touch_run_records_time(self):
         state = load_state(Path("/nonexistent"))

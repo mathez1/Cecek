@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import json
 import logging
+import os
 from dataclasses import asdict, dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
@@ -84,9 +85,13 @@ def load_posts(path: Path, limit: int | None = None) -> list[PostRecord]:
         except (json.JSONDecodeError, TypeError) as exc:
             log.warning("skipping malformed line %d in %s: %s", line_no, path, exc)
 
-    if limit is not None and limit >= 0:
-        return records[-limit:]
-    return records
+    if limit is None:
+        return records
+    if limit <= 0:
+        # records[-0:] is the whole list, which is the opposite of what
+        # "show me zero posts" asks for.
+        return []
+    return records[-limit:]
 
 
 def append_post(path: Path, record: PostRecord) -> None:
@@ -121,17 +126,44 @@ def load_state(path: Path) -> dict[str, Any]:
 
     merged = json.loads(json.dumps(DEFAULT_STATE))
     merged.update(data)
+
     if not isinstance(merged.get("monthly"), dict):
         merged["monthly"] = {}
+    merged["monthly"] = {
+        key: _as_int(value) for key, value in merged["monthly"].items()
+    }
+
+    # memory/README.md invites hand edits, so a null or a string here is a
+    # realistic thing to find. Coerce once, rather than letting int() raise
+    # somewhere downstream on every run until someone notices.
+    for key in ("consecutive_failures", "total_posts"):
+        merged[key] = _as_int(merged.get(key))
+
     return merged
 
 
+def _as_int(value: Any) -> int:
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return 0
+
+
 def save_state(path: Path, state: dict[str, Any]) -> None:
+    """Write atomically.
+
+    This file is rewritten on every one of ~720 runs a month, and a run can be
+    killed mid-write when the job hits its timeout. A half-written state.json
+    parses as corrupt and silently resets the monthly budget counter, so the
+    write goes to a temp file in the same directory and is renamed over the
+    original, which is atomic on POSIX.
+    """
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(
-        json.dumps(state, indent=2, sort_keys=True, ensure_ascii=False) + "\n",
-        encoding="utf-8",
-    )
+    payload = json.dumps(state, indent=2, sort_keys=True, ensure_ascii=False) + "\n"
+
+    tmp = path.with_name(path.name + ".tmp")
+    tmp.write_text(payload, encoding="utf-8")
+    os.replace(tmp, path)
 
 
 def posts_this_month(state: dict[str, Any], when: datetime | None = None) -> int:
@@ -150,9 +182,20 @@ def record_success(state: dict[str, Any], when: datetime | None = None) -> None:
     _prune_monthly(state)
 
 
-def record_skip(state: dict[str, Any], reason: str) -> None:
+def record_skip(
+    state: dict[str, Any], reason: str, *, clears_failures: bool = False
+) -> None:
+    """Note a run that did not post but did not fail either.
+
+    Most skips are neutral and must leave the failure streak alone: a dry run
+    or a budget stop says nothing about whether the credentials work, and
+    clearing the streak on one would re-arm the circuit breaker for another
+    six expensive runs. Pass clears_failures=True only where the skip proves
+    the far end is reachable, as a rate-limit response from X does.
+    """
     state["last_status"] = f"skipped: {reason}"
-    state["consecutive_failures"] = 0
+    if clears_failures:
+        state["consecutive_failures"] = 0
 
 
 def record_failure(state: dict[str, Any], reason: str) -> None:

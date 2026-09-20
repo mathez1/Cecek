@@ -279,6 +279,60 @@ class TestXFailures:
         assert main.run() == main.EXIT_NEEDS_HUMAN
         assert repo.posts == []
 
+    def test_a_rate_limit_during_the_rewrite_is_still_a_soft_skip(self, repo):
+        # Regression: the retry used to post from inside the duplicate
+        # handler, so an error raised there could not reach the sibling
+        # handlers. A self-healing rate limit was recorded as a hard failure
+        # and the run went red.
+        FakeXClient.queue = [XDuplicateError("dup"), XRateLimitError("slow down")]
+        FakeBrain.queue = [Draft(post=GOOD_POST), Draft(post=OTHER_POST)]
+
+        assert main.run() == main.EXIT_OK
+        assert repo.state["last_status"] == "skipped: rate limited by X"
+        assert repo.state["consecutive_failures"] == 0
+
+    def test_a_quota_error_during_the_rewrite_is_classified_properly(self, repo):
+        FakeXClient.queue = [XDuplicateError("dup"), XQuotaError("usage cap exceeded")]
+        FakeBrain.queue = [Draft(post=GOOD_POST), Draft(post=OTHER_POST)]
+
+        assert main.run() == main.EXIT_NEEDS_HUMAN
+        assert repo.state["last_status"] == "failed: X usage cap exceeded"
+
+    def test_a_low_confidence_rewrite_is_not_published(self, repo):
+        # The rewrite has to clear the same bar as the original draft.
+        FakeXClient.queue = [XDuplicateError("dup"), None]
+        FakeBrain.queue = [
+            Draft(post=GOOD_POST, confidence="high"),
+            Draft(post=OTHER_POST, confidence="low"),
+        ]
+
+        assert main.run() == main.EXIT_NEEDS_HUMAN
+        assert repo.posts == []
+
+    def test_a_rewrite_that_fails_the_guards_is_not_published(self, repo):
+        FakeXClient.queue = [XDuplicateError("dup"), None]
+        FakeBrain.queue = [Draft(post=GOOD_POST), Draft(post="#spam " + "x" * 400)]
+
+        assert main.run() == main.EXIT_NEEDS_HUMAN
+        assert repo.posts == []
+
+    def test_the_rewrite_records_its_own_topic_and_sources(self, repo):
+        # Regression: only the text was carried across, so posts.jsonl
+        # attributed the rejected draft's sources to the published one.
+        FakeXClient.queue = [XDuplicateError("dup"), None]
+        FakeBrain.queue = [
+            Draft(post=GOOD_POST, topic="concrete", sources=["https://old.example/1"]),
+            Draft(post=OTHER_POST, topic="gears", sources=["https://new.example/2"],
+                  rationale="the gearing is the point"),
+        ]
+
+        assert main.run() == main.EXIT_OK
+        record = repo.posts[0]
+        assert record.text == OTHER_POST
+        assert record.topic == "gears"
+        assert record.sources == ["https://new.example/2"]
+        assert record.rationale == "the gearing is the point"
+
 
 class TestCircuitBreaker:
     def _fail_n_runs(self, repo, n):
@@ -306,13 +360,26 @@ class TestCircuitBreaker:
         assert main.run() == main.EXIT_OK
         assert len(repo.posts) == 1
 
-    def test_a_manual_run_clears_the_streak(self, repo, monkeypatch):
+    def test_a_manual_run_gets_through_and_a_real_post_clears_the_streak(self, repo, monkeypatch):
         self._fail_n_runs(repo, 10)
         monkeypatch.setenv("GITHUB_EVENT_NAME", "workflow_dispatch")
 
         assert main.run() == main.EXIT_OK
         assert len(repo.posts) == 1
         assert repo.state["consecutive_failures"] == 0
+
+    def test_a_manual_DRY_run_does_not_clear_the_streak(self, repo, monkeypatch):
+        # Regression: the streak used to be cleared at the top of the run just
+        # for being manual. The default manual run is a dry run, which proves
+        # nothing about the credentials that caused the streak, so it would
+        # re-arm the bot to burn another six runs before stopping again.
+        self._fail_n_runs(repo, 10)
+        monkeypatch.setenv("GITHUB_EVENT_NAME", "workflow_dispatch")
+        monkeypatch.setenv("DRY_RUN", "true")
+
+        assert main.run() == main.EXIT_OK
+        assert repo.posts == []
+        assert repo.state["consecutive_failures"] == 10, "a dry run cleared the streak"
 
     def test_scheduled_run_does_not_clear_the_streak(self, repo, monkeypatch):
         self._fail_n_runs(repo, 6)

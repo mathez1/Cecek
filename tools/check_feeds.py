@@ -19,7 +19,13 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import feedparser  # noqa: E402
 
 from bot.config import FEEDS_PATH  # noqa: E402
-from bot.explore import USER_AGENT, Source, load_sources  # noqa: E402
+from bot.explore import (  # noqa: E402
+    FETCH_TIMEOUT,
+    USER_AGENT,
+    Source,
+    load_sources,
+    socket_timeout,
+)
 
 
 def check(source: Source) -> tuple[Source, bool, str]:
@@ -53,8 +59,11 @@ def main() -> int:
 
     print(f"Checking {len(sources)} feeds from {FEEDS_PATH}\n")
 
-    with ThreadPoolExecutor(max_workers=10) as pool:
-        results = list(pool.map(check, sources))
+    # Same reason as the bot: feedparser has no timeout of its own, and a
+    # silent server would hang this forever.
+    with socket_timeout(FETCH_TIMEOUT):
+        with ThreadPoolExecutor(max_workers=10) as pool:
+            results = list(pool.map(check, sources))
 
     working = [r for r in results if r[1]]
     broken = [r for r in results if not r[1]]

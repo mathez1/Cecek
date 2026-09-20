@@ -31,6 +31,11 @@ WEB_FETCH_TOOL = {"type": "web_fetch_20260209", "name": "web_fetch"}
 # Scalar server-side fallback form. Pairs only with this beta flag.
 FALLBACK_BETA = "server-side-fallback-2026-07-01"
 
+# Per request, and for all retries of one logical call. Sized so the worst case
+# stays inside the workflow's 15 minute job timeout.
+REQUEST_TIMEOUT = 240.0
+TOTAL_BUDGET_SECONDS = 600.0
+
 DRAFT_SCHEMA: dict[str, Any] = {
     "type": "object",
     "properties": {
@@ -135,11 +140,17 @@ def _sources_of(response: Any) -> list[str]:
 class Brain:
     def __init__(self, cfg) -> None:
         self.cfg = cfg
+        # The workflow kills the job at 15 minutes. The SDK's own retries
+        # multiply against our retry loop below, so a generous per-request
+        # timeout plus generous retries could spend well over an hour in here
+        # and never reach the error handling at all. Keep the whole budget
+        # comfortably inside the job's.
         self.client = anthropic.Anthropic(
             api_key=cfg.anthropic_api_key,
-            timeout=600.0,
-            max_retries=3,
+            timeout=REQUEST_TIMEOUT,
+            max_retries=1,
         )
+        self._deadline: float | None = None
         self._fallbacks_enabled = cfg.enable_refusal_fallback
 
     # ------------------------------------------------------------------ core
@@ -152,7 +163,15 @@ class Brain:
         rather than letting an unattended run die over a nice-to-have.
         """
         attempts = 4
+        deadline = time.monotonic() + TOTAL_BUDGET_SECONDS
+
         for attempt in range(1, attempts + 1):
+            if time.monotonic() > deadline:
+                raise BrainError(
+                    "gave up on the Anthropic API after "
+                    f"{TOTAL_BUDGET_SECONDS:.0f}s of retries"
+                )
+
             try:
                 if self._fallbacks_enabled:
                     return self.client.beta.messages.create(
@@ -207,12 +226,20 @@ class Brain:
                     continue
                 raise BrainError(f"API error {exc.status_code}: {exc}") from exc
 
-            except (anthropic.APIConnectionError, anthropic.APITimeoutError) as exc:
+            except anthropic.APIConnectionError as exc:
+                # APITimeoutError is a subclass, so this covers both.
                 if attempt == attempts:
                     raise BrainError(f"could not reach the Anthropic API: {exc}") from exc
                 delay = _backoff(attempt)
                 log.warning("connection problem (%s); sleeping %.0fs", exc, delay)
                 time.sleep(delay)
+
+            except anthropic.AnthropicError as exc:
+                # Catch-all for the rest of the SDK's hierarchy, notably
+                # APIResponseValidationError: if the API ships a response shape
+                # this client version cannot model, that must surface as a
+                # recorded failure rather than a raw traceback at 03:23.
+                raise BrainError(f"unexpected Anthropic SDK error: {exc}") from exc
 
         raise BrainError("exhausted retries talking to the Anthropic API")
 

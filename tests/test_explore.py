@@ -1,12 +1,25 @@
 import json
+import socket
 import sys
+import threading
 from pathlib import Path
 from types import SimpleNamespace
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
+import pytest
+
 import bot.explore as explore
-from bot.explore import FeedCache, FeedItem, Source, build_digest, gather, load_sources
+from bot.explore import (
+    FETCH_TIMEOUT,
+    FeedCache,
+    FeedItem,
+    Source,
+    build_digest,
+    gather,
+    load_sources,
+    socket_timeout,
+)
 
 
 class TestLoadSources:
@@ -187,6 +200,15 @@ class TestGatherAndDigest:
     def test_empty_sources_is_empty(self):
         assert gather([], sample_size=5, items_per_source=5) == []
 
+    def test_sample_size_zero_disables_the_digest(self):
+        # Regression: ThreadPoolExecutor(max_workers=0) raises ValueError, so
+        # FEED_SAMPLE_SIZE=0 used to crash the run rather than turn feeds off.
+        sources = [Source("A", "https://a.com/f"), Source("B", "https://b.com/f")]
+        assert gather(sources, sample_size=0, items_per_source=5) == []
+
+    def test_negative_sample_size_is_clamped(self):
+        assert gather([Source("A", "https://a.com/f")], sample_size=-3, items_per_source=5) == []
+
     def test_digest_is_empty_for_no_items(self):
         assert build_digest([]) == ""
 
@@ -205,3 +227,61 @@ class TestGatherAndDigest:
     def test_digest_respects_max_items(self):
         items = [FeedItem(source="S", title=f"t{i}", link="") for i in range(100)]
         assert build_digest(items, max_items=5).count("[S]") == 5
+
+
+class TestSocketTimeout:
+    """feedparser takes no timeout, so the process-wide default is the only
+    lever. Without it a silent feed server pins a worker until the job's
+    15 minute ceiling kills the run."""
+
+    def test_sets_and_restores_the_default(self):
+        before = socket.getdefaulttimeout()
+        with socket_timeout(7.5):
+            assert socket.getdefaulttimeout() == 7.5
+        assert socket.getdefaulttimeout() == before
+
+    def test_restores_even_when_the_body_raises(self):
+        before = socket.getdefaulttimeout()
+        with pytest.raises(ValueError):
+            with socket_timeout(7.5):
+                raise ValueError("boom")
+        assert socket.getdefaulttimeout() == before
+
+    def test_gather_applies_it_while_fetching(self, monkeypatch):
+        seen = []
+
+        def fake_fetch(source, items_per_source, cache=None):
+            seen.append(socket.getdefaulttimeout())
+            return []
+
+        monkeypatch.setattr(explore, "fetch_source", fake_fetch)
+        before = socket.getdefaulttimeout()
+
+        gather([Source("A", "https://a.com/f")], sample_size=1, items_per_source=3)
+
+        assert seen == [FETCH_TIMEOUT], "feeds were fetched without a timeout"
+        assert socket.getdefaulttimeout() == before, "timeout leaked past the fetch"
+
+    def test_gather_restores_it_when_a_worker_explodes(self, monkeypatch):
+        def boom(source, items_per_source, cache=None):
+            raise RuntimeError("socket exploded")
+
+        monkeypatch.setattr(explore, "fetch_source", boom)
+        before = socket.getdefaulttimeout()
+
+        items = gather([Source("A", "https://a.com/f")], sample_size=1, items_per_source=3)
+
+        assert items == []
+        assert socket.getdefaulttimeout() == before
+
+    def test_a_worker_thread_inherits_the_timeout(self):
+        """The timeout is process-wide, so threads started inside the block
+        must see it. This is the property the fix actually depends on."""
+        observed = []
+
+        with socket_timeout(3.25):
+            thread = threading.Thread(target=lambda: observed.append(socket.getdefaulttimeout()))
+            thread.start()
+            thread.join()
+
+        assert observed == [3.25]
