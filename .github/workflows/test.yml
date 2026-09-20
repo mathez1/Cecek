@@ -1,9 +1,12 @@
 name: test
 
+# Every push, on every branch. The tests need no secrets and the repo is
+# public, so Actions minutes are unmetered: there is no reason to wait for a
+# pull request to find out the bot no longer imports. `pull_request` is left
+# off deliberately, because with an unfiltered `push` it would run everything
+# twice on any branch that has one open.
 on:
   push:
-    branches: [main]
-  pull_request:
   workflow_dispatch:
 
 permissions:
