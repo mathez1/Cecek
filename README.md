@@ -254,7 +254,7 @@ Actions → Variables). All have working defaults.
 |---|---|---|
 | `DRY_RUN` | `false` | Write a post but do not publish it. Setting this to `true` is a master pause switch: it also overrides an unticked dry-run box on a manual run. Unset it to post again. |
 | `MODEL` | `claude-opus-5` | `claude-sonnet-5` is roughly 2.5x cheaper. |
-| `EFFORT` | `high` | `low`, `medium`, `high`, `xhigh`, `max`. The biggest cost lever. |
+| `EFFORT` | `high` | `low`, `medium`, `high`, `xhigh`, `max`. The biggest cost lever. The token ceiling scales with it, so `max` is genuinely expensive. |
 | `ENABLE_WEB_SEARCH` | `true` | Off means it works from feeds and memory only. Much cheaper, noticeably less interesting. |
 | `ALLOW_LINKS` | `false` | On costs about 13x per post. |
 | `MONTHLY_POST_BUDGET` | `0` | `0` is unlimited. Set e.g. `400` to stop after 400 posts in a month. |

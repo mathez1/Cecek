@@ -17,7 +17,14 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 import pytest
 
 import bot.brain as brain_mod
-from bot.brain import Brain, BrainError, Exploration, _sources_of, _text_of
+from bot.brain import (
+    Brain,
+    BrainError,
+    Exploration,
+    _sources_of,
+    _text_of,
+    max_tokens_for,
+)
 from bot.config import Config
 
 
@@ -141,20 +148,51 @@ class TestExplore:
         with pytest.raises(BrainError, match="declined"):
             brain.explore("digest", [], "persona")
 
-    def test_pause_turn_resumes_and_accumulates(self, brain, monkeypatch):
+    def test_pause_turn_resumes_with_the_documented_shape(self, brain, monkeypatch):
         paused = response([text("partial"), search_ok("https://a")], "pause_turn")
         done = response([text("complete"), search_ok("https://b")], "end_turn")
         calls = self._wire(brain, [paused, done], monkeypatch)
 
-        result = brain.explore("digest", [], "persona")
+        brain.explore("digest", [], "persona")
 
         assert len(calls) == 2, "did not resume the paused turn"
-        # The resume resends the original user turn plus the paused assistant
-        # turn, with no extra user message.
+        # The resume resends the user turn plus the paused assistant turn, with
+        # no extra "continue" message: the API resumes off the trailing
+        # server_tool_use block.
         resumed = calls[1]["messages"]
         assert resumed[0]["role"] == "user"
         assert resumed[-1]["role"] == "assistant"
-        assert result.notes == "complete"
+        assert all(m["role"] != "user" for m in resumed[1:])
+
+    def test_pause_turn_keeps_what_earlier_rounds_found(self, brain, monkeypatch):
+        # Regression: each paused response carries only its OWN segment of the
+        # turn, so reading just the final one threw away everything found
+        # before the last pause, which is usually most of the exploration.
+        paused = response([text("partial"), search_ok("https://a", "https://b")], "pause_turn")
+        done = response([text("complete"), search_ok("https://c")], "end_turn")
+        self._wire(brain, [paused, done], monkeypatch)
+
+        result = brain.explore("digest", [], "persona")
+
+        assert "partial" in result.notes
+        assert "complete" in result.notes
+        assert result.sources == ["https://a", "https://b", "https://c"]
+
+    def test_a_round_with_no_text_does_not_blank_the_notes(self, brain, monkeypatch):
+        paused = response([text("the good part"), search_ok("https://a")], "pause_turn")
+        silent = response([search_ok("https://b")], "end_turn")   # no text block
+        self._wire(brain, [paused, silent], monkeypatch)
+
+        result = brain.explore("digest", [], "persona")
+        assert result.notes == "the good part"
+        assert result.sources == ["https://a", "https://b"]
+
+    def test_sources_are_deduplicated_across_rounds(self, brain, monkeypatch):
+        paused = response([text("one"), search_ok("https://a")], "pause_turn")
+        done = response([text("two"), search_ok("https://a", "https://b")], "end_turn")
+        self._wire(brain, [paused, done], monkeypatch)
+
+        assert brain.explore("digest", [], "persona").sources == ["https://a", "https://b"]
 
     def test_pause_turn_is_bounded(self, brain, monkeypatch):
         always_paused = response([text("still going")], "pause_turn")
@@ -163,9 +201,9 @@ class TestExplore:
         result = brain.explore("digest", [], "persona")
 
         # 1 initial call + max_search_rounds resumes, then it gives up and uses
-        # what it has rather than looping forever.
+        # what it has rather than looping while the meter runs.
         assert len(calls) == 1 + brain.cfg.max_search_rounds
-        assert result.notes == "still going"
+        assert "still going" in result.notes
 
     def test_web_search_off_sends_no_tools(self, cfg, monkeypatch):
         monkeypatch.setattr(brain_mod.anthropic, "Anthropic", lambda **kw: NS())
@@ -245,3 +283,137 @@ class TestCompose:
         calls = self._wire(brain, json.dumps({"post": "p"}), monkeypatch)
         brain.compose(Exploration(notes="n"), [], "persona", feedback="TOO LONG")
         assert "TOO LONG" in calls[0]["messages"][0]["content"]
+
+
+class TestMaxTokens:
+    """Thinking counts toward max_tokens, so a fixed ceiling truncates the
+    response mid-object at high effort and the JSON will not parse."""
+
+    def test_the_ceiling_rises_with_effort(self):
+        levels = ["low", "medium", "high", "xhigh", "max"]
+        values = [max_tokens_for(e) for e in levels]
+        assert values == sorted(values)
+        assert len(set(values)) == len(values)
+
+    def test_an_unknown_effort_gets_a_safe_default(self):
+        assert max_tokens_for("bogus") >= max_tokens_for("high")
+
+    def test_both_calls_use_the_configured_effort(self, brain, monkeypatch):
+        calls = []
+
+        def fake_create(**kwargs):
+            calls.append(kwargs)
+            return response([text('{"post": "p"}')])
+
+        monkeypatch.setattr(brain, "_create", fake_create)
+        brain.explore("digest", [], "persona")
+        brain.compose(Exploration(notes="n"), [], "persona")
+
+        expected = max_tokens_for(brain.cfg.effort)
+        assert [c["max_tokens"] for c in calls] == [expected, expected]
+
+
+class FakeStream:
+    """Stands in for the SDK's streaming context manager."""
+
+    def __init__(self, result):
+        self._result = result
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *exc):
+        return False
+
+    def get_final_message(self):
+        if isinstance(self._result, Exception):
+            raise self._result
+        return self._result
+
+
+def wire_client(brain, *outcomes):
+    """Give the brain a client whose stream() yields these outcomes in turn."""
+    calls = {"beta": [], "plain": []}
+    remaining = list(outcomes)
+
+    def take():
+        return remaining.pop(0) if len(remaining) > 1 else remaining[0]
+
+    def beta_stream(**kwargs):
+        calls["beta"].append(kwargs)
+        return FakeStream(take())
+
+    def plain_stream(**kwargs):
+        calls["plain"].append(kwargs)
+        return FakeStream(take())
+
+    brain.client = NS(
+        beta=NS(messages=NS(stream=beta_stream)),
+        messages=NS(stream=plain_stream),
+    )
+    return calls
+
+
+def bad_request(message):
+    return anth.BadRequestError(
+        message, response=NS(status_code=400, headers={}, request=None), body=None
+    )
+
+
+import anthropic as anth  # noqa: E402
+
+
+class TestCreate:
+    def test_streams_and_returns_the_final_message(self, brain, monkeypatch):
+        want = response([text("hi")])
+        calls = wire_client(brain, want)
+
+        got = brain._create(model="m", max_tokens=100, messages=[])
+
+        assert got is want
+        assert len(calls["beta"]) == 1, "should use the beta namespace for fallbacks"
+        assert calls["beta"][0]["fallbacks"] == "default"
+        assert calls["beta"][0]["betas"] == ["server-side-fallback-2026-07-01"]
+
+    def test_falls_back_to_the_plain_namespace_if_the_beta_is_rejected(self, brain):
+        # An account not enrolled in the fallback beta must not take the bot
+        # down; it just loses a nice-to-have.
+        calls = wire_client(
+            brain,
+            bad_request("fallbacks: unsupported parameter"),
+            response([text("second try")]),
+        )
+
+        got = brain._create(model="m", max_tokens=100, messages=[])
+
+        assert _text_of(got) == "second try"
+        assert len(calls["beta"]) == 1
+        assert len(calls["plain"]) == 1, "did not retry without the beta"
+
+    def test_an_unrelated_400_is_not_mistaken_for_a_fallback_rejection(self, brain):
+        # Regression: matching a bare "beta" swallowed any 400 whose message
+        # echoed the beta header, silently disabling fallbacks and retrying the
+        # real problem several times before surfacing it.
+        calls = wire_client(brain, bad_request("invalid json_schema in output_config"))
+
+        with pytest.raises(BrainError, match="rejected the request"):
+            brain._create(model="m", max_tokens=100, messages=[])
+
+        assert len(calls["plain"]) == 0, "disabled fallbacks over an unrelated 400"
+
+    def test_a_bad_api_key_is_reported_clearly(self, brain):
+        wire_client(brain, anth.AuthenticationError(
+            "invalid key", response=NS(status_code=401, headers={}, request=None), body=None
+        ))
+        with pytest.raises(BrainError, match="ANTHROPIC_API_KEY"):
+            brain._create(model="m", max_tokens=100, messages=[])
+
+    def test_an_sdk_validation_error_becomes_a_BrainError(self, brain):
+        # Regression: APIResponseValidationError is neither an APIStatusError
+        # nor an APIConnectionError, so it used to escape the whole chain and
+        # kill the run with a raw traceback.
+        wire_client(brain, anth.APIResponseValidationError(
+            response=NS(status_code=200, headers={}, request=None), body=None
+        ))
+        with pytest.raises(BrainError, match="unexpected Anthropic SDK error"):
+            brain._create(model="m", max_tokens=100, messages=[])

@@ -31,10 +31,27 @@ WEB_FETCH_TOOL = {"type": "web_fetch_20260209", "name": "web_fetch"}
 # Scalar server-side fallback form. Pairs only with this beta flag.
 FALLBACK_BETA = "server-side-fallback-2026-07-01"
 
-# Per request, and for all retries of one logical call. Sized so the worst case
-# stays inside the workflow's 15 minute job timeout.
-REQUEST_TIMEOUT = 240.0
-TOTAL_BUDGET_SECONDS = 600.0
+# Both calls stream. The SDK refuses non-streaming requests that could run past
+# ten minutes, and an exploration that really uses web search can sit well past
+# any timeout worth setting on a single HTTP response. Streaming removes the
+# question: the connection stays alive while the model works.
+REQUEST_TIMEOUT = 660.0
+TOTAL_BUDGET_SECONDS = 720.0
+
+# Thinking tokens count toward max_tokens, so the ceiling has to move with
+# effort or a high-effort run truncates mid-object and the JSON will not parse.
+MAX_TOKENS_BY_EFFORT: dict[str, int] = {
+    "low": 8_000,
+    "medium": 16_000,
+    "high": 24_000,
+    "xhigh": 48_000,
+    "max": 64_000,
+}
+DEFAULT_MAX_TOKENS = 24_000
+
+
+def max_tokens_for(effort: str) -> int:
+    return MAX_TOKENS_BY_EFFORT.get(effort, DEFAULT_MAX_TOKENS)
 
 DRAFT_SCHEMA: dict[str, Any] = {
     "type": "object",
@@ -128,13 +145,17 @@ def _sources_of(response: Any) -> list[str]:
                     getattr(content, "error_code", content),
                 )
 
+    return _dedupe(urls)
+
+
+def _dedupe(urls: list[str]) -> list[str]:
     seen: set[str] = set()
-    deduped = []
+    out: list[str] = []
     for url in urls:
         if url not in seen:
             seen.add(url)
-            deduped.append(url)
-    return deduped
+            out.append(url)
+    return out
 
 
 class Brain:
@@ -174,12 +195,15 @@ class Brain:
 
             try:
                 if self._fallbacks_enabled:
-                    return self.client.beta.messages.create(
+                    with self.client.beta.messages.stream(
                         betas=[FALLBACK_BETA],
                         fallbacks="default",
                         **kwargs,
-                    )
-                return self.client.messages.create(**kwargs)
+                    ) as stream:
+                        return stream.get_final_message()
+
+                with self.client.messages.stream(**kwargs) as stream:
+                    return stream.get_final_message()
 
             except anthropic.BadRequestError as exc:
                 if self._fallbacks_enabled and _looks_like_fallback_rejection(exc):
@@ -264,7 +288,7 @@ class Brain:
 
         kwargs: dict[str, Any] = {
             "model": self.cfg.model,
-            "max_tokens": 16000,
+            "max_tokens": max_tokens_for(self.cfg.effort),
             "system": [
                 {
                     "type": "text",
@@ -282,10 +306,18 @@ class Brain:
         response = self._create(**kwargs)
         self._guard_stop_reason(response, "exploration")
 
-        # Server tools run in a sampling loop that pauses after ~10 iterations.
-        # Resending the exchange unchanged resumes it; no extra user turn.
+        # Server tools run in a sampling loop that pauses after about ten
+        # iterations. Resending the exchange resumes it; no extra user turn.
+        #
+        # Each paused response carries only ITS OWN segment of the turn, so the
+        # text and the search results have to be accumulated as we go. Reading
+        # only the final response throws away everything found before the last
+        # pause, which is usually most of the exploration.
         messages = list(kwargs["messages"])
+        note_parts = [_text_of(response)]
+        all_sources = list(_sources_of(response))
         rounds = 0
+
         while (
             getattr(response, "stop_reason", None) == "pause_turn"
             and rounds < self.cfg.max_search_rounds
@@ -296,14 +328,17 @@ class Brain:
             response = self._create(**{**kwargs, "messages": messages})
             self._guard_stop_reason(response, "exploration")
 
+            note_parts.append(_text_of(response))
+            all_sources.extend(_sources_of(response))
+
         if getattr(response, "stop_reason", None) == "pause_turn":
             log.warning("stopped exploring after %d rounds; using what we have", rounds)
 
-        notes = _text_of(response)
+        notes = "\n".join(part for part in note_parts if part).strip()
         if not notes:
             raise BrainError("exploration produced no text")
 
-        sources = _sources_of(response)
+        sources = _dedupe(all_sources)
         log.info(
             "exploration done: %d chars of notes, %d sources",
             len(notes),
@@ -323,13 +358,13 @@ class Brain:
         """Turn the notes into one post, as validated JSON."""
         prompt = _compose_prompt(exploration, recent_posts, feedback)
 
-        # Adaptive thinking counts toward max_tokens, and at effort `high` it
-        # can be far larger than the ~300 tokens of JSON we actually want. Being
-        # generous here costs nothing (max_tokens is a cap, not a charge) and
-        # avoids a truncated response that will not parse.
+        # Adaptive thinking counts toward max_tokens, and at high effort it can
+        # be far larger than the ~300 tokens of JSON we actually want. Being
+        # generous costs nothing (max_tokens is a cap, not a charge) and avoids
+        # a truncated response that will not parse.
         response = self._create(
             model=self.cfg.model,
-            max_tokens=16000,
+            max_tokens=max_tokens_for(self.cfg.effort),
             system=[
                 {
                     "type": "text",
@@ -465,8 +500,14 @@ write a variation on one of them:
 
 
 def _looks_like_fallback_rejection(exc: anthropic.BadRequestError) -> bool:
+    """Only the fallback parameter itself.
+
+    Matching a bare "beta" would swallow any other 400 whose message happens to
+    echo the beta header, silently turn fallbacks off, and retry the real
+    problem several times before surfacing it.
+    """
     blob = f"{getattr(exc, 'message', '')} {exc}".lower()
-    return "fallback" in blob or "server-side-fallback" in blob or "beta" in blob
+    return "fallback" in blob
 
 
 def _backoff(attempt: int) -> float:
