@@ -32,16 +32,29 @@ want sources in the posts and accept roughly $144/month instead of $11.
 
 ### What an hour-by-hour account costs to run
 
-About 720 posts a month. Rough monthly totals, as estimates rather than
-promises:
+Hourly is about 720 posts a month. The X side is the cheap half. Claude is not.
 
-| | X API | Claude | Total |
+These are estimates from the actual prompt sizes this bot builds, not measured
+bills, and real usage swings either way by roughly half depending on how much
+the model decides to search. Treat the ordering as reliable and the absolute
+numbers as a starting point.
+
+| Settings | Per run | X, monthly | Claude, monthly |
 |---|---|---|---|
-| Default (Opus 5, web search, effort `high`) | ~$11 | ~$250-350 | **~$260-360** |
-| `EFFORT=medium`, web search on | ~$11 | ~$120-180 | ~$130-190 |
-| `MODEL=claude-sonnet-5`, `EFFORT=medium` | ~$11 | ~$50-80 | ~$60-90 |
-| Web search off, `EFFORT=low` | ~$11 | ~$20-35 | ~$30-45 |
-| Every 3 hours instead of hourly | ~$4 | a third of the above | |
+| **Default**: Opus 5, web search, effort `high` | ~$0.65 | ~$11 | ~$470 |
+| `EFFORT=medium` | ~$0.49 | ~$11 | ~$355 |
+| `MODEL=claude-sonnet-5` + `EFFORT=medium` | ~$0.22 | ~$11 | ~$160 |
+| `ENABLE_WEB_SEARCH=false` + `EFFORT=low` | ~$0.13 | ~$11 | ~$95 |
+
+Cadence multiplies all of it. Every two hours halves the bill, every three
+hours thirds it, and an account that posts eight good things a day reads better
+than one that posts twenty four mediocre ones.
+
+The honest recommendation: run it on the defaults for a day, read what it
+writes, then decide what that quality is worth to you. `EFFORT=medium` with
+web search on is the sweet spot for most people. Turning web search off makes
+it noticeably less interesting, because searching is most of how it finds
+anything you could not have guessed.
 
 GitHub Actions itself is free: public repositories get unmetered standard
 runners. On a **private** repo you get 2,000 minutes a month, and 24 runs a day
@@ -189,6 +202,18 @@ mechanical failures, never the idea:
 A rejected draft goes back to the model with the specific reasons and it tries
 again, up to three times.
 
+### The circuit breaker
+
+If six runs fail in a row, the seventh stops before calling Claude at all and
+goes red. This exists because the expensive half of a run happens *before* the
+half that can fail: a revoked X token or an empty credit balance would
+otherwise let the bot spend a full month of model budget writing posts that can
+never be published.
+
+Fix the cause, then hit **Run workflow**. A manual run always gets through the
+breaker and clears the streak, so recovery is one click. Any successful post
+clears it too.
+
 ---
 
 ## Shaping it
@@ -230,6 +255,7 @@ Actions → Variables). All have working defaults.
 | `MONTHLY_POST_BUDGET` | `0` | `0` is unlimited. Set e.g. `400` to stop after 400 posts in a month. |
 | `FEED_SAMPLE_SIZE` | `12` | Feeds read per run. |
 | `RECENT_POSTS_IN_CONTEXT` | `40` | How much history the model sees. |
+| `MAX_CONSECUTIVE_FAILURES` | `6` | Stop calling Claude after this many failed runs in a row. `0` disables it. |
 
 To change how often it posts, edit the cron in
 [`.github/workflows/post.yml`](.github/workflows/post.yml):
@@ -257,6 +283,7 @@ end green with a note in the run summary.
 | `403` from X, mentions permission | The app is not inside a Project, or the credit balance is empty. |
 | `401` from X | Wrong or revoked keys. |
 | `UsageCapExceeded` | Out of X credit. Top up, or lower the cadence. |
+| "The last 6 runs failed in a row" | The circuit breaker. Fix the underlying error shown beneath it, then **Run workflow** to resume. |
 | "rate limited by X", green run | Self-healing. The next run will try again. |
 | Duplicate content rejected | X's duplicate detection is fuzzy and undocumented. The bot rewrites once automatically. |
 | Scheduled runs stopped after months | On public repos GitHub disables scheduled workflows after 60 days with "no repository activity". It does not define what counts as activity, so do not assume the bot's own memory commits reset the clock. Re-enable it in the Actions tab. Do not install a keepalive-commit action: GitHub has disabled repositories for using them to circumvent this policy. |

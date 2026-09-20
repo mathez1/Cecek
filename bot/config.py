@@ -81,6 +81,10 @@ class Config:
     # --- guards ---
     similarity_threshold: float = 0.72
     max_compose_attempts: int = 3
+    # After this many failed runs in a row, stop calling Claude. A revoked X
+    # token would otherwise burn a full month of model spend on posts that can
+    # never be published. 0 disables the breaker.
+    max_consecutive_failures: int = 6
     # X bills a post containing a URL at a far higher per-post rate than a
     # plain one, so links are off unless you opt in.
     allow_links: bool = False
@@ -159,6 +163,7 @@ def load_config() -> Config:
         recent_posts_in_context=_env_int("RECENT_POSTS_IN_CONTEXT", 40),
         monthly_post_budget=_env_int("MONTHLY_POST_BUDGET", 0),
         allow_links=_env_bool("ALLOW_LINKS", False),
+        max_consecutive_failures=_env_int("MAX_CONSECUTIVE_FAILURES", 6),
     )
 
     valid_efforts = {"low", "medium", "high", "xhigh", "max"}

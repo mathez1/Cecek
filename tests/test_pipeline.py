@@ -280,6 +280,68 @@ class TestXFailures:
         assert repo.posts == []
 
 
+class TestCircuitBreaker:
+    def _fail_n_runs(self, repo, n):
+        from bot.memory import record_failure, save_state
+
+        state = repo.state
+        for _ in range(n):
+            record_failure(state, "X rejected the credentials")
+        save_state(repo.memory / "state.json", state)
+
+    def test_stops_before_spending_after_six_failures(self, repo, monkeypatch):
+        self._fail_n_runs(repo, 6)
+
+        called = []
+        monkeypatch.setattr(
+            FakeBrain, "explore",
+            lambda self, d, r, p: called.append(1) or Exploration(notes="x"),
+        )
+
+        assert main.run() == main.EXIT_NEEDS_HUMAN
+        assert called == [], "called Claude despite the breaker being tripped"
+
+    def test_five_failures_still_runs(self, repo):
+        self._fail_n_runs(repo, 5)
+        assert main.run() == main.EXIT_OK
+        assert len(repo.posts) == 1
+
+    def test_a_manual_run_clears_the_streak(self, repo, monkeypatch):
+        self._fail_n_runs(repo, 10)
+        monkeypatch.setenv("GITHUB_EVENT_NAME", "workflow_dispatch")
+
+        assert main.run() == main.EXIT_OK
+        assert len(repo.posts) == 1
+        assert repo.state["consecutive_failures"] == 0
+
+    def test_scheduled_run_does_not_clear_the_streak(self, repo, monkeypatch):
+        self._fail_n_runs(repo, 6)
+        monkeypatch.setenv("GITHUB_EVENT_NAME", "schedule")
+
+        assert main.run() == main.EXIT_NEEDS_HUMAN
+        assert repo.state["consecutive_failures"] == 6
+
+    def test_a_success_resets_the_streak(self, repo):
+        self._fail_n_runs(repo, 5)
+        assert main.run() == main.EXIT_OK
+        assert repo.state["consecutive_failures"] == 0
+
+    def test_zero_disables_the_breaker(self, repo, monkeypatch):
+        self._fail_n_runs(repo, 50)
+        monkeypatch.setenv("MAX_CONSECUTIVE_FAILURES", "0")
+        assert main.run() == main.EXIT_OK
+
+    def test_the_breaker_explains_itself_in_the_summary(self, repo, tmp_path, monkeypatch):
+        self._fail_n_runs(repo, 6)
+        path = tmp_path / "summary.md"
+        monkeypatch.setenv("GITHUB_STEP_SUMMARY", str(path))
+
+        assert main.run() == main.EXIT_NEEDS_HUMAN
+        text = path.read_text(encoding="utf-8")
+        assert "cost nothing" in text
+        assert "Run workflow" in text
+
+
 class TestConfigFailures:
     def test_missing_anthropic_key_is_a_clean_failure(self, repo, monkeypatch):
         monkeypatch.delenv("ANTHROPIC_API_KEY")

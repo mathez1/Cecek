@@ -120,6 +120,25 @@ def write_draft(
     )
 
 
+def tripped_breaker(state: dict, cfg: Config, manual_run: bool) -> str | None:
+    """Refuse to spend anything when the last N runs all failed.
+
+    Without this, a revoked X token or an empty credit balance quietly turns
+    into a full month of Claude calls that can never produce a post.
+    """
+    if manual_run or cfg.max_consecutive_failures <= 0:
+        return None
+
+    failures = int(state.get("consecutive_failures", 0))
+    if failures < cfg.max_consecutive_failures:
+        return None
+
+    return (
+        f"The last {failures} runs failed in a row, so this one stopped before "
+        "calling Claude."
+    )
+
+
 def run() -> int:
     setup_logging()
 
@@ -148,6 +167,26 @@ def run() -> int:
 
     state = memory.load_state(STATE_PATH)
     memory.touch_run(state)
+
+    # A run started by hand is a deliberate "try again", so it always gets
+    # through the breaker and clears the streak.
+    manual_run = os.environ.get("GITHUB_EVENT_NAME") == "workflow_dispatch"
+    if manual_run and state.get("consecutive_failures"):
+        log.info("manual run: clearing a streak of %d failures", state["consecutive_failures"])
+        state["consecutive_failures"] = 0
+
+    breaker = tripped_breaker(state, cfg, manual_run)
+    if breaker:
+        log.error("%s", breaker)
+        memory.save_state(STATE_PATH, state)
+        summary(
+            f"## Stopped, needs you\n\n{breaker}\n\n"
+            "Nothing was sent to Claude, so this run cost nothing. Fix the "
+            "cause, then use **Run workflow** to clear the streak and resume. "
+            "The last error was:\n\n"
+            f"> {state.get('last_status')}\n"
+        )
+        return EXIT_NEEDS_HUMAN
     history = memory.load_posts(POSTS_PATH, limit=cfg.recent_posts_in_context)
     recent = memory.recent_texts(history)
     log.info("memory: %d recent posts in context", len(recent))
