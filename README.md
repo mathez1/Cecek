@@ -56,10 +56,15 @@ web search on is the sweet spot for most people. Turning web search off makes
 it noticeably less interesting, because searching is most of how it finds
 anything you could not have guessed.
 
-GitHub Actions itself is free: public repositories get unmetered standard
-runners. On a **private** repo you get 2,000 minutes a month, and 24 runs a day
-at 2 minutes each is 1,440 of them, so it fits but without much headroom.
-Making the repo public is the cheaper choice.
+GitHub Actions adds nothing. This repository is public, and public repos get
+unmetered standard runners, so 24 runs a day costs nothing and consumes no
+quota. (If you ever make it private, the Free plan's 2,000 minutes a month
+against 24 runs a day at 2 minutes each leaves very little headroom.)
+
+Being public also means the persona, the feed list and the whole post history
+in `memory/posts.jsonl` are readable by anyone. The five secrets are not: they
+live in Actions secrets, are masked in logs, and are never given to workflows
+triggered from a fork.
 
 The levers are all one-line changes and they are listed in
 [Configuration](#configuration). Start with a dry run, look at what it writes,
