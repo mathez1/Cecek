@@ -89,13 +89,27 @@ jobs:
 
           # A delayed run from the previous hour may have landed a commit while
           # this one was thinking. Rebase onto it rather than failing.
+          # memory/posts.jsonl is marked merge=union in .gitattributes, so
+          # concurrent appends keep both lines instead of conflicting.
           for attempt in 1 2 3; do
             if git push; then
               echo "Pushed on attempt $attempt."
               exit 0
             fi
-            echo "Push failed (attempt $attempt); rebasing onto origin."
-            git pull --rebase --autostash origin "${GITHUB_REF_NAME}"
+
+            if [ "$attempt" -eq 3 ]; then
+              break
+            fi
+
+            echo "Push rejected (attempt $attempt); rebasing onto origin."
+            if ! git pull --rebase --autostash origin "${GITHUB_REF_NAME}"; then
+              git rebase --abort || true
+              echo "::error::Could not rebase onto origin/${GITHUB_REF_NAME}."
+              echo "::error::This run's post is on X but was not recorded in memory/,"
+              echo "::error::so the next run may repeat it. Resolve memory/ by hand."
+              exit 1
+            fi
+
             sleep $((attempt * 3))
           done
 

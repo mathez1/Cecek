@@ -222,7 +222,7 @@ Actions → Variables). All have working defaults.
 
 | Variable | Default | What it does |
 |---|---|---|
-| `DRY_RUN` | `false` | Write a post but do not publish it. |
+| `DRY_RUN` | `false` | Write a post but do not publish it. Setting this to `true` is a master pause switch: it also overrides an unticked dry-run box on a manual run. Unset it to post again. |
 | `MODEL` | `claude-opus-5` | `claude-sonnet-5` is roughly 2.5x cheaper. |
 | `EFFORT` | `high` | `low`, `medium`, `high`, `xhigh`, `max`. The biggest cost lever. |
 | `ENABLE_WEB_SEARCH` | `true` | Off means it works from feeds and memory only. Much cheaper, noticeably less interesting. |
