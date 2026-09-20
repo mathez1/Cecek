@@ -1,0 +1,133 @@
+name: post
+
+# Scheduled workflows only ever run from the DEFAULT branch. A schedule on a
+# feature branch fires nothing and reports no error, so this file has to be
+# merged to main before the bot starts running.
+#
+# The minute is deliberately not 0. GitHub's own docs warn that scheduled runs
+# are delayed, and sometimes dropped entirely, during the load spike at the top
+# of every hour.
+on:
+  schedule:
+    - cron: '23 * * * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Write a post but do not publish it'
+        type: boolean
+        default: true
+      effort:
+        description: 'Reasoning effort (repo-default uses the EFFORT variable)'
+        type: choice
+        options: [repo-default, low, medium, high, xhigh, max]
+        default: repo-default
+
+# contents: write is what lets the run commit memory/ back. Naming any
+# permission sets every unnamed one to none, which is the least privilege we
+# want here.
+permissions:
+  contents: write
+
+# Never let a delayed run overlap the next one: they would race on the same
+# branch and one would lose its memory commit. cancel-in-progress stays false
+# so an in-flight run that has already posted is allowed to record that fact.
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install --disable-pip-version-check -r requirements.txt
+
+      - name: Write a post
+        id: post
+        # Deliberately below the job's 15, so that if the model call stalls
+        # this step fails on its own budget and the always() commit step still
+        # has runway to record the failure. Otherwise the run is cancelled
+        # outright, memory/ is untouched, and six stalls never trip the breaker.
+        timeout-minutes: 12
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          X_API_KEY: ${{ secrets.X_API_KEY }}
+          X_API_SECRET: ${{ secrets.X_API_SECRET }}
+          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_TOKEN_SECRET: ${{ secrets.X_ACCESS_TOKEN_SECRET }}
+          DRY_RUN: ${{ inputs.dry_run || vars.DRY_RUN || 'false' }}
+          MODEL: ${{ vars.MODEL }}
+          # A choice input always has a value, so a plain `inputs.effort ||
+          # vars.EFFORT` could never fall through to the variable. The
+          # sentinel makes "leave it alone" expressible.
+          EFFORT: ${{ (inputs.effort != 'repo-default' && inputs.effort) || vars.EFFORT }}
+          ENABLE_WEB_SEARCH: ${{ vars.ENABLE_WEB_SEARCH }}
+          ALLOW_LINKS: ${{ vars.ALLOW_LINKS }}
+          MONTHLY_POST_BUDGET: ${{ vars.MONTHLY_POST_BUDGET }}
+          FEED_SAMPLE_SIZE: ${{ vars.FEED_SAMPLE_SIZE }}
+          RECENT_POSTS_IN_CONTEXT: ${{ vars.RECENT_POSTS_IN_CONTEXT }}
+          MAX_CONSECUTIVE_FAILURES: ${{ vars.MAX_CONSECUTIVE_FAILURES }}
+          FEED_ITEMS_PER_SOURCE: ${{ vars.FEED_ITEMS_PER_SOURCE }}
+          MAX_SEARCH_ROUNDS: ${{ vars.MAX_SEARCH_ROUNDS }}
+          ENABLE_REFUSAL_FALLBACK: ${{ vars.ENABLE_REFUSAL_FALLBACK }}
+        run: python -m bot.main
+
+      # always(): a failed run still has something worth remembering, such as
+      # the failure streak that tells the next run something is wrong.
+      - name: Commit memory
+        if: always()
+        run: |
+          set -euo pipefail
+
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # ':!' excludes the atomic-write temp file, which a run killed
+          # mid-save can leave behind. Committing it would put it in public
+          # history permanently.
+          git add -A memory/ -- ':!memory/*.tmp'
+
+          if git diff --cached --quiet; then
+            echo "Nothing changed in memory/."
+            exit 0
+          fi
+
+          git commit -m "post: $(date -u '+%Y-%m-%d %H:%M UTC')"
+
+          # A delayed run from the previous hour may have landed a commit while
+          # this one was thinking. Rebase onto it rather than failing.
+          # memory/posts.jsonl is marked merge=union in .gitattributes, so
+          # concurrent appends keep both lines instead of conflicting.
+          for attempt in 1 2 3; do
+            if git push; then
+              echo "Pushed on attempt $attempt."
+              exit 0
+            fi
+
+            if [ "$attempt" -eq 3 ]; then
+              break
+            fi
+
+            echo "Push rejected (attempt $attempt); rebasing onto origin."
+            if ! git pull --rebase --autostash origin "${GITHUB_REF_NAME}"; then
+              git rebase --abort || true
+              echo "::error::Could not rebase onto origin/${GITHUB_REF_NAME}."
+              echo "::error::This run's post is on X but was not recorded in memory/,"
+              echo "::error::so the next run may repeat it. Resolve memory/ by hand."
+              exit 1
+            fi
+
+            sleep $((attempt * 3))
+          done
+
+          echo "::error::Could not push the memory commit after 3 attempts."
+          exit 1

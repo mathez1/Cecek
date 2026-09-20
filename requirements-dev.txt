@@ -1,0 +1,6 @@
+# Test-only dependencies. The bot itself does not need these, so they are kept
+# out of requirements.txt: nothing that runs hourly in production should carry
+# a package that only the test suite imports.
+-r requirements.txt
+pytest>=8,<9
+PyYAML>=6,<7

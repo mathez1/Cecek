@@ -1,0 +1,10 @@
+# posts.jsonl is an append-only log. If two runs ever race, the right
+# resolution is to keep both lines, not to pick a side. Without this a rebase
+# conflict here would abort the memory commit and lose a post.
+memory/posts.jsonl merge=union
+
+# Keep the workflow and prompt files in LF whatever the contributor's platform.
+*.py    text eol=lf
+*.yml   text eol=lf
+*.md    text eol=lf
+*.txt   text eol=lf

@@ -1,0 +1,63 @@
+# Raw material. One feed per line, as `Name | URL`. Blank lines and # ignored.
+#
+# A dozen of these are sampled at random each run, so the account does not
+# orbit whichever source posts most often. A dead or slow feed is skipped
+# silently, which is why the list is long and why losing a few does not matter.
+#
+# Add your own. The model is told this is optional reading, not an assignment,
+# so a niche feed will not narrow the account, it just widens what is on hand.
+#
+# Run `python tools/check_feeds.py` (or the "feeds" workflow) to find dead ones.
+
+# --- aggregators ---
+Hacker News            | https://hnrss.org/frontpage
+Hacker News Best       | https://hnrss.org/best
+Lobsters               | https://lobste.rs/rss
+Slashdot               | https://rss.slashdot.org/Slashdot/slashdotMain
+
+# --- world and general news ---
+BBC World              | https://feeds.bbci.co.uk/news/world/rss.xml
+NPR News               | https://feeds.npr.org/1001/rss.xml
+Al Jazeera             | https://www.aljazeera.com/xml/rss/all.xml
+Guardian World         | https://www.theguardian.com/world/rss
+CBC World              | https://www.cbc.ca/webfeed/rss/rss-world
+Deutsche Welle         | https://rss.dw.com/rdf/rss-en-world
+France 24              | https://www.france24.com/en/rss
+The Economist          | https://www.economist.com/latest/rss.xml
+
+# --- science and research ---
+Quanta Magazine        | https://www.quantamagazine.org/feed/
+Nature                 | https://www.nature.com/nature.rss
+Science News           | https://www.sciencenews.org/feed
+ScienceDaily           | https://www.sciencedaily.com/rss/top/science.xml
+Phys.org               | https://phys.org/rss-feed/
+New Scientist          | https://www.newscientist.com/feed/home/
+BBC Science            | https://feeds.bbci.co.uk/news/science_and_environment/rss.xml
+Guardian Science       | https://www.theguardian.com/science/rss
+NASA                   | https://www.nasa.gov/news-release/feed/
+Physics World          | https://physicsworld.com/feed/
+Harvard Gazette        | https://news.harvard.edu/gazette/feed/
+The Conversation       | https://theconversation.com/global/articles.atom
+arXiv cs.AI            | https://rss.arxiv.org/rss/cs.AI
+arXiv econ.GN          | https://rss.arxiv.org/rss/econ.GN
+arXiv q-bio.PE         | https://rss.arxiv.org/rss/q-bio.PE
+
+# --- technology ---
+Ars Technica           | https://feeds.arstechnica.com/arstechnica/index
+The Verge              | https://www.theverge.com/rss/index.xml
+MIT Technology Review  | https://www.technologyreview.com/feed/
+Wired                  | https://www.wired.com/feed/rss
+IEEE Spectrum          | https://spectrum.ieee.org/feeds/feed.rss
+TechCrunch             | https://techcrunch.com/feed/
+404 Media              | https://www.404media.co/rss/
+
+# --- ideas, essays, history, oddities ---
+Marginal Revolution    | https://marginalrevolution.com/feed
+Astral Codex Ten       | https://www.astralcodexten.com/feed
+Construction Physics   | https://www.construction-physics.com/feed
+Aeon                   | https://aeon.co/feed.rss
+Nautilus               | https://nautil.us/feed/
+The Atlantic           | https://www.theatlantic.com/feed/all/
+Smithsonian Magazine   | https://www.smithsonianmag.com/rss/latest_articles/
+Atlas Obscura          | https://www.atlasobscura.com/feeds/latest
+Big Think              | https://bigthink.com/feed/

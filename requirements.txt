@@ -1,0 +1,5 @@
+# Pinned to major versions so an unattended hourly job cannot wake up to a
+# breaking change. Bump deliberately.
+anthropic>=1.7,<2
+tweepy>=4.17,<5
+feedparser>=6.0,<7
