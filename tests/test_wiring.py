@@ -147,3 +147,65 @@ class TestEffortInput:
         workflow = yaml.safe_load(POST_YML.read_text(encoding="utf-8"))
         options = set(workflow[True]["workflow_dispatch"]["inputs"]["effort"]["options"])
         assert {"low", "medium", "high", "xhigh", "max"} <= options
+
+
+class TestTheDocsMatchTheCode:
+    """Every default in the README's table is a promise. They drift silently."""
+
+    def _defaults_table(self) -> dict:
+        text = README.read_text(encoding="utf-8")
+        return dict(re.findall(r"\|\s*`([A-Z_]+)`\s*\|\s*`([^`]*)`\s*\|", text))
+
+    def _config(self):
+        from bot.config import Config
+
+        return Config(
+            anthropic_api_key="x", x_api_key="a", x_api_secret="b",
+            x_access_token="c", x_access_token_secret="d",
+        )
+
+    @pytest.mark.parametrize(
+        "variable,attribute",
+        [
+            ("DRY_RUN", "dry_run"),
+            ("MODEL", "model"),
+            ("EFFORT", "effort"),
+            ("ENABLE_WEB_SEARCH", "enable_web_search"),
+            ("ENABLE_REFUSAL_FALLBACK", "enable_refusal_fallback"),
+            ("ALLOW_LINKS", "allow_links"),
+            ("MONTHLY_POST_BUDGET", "monthly_post_budget"),
+            ("FEED_SAMPLE_SIZE", "feed_sample_size"),
+            ("FEED_ITEMS_PER_SOURCE", "feed_items_per_source"),
+            ("RECENT_POSTS_IN_CONTEXT", "recent_posts_in_context"),
+            ("MAX_CONSECUTIVE_FAILURES", "max_consecutive_failures"),
+            ("MAX_SEARCH_ROUNDS", "max_search_rounds"),
+        ],
+    )
+    def test_the_documented_default_is_the_real_default(self, variable, attribute):
+        documented = self._defaults_table().get(variable)
+        real = getattr(self._config(), attribute)
+        expected = str(real).lower() if isinstance(real, bool) else str(real)
+
+        assert documented == expected, (
+            f"README says {variable} defaults to {documented!r}, "
+            f"but bot/config.py uses {expected!r}"
+        )
+
+    def test_the_feed_count_is_right(self):
+        from bot.config import FEEDS_PATH
+        from bot.explore import load_sources
+
+        actual = len(load_sources(FEEDS_PATH))
+        claimed = {int(n) for n in re.findall(r"(\d+) feeds", README.read_text(encoding="utf-8"))}
+        assert claimed <= {actual}, f"README claims {claimed} feeds, there are {actual}"
+
+    def test_the_documented_cron_is_the_real_cron(self):
+        workflow = yaml.safe_load(POST_YML.read_text(encoding="utf-8"))
+        cron = workflow[True]["schedule"][0]["cron"]
+        assert cron in README.read_text(encoding="utf-8")
+
+    def test_the_documented_character_limit_is_the_real_one(self):
+        from bot.config import POST_CHAR_LIMIT
+
+        claimed = {int(n) for n in re.findall(r"(\d+) weighted characters", README.read_text(encoding="utf-8"))}
+        assert claimed <= {POST_CHAR_LIMIT}
