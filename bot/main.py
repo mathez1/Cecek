@@ -166,23 +166,11 @@ def tripped_breaker(state: dict, cfg: Config, manual_run: bool) -> str | None:
     )
 
 
+CONFIG_FAILURE = "configuration"
+
+
 def run() -> int:
     setup_logging()
-
-    try:
-        cfg = load_config()
-    except ConfigError as exc:
-        log.error("%s", exc)
-        summary(f"## Run failed\n\nConfiguration problem:\n\n> {exc}\n")
-        return EXIT_NEEDS_HUMAN
-
-    log.info(
-        "starting: model=%s effort=%s web_search=%s dry_run=%s",
-        cfg.model,
-        cfg.effort,
-        cfg.enable_web_search,
-        cfg.dry_run,
-    )
 
     from bot.config import (
         FEED_CACHE_PATH,
@@ -192,8 +180,47 @@ def run() -> int:
         STATE_PATH,
     )
 
+    # State is loaded BEFORE the config, because a broken config is itself
+    # worth recording. Returning early without writing it meant the breaker
+    # could never see the single most likely persistent failure, and a repo
+    # with no secrets set logged a red run every hour forever instead of six.
+    # Nothing here depends on the config: these paths are module constants.
     state = memory.load_state(STATE_PATH)
     memory.touch_run(state)
+
+    try:
+        cfg = load_config()
+    except ConfigError as exc:
+        log.error("%s", exc)
+        memory.record_failure(state, f"{CONFIG_FAILURE}: {exc}")
+        memory.save_state(STATE_PATH, state)
+        summary(
+            f"## Run failed\n\nConfiguration problem:\n\n> {exc}\n\n"
+            "Nothing was sent to Claude, so this run cost nothing. Once the "
+            "setting is in place the next scheduled run picks it up by "
+            "itself.\n"
+        )
+        return EXIT_NEEDS_HUMAN
+
+    # The config loaded, so whatever was missing is now present. A streak of
+    # configuration failures is therefore demonstrably over, and clearing it
+    # here is what stops the breaker blocking the first good run after someone
+    # finally adds the secrets.
+    if str(state.get("last_status", "")).startswith(f"failed: {CONFIG_FAILURE}"):
+        log.info(
+            "configuration is fixed; clearing a streak of %s failed runs",
+            state.get("consecutive_failures"),
+        )
+        state["consecutive_failures"] = 0
+        state["last_status"] = "recovered: configuration fixed"
+
+    log.info(
+        "starting: model=%s effort=%s web_search=%s dry_run=%s",
+        cfg.model,
+        cfg.effort,
+        cfg.enable_web_search,
+        cfg.dry_run,
+    )
 
     # A run started by hand is a deliberate "try again", so it gets through
     # the breaker. It does NOT clear the streak by itself: the default manual

@@ -441,6 +441,66 @@ class TestCircuitBreaker:
         assert "Run workflow" in text
 
 
+class TestConfigFailuresReachTheBreaker:
+    """The 117-red-runs regression.
+
+    run() used to return on ConfigError before touching state, so
+    consecutive_failures never moved and the breaker could never trip. A repo
+    with no secrets set logged a failed run every hour indefinitely instead of
+    stopping after six.
+    """
+
+    def test_a_config_error_is_recorded(self, repo, monkeypatch):
+        monkeypatch.delenv("ANTHROPIC_API_KEY")
+
+        assert main.run() == main.EXIT_NEEDS_HUMAN
+        state = repo.state
+        assert state["consecutive_failures"] == 1, "the failure was not recorded"
+        assert state["last_status"].startswith("failed: configuration")
+        assert state["last_run_at"] is not None
+
+    def test_repeated_config_errors_trip_the_breaker(self, repo, monkeypatch):
+        monkeypatch.delenv("ANTHROPIC_API_KEY")
+
+        for expected in range(1, 7):
+            assert main.run() == main.EXIT_NEEDS_HUMAN
+            assert repo.state["consecutive_failures"] == expected
+
+        # The seventh is stopped by the breaker rather than retrying forever.
+        assert main.run() == main.EXIT_NEEDS_HUMAN
+        assert "runs failed in a row" in repo.state["last_status"] or \
+            repo.state["consecutive_failures"] >= 6
+
+    def test_fixing_the_config_clears_the_streak_by_itself(self, repo, monkeypatch):
+        # The trap this avoids: the breaker trips on missing secrets, you add
+        # the secrets, and the next scheduled run is then blocked by the very
+        # breaker that was waiting for you to fix it.
+        monkeypatch.delenv("ANTHROPIC_API_KEY")
+        for _ in range(8):
+            main.run()
+        assert repo.state["consecutive_failures"] >= 6
+
+        monkeypatch.setenv("ANTHROPIC_API_KEY", "sk-ant-test")
+        assert main.run() == main.EXIT_OK, "a fixed config was still blocked"
+        assert len(repo.posts) == 1
+        assert repo.state["consecutive_failures"] == 0
+
+    def test_a_runtime_failure_streak_is_not_cleared_by_a_good_config(self, repo):
+        # Only configuration failures self-heal. A streak caused by X
+        # rejecting the credentials must still require a human, because
+        # loading the config proves nothing about those.
+        from bot.memory import record_failure, save_state
+
+        state = repo.state
+        for _ in range(6):
+            record_failure(state, "X rejected the credentials")
+        save_state(repo.memory / "state.json", state)
+
+        assert main.run() == main.EXIT_NEEDS_HUMAN
+        assert repo.posts == []
+        assert repo.state["consecutive_failures"] == 6
+
+
 class TestConfigFailures:
     def test_missing_anthropic_key_is_a_clean_failure(self, repo, monkeypatch):
         monkeypatch.delenv("ANTHROPIC_API_KEY")
