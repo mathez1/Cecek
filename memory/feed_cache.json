@@ -4,7 +4,7 @@
     "modified": "Thu, 15 Oct 2026 10:15:55 GMT"
   },
   "https://feeds.arstechnica.com/arstechnica/index": {
-    "modified": "Fri, 16 Oct 2026 10:20:37 GMT"
+    "modified": "Fri, 16 Oct 2026 16:57:55 GMT"
   },
   "https://hnrss.org/frontpage": {
     "modified": "Fri, 16 Oct 2026 09:40:47 GMT"
@@ -24,29 +24,36 @@
   "https://rss.arxiv.org/rss/cs.AI": {
     "etag": "790cb7bd9f0150d35932032b596717c8d26252d186fb9650718ce609cf44b5de"
   },
+  "https://rss.arxiv.org/rss/econ.GN": {
+    "etag": "72b1800a1aa3e51bcfb47679aae0a32f163c6f488d71e5afdc9f0289a3c5e95e"
+  },
   "https://rss.arxiv.org/rss/q-bio.PE": {
     "etag": "d17e6011f7376db1a48a662df05d8f6d21c88386d70b71d740cbb505defc22f0"
   },
+  "https://rss.slashdot.org/Slashdot/slashdotMain": {
+    "etag": "W/\"db61-65df869a26ce8\"",
+    "modified": "Fri, 16 Oct 2026 17:22:45 GMT"
+  },
   "https://www.aljazeera.com/xml/rss/all.xml": {
-    "etag": "W/\"c12de754be4d50cc3ce3c6fd4fa4dca4\"",
-    "modified": "Fri, 16 Oct 2026 11:02:26 GMT"
+    "etag": "W/\"8fd90ea787849dc744832156225ad6c7\"",
+    "modified": "Fri, 16 Oct 2026 17:15:27 GMT"
   },
   "https://www.astralcodexten.com/feed": {
-    "etag": "W/\"ecdd7-wJC4+6P7EEUON4u56CoRCOoGlE4\""
+    "etag": "W/\"ed6c3-72K6pnp7pUXRdU9f5OwstIBoPPw\""
   },
   "https://www.atlasobscura.com/feeds/latest": {
     "etag": "W/\"cbdad757a184eca9200f3653234cea2c\""
   },
   "https://www.construction-physics.com/feed": {
-    "etag": "W/\"cb19f-46dfUL1pa1ZOQLfX+m7YaIvFzR4\""
+    "etag": "W/\"cb19f-UtHv1HpvLEVwWPeOXkm/GpzLuY0\""
   },
   "https://www.newscientist.com/feed/home/": {
     "etag": "W/\"42adb23c819ef6e3162e3f386e9fb834\"",
     "modified": "Fri, 16 Oct 2026 10:58:51 GMT"
   },
   "https://www.quantamagazine.org/feed/": {
-    "etag": "\"507e2ba68a91176770a713f308087c5e-gzip\"",
-    "modified": "Thu, 15 Oct 2026 19:03:54 GMT"
+    "etag": "\"30bcdfcfa56a874df0213e3919f98771-gzip\"",
+    "modified": "Fri, 16 Oct 2026 13:38:50 GMT"
   },
   "https://www.sciencenews.org/feed": {
     "etag": "W/\"284cb4ff3b77b0b92a16e8f444320b70\"",
@@ -57,9 +64,12 @@
     "modified": "Thu, 15 Oct 2026 13:59:11 GMT"
   },
   "https://www.theatlantic.com/feed/all/": {
-    "modified": "Fri, 16 Oct 2026 12:26:05 GMT"
+    "modified": "Fri, 16 Oct 2026 17:25:57 GMT"
   },
   "https://www.theguardian.com/science/rss": {
     "etag": "W/\"hash-799191661626898470\""
+  },
+  "https://www.theguardian.com/world/rss": {
+    "etag": "W/\"hash-5391664702529997051\""
   }
 }
