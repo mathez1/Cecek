@@ -1,8 +1,9 @@
 {
-  "consecutive_failures": 0,
+  "consecutive_failures": 1,
+  "daily": {},
   "last_post_at": null,
-  "last_run_at": "2026-10-16T11:17:55+00:00",
-  "last_status": "skipped: dry run",
+  "last_run_at": "2026-10-16T12:30:28+00:00",
+  "last_status": "failed: posting to X failed: Payment Required | credits depleted",
   "monthly": {},
   "monthly_spend": {},
   "total_posts": 0
