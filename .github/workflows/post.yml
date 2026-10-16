@@ -79,6 +79,9 @@ jobs:
           FEED_ITEMS_PER_SOURCE: ${{ vars.FEED_ITEMS_PER_SOURCE }}
           MAX_SEARCH_ROUNDS: ${{ vars.MAX_SEARCH_ROUNDS }}
           ENABLE_REFUSAL_FALLBACK: ${{ vars.ENABLE_REFUSAL_FALLBACK }}
+          DAILY_POST_BUDGET: ${{ vars.DAILY_POST_BUDGET }}
+          MAX_SEARCHES: ${{ vars.MAX_SEARCHES }}
+          MAX_FETCHES: ${{ vars.MAX_FETCHES }}
         run: python -m bot.main
 
       # always(): a failed run still has something worth remembering, such as

@@ -27,8 +27,19 @@ from bot.cost import Meter
 
 log = logging.getLogger(__name__)
 
-WEB_SEARCH_TOOL = {"type": "web_search_20260209", "name": "web_search"}
-WEB_FETCH_TOOL = {"type": "web_fetch_20260209", "name": "web_fetch"}
+def web_search_tool(max_uses: int) -> dict[str, Any]:
+    """The search tool, with a hard ceiling on how far it may roam.
+
+    max_uses is the real cost lever. Each search bills per call, but more
+    importantly its results land in the context and are re-read on every
+    subsequent turn of the server-side loop, so the Nth search costs more than
+    the first. Capping it bounds the run.
+    """
+    return {"type": "web_search_20260209", "name": "web_search", "max_uses": max_uses}
+
+
+def web_fetch_tool(max_uses: int) -> dict[str, Any]:
+    return {"type": "web_fetch_20260209", "name": "web_fetch", "max_uses": max_uses}
 
 # Scalar server-side fallback form. Pairs only with this beta flag.
 FALLBACK_BETA = "server-side-fallback-2026-07-01"
@@ -289,7 +300,10 @@ class Brain:
         """Let the model roam. Returns its notes, not a post."""
         tools = []
         if self.cfg.enable_web_search:
-            tools = [WEB_SEARCH_TOOL, WEB_FETCH_TOOL]
+            tools = [
+                web_search_tool(self.cfg.max_searches),
+                web_fetch_tool(self.cfg.max_fetches),
+            ]
 
         prompt = _explore_prompt(digest, recent_posts, self.cfg.enable_web_search)
 

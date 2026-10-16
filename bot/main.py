@@ -246,15 +246,23 @@ def run() -> int:
     recent = memory.recent_texts(history)
     log.info("memory: %d recent posts in context", len(recent))
 
-    # Stop before spending anything if a self-imposed monthly cap is reached.
-    if cfg.monthly_post_budget > 0:
-        used = memory.posts_this_month(state)
-        if used >= cfg.monthly_post_budget:
-            reason = f"monthly budget reached ({used}/{cfg.monthly_post_budget})"
+    # Stop before spending anything if a self-imposed cap is reached. Both
+    # checks happen BEFORE the model call, because the model call is the
+    # expensive half and a capped run must not pay for a post it cannot make.
+    budgets = (
+        ("daily", cfg.daily_post_budget, memory.posts_today(state), "tomorrow"),
+        ("monthly", cfg.monthly_post_budget, memory.posts_this_month(state), "next month"),
+    )
+    for label, cap, used, resumes in budgets:
+        if cap > 0 and used >= cap:
+            reason = f"{label} budget reached ({used}/{cap})"
             log.warning("%s; not posting", reason)
             memory.record_skip(state, reason)
             memory.save_state(STATE_PATH, state)
-            summary(f"## Skipped\n\n{reason}. Posting resumes next month.\n")
+            summary(
+                f"## Skipped\n\n{reason}. Nothing was sent to Claude, so this "
+                f"run cost nothing. Posting resumes {resumes}.\n"
+            )
             return EXIT_OK
 
     persona = load_persona(PERSONA_PATH)

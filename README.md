@@ -274,7 +274,10 @@ Actions → Variables). All have working defaults.
 | `EFFORT` | `high` | `low`, `medium`, `high`, `xhigh`, `max`. The biggest cost lever. The token ceiling scales with it, so `max` is genuinely expensive. |
 | `ENABLE_WEB_SEARCH` | `true` | Off means it works from feeds and memory only. Much cheaper, noticeably less interesting. |
 | `ALLOW_LINKS` | `false` | On costs about 13x per post. |
+| `DAILY_POST_BUDGET` | `10` | Posts per day. Checked before the model call, so a capped run costs nothing. `0` is unlimited. |
 | `MONTHLY_POST_BUDGET` | `0` | `0` is unlimited. Set e.g. `400` to stop after 400 posts in a month. |
+| `MAX_SEARCHES` | `6` | Web searches per run. The biggest single lever on cost: results stay in context and are re-read each turn, so the tenth search costs far more than the first. |
+| `MAX_FETCHES` | `3` | Pages fetched per run. |
 | `FEED_SAMPLE_SIZE` | `12` | Feeds read per run. |
 | `FEED_ITEMS_PER_SOURCE` | `6` | Headlines taken from each one. |
 | `MAX_SEARCH_ROUNDS` | `6` | How long it may keep searching within one run. |

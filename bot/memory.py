@@ -36,6 +36,11 @@ def month_key(when: datetime | None = None) -> str:
     return f"{when.year:04d}-{when.month:02d}"
 
 
+def day_key(when: datetime | None = None) -> str:
+    when = when or utc_now()
+    return f"{when.year:04d}-{when.month:02d}-{when.day:02d}"
+
+
 @dataclass
 class PostRecord:
     """One published (or dry-run) post."""
@@ -107,6 +112,7 @@ DEFAULT_STATE: dict[str, Any] = {
     "consecutive_failures": 0,
     "total_posts": 0,
     "monthly": {},
+    "daily": {},
     # Model spend in dollars, per month, from the token counts the API
     # reports. Recorded for every run that called Claude, including the ones
     # that then failed to publish: those cost money too, and leaving them out
@@ -137,6 +143,10 @@ def load_state(path: Path) -> dict[str, Any]:
     merged["monthly"] = {
         key: _as_int(value) for key, value in merged["monthly"].items()
     }
+
+    if not isinstance(merged.get("daily"), dict):
+        merged["daily"] = {}
+    merged["daily"] = {k: _as_int(v) for k, v in merged["daily"].items()}
 
     if not isinstance(merged.get("monthly_spend"), dict):
         merged["monthly_spend"] = {}
@@ -188,6 +198,10 @@ def posts_this_month(state: dict[str, Any], when: datetime | None = None) -> int
     return int(state.get("monthly", {}).get(month_key(when), 0))
 
 
+def posts_today(state: dict[str, Any], when: datetime | None = None) -> int:
+    return int(state.get("daily", {}).get(day_key(when), 0))
+
+
 def spend_this_month(state: dict[str, Any], when: datetime | None = None) -> float:
     return float(state.get("monthly_spend", {}).get(month_key(when), 0.0))
 
@@ -210,6 +224,10 @@ def record_success(state: dict[str, Any], when: datetime | None = None) -> None:
     key = month_key(when)
     monthly = state.setdefault("monthly", {})
     monthly[key] = int(monthly.get(key, 0)) + 1
+
+    daily = state.setdefault("daily", {})
+    today = day_key(when)
+    daily[today] = int(daily.get(today, 0)) + 1
     state["total_posts"] = int(state.get("total_posts", 0)) + 1
     state["last_post_at"] = when.isoformat(timespec="seconds")
     state["last_status"] = "posted"
@@ -250,6 +268,8 @@ def _prune_monthly(state: dict[str, Any], keep: int = 24) -> None:
     """Keep the state file small forever; it is committed on every run."""
     _prune(state.get("monthly", {}), keep)
     _prune(state.get("monthly_spend", {}), keep)
+    # Days accumulate 30x faster than months, so keep far fewer.
+    _prune(state.get("daily", {}), 14)
 
 
 def _prune(buckets: dict[str, Any], keep: int = 24) -> None:

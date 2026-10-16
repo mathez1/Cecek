@@ -72,6 +72,11 @@ class Config:
     enable_web_search: bool = True
     enable_refusal_fallback: bool = True
     max_search_rounds: int = 6
+    # The main lever on what a run costs. Search results stay in context and
+    # are re-read on every later turn of the server-side loop, so the tenth
+    # search costs far more than the first.
+    max_searches: int = 6
+    max_fetches: int = 3
 
     # --- behaviour ---
     dry_run: bool = False
@@ -81,6 +86,10 @@ class Config:
     # 0 disables the cap. X's free tier allows 500 posts/month, so hourly
     # posting (~720/month) overruns it; set this to stay inside a plan.
     monthly_post_budget: int = 0
+    # The cap that actually governs day to day. GitHub delivers scheduled runs
+    # unpredictably, so capping posts is more reliable than tuning the cron:
+    # schedule generously, let the budget decide how many land.
+    daily_post_budget: int = 10
 
     # --- guards ---
     similarity_threshold: float = 0.72
@@ -161,11 +170,14 @@ def load_config() -> Config:
         enable_web_search=_env_bool("ENABLE_WEB_SEARCH", True),
         enable_refusal_fallback=_env_bool("ENABLE_REFUSAL_FALLBACK", True),
         max_search_rounds=_env_int("MAX_SEARCH_ROUNDS", 6),
+        max_searches=_env_int("MAX_SEARCHES", 6),
+        max_fetches=_env_int("MAX_FETCHES", 3),
         dry_run=dry_run,
         feed_sample_size=_env_int("FEED_SAMPLE_SIZE", 12),
         feed_items_per_source=_env_int("FEED_ITEMS_PER_SOURCE", 6),
         recent_posts_in_context=_env_int("RECENT_POSTS_IN_CONTEXT", 40),
         monthly_post_budget=_env_int("MONTHLY_POST_BUDGET", 0),
+        daily_post_budget=_env_int("DAILY_POST_BUDGET", 10),
         allow_links=_env_bool("ALLOW_LINKS", False),
         max_consecutive_failures=_env_int("MAX_CONSECUTIVE_FAILURES", 6),
     )
