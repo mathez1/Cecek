@@ -10,8 +10,8 @@
     "modified": "Fri, 16 Oct 2026 09:40:47 GMT"
   },
   "https://lobste.rs/rss": {
-    "etag": "\"dm69i4zcy507c15-gzip\"",
-    "modified": "Fri, 16 Oct 2026 12:30:06 GMT"
+    "etag": "\"dm6kr309tbfnchz-gzip\"",
+    "modified": "Fri, 16 Oct 2026 21:18:59 GMT"
   },
   "https://marginalrevolution.com/feed": {
     "etag": "\"5fe9878d00ffbcf6ca75b182ac363320\"",
@@ -20,6 +20,10 @@
   "https://news.harvard.edu/gazette/feed/": {
     "etag": "W/\"719b60076df7ec6cf9e52ad06fc19e91\"",
     "modified": "Thu, 15 Oct 2026 19:22:20 GMT"
+  },
+  "https://physicsworld.com/feed/": {
+    "etag": "W/\"b003931ef747028b5a48f52e75a40b2d\"",
+    "modified": "Fri, 16 Oct 2026 15:32:21 GMT"
   },
   "https://rss.arxiv.org/rss/cs.AI": {
     "etag": "790cb7bd9f0150d35932032b596717c8d26252d186fb9650718ce609cf44b5de"
@@ -34,6 +38,14 @@
     "etag": "W/\"db61-65df869a26ce8\"",
     "modified": "Fri, 16 Oct 2026 17:22:45 GMT"
   },
+  "https://spectrum.ieee.org/feeds/feed.rss": {
+    "etag": "\"9ff57c7fdf443e3b95e92b3783b6235e\"",
+    "modified": "Fri, 16 Oct 2026 18:01:55 GMT"
+  },
+  "https://techcrunch.com/feed/": {
+    "etag": "W/\"26daab57e6ffc9fb09d5c9f649d3f83e\"",
+    "modified": "Fri, 16 Oct 2026 21:05:37 GMT"
+  },
   "https://www.aljazeera.com/xml/rss/all.xml": {
     "etag": "W/\"8fd90ea787849dc744832156225ad6c7\"",
     "modified": "Fri, 16 Oct 2026 17:15:27 GMT"
@@ -46,6 +58,13 @@
   },
   "https://www.construction-physics.com/feed": {
     "etag": "W/\"cb19f-UtHv1HpvLEVwWPeOXkm/GpzLuY0\""
+  },
+  "https://www.nasa.gov/news-release/feed/": {
+    "etag": "W/\"1b1aa2a08705469b494861c684f48ce9\"",
+    "modified": "Fri, 16 Oct 2026 20:40:19 GMT"
+  },
+  "https://www.nature.com/nature.rss": {
+    "etag": "\"3a06253cc6a89e94add42b3cdbec9da1\""
   },
   "https://www.newscientist.com/feed/home/": {
     "etag": "W/\"42adb23c819ef6e3162e3f386e9fb834\"",
@@ -67,7 +86,7 @@
     "modified": "Fri, 16 Oct 2026 17:25:57 GMT"
   },
   "https://www.theguardian.com/science/rss": {
-    "etag": "W/\"hash-799191661626898470\""
+    "etag": "W/\"hash5150397477739308549\""
   },
   "https://www.theguardian.com/world/rss": {
     "etag": "W/\"hash-5391664702529997051\""
