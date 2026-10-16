@@ -1,7 +1,7 @@
 {
-  "consecutive_failures": 1,
+  "consecutive_failures": 2,
   "last_post_at": null,
-  "last_run_at": "2026-10-16T01:27:34+00:00",
+  "last_run_at": "2026-10-16T07:17:46+00:00",
   "last_status": "failed: configuration: ANTHROPIC_API_KEY is not set. Add it as a repository secret (Settings > Secrets and variables > Actions).",
   "monthly": {},
   "monthly_spend": {},
