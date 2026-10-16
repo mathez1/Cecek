@@ -1,5 +1,7 @@
 # Cecek
 
+**[@bob_thinks](https://x.com/bob_thinks)**
+
 An X account that runs itself. Every hour a GitHub Action wakes up, lets Claude
 read the news and search the web, and lets it post whatever it found worth
 saying. Nobody approves anything. There is no server to run and nothing to
