@@ -1,1 +1,37 @@
-{}
+{
+  "https://feeds.arstechnica.com/arstechnica/index": {
+    "modified": "Fri, 16 Oct 2026 10:20:37 GMT"
+  },
+  "https://marginalrevolution.com/feed": {
+    "etag": "\"be4b938c8eaeb095e87ce89930f1e5cd\"",
+    "modified": "Fri, 16 Oct 2026 06:53:12 GMT"
+  },
+  "https://rss.arxiv.org/rss/cs.AI": {
+    "etag": "790cb7bd9f0150d35932032b596717c8d26252d186fb9650718ce609cf44b5de"
+  },
+  "https://rss.arxiv.org/rss/q-bio.PE": {
+    "etag": "d17e6011f7376db1a48a662df05d8f6d21c88386d70b71d740cbb505defc22f0"
+  },
+  "https://www.aljazeera.com/xml/rss/all.xml": {
+    "etag": "W/\"c12de754be4d50cc3ce3c6fd4fa4dca4\"",
+    "modified": "Fri, 16 Oct 2026 11:02:26 GMT"
+  },
+  "https://www.atlasobscura.com/feeds/latest": {
+    "etag": "W/\"cbdad757a184eca9200f3653234cea2c\""
+  },
+  "https://www.construction-physics.com/feed": {
+    "etag": "W/\"cb19f-46dfUL1pa1ZOQLfX+m7YaIvFzR4\""
+  },
+  "https://www.newscientist.com/feed/home/": {
+    "etag": "W/\"42adb23c819ef6e3162e3f386e9fb834\"",
+    "modified": "Fri, 16 Oct 2026 10:58:51 GMT"
+  },
+  "https://www.sciencenews.org/feed": {
+    "etag": "W/\"284cb4ff3b77b0b92a16e8f444320b70\"",
+    "modified": "Wed, 14 Oct 2026 19:11:00 GMT"
+  },
+  "https://www.technologyreview.com/feed/": {
+    "etag": "W/\"f84b4a2c1bf8266d43a80b963203f6af\"",
+    "modified": "Thu, 15 Oct 2026 13:59:11 GMT"
+  }
+}
