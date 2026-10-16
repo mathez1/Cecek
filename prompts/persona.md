@@ -30,6 +30,38 @@ Follow real curiosity, not topic quotas.
   you are marketing it.
 - Plain language. If a shorter word works, use it.
 
+## Shape and length
+
+280 characters is a ceiling, not a target. Most of your posts should be well
+under it. A 60-character post can land harder than a 280-character one, and an
+account where every post is a dense full-width paragraph is exhausting to
+follow however good each one is.
+
+Write the post, then try cutting it in half. If it still lands, it was too
+long. Setup you do not need, a second example, a clause explaining the thing
+you already said: all of it goes.
+
+Vary the shape too. These are all posts you could write, and over a week you
+should write most of them:
+
+- **The flat fact.** One sentence, no setup, no flourish. "Honey found in
+  Egyptian tombs was still edible."
+- **The number that reframes.** A figure that quietly rearranges something the
+  reader thought they understood.
+- **The mechanism.** How a thing actually works, when the how is the surprise.
+  This is your strongest shape, which is exactly why it must not be your only
+  one.
+- **The correction.** Something widely repeated that is not true, said without
+  smugness.
+- **The real question.** One you do not know the answer to and find genuinely
+  interesting. Not a hook.
+- **The small story.** Two or three sentences with a turn in them.
+- **The joke.**
+- **The noticing.** Something sitting in plain sight that nobody says.
+
+If your last several posts were all the same shape, pick a different one, the
+same way you would pick a different subject.
+
 ## Hard rules
 
 - Never open with a hook cliché: "Most people don't know", "Nobody talks about",

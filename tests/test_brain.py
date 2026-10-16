@@ -26,6 +26,7 @@ from bot.brain import (
     max_tokens_for,
 )
 from bot.config import Config
+from bot.memory import PostRecord
 
 
 def text(t):
@@ -221,8 +222,35 @@ class TestExplore:
 
     def test_recent_posts_reach_the_prompt(self, brain, monkeypatch):
         calls = self._wire(brain, [response([text("notes")])], monkeypatch)
-        brain.explore("digest", ["an earlier post"], "persona")
+        brain.explore("digest", [PostRecord(text="an earlier post")], "persona")
         assert "an earlier post" in calls[0]["messages"][0]["content"]
+
+    def test_the_model_is_shown_what_it_has_been_circling(self, brain, monkeypatch):
+        # Ten posts can all be about the same field without sharing a word, so
+        # showing only the text made a rut invisible. The tally makes it plain.
+        calls = self._wire(brain, [response([text("notes")])], monkeypatch)
+        brain.explore(
+            "digest",
+            [
+                PostRecord(text="a", topic="roman concrete"),
+                PostRecord(text="b", topic="roman concrete"),
+                PostRecord(text="c", topic="shipping containers"),
+            ],
+            "persona",
+        )
+        prompt = calls[0]["messages"][0]["content"]
+
+        assert "[roman concrete]" in prompt
+        assert "Topics you have been circling" in prompt
+        assert "roman concrete (2)" in prompt
+        assert "shipping containers" in prompt
+
+    def test_a_post_with_no_topic_still_renders(self, brain, monkeypatch):
+        calls = self._wire(brain, [response([text("notes")])], monkeypatch)
+        brain.explore("digest", [PostRecord(text="untagged post")], "persona")
+        prompt = calls[0]["messages"][0]["content"]
+        assert "untagged post" in prompt
+        assert "[]" not in prompt
 
 
 class TestCompose:

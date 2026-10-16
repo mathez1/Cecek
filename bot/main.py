@@ -74,6 +74,7 @@ def load_persona(cfg_path: Path) -> str:
 def write_draft(
     brain: Brain,
     exploration: Exploration,
+    history: list,
     recent: list[str],
     persona: str,
     cfg: Config,
@@ -86,7 +87,7 @@ def write_draft(
         log.info("composing (attempt %d of %d)", attempt, cfg.max_compose_attempts)
 
         try:
-            draft = brain.compose(exploration, recent, persona, feedback=feedback)
+            draft = brain.compose(exploration, history, persona, feedback=feedback)
         except BrainError as exc:
             # A truncated or unparseable response is worth another go; we
             # already paid for the exploration that produced these notes.
@@ -243,7 +244,7 @@ def run() -> int:
         )
         return EXIT_NEEDS_HUMAN
     history = memory.load_posts(POSTS_PATH, limit=cfg.recent_posts_in_context)
-    recent = memory.recent_texts(history)
+    recent = memory.recent_texts(history)  # texts only, for the similarity guard
     log.info("memory: %d recent posts in context", len(recent))
 
     # Stop before spending anything if a self-imposed cap is reached. Both
@@ -284,8 +285,8 @@ def run() -> int:
     brain = Brain(cfg)
 
     try:
-        exploration = brain.explore(digest, recent, persona)
-        draft = write_draft(brain, exploration, recent, persona, cfg)
+        exploration = brain.explore(digest, history, persona)
+        draft = write_draft(brain, exploration, history, recent, persona, cfg)
     except BrainError as exc:
         log.error("could not write a post: %s", exc)
         memory.record_spend(state, brain.meter.cost(cfg.model))
@@ -314,7 +315,7 @@ def run() -> int:
         return EXIT_OK
 
     client = XClient(cfg)
-    result = publish(client, brain, draft, exploration, recent, persona, cfg, state)
+    result = publish(client, brain, draft, exploration, history, recent, persona, cfg, state)
 
     if result is None:
         memory.save_state(STATE_PATH, state)
@@ -379,6 +380,7 @@ def publish(
     brain: Brain,
     draft: Draft,
     exploration: Exploration,
+    history: list,
     recent: list[str],
     persona: str,
     cfg: Config,
@@ -416,7 +418,7 @@ def publish(
             try:
                 retry = brain.compose(
                     exploration,
-                    recent,
+                    history,
                     persona,
                     feedback=(
                         "X rejected that post as duplicate content. Its matching "

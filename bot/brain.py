@@ -24,6 +24,7 @@ from typing import Any
 import anthropic
 
 from bot.cost import Meter
+from bot.memory import PostRecord
 
 log = logging.getLogger(__name__)
 
@@ -296,7 +297,7 @@ class Brain:
 
     # ------------------------------------------------------------- stage one
 
-    def explore(self, digest: str, recent_posts: list[str], persona: str) -> Exploration:
+    def explore(self, digest: str, history: list[PostRecord], persona: str) -> Exploration:
         """Let the model roam. Returns its notes, not a post."""
         tools = []
         if self.cfg.enable_web_search:
@@ -305,7 +306,7 @@ class Brain:
                 web_fetch_tool(self.cfg.max_fetches),
             ]
 
-        prompt = _explore_prompt(digest, recent_posts, self.cfg.enable_web_search)
+        prompt = _explore_prompt(digest, history, self.cfg.enable_web_search)
 
         kwargs: dict[str, Any] = {
             "model": self.cfg.model,
@@ -372,12 +373,12 @@ class Brain:
     def compose(
         self,
         exploration: Exploration,
-        recent_posts: list[str],
+        history: list[PostRecord],
         persona: str,
         feedback: str | None = None,
     ) -> Draft:
         """Turn the notes into one post, as validated JSON."""
-        prompt = _compose_prompt(exploration, recent_posts, feedback)
+        prompt = _compose_prompt(exploration, history, feedback)
 
         # Adaptive thinking counts toward max_tokens, and at high effort it can
         # be far larger than the ~300 tokens of JSON we actually want. Being
@@ -431,8 +432,8 @@ class Brain:
 # ---------------------------------------------------------------- prompt text
 
 
-def _explore_prompt(digest: str, recent_posts: list[str], can_search: bool) -> str:
-    history = _format_history(recent_posts)
+def _explore_prompt(digest: str, history: list[PostRecord], can_search: bool) -> str:
+    history_text = _format_history(history)
 
     search_clause = (
         "You have web search and web fetch. Use them. Follow whatever thread "
@@ -455,7 +456,7 @@ assignment. You are free to ignore all of it.
 
 {digest or "(no feed items available this run)"}
 
-{history}
+{history_text}
 
 Think out loud, then finish with a section headed EXACTLY:
 
@@ -474,9 +475,9 @@ Do not write the post itself yet."""
 
 
 def _compose_prompt(
-    exploration: Exploration, recent_posts: list[str], feedback: str | None
+    exploration: Exploration, history: list[PostRecord], feedback: str | None
 ) -> str:
-    history = _format_history(recent_posts)
+    history_text = _format_history(history)
 
     retry_clause = ""
     if feedback:
@@ -490,7 +491,7 @@ An earlier draft was rejected. Do not repeat the mistake.
 
 {exploration.notes}
 
-{history}
+{history_text}
 {retry_clause}
 Now write the post.
 
@@ -506,15 +507,41 @@ post goes out.
 Return the JSON object and nothing else."""
 
 
-def _format_history(recent_posts: list[str]) -> str:
-    if not recent_posts:
+def _format_history(history: list[PostRecord]) -> str:
+    """Show the model what it has been saying AND what it has been saying it about.
+
+    Showing only the text made clustering hard to see: ten posts can all be
+    mechanism-of-an-old-technology without sharing a word, and the model has
+    to infer the pattern from prose. A topic tally makes the rut explicit, so
+    it can act on the persona's instruction to go somewhere else.
+    """
+    if not history:
         return "You have not posted anything yet. This is your first post."
 
-    lines = "\n".join(f"- {p}" for p in reversed(recent_posts))
-    return f"""Your recent posts, newest first. Do not repeat these, and do not
-write a variation on one of them:
+    lines = []
+    for record in reversed(history):
+        topic = record.topic.strip()
+        lines.append(f"- [{topic}] {record.text}" if topic else f"- {record.text}")
 
-{lines}"""
+    counts: dict[str, int] = {}
+    for record in history:
+        topic = record.topic.strip().lower()
+        if topic:
+            counts[topic] = counts.get(topic, 0) + 1
+
+    tally = ""
+    if counts:
+        ranked = sorted(counts.items(), key=lambda kv: (-kv[1], kv[0]))[:12]
+        tally = "\n\nTopics you have been circling, most frequent first:\n" + ", ".join(
+            f"{topic} ({n})" if n > 1 else topic for topic, n in ranked
+        )
+
+    return (
+        "Your recent posts, newest first. Do not repeat these, and do not "
+        "write a variation on one of them:\n\n"
+        + "\n".join(lines)
+        + tally
+    )
 
 
 # -------------------------------------------------------------------- helpers

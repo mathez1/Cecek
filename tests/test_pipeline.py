@@ -53,11 +53,11 @@ class FakeBrain:
             web_searches=4,
         )
 
-    def explore(self, digest, recent, persona):
+    def explore(self, digest, history, persona):
         self.explore_calls += 1
         return Exploration(notes="some notes", sources=["https://example.com/a"])
 
-    def compose(self, exploration, recent, persona, feedback=None):
+    def compose(self, exploration, history, persona, feedback=None):
         self.feedback_seen.append(feedback)
         if not self.drafts:
             raise AssertionError("compose called more times than the test queued")
@@ -162,9 +162,9 @@ class TestHappyPath:
         seen = {}
         original = FakeBrain.explore
 
-        def spy(self, digest, recent, persona):
-            seen["recent"] = list(recent)
-            return original(self, digest, recent, persona)
+        def spy(self, digest, history, persona):
+            seen["recent"] = [r.text for r in history]
+            return original(self, digest, history, persona)
 
         monkeypatch.setattr(FakeBrain, "explore", spy)
         FakeBrain.queue = [Draft(post=OTHER_POST)]
@@ -364,7 +364,7 @@ class TestCircuitBreaker:
         called = []
         monkeypatch.setattr(
             FakeBrain, "explore",
-            lambda self, d, r, p: called.append(1) or Exploration(notes="x"),
+            lambda self, d, h, p: called.append(1) or Exploration(notes="x"),
         )
 
         assert main.run() == main.EXIT_NEEDS_HUMAN
@@ -381,7 +381,7 @@ class TestCircuitBreaker:
         called = []
         monkeypatch.setattr(
             FakeBrain, "explore",
-            lambda self, d, r, p: called.append(1) or Exploration(notes="x"),
+            lambda self, d, h, p: called.append(1) or Exploration(notes="x"),
         )
         FakeBrain.queue = [Draft(post=OTHER_POST)]
         assert main.run() == main.EXIT_NEEDS_HUMAN
@@ -530,7 +530,7 @@ class TestBrainFailure:
         assert repo.state["consecutive_failures"] == 1
 
     def test_exploration_failure_goes_red_immediately(self, repo, monkeypatch):
-        def boom(self, digest, recent, persona):
+        def boom(self, digest, history, persona):
             raise BrainError("web search is unavailable")
 
         monkeypatch.setattr(FakeBrain, "explore", boom)
