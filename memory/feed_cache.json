@@ -10,7 +10,7 @@
     "modified": "Fri, 16 Oct 2026 19:04:47 GMT"
   },
   "https://hnrss.org/frontpage": {
-    "modified": "Fri, 16 Oct 2026 09:40:47 GMT"
+    "modified": "Sat, 17 Oct 2026 09:08:16 GMT"
   },
   "https://lobste.rs/rss": {
     "etag": "\"dm6u2osw36qxcvv-gzip\"",
@@ -35,7 +35,7 @@
     "etag": "790cb7bd9f0150d35932032b596717c8d26252d186fb9650718ce609cf44b5de"
   },
   "https://rss.arxiv.org/rss/econ.GN": {
-    "etag": "72b1800a1aa3e51bcfb47679aae0a32f163c6f488d71e5afdc9f0289a3c5e95e"
+    "etag": "6743704008060029b92b8e8e4d2ce9021d1d46d2cb2a3b58b715cbb55689e10e"
   },
   "https://rss.arxiv.org/rss/q-bio.PE": {
     "etag": "b1e93b76a34471bb5e2b5cc6cb653d3f86517e0592c7791288167e03b044270e"
@@ -49,8 +49,11 @@
     "modified": "Fri, 16 Oct 2026 18:01:55 GMT"
   },
   "https://techcrunch.com/feed/": {
-    "etag": "W/\"26daab57e6ffc9fb09d5c9f649d3f83e\"",
-    "modified": "Fri, 16 Oct 2026 21:05:37 GMT"
+    "etag": "W/\"2d8859bbd4bf27a52362d5631dad55c4\"",
+    "modified": "Sat, 17 Oct 2026 06:50:18 GMT"
+  },
+  "https://www.404media.co/rss/": {
+    "etag": "W/\"12a32-OJILm20BlTDW2kX4wTIdd0JgNPY\""
   },
   "https://www.aljazeera.com/xml/rss/all.xml": {
     "etag": "W/\"b2770186d434177608b7738e9be79bbe\"",
@@ -60,18 +63,18 @@
     "etag": "W/\"ed6c3-72K6pnp7pUXRdU9f5OwstIBoPPw\""
   },
   "https://www.atlasobscura.com/feeds/latest": {
-    "etag": "W/\"cbdad757a184eca9200f3653234cea2c\""
+    "etag": "W/\"4e56275fca39dd441f4b3923531b0b8c\""
   },
   "https://www.construction-physics.com/feed": {
-    "etag": "W/\"cb19f-J+ogZt75n+xpXrtypfYgvCsazzY\""
+    "etag": "W/\"cb19f-i2ZztndrPN+pGrE8LyQIyJ4cvwU\""
   },
   "https://www.economist.com/latest/rss.xml": {
     "etag": "W/\"5a5d4fc3b13941f80a159d4ce06ba39a\"",
     "modified": "Sat, 17 Oct 2026 03:41:57 GMT"
   },
   "https://www.nasa.gov/news-release/feed/": {
-    "etag": "W/\"1b1aa2a08705469b494861c684f48ce9\"",
-    "modified": "Fri, 16 Oct 2026 20:40:19 GMT"
+    "etag": "W/\"275ead70c02174ef320395e0e8228d05\"",
+    "modified": "Sat, 17 Oct 2026 04:05:00 GMT"
   },
   "https://www.nature.com/nature.rss": {
     "etag": "\"3a06253cc6a89e94add42b3cdbec9da1\""
@@ -92,7 +95,7 @@
     "modified": "Thu, 15 Oct 2026 17:15:50 GMT"
   },
   "https://www.smithsonianmag.com/rss/latest_articles/": {
-    "modified": "Fri, 16 Oct 2026 23:39:28 GMT"
+    "modified": "Sat, 17 Oct 2026 09:12:18 GMT"
   },
   "https://www.technologyreview.com/feed/": {
     "etag": "W/\"f84b4a2c1bf8266d43a80b963203f6af\"",
