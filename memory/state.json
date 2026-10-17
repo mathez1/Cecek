@@ -1,8 +1,8 @@
 {
-  "consecutive_failures": 4,
+  "consecutive_failures": 5,
   "daily": {},
   "last_post_at": null,
-  "last_run_at": "2026-10-16T23:40:13+00:00",
+  "last_run_at": "2026-10-17T04:37:24+00:00",
   "last_status": "failed: posting to X failed: Payment Required | credits depleted",
   "monthly": {},
   "monthly_spend": {},
