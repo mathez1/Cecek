@@ -139,7 +139,7 @@ def _spend_note(meter: cost.Meter, state: dict, cfg: Config) -> str:
 
     memory.record_spend(state, spent)
 
-    runs_per_day = 24
+    runs_per_day = cfg.daily_post_budget or 24
     note = f"\nAt this rate: {cost.project(spent, runs_per_day)}.\n"
 
     month = memory.spend_this_month(state)
@@ -300,6 +300,7 @@ def run() -> int:
     if cfg.dry_run:
         log.info("DRY_RUN is on; not posting")
         memory.record_skip(state, "dry run")
+        spend_note = _spend_note(brain.meter, state, cfg)
         memory.save_state(STATE_PATH, state)
         log.info("this run used %s", brain.meter.report(cfg.model))
         summary(
@@ -310,7 +311,7 @@ def run() -> int:
             f"**Confidence:** {draft.confidence}  \n"
             f"**Length:** {guard.weighted_length(draft.post)}/{POST_CHAR_LIMIT}  \n"
             f"**Cost:** {brain.meter.report(cfg.model)}\n"
-            + _spend_note(brain.meter, state, cfg)
+            + spend_note
         )
         return EXIT_OK
 
@@ -355,6 +356,9 @@ def run() -> int:
         )
 
     memory.record_success(state)
+    # _spend_note mutates state, so it has to run before the save or the
+    # monthly total never reaches disk.
+    spend_note = _spend_note(brain.meter, state, cfg)
     try:
         memory.save_state(STATE_PATH, state)
     except OSError as exc:
@@ -370,7 +374,7 @@ def run() -> int:
         f"**Confidence:** {draft.confidence}  \n"
         f"**Length:** {guard.weighted_length(result.text)}/{POST_CHAR_LIMIT}  \n"
         f"**Cost:** {brain.meter.report(cfg.model)}\n"
-        + _spend_note(brain.meter, state, cfg)
+        + spend_note
     )
     return EXIT_OK
 

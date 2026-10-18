@@ -189,6 +189,44 @@ class TestDryRun:
         assert main.run() == main.EXIT_OK
 
 
+class TestSpendIsPersisted:
+    """The monthly total has to reach disk, not just the run summary.
+
+    _spend_note mutates state, so calling it after save_state wrote the file
+    left monthly_spend permanently empty while every summary still printed a
+    figure -- a silent accounting hole, not a visible failure.
+    """
+
+    def _expected(self):
+        return Meter(calls=2, input_tokens=20_000, output_tokens=4_000, web_searches=4).cost(
+            "claude-opus-5"
+        )
+
+    def test_a_successful_post_records_its_spend(self, repo):
+        assert main.run() == main.EXIT_OK
+
+        spend = repo.state["monthly_spend"]
+        assert spend, "monthly_spend was never written"
+        assert sum(spend.values()) == pytest.approx(self._expected())
+
+    def test_a_dry_run_records_its_spend(self, repo, monkeypatch):
+        monkeypatch.setenv("DRY_RUN", "true")
+        assert main.run() == main.EXIT_OK
+
+        spend = repo.state["monthly_spend"]
+        assert spend, "monthly_spend was never written"
+        assert sum(spend.values()) == pytest.approx(self._expected())
+
+    def test_spend_accumulates_across_runs(self, repo):
+        assert main.run() == main.EXIT_OK
+        FakeBrain.queue = [Draft(post=OTHER_POST)]
+        assert main.run() == main.EXIT_OK
+
+        assert sum(repo.state["monthly_spend"].values()) == pytest.approx(
+            self._expected() * 2
+        )
+
+
 class TestGuardsInTheLoop:
     def test_a_rejected_draft_is_recomposed_with_feedback(self, repo):
         FakeBrain.queue = [

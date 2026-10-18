@@ -2,10 +2,10 @@
 
 **[@bob_thinks](https://x.com/bob_thinks)**
 
-An X account that runs itself. Every hour a GitHub Action wakes up, lets Claude
-read the news and search the web, and lets it post whatever it found worth
-saying. Nobody approves anything. There is no server to run and nothing to
-click.
+An X account that runs itself. Through the day a GitHub Action wakes up, lets
+Claude read the news and search the web, and lets it post whatever it found
+worth saying — up to ten times a day. Nobody approves anything. There is no
+server to run and nothing to click.
 
 You shape it by editing one file, [`prompts/persona.md`](prompts/persona.md).
 Everything else is plumbing.
@@ -49,12 +49,12 @@ Run it in dry-run mode a few times and you will know your number within a day.
 Until then, the plausible range on the defaults, worked from the prompt sizes
 this bot actually builds:
 
-| Per run | Claude, monthly at hourly | When |
+| Per run | Claude, monthly at the 10/day cap | When |
 |---|---|---|
-| ~$0.18 | ~$130 | short exploration, compact results |
-| **~$0.30** | **~$215** | **the typical case** |
-| ~$0.44 | ~$315 | heavy searching |
-| ~$0.65 | ~$470 | long exploration and two compose retries |
+| ~$0.18 | ~$54 | short exploration, compact results |
+| **~$0.30** | **~$90** | **the typical case** |
+| ~$0.44 | ~$132 | heavy searching |
+| ~$0.65 | ~$195 | long exploration and two compose retries |
 
 On `claude-sonnet-5` every row is roughly halved, and `EFFORT=medium` takes
 another third off the output side.
@@ -144,7 +144,7 @@ re-runs itself monthly.
 
 ### 6. Let it loose
 
-Two things have to be true before the hourly schedule fires:
+Two things have to be true before the schedule fires:
 
 1. **This code must be on your default branch.** GitHub only runs scheduled
    workflows from the default branch. A `schedule:` block on a feature branch
@@ -153,16 +153,19 @@ Two things have to be true before the hourly schedule fires:
 2. **The repository variable `DRY_RUN` must not be `true`.** It defaults to
    posting for real, so unless you set that variable there is nothing to do.
 
-The first post lands at 23 minutes past the next hour. GitHub schedules run
-late during load spikes and occasionally get dropped altogether, so treat "one
-post an hour" as roughly, not exactly.
+The first post lands at 23 or 53 minutes past the next hour. GitHub schedules
+run late during load spikes and are often dropped altogether on a quiet public
+repo — measured here, an hourly cron fired 3-6 times a day. The schedule asks
+twice an hour so that the real number lands near the `DAILY_POST_BUDGET` cap;
+the cap, not the cron, is what limits posting. A firing past the cap costs
+nothing: the budget check runs before the model call and exits immediately.
 
 ---
 
 ## How it works
 
 ```
- cron, every hour at :23
+ cron, twice an hour at :23 and :53
         │
         ├─ read a random dozen of the 43 feeds in prompts/feeds.txt
         │  (sends back ETags, so most fetches are empty 304s)
@@ -289,6 +292,7 @@ To change how often it posts, edit the cron in
 [`.github/workflows/post.yml`](.github/workflows/post.yml):
 
 ```yaml
+- cron: '23,53 * * * *'   # twice an hour (the default)
 - cron: '23 * * * *'      # hourly, at :23
 - cron: '23 */3 * * *'    # every 3 hours
 - cron: '23 9,13,17 * * *'  # three times a day

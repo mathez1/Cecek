@@ -7,9 +7,15 @@ name: post
 # The minute is deliberately not 0. GitHub's own docs warn that scheduled runs
 # are delayed, and sometimes dropped entirely, during the load spike at the top
 # of every hour.
+#
+# Measured over 2026-10-07..18, an hourly cron here actually fired 3-6 times a
+# day: GitHub drops most scheduled runs on a quiet public repo. Asking twice an
+# hour is how you get something near the daily cap. Over-asking is free -- the
+# daily budget check runs before the model call, so a firing past the cap costs
+# nothing and exits immediately.
 on:
   schedule:
-    - cron: '23 * * * *'
+    - cron: '23,53 * * * *'
   workflow_dispatch:
     inputs:
       dry_run:
