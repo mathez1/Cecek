@@ -1,14 +1,14 @@
 {
   "consecutive_failures": 0,
   "daily": {
-    "2026-10-18": 3
+    "2026-10-18": 4
   },
-  "last_post_at": "2026-10-18T20:55:34+00:00",
-  "last_run_at": "2026-10-18T20:52:22+00:00",
+  "last_post_at": "2026-10-18T23:22:32+00:00",
+  "last_run_at": "2026-10-18T23:20:12+00:00",
   "last_status": "posted",
   "monthly": {
-    "2026-10": 3
+    "2026-10": 4
   },
   "monthly_spend": {},
-  "total_posts": 3
+  "total_posts": 4
 }
