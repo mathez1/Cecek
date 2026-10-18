@@ -2,7 +2,7 @@
   "consecutive_failures": 6,
   "daily": {},
   "last_post_at": null,
-  "last_run_at": "2026-10-18T01:09:41+00:00",
+  "last_run_at": "2026-10-18T06:00:23+00:00",
   "last_status": "failed: posting to X failed: Payment Required | credits depleted",
   "monthly": {},
   "monthly_spend": {},
