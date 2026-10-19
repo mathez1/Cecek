@@ -4,7 +4,7 @@
     "modified": "Sat, 17 Oct 2026 12:52:06 GMT"
   },
   "https://feeds.arstechnica.com/arstechnica/index": {
-    "modified": "Sun, 18 Oct 2026 17:23:14 GMT"
+    "modified": "Mon, 19 Oct 2026 12:17:49 GMT"
   },
   "https://hnrss.org/best": {
     "modified": "Sun, 18 Oct 2026 16:56:56 GMT"
@@ -28,8 +28,8 @@
     "modified": "Fri, 16 Oct 2026 20:26:04 GMT"
   },
   "https://physicsworld.com/feed/": {
-    "etag": "W/\"b003931ef747028b5a48f52e75a40b2d\"",
-    "modified": "Fri, 16 Oct 2026 15:32:21 GMT"
+    "etag": "W/\"15087acfd0c5c67b346de28414cc22f8\"",
+    "modified": "Mon, 19 Oct 2026 10:47:15 GMT"
   },
   "https://rss.arxiv.org/rss/cs.AI": {
     "etag": "0afd667d22efdd16cc565280f4105b8018ff3e4aeaab4244d8b7d8999628a94e"
@@ -41,12 +41,12 @@
     "etag": "b1e93b76a34471bb5e2b5cc6cb653d3f86517e0592c7791288167e03b044270e"
   },
   "https://rss.slashdot.org/Slashdot/slashdotMain": {
-    "etag": "W/\"131f8-65e1ee04bfc24\"",
-    "modified": "Sun, 18 Oct 2026 15:16:05 GMT"
+    "etag": "W/\"118e3-65e3183f18c5e\"",
+    "modified": "Mon, 19 Oct 2026 13:30:20 GMT"
   },
   "https://spectrum.ieee.org/feeds/feed.rss": {
-    "etag": "\"4bfe8414483ec87f5ddd3f4e38b427d3\"",
-    "modified": "Sat, 17 Oct 2026 13:00:02 GMT"
+    "etag": "\"3b21908f3fdb302f14eb4bdd36675bf5\"",
+    "modified": "Mon, 19 Oct 2026 13:00:03 GMT"
   },
   "https://techcrunch.com/feed/": {
     "etag": "W/\"bf6427ee9939ffc581c9b0b7bf7a1beb\"",
@@ -69,8 +69,8 @@
     "etag": "W/\"cb19f-i2ZztndrPN+pGrE8LyQIyJ4cvwU\""
   },
   "https://www.economist.com/latest/rss.xml": {
-    "etag": "W/\"9c0aeebcff0412f17d8268e1beb29aca\"",
-    "modified": "Mon, 19 Oct 2026 00:56:57 GMT"
+    "etag": "W/\"5438e4cab36514ecb0f5f515accd0a17\"",
+    "modified": "Mon, 19 Oct 2026 12:41:57 GMT"
   },
   "https://www.nasa.gov/news-release/feed/": {
     "etag": "W/\"3d5689957644f1bb0456becb61502d00\"",
@@ -98,8 +98,8 @@
     "modified": "Sun, 18 Oct 2026 23:14:58 GMT"
   },
   "https://www.technologyreview.com/feed/": {
-    "etag": "W/\"f9ba5a117e67e5e025e34fdb41828d74\"",
-    "modified": "Sat, 17 Oct 2026 19:38:22 GMT"
+    "etag": "W/\"e38daa1f85963e8fcffec9d143ef76f2\"",
+    "modified": "Mon, 19 Oct 2026 11:53:57 GMT"
   },
   "https://www.theatlantic.com/feed/all/": {
     "modified": "Sun, 18 Oct 2026 14:57:10 GMT"
