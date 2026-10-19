@@ -25,6 +25,10 @@ STATE_PATH = MEMORY_DIR / "state.json"
 # already on X once the post lands. The workflow uploads it as a run artifact
 # instead, which is how you see what a dry run drew.
 OUT_DIR = REPO_ROOT / "out"
+
+# What the tracker writes: the numbers, and the table a person reads.
+METRICS_PATH = MEMORY_DIR / "metrics.json"
+METRICS_MD_PATH = MEMORY_DIR / "METRICS.md"
 FEED_CACHE_PATH = MEMORY_DIR / "feed_cache.json"
 
 # X counts a standard post in weighted characters. 280 is the cap.
@@ -108,6 +112,16 @@ class Config:
     # provider's current list before blaming the key.
     image_model: str = "imagen-4.0-fast-generate-001"
     daily_image_budget: int = 3
+
+    # --- views ---
+    # X bills reads per post returned and deduplicates per UTC day, so how
+    # OFTEN this runs is free and how FAR BACK it looks is not. Posts older
+    # than the window keep their last reading rather than being refreshed:
+    # engagement is front-loaded, so a week-old number is close to final.
+    metrics_window_days: int = 7
+    # The account's numeric id. Resolving it costs a read that is not an
+    # Owned Read, so it is looked up once and then cached in state.json.
+    x_user_id: str = ""
 
     # --- guards ---
     similarity_threshold: float = 0.72
@@ -204,6 +218,8 @@ def load_config() -> Config:
         enable_visuals=_env_bool("ENABLE_VISUALS", True),
         image_model=_env_str("IMAGE_MODEL", "imagen-4.0-fast-generate-001"),
         daily_image_budget=_env_int("DAILY_IMAGE_BUDGET", 3),
+        metrics_window_days=_env_int("METRICS_WINDOW_DAYS", 7),
+        x_user_id=_env_str("X_USER_ID", ""),
     )
 
     valid_efforts = {"low", "medium", "high", "xhigh", "max"}

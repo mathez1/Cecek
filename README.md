@@ -302,6 +302,45 @@ check it against the developer console after a few posts.
 
 ---
 
+## Views
+
+A second workflow, [`views`](.github/workflows/metrics.yml), reads how many
+people actually saw each post and writes the numbers into
+[`memory/METRICS.md`](memory/METRICS.md) as a table, and into
+`memory/metrics.json` with a per-day history.
+
+It is cheap, but only because of how it asks. X bills reads **per post
+returned**, and the obvious way to do this is five times more expensive than
+the right one:
+
+| How | Rate | 180 posts |
+|---|---|---|
+| `GET /2/tweets?ids=...` — the ids are right there in `posts.jsonl` | $0.005 each | $0.90 a day |
+| `GET /2/users/{id}/tweets` — your own timeline, an "Owned Read" | $0.001 each | $0.18 a day |
+
+So it reads the timeline and matches against the stored ids rather than
+asking for them by id.
+
+Two more things follow from per-resource billing. **Running it more often is
+free**: charges are deduplicated per UTC calendar day, so a second run today
+costs nothing new. **Looking further back is not**: the bill scales with how
+many distinct posts get touched. That is what `METRICS_WINDOW_DAYS` controls.
+Posts older than the window are not refreshed and not forgotten — they keep
+their last reading, which is close to final, because engagement on X is
+front-loaded.
+
+The view count is `public_metrics.impression_count`. The `non_public_metrics`
+and `organic_metrics` objects carry the same number, but only for posts under
+30 days old and only for posts you wrote, so they would buy nothing and break
+quietly on anything older.
+
+**Expect small numbers at first.** Reach on X is almost entirely the follower
+graph, and a new account does not have one. The tracker's use is not the
+total; it is seeing which posts do better than the others, once there are
+enough of them to compare.
+
+---
+
 ## Shaping it
 
 ### `prompts/persona.md`
@@ -351,6 +390,8 @@ Actions → Variables). All have working defaults.
 | `ENABLE_VISUALS` | `true` | Whether the model is asked for a picture at all. Off removes the question from the schema entirely. |
 | `DAILY_IMAGE_BUDGET` | `3` | Generated illustrations per day. Charts do not count: they cost nothing. `0` is unlimited. |
 | `IMAGE_MODEL` | `imagen-4.0-fast-generate-001` | Which image model `IMAGE_API_KEY` talks to. The first thing here to go stale. |
+| `METRICS_WINDOW_DAYS` | `7` | How far back the view tracker refreshes. Older posts keep their last reading. The main cost lever on the tracker. `0` refreshes everything. |
+| `X_USER_ID` | *(looked up once)* | The account's numeric id. Optional: it is resolved once and cached in `memory/state.json`. |
 
 To change how often it posts, edit the cron in
 [`.github/workflows/post.yml`](.github/workflows/post.yml):
