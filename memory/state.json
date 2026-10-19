@@ -1,16 +1,17 @@
 {
-  "consecutive_failures": 1,
+  "consecutive_failures": 0,
   "daily": {
-    "2026-10-18": 4
+    "2026-10-18": 4,
+    "2026-10-19": 1
   },
-  "last_post_at": "2026-10-18T23:22:32+00:00",
-  "last_run_at": "2026-10-19T01:22:37+00:00",
-  "last_status": "failed: the model declined during composition (category: reasoning_extraction)",
+  "last_post_at": "2026-10-19T06:23:38+00:00",
+  "last_run_at": "2026-10-19T06:19:57+00:00",
+  "last_status": "posted",
   "monthly": {
-    "2026-10": 4
+    "2026-10": 5
   },
   "monthly_spend": {
     "2026-10": 0.6543
   },
-  "total_posts": 4
+  "total_posts": 5
 }
