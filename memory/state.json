@@ -2,16 +2,16 @@
   "consecutive_failures": 0,
   "daily": {
     "2026-10-18": 4,
-    "2026-10-19": 3
+    "2026-10-19": 4
   },
-  "last_post_at": "2026-10-19T20:01:33+00:00",
-  "last_run_at": "2026-10-19T19:59:31+00:00",
+  "last_post_at": "2026-10-19T23:50:50+00:00",
+  "last_run_at": "2026-10-19T23:46:32+00:00",
   "last_status": "posted",
   "monthly": {
-    "2026-10": 7
+    "2026-10": 8
   },
   "monthly_spend": {
     "2026-10": 0.6543
   },
-  "total_posts": 7
+  "total_posts": 8
 }

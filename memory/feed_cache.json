@@ -4,17 +4,17 @@
     "modified": "Mon, 19 Oct 2026 19:39:17 GMT"
   },
   "https://feeds.arstechnica.com/arstechnica/index": {
-    "modified": "Mon, 19 Oct 2026 19:36:23 GMT"
+    "modified": "Mon, 19 Oct 2026 23:39:01 GMT"
   },
   "https://hnrss.org/best": {
-    "modified": "Sun, 18 Oct 2026 16:56:56 GMT"
+    "modified": "Mon, 19 Oct 2026 16:45:30 GMT"
   },
   "https://hnrss.org/frontpage": {
     "modified": "Mon, 19 Oct 2026 18:51:09 GMT"
   },
   "https://lobste.rs/rss": {
-    "etag": "\"dm8lias21d6s-jj0-gzip\"",
-    "modified": "Mon, 19 Oct 2026 06:19:52 GMT"
+    "etag": "\"dm97riv3f83j-jbm-gzip\"",
+    "modified": "Mon, 19 Oct 2026 23:46:19 GMT"
   },
   "https://marginalrevolution.com/feed": {
     "etag": "\"e783ad664f1da42024c10bdb248b3687\"",
@@ -60,7 +60,7 @@
     "modified": "Mon, 19 Oct 2026 01:12:01 GMT"
   },
   "https://www.astralcodexten.com/feed": {
-    "etag": "W/\"e6241-w77eR//yZsz+SVknf74Hrdh55hI\""
+    "etag": "W/\"e6241-jCkf94XaJBufAU4bf9ISiy/3EAY\""
   },
   "https://www.atlasobscura.com/feeds/latest": {
     "etag": "W/\"4e56275fca39dd441f4b3923531b0b8c\""
@@ -69,8 +69,8 @@
     "etag": "W/\"cb19f-i2ZztndrPN+pGrE8LyQIyJ4cvwU\""
   },
   "https://www.economist.com/latest/rss.xml": {
-    "etag": "W/\"5438e4cab36514ecb0f5f515accd0a17\"",
-    "modified": "Mon, 19 Oct 2026 12:41:57 GMT"
+    "etag": "W/\"379c3372ea77fe61f293401c8991deef\"",
+    "modified": "Mon, 19 Oct 2026 22:41:57 GMT"
   },
   "https://www.nasa.gov/news-release/feed/": {
     "etag": "W/\"3d5689957644f1bb0456becb61502d00\"",
@@ -102,13 +102,13 @@
     "modified": "Mon, 19 Oct 2026 11:53:57 GMT"
   },
   "https://www.theatlantic.com/feed/all/": {
-    "modified": "Sun, 18 Oct 2026 14:57:10 GMT"
+    "modified": "Mon, 19 Oct 2026 23:42:12 GMT"
   },
   "https://www.theguardian.com/science/rss": {
-    "etag": "W/\"hash-5469360738974195224\""
+    "etag": "W/\"hash-7504256651347294050\""
   },
   "https://www.theguardian.com/world/rss": {
-    "etag": "W/\"hash217131159793155517\""
+    "etag": "W/\"hash-8771588588496066562\""
   },
   "https://www.theverge.com/rss/index.xml": {
     "etag": "W/\"51fed21fa223879af26beba9f2aebb6a\""
