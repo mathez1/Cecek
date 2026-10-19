@@ -24,6 +24,7 @@ import matplotlib
 # turns a cosmetic feature into a dead run.
 matplotlib.use("Agg")
 
+import matplotlib.patheffects as patheffects  # noqa: E402
 import matplotlib.pyplot as plt  # noqa: E402
 
 log = logging.getLogger(__name__)
@@ -38,6 +39,11 @@ INK = "#FFFFFF"
 INK_2 = "#9A9A9A"
 INK_MUTED = "#4E4E4E"
 GRID = "#1C1C1C"
+
+# Labels sit wherever the data leaves room, which is sometimes on top of the
+# curve. A stroke in the surface colour around the glyphs keeps them readable
+# there without having to solve label placement properly.
+HALO = [patheffects.withStroke(linewidth=3.5, foreground=SURFACE)]
 
 # Plot box as a fraction of the figure, shared by the two axes-based shapes so
 # the reference-line label can be angled correctly (see _reference_angle).
@@ -94,18 +100,70 @@ def _dress(ax, x_label: str, y_label: str) -> None:
         ax.spines[side].set_linewidth(0.8)
 
 
-def _reference_angle() -> float:
-    """Degrees at which a 1:1 line is actually drawn.
+def _label_the_chord(ax, xs: list[float], ys: list[float]) -> None:
+    """Name the reference line, lying along it at whatever angle it is drawn.
 
-    The plot box is wider than it is tall, so the diagonal reads at about 22
-    degrees, not 45. Labelling it at 45 looks like a mistake, because it is
-    one: the label would not lie along the line it names.
+    The angle comes from the display transform rather than from the data,
+    because the plot box is not square: a 1:1 line reads at about 22 degrees
+    here, and a falling one at minus that. Labelling it from the data slope
+    puts the words across the line instead of along it.
     """
     from math import atan2, degrees
 
-    width = (RIGHT - LEFT) * FIGSIZE[0]
-    height = (TOP - BOTTOM) * FIGSIZE[1]
-    return degrees(atan2(height, width))
+    start = ax.transData.transform((xs[0], ys[0]))
+    end = ax.transData.transform((xs[-1], ys[-1]))
+    angle = degrees(atan2(end[1] - start[1], end[0] - start[0]))
+    # Keep it readable rather than upside down if the points ever arrive
+    # right to left.
+    if angle > 90 or angle < -90:
+        angle += 180
+
+    ax.text(
+        xs[0] + (xs[-1] - xs[0]) * 0.46,
+        ys[0] + (ys[-1] - ys[0]) * 0.46,
+        "what you'd expect",
+        color=INK_MUTED, fontsize=8.5, ha="center", va="bottom",
+        rotation=angle, rotation_mode="anchor", zorder=2,
+        path_effects=HALO,
+    )
+
+
+def _callout(ax, hx: float, hy: float, label: str) -> None:
+    """Two lines of numbers beside the marked point, kept on the canvas.
+
+    A fixed up-and-left offset walks off the axes whenever the marked point
+    is the first or the last one, which is often exactly the point worth
+    marking. The text clipped to a letter or two and the post went out with
+    it, because nothing about that raises.
+    """
+    left, right = ax.get_xlim()
+    bottom, top = ax.get_ylim()
+    width, height = right - left, top - bottom
+
+    # Lean away from the nearer edge on each axis.
+    going_left = hx > left + width * 0.5
+    going_down = hy > bottom + height * 0.62
+
+    text_x = hx + (-1 if going_left else 1) * width * 0.14
+    text_y = hy + (-1 if going_down else 1) * height * 0.27
+
+    # Then keep the anchor inside, with room for two lines of text.
+    margin_x, margin_y = width * 0.03, height * 0.12
+    text_x = min(max(text_x, left + margin_x), right - margin_x)
+    text_y = min(max(text_y, bottom + margin_y), top - margin_y)
+
+    ax.annotate(
+        label,
+        xy=(hx, hy),
+        xytext=(text_x, text_y),
+        color=INK, fontsize=10.5, linespacing=1.35,
+        ha="right" if going_left else "left",
+        va="top" if going_down else "bottom",
+        arrowprops=dict(arrowstyle="-", color=INK_MUTED, linewidth=1.0,
+                        shrinkA=2, shrinkB=7),
+        zorder=5,
+        path_effects=HALO,
+    )
 
 
 def draw_line(
@@ -129,21 +187,18 @@ def draw_line(
         xs = [p[0] for p in points]
         ys = [p[1] for p in points]
 
-        if linear_reference:
-            # The intuition the post is usually correcting: output tracking input
-            # one for one, drawn across the same span as the data.
-            lo, hi = min(xs), max(xs)
-            y_lo, y_hi = min(ys), max(ys)
-            ax.plot([lo, hi], [y_lo, y_hi], color=INK_MUTED, linewidth=1.0, zorder=2)
-            ax.text(
-                lo + (hi - lo) * 0.44,
-                y_lo + (y_hi - y_lo) * 0.46,
-                "what you'd expect",
-                color=INK_MUTED, fontsize=8.5, ha="left", va="bottom",
-                rotation=_reference_angle(), rotation_mode="anchor",
-            )
-
         ax.plot(xs, ys, color=INK, linewidth=2.2, solid_capstyle="round", zorder=3)
+
+        if linear_reference:
+            # The chord between the two ENDPOINTS, not between the corners of
+            # the bounding box. Taking min(xs) with min(ys) draws a rising
+            # line whatever the data does, so for a falling series it asserted
+            # the opposite of the intuition the post was correcting.
+            ax.plot(
+                [xs[0], xs[-1]], [ys[0], ys[-1]],
+                color=INK_MUTED, linewidth=1.0, zorder=2,
+            )
+            _label_the_chord(ax, xs, ys)
 
         if 0 <= highlight < len(points):
             hx, hy = points[highlight]
@@ -152,16 +207,7 @@ def draw_line(
             ax.plot([hx], [hy], marker="o", markersize=9, color=INK,
                     markeredgecolor=SURFACE, markeredgewidth=2.5, zorder=4)
             if highlight_label:
-                span_x = max(xs) - min(xs) or 1.0
-                span_y = max(ys) - min(ys) or 1.0
-                ax.annotate(
-                    highlight_label,
-                    xy=(hx, hy),
-                    xytext=(hx - span_x * 0.14, hy + span_y * 0.27),
-                    color=INK, fontsize=10.5, linespacing=1.35, ha="right",
-                    arrowprops=dict(arrowstyle="-", color=INK_MUTED, linewidth=1.0,
-                                    shrinkA=2, shrinkB=7),
-                )
+                _callout(ax, hx, hy, highlight_label)
 
         _dress(ax, x_label, y_label)
         _headings(fig, title, subtitle)

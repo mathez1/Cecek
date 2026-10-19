@@ -9,6 +9,7 @@ success and a single error object on failure.
 
 import json
 import sys
+from dataclasses import replace
 from pathlib import Path
 from types import SimpleNamespace as NS
 
@@ -118,6 +119,82 @@ class TestSourceExtraction:
 
     def test_no_tool_blocks_gives_nothing(self):
         assert _sources_of(response([text("just text")])) == []
+
+
+class TestTheComposeSchema:
+    """What the model is actually asked for, observed rather than recomputed.
+
+    A test that calls draft_schema() itself and inspects the result passes
+    whether or not compose ever sends it. If the wiring were dropped, the
+    model would never be asked for a picture, every post would go out as
+    text, and nothing would fail.
+    """
+
+    def _sent(self, brain, monkeypatch, payload):
+        calls = []
+
+        def fake_create(**kwargs):
+            calls.append(kwargs)
+            return response([text(json.dumps(payload))])
+
+        monkeypatch.setattr(brain, "_create", fake_create)
+        return calls
+
+    def _payload(self, **extra):
+        payload = {
+            "post": "Portland cement does not dry, it reacts.",
+            "topic": "cement", "rationale": "it is neat",
+            "sources": [], "confidence": "high",
+        }
+        payload.update(extra)
+        return payload
+
+    def test_the_visual_question_is_sent_when_visuals_are_on(self, brain, monkeypatch):
+        calls = self._sent(brain, monkeypatch, self._payload(visual={"kind": "none"}))
+
+        brain.compose(Exploration(notes="n"), [], "persona")
+
+        schema = calls[0]["output_config"]["format"]["schema"]
+        assert "visual" in schema["properties"]
+        assert "visual" in schema["required"]
+        assert set(schema["properties"]["visual"]["properties"]) >= {
+            "kind", "alt", "points", "figure", "prompt"
+        }
+
+    def test_it_is_absent_when_visuals_are_off(self, cfg, monkeypatch):
+        monkeypatch.setattr(brain_mod.anthropic, "Anthropic", lambda **kw: NS(
+            beta=NS(messages=NS(create=None)), messages=NS(create=None)
+        ))
+        off = Brain(replace(cfg, enable_visuals=False))
+        calls = self._sent(off, monkeypatch, self._payload())
+
+        off.compose(Exploration(notes="n"), [], "persona")
+
+        schema = calls[0]["output_config"]["format"]["schema"]
+        assert "visual" not in schema["properties"]
+        assert "visual" not in schema["required"]
+
+    def test_the_answer_reaches_the_draft(self, brain, monkeypatch):
+        self._sent(brain, monkeypatch, self._payload(visual={
+            "kind": "stat", "figure": "340 ppm", "alt": "The figure 340 ppm.",
+            "title": "", "subtitle": "", "x_label": "", "y_label": "",
+            "points": [], "linear_reference": False, "categories": [],
+            "values": [], "highlight": -1, "highlight_label": "",
+            "caption": "", "prompt": "",
+        }))
+
+        draft = brain.compose(Exploration(notes="n"), [], "persona")
+
+        assert draft.visual.kind == "stat"
+        assert draft.visual.figure == "340 ppm"
+
+    def test_a_response_with_no_visual_is_still_a_draft(self, brain, monkeypatch):
+        # Belt and braces: the field is required, but a missing one must not
+        # cost the post.
+        self._sent(brain, monkeypatch, self._payload())
+
+        draft = brain.compose(Exploration(notes="n"), [], "persona")
+        assert draft.visual.kind == "none"
 
 
 class TestExplore:

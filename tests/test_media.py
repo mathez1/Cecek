@@ -139,6 +139,20 @@ class TestUpload:
         monkeypatch.setattr(media.requests, "post", fake_post)
         assert media.MediaUploader(Cfg()).upload(png, alt="something") == "42"
 
+    def test_a_stalled_alt_text_call_does_not_discard_the_upload(self, png, monkeypatch):
+        # X has already accepted the image at this point. Letting a transport
+        # failure on the optional second request propagate threw away a
+        # perfectly good media id and posted as text.
+        def fake_post(url, **kwargs):
+            if url == media.METADATA:
+                raise requests.exceptions.ReadTimeout("metadata call stalled")
+            return uploaded("1946")
+
+        monkeypatch.setattr(media.requests, "post", fake_post)
+
+        uploader = media.MediaUploader(Cfg())
+        assert uploader.upload(png, alt="a rising curve") == "1946"
+
     def test_every_call_is_counted(self, png, monkeypatch):
         # X publishes no price for these, so the count is the only way to
         # check a bill against reality.

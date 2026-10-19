@@ -175,17 +175,39 @@ class Rendered:
 
 
 def _finite(value: Any) -> float | None:
+    # OverflowError is neither of the other two: float(2**1024) raises it, and
+    # a 309-digit integer is a perfectly legal answer under a "number" schema.
+    # A post about key spaces or factorials would otherwise kill the run.
     try:
         number = float(value)
-    except (TypeError, ValueError):
+    except (TypeError, ValueError, OverflowError):
         return None
     # A model that computes a curve can hand back inf or nan at an asymptote.
     # matplotlib draws those as a silently broken line rather than raising.
     return number if math.isfinite(number) else None
 
 
+def _items(value: Any) -> list:
+    """Whatever arrived where an array was promised, as something iterable."""
+    return value if isinstance(value, list) else []
+
+
 def parse(data: Any) -> Visual:
-    """Read the model's answer defensively. Anything odd becomes 'none'."""
+    """Read the model's answer defensively. Anything odd becomes 'none'.
+
+    The guard is here rather than at each conversion because this function
+    promises total defensiveness and the list of ways a number can misbehave
+    is not one anybody enumerates correctly in advance. render() takes the
+    same approach for the same reason.
+    """
+    try:
+        return _parse(data)
+    except Exception as exc:  # noqa: BLE001 - a bad spec must not cost the post
+        log.warning("could not read the visual spec (%s); posting as text", exc)
+        return Visual()
+
+
+def _parse(data: Any) -> Visual:
     if not isinstance(data, dict):
         return Visual()
 
@@ -194,21 +216,35 @@ def parse(data: Any) -> Visual:
         log.warning("unknown visual kind %r; treating as none", kind)
         return Visual()
 
-    points: list[tuple[float, float]] = []
-    for item in data.get("points") or []:
+    try:
+        highlight = int(data.get("highlight", -1))
+    except (TypeError, ValueError, OverflowError):
+        highlight = -1
+
+    # Keep each point's position in the model's own array while filtering, so
+    # that re-sorting below can carry the highlight with it.
+    kept: list[tuple[int, float, float]] = []
+    for index, item in enumerate(_items(data.get("points"))):
         if not isinstance(item, dict):
             continue
         x, y = _finite(item.get("x")), _finite(item.get("y"))
         if x is not None and y is not None:
-            points.append((x, y))
+            kept.append((index, x, y))
 
-    values = [v for v in (_finite(v) for v in data.get("values") or []) if v is not None]
-    categories = [str(c) for c in (data.get("categories") or []) if str(c).strip()]
+    # A curve drawn out of order folds back on itself, so the points are
+    # sorted. But the model chose its highlight against the order it wrote,
+    # and a marker that moves to a different point is worse than no marker:
+    # the callout would state one pair of numbers beside another.
+    kept.sort(key=lambda row: (row[1], row[2]))
+    points = [(x, y) for _, x, y in kept]
+    if 0 <= highlight:
+        moved = [position for position, row in enumerate(kept) if row[0] == highlight]
+        highlight = moved[0] if moved else -1
 
-    try:
-        highlight = int(data.get("highlight", -1))
-    except (TypeError, ValueError):
-        highlight = -1
+    values = [
+        v for v in (_finite(v) for v in _items(data.get("values"))) if v is not None
+    ]
+    categories = [str(c) for c in _items(data.get("categories")) if str(c).strip()]
 
     return Visual(
         kind=kind,
@@ -217,7 +253,7 @@ def parse(data: Any) -> Visual:
         alt=str(data.get("alt") or "").strip()[:ALT_LIMIT],
         x_label=str(data.get("x_label") or "").strip(),
         y_label=str(data.get("y_label") or "").strip(),
-        points=sorted(points),  # a curve drawn out of order folds back on itself
+        points=points,
         linear_reference=bool(data.get("linear_reference")),
         categories=categories,
         values=values,
@@ -302,10 +338,14 @@ def render(
         log.warning("cannot draw: %s", exc)
         return None
 
-    directory.mkdir(parents=True, exist_ok=True)
     path = directory / "post.png"
 
     try:
+        # Inside the guard, not above it: a full disk, a read-only checkout or
+        # a stray file where out/ should be is exactly the kind of thing that
+        # must cost the picture and not the post.
+        directory.mkdir(parents=True, exist_ok=True)
+
         if visual.kind == "line":
             chart.draw_line(
                 path,
@@ -343,12 +383,14 @@ def render(
                 return None
             if not illustrator(visual.prompt, path):
                 return None
+
+        # Also inside: stat() on a path a failing filesystem just lost raises
+        # as readily as the drawing did.
+        if not path.exists() or path.stat().st_size == 0:
+            log.warning("the %s rendered to nothing", visual.kind)
+            return None
     except Exception as exc:  # noqa: BLE001 - a drawing bug must not lose the post
         log.warning("could not draw a %s: %s", visual.kind, exc)
-        return None
-
-    if not path.exists() or path.stat().st_size == 0:
-        log.warning("the %s rendered to nothing", visual.kind)
         return None
 
     return Rendered(path=path, alt=visual.alt, kind=visual.kind)

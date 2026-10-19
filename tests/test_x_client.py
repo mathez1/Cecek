@@ -61,6 +61,42 @@ class TestTimeout:
         assert client.client.session.request.keywords["timeout"] == REQUEST_TIMEOUT
 
 
+class TestMediaReachesTweepy:
+    """Nothing else checks that an uploaded picture is actually attached.
+
+    Drawing, uploading and reporting all succeed independently of this one
+    keyword argument, so losing it produces a green suite, a summary that
+    says a picture was attached, and an account that never posts one.
+    """
+
+    def test_media_ids_are_passed_through(self, client):
+        seen = {}
+
+        def capture(**kwargs):
+            seen.update(kwargs)
+            return NS(data={"id": "1"})
+
+        client.client.create_tweet = capture
+        client.post("hello", media_ids=["999"])
+
+        assert seen["media_ids"] == ["999"]
+        assert seen["text"] == "hello"
+
+    def test_no_picture_sends_none_not_an_empty_list(self, client):
+        seen = {}
+
+        def capture(**kwargs):
+            seen.update(kwargs)
+            return NS(data={"id": "1"})
+
+        client.client.create_tweet = capture
+        client.post("hello")
+        assert seen["media_ids"] is None
+
+        client.post("hello", media_ids=[])
+        assert seen["media_ids"] is None
+
+
 class TestTheTwoKindsOf429:
     def test_a_rate_limit_is_retryable(self, client):
         exc = tweepy.errors.TooManyRequests(

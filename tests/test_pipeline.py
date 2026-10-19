@@ -23,6 +23,7 @@ from bot.cost import Meter
 from bot.memory import load_posts, load_state
 from bot.x_client import (
     PostResult,
+    XError,
     XAuthError,
     XDuplicateError,
     XQuotaError,
@@ -78,6 +79,8 @@ class FakeXClient:
         self.raises = list(getattr(FakeXClient, "queue", []))
 
     def post(self, text, media_ids=None):
+        if media_ids and getattr(FakeXClient, "rejects_media", False):
+            raise XError("X rejected the request: Invalid media_ids")
         if self.raises:
             exc = self.raises.pop(0)
             if exc is not None:
@@ -133,6 +136,7 @@ def repo(tmp_path, monkeypatch):
     FakeBrain.queue = [Draft(post=GOOD_POST, topic="concrete", rationale="it is neat")]
     FakeXClient.queue = []
     FakeXClient.last_media = None
+    FakeXClient.rejects_media = False
     monkeypatch.setattr(config, "OUT_DIR", tmp_path / "out")
     monkeypatch.setattr(main, "Brain", FakeBrain)
     monkeypatch.setattr(main, "XClient", FakeXClient)
@@ -365,19 +369,58 @@ class TestPictures:
         assert FakeUploader.instances == []
         assert (config.OUT_DIR / "post.png").exists()
 
-    def test_visuals_off_means_the_model_is_not_even_asked(self, repo, monkeypatch):
+    def test_visuals_off_draws_nothing_even_when_a_spec_arrives(self, repo, monkeypatch):
+        # Whether the question reaches the model is tested against the real
+        # compose call in tests/test_brain.py. This is the other half: the
+        # switch also has to stop the drawing.
         monkeypatch.setenv("ENABLE_VISUALS", "false")
-        seen = {}
+        FakeUploader.instances = []
+        monkeypatch.setattr(main, "MediaUploader", FakeUploader)
+        FakeBrain.queue = [Draft(post=GOOD_POST, visual=visual.parse(STAT))]
 
-        original = FakeBrain.compose
-
-        def spy(self, exploration, history, persona, feedback=None):
-            seen["schema"] = brain_module.draft_schema(self.cfg.enable_visuals)
-            return original(self, exploration, history, persona, feedback)
-
-        monkeypatch.setattr(FakeBrain, "compose", spy)
         assert main.run() == main.EXIT_OK
-        assert "visual" not in seen["schema"]["properties"]
+        assert FakeUploader.instances == []
+        assert FakeXClient.last_media is None
+
+    def test_a_media_id_x_will_not_take_costs_the_picture_not_the_post(self, pictures):
+        # An unusable media id fails the whole create_tweet call, so without
+        # a retry the text goes down with the picture.
+        FakeXClient.rejects_media = True
+        FakeBrain.queue = [Draft(post=GOOD_POST, visual=visual.parse(STAT))]
+
+        assert main.run() == main.EXIT_OK
+        assert [p.text for p in pictures.posts] == [GOOD_POST]
+        assert FakeXClient.last_media is None
+        assert pictures.state["consecutive_failures"] == 0
+
+    def test_a_rewrite_reports_the_post_that_actually_went_out(self, pictures, tmp_path, monkeypatch):
+        # The picture is dropped on a rewrite. A summary still claiming it
+        # was attached, with the discarded draft's alt text, describes a post
+        # that does not exist.
+        summary_path = tmp_path / "summary.md"
+        monkeypatch.setenv("GITHUB_STEP_SUMMARY", str(summary_path))
+        FakeXClient.queue = [XDuplicateError("duplicate")]
+        FakeBrain.queue = [
+            Draft(post=GOOD_POST, visual=visual.parse(STAT)),
+            Draft(post=OTHER_POST),
+        ]
+
+        assert main.run() == main.EXIT_OK
+
+        written = summary_path.read_text(encoding="utf-8")
+        assert "The figure 340 ppm." not in written
+        assert "**Picture:** stat  " not in written
+
+    def test_a_picture_that_fails_outright_does_not_fail_the_run(self, pictures, monkeypatch):
+        def explode(*args, **kwargs):
+            raise OSError("no space left on device")
+
+        monkeypatch.setattr(main, "draw", explode)
+        FakeBrain.queue = [Draft(post=GOOD_POST, visual=visual.parse(STAT))]
+
+        assert main.run() == main.EXIT_OK
+        assert [p.text for p in pictures.posts] == [GOOD_POST]
+        assert pictures.state["last_status"] == "posted"
 
 
 class TestIllustrationBudget:
@@ -414,6 +457,35 @@ class TestIllustrationBudget:
         FakeBrain.queue = [Draft(post=OTHER_POST, visual=visual.parse(ILLUSTRATION))]
         assert main.run() == main.EXIT_OK
         assert len(made) == 1, "the second run was over budget and should not have paid"
+
+    def test_an_image_that_was_paid_for_and_discarded_still_counts(self, pictures, monkeypatch):
+        # The vendor charges on delivery. An image too large to post, or one
+        # that could not be marked, is money spent; billing it to nothing let
+        # a cap of one pay for every run of the day.
+        monkeypatch.setenv("IMAGE_API_KEY", "img-key")
+        monkeypatch.setenv("DAILY_IMAGE_BUDGET", "1")
+
+        paid = []
+
+        class WastefulIllustrator:
+            def __init__(self, cfg):
+                self.images = 0
+
+            def __call__(self, prompt, path):
+                paid.append(prompt)
+                self.images += 1  # charged
+                return False      # but nothing usable came back
+
+        monkeypatch.setattr(main.imagegen, "Illustrator", WastefulIllustrator)
+
+        FakeBrain.queue = [Draft(post=GOOD_POST, visual=visual.parse(ILLUSTRATION))]
+        assert main.run() == main.EXIT_OK
+        assert len(paid) == 1
+        assert sum(pictures.state["daily_images"].values()) == 1
+
+        FakeBrain.queue = [Draft(post=OTHER_POST, visual=visual.parse(ILLUSTRATION))]
+        assert main.run() == main.EXIT_OK
+        assert len(paid) == 1, "the budget was spent on a discarded image but not counted"
 
     def test_a_chart_is_unaffected_by_the_image_budget(self, pictures, monkeypatch):
         monkeypatch.setenv("IMAGE_API_KEY", "img-key")

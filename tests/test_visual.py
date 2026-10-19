@@ -104,6 +104,72 @@ class TestParsing:
         assert parsed.categories == ["a", "c"]
 
 
+class TestParsingSurvivesWhatTheSchemaAllows:
+    """The schema says "number". It does not say "a number float() accepts".
+
+    These are not malformed responses. A post about key spaces or factorials
+    produces integers that are perfectly legal JSON and perfectly legal under
+    the schema, and float() raises OverflowError on them - which is neither
+    TypeError nor ValueError.
+    """
+
+    def test_an_integer_too_large_for_a_float(self):
+        parsed = visual.parse(line(points=[
+            {"x": 1, "y": 1},
+            {"x": 2, "y": 2 ** 1024},
+            {"x": 3, "y": 3},
+            {"x": 4, "y": 4},
+        ]))
+        assert parsed.kind == "line"
+        assert (2.0, float("inf")) not in parsed.points
+        assert len(parsed.points) == 3
+
+    def test_a_highlight_that_is_not_a_whole_number(self):
+        assert visual.parse(line(highlight=float("inf"))).highlight == -1
+        assert visual.parse(line(highlight=float("nan"))).highlight == -1
+
+    @pytest.mark.parametrize("field", ["points", "values", "categories"])
+    def test_a_scalar_where_an_array_was_promised(self, field):
+        # Truthy and not iterable: the comprehensions raised TypeError.
+        assert visual.parse(line(**{field: 5})).kind in visual.KINDS
+
+    def test_anything_at_all_rather_than_an_exception(self):
+        class Hostile(dict):
+            def get(self, *args, **kwargs):
+                raise RuntimeError("no")
+
+        assert visual.parse(Hostile()).kind == "none"
+
+
+class TestTheHighlightFollowsItsPoint:
+    """The model picks an index into the array it wrote; parse re-sorts.
+
+    A marker that lands on a different point is worse than no marker: the
+    callout states one pair of numbers next to another pair entirely.
+    """
+
+    def test_points_written_in_descending_order(self):
+        descending = [{"x": x, "y": x ** 3 / 10_000} for x in range(100, -1, -5)]
+        parsed = visual.parse(line(points=descending, highlight=4))
+
+        # Index 4 of the model's array is x=80. After sorting it is near the
+        # other end, and that is where the ring has to be.
+        assert parsed.points[parsed.highlight] == (80.0, 51.2)
+
+    def test_a_highlight_on_a_point_that_was_dropped(self):
+        parsed = visual.parse(line(
+            points=[
+                {"x": 1, "y": 1}, {"x": 2, "y": float("nan")},
+                {"x": 3, "y": 3}, {"x": 4, "y": 4}, {"x": 5, "y": 5},
+            ],
+            highlight=1,
+        ))
+        assert parsed.highlight == -1
+
+    def test_an_out_of_range_highlight(self):
+        assert visual.parse(line(highlight=999)).highlight == -1
+
+
 class TestWhatCannotBeDrawn:
     def test_a_good_line_is_drawable(self):
         assert visual.problem(visual.parse(line())) is None
@@ -192,6 +258,14 @@ class TestRendering:
 
         monkeypatch.setattr(chart, "draw_line", explode)
         assert visual.render(visual.parse(line()), tmp_path) is None
+
+    def test_a_file_where_the_directory_should_be(self, tmp_path):
+        # A stray out/ file, a read-only checkout or a full disk all raise
+        # from mkdir, which used to sit one line above the guard.
+        blocked = tmp_path / "out"
+        blocked.write_text("not a directory")
+
+        assert visual.render(visual.parse(stat()), blocked) is None
 
     def test_an_empty_file_is_not_a_picture(self, tmp_path, monkeypatch):
         def touch(path, **kwargs):

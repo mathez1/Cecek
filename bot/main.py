@@ -165,12 +165,18 @@ def draw(
         illustrator = imagegen.Illustrator(cfg)
 
     rendered = visual.render(draft.visual, out_dir, illustrator)
+
+    # Counted from what the vendor was actually asked for, not from whether a
+    # picture came out of it. An image that was paid for and then discarded -
+    # too large, or unmarkable - still spent money, and billing it to nothing
+    # let a one-a-day cap pay for every run of the day.
+    for _ in range(getattr(illustrator, "images", 0)):
+        memory.record_image(state)
+
     if rendered is None:
         return None, illustrator
 
     log.info("drew a %s: %s", rendered.kind, rendered.path)
-    if rendered.kind == "illustration":
-        memory.record_image(state)
     return rendered, illustrator
 
 
@@ -385,7 +391,16 @@ def run() -> int:
     # Drawn before the dry-run branch on purpose: a dry run that skipped the
     # picture could not be used to check the picture, which is most of what
     # anyone would dry-run this for.
-    rendered, illustrator = draw(draft, cfg, state, OUT_DIR)
+    # draw() guards its own internals, but the belt-and-braces handler is
+    # here because this is the boundary the governing rule is stated at: a
+    # picture is a bonus and may never cost a post. An OSError from a full or
+    # read-only disk would otherwise end the run with the post already
+    # written and paid for.
+    try:
+        rendered, illustrator = draw(draft, cfg, state, OUT_DIR)
+    except Exception as exc:  # noqa: BLE001
+        log.warning("the picture failed outright (%s); posting as text", exc)
+        rendered, illustrator = None, None
 
     if cfg.dry_run:
         log.info("DRY_RUN is on; not posting")
@@ -406,16 +421,18 @@ def run() -> int:
         )
         return EXIT_OK
 
-    media_ids = None
+    # A list, not None, and the same object publish() is given: publish
+    # empties it in place when it drops the picture, which is how the summary
+    # below knows whether the post that went out actually carried one.
+    media_ids: list[str] = []
     uploader = None
     if rendered is not None:
         uploader = MediaUploader(cfg)
         try:
-            media_ids = [uploader.upload(rendered.path, rendered.alt)]
+            media_ids.append(uploader.upload(rendered.path, rendered.alt))
         except MediaError as exc:
             # The picture was a bonus. Losing it is not worth losing the post.
             log.warning("posting without the picture: %s", exc)
-            media_ids = None
 
     client = XClient(cfg)
     result = publish(
@@ -478,7 +495,7 @@ def run() -> int:
         f"**Why:** {draft.rationale}  \n"
         f"**Confidence:** {draft.confidence}  \n"
         f"**Length:** {guard.weighted_length(result.text)}/{POST_CHAR_LIMIT}  \n"
-        + _picture_note(rendered, draft, attached=media_ids is not None)
+        + _picture_note(rendered, draft, attached=bool(media_ids))
         + f"**Cost:** {brain.meter.report(cfg.model)}\n"
         + _media_note(illustrator, uploader, cfg)
         + spend_note
@@ -510,7 +527,7 @@ def publish(
 
     while True:
         try:
-            return client.post(draft.post, media_ids=media_ids)
+            return client.post(draft.post, media_ids=media_ids or None)
 
         except XDuplicateError as exc:
             # X's duplicate detection is fuzzy and undocumented, so it can
@@ -530,9 +547,10 @@ def publish(
             # The picture was drawn for the angle X just rejected, and the
             # rewrite is required to take a different one. Carrying it over
             # would attach a chart of a claim the new post no longer makes.
+            # Cleared in place so the caller's summary knows it went.
             if media_ids:
                 log.info("dropping the picture; it belongs to the rejected draft")
-                media_ids = None
+                media_ids.clear()
 
             try:
                 retry = brain.compose(
@@ -616,6 +634,21 @@ def publish(
             return None
 
         except XError as exc:
+            # An unusable media id fails the whole create_tweet call, so the
+            # text goes down with the picture unless it is retried without.
+            # This sits in the catch-all rather than its own clause because
+            # every specific error above is an XError subclass and a clause
+            # ahead of them would shadow all four; and because a rate limit
+            # or a quota stop is not about the picture anyway. Clearing the
+            # list is what ends the retry: the second time round there is no
+            # picture, so this falls through to the failure below.
+            if media_ids:
+                log.warning(
+                    "X refused the post with its picture (%s); retrying as text", exc
+                )
+                media_ids.clear()
+                continue
+
             log.error("posting failed: %s", exc)
             memory.record_failure(state, str(exc))
             summary(f"## Run failed\n\n> {exc}\n")

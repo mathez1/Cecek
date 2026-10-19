@@ -147,11 +147,23 @@ class MediaUploader:
         return media_id
 
     def _describe(self, media_id: str, alt: str) -> None:
-        """Attach alt text. A failure here is not worth losing the picture."""
-        response = self._post(
-            METADATA,
-            json={"id": media_id, "metadata": {"alt_text": {"text": alt}}},
-        )
+        """Attach alt text. A failure here is not worth losing the picture.
+
+        _post raises MediaError on a transport failure, and this is called
+        after X has already accepted the upload. Letting that propagate threw
+        away a perfectly good media id because an optional second request
+        stalled, so the handler is here rather than only around the status
+        code.
+        """
+        try:
+            response = self._post(
+                METADATA,
+                json={"id": media_id, "metadata": {"alt_text": {"text": alt}}},
+            )
+        except MediaError as exc:
+            log.warning("could not attach alt text: %s", exc)
+            return
+
         if response.status_code not in (200, 201, 204):
             log.warning(
                 "alt text rejected (HTTP %s): %s",
