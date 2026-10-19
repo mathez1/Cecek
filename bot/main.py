@@ -17,9 +17,10 @@ import random
 import sys
 from pathlib import Path
 
-from bot import cost, explore, guard, memory
+from bot import cost, explore, guard, imagegen, memory, visual
 from bot.brain import Brain, BrainError, Draft, Exploration
 from bot.config import POST_CHAR_LIMIT, Config, ConfigError, load_config
+from bot.media import MediaError, MediaUploader
 from bot.x_client import (
     PostResult,
     XAuthError,
@@ -131,6 +132,89 @@ def write_draft(
     )
 
 
+def draw(
+    draft: Draft, cfg: Config, state: dict, out_dir: Path
+) -> tuple[object | None, object | None]:
+    """Make the picture the model asked for, if it asked for one.
+
+    Returns the rendered picture and the illustrator that was used, the
+    latter only so the run can report what it spent. Both are None when the
+    post goes out as text, which is the common case and not a failure.
+    """
+    kind = getattr(draft.visual, "kind", "none")
+    if not cfg.enable_visuals or kind == "none":
+        return None, None
+
+    illustrator = None
+    if kind == "illustration":
+        # The only branch that can spend money, so it is the only one that
+        # looks at a key or a budget. Charts are drawn here regardless.
+        if not cfg.image_api_key:
+            log.info("an illustration was chosen but IMAGE_API_KEY is not set")
+            return None, None
+
+        used = memory.images_today(state)
+        if 0 < cfg.daily_image_budget <= used:
+            log.info(
+                "daily image budget reached (%d/%d); posting without a picture",
+                used,
+                cfg.daily_image_budget,
+            )
+            return None, None
+
+        illustrator = imagegen.Illustrator(cfg)
+
+    rendered = visual.render(draft.visual, out_dir, illustrator)
+    if rendered is None:
+        return None, illustrator
+
+    log.info("drew a %s: %s", rendered.kind, rendered.path)
+    if rendered.kind == "illustration":
+        memory.record_image(state)
+    return rendered, illustrator
+
+
+def _picture_note(rendered: object | None, draft: Draft, attached: bool = True) -> str:
+    """The summary line about the picture, which is often 'there isn't one'.
+
+    Three outcomes are worth telling apart: no picture was wanted, one was
+    wanted and could not be drawn, and one was drawn and then rejected by the
+    upload. Collapsing the last two would hide which half is broken.
+    """
+    wanted = getattr(draft.visual, "kind", "none")
+
+    if rendered is None:
+        if wanted == "none":
+            return "**Picture:** none, by choice  \n"
+        return f"**Picture:** a {wanted} was wanted but could not be drawn  \n"
+
+    if not attached:
+        return f"**Picture:** a {rendered.kind} was drawn but X would not take it  \n"
+
+    return f"**Picture:** {rendered.kind}  \n**Alt text:** {rendered.alt}  \n"
+
+
+def _media_note(illustrator: object | None, uploader: object | None, cfg: Config) -> str:
+    """What the picture cost, including the part nobody can price yet.
+
+    X publishes a rate for creating a post and one for alt-text metadata, and
+    nothing at all for the upload endpoints. Rather than quietly assume they
+    are free, every call is counted here so the figure can be checked against
+    the developer console after a few runs.
+    """
+    images = getattr(illustrator, "images", 0)
+    calls = getattr(uploader, "calls", 0)
+    if not images and not calls:
+        return ""
+
+    parts = []
+    if images:
+        parts.append(f"{images} generated image ({cfg.image_model})")
+    if calls:
+        parts.append(f"{calls} X media call{'s' if calls != 1 else ''}, price unpublished")
+    return "**Picture cost:** " + ", ".join(parts) + "  \n"
+
+
 def _spend_note(meter: cost.Meter, state: dict, cfg: Config) -> str:
     """The line that turns one run's price into the number that matters."""
     spent = meter.cost(cfg.model)
@@ -176,6 +260,7 @@ def run() -> int:
     from bot.config import (
         FEED_CACHE_PATH,
         FEEDS_PATH,
+        OUT_DIR,
         PERSONA_PATH,
         POSTS_PATH,
         STATE_PATH,
@@ -297,6 +382,11 @@ def run() -> int:
 
     log.info("draft: %s", draft.post)
 
+    # Drawn before the dry-run branch on purpose: a dry run that skipped the
+    # picture could not be used to check the picture, which is most of what
+    # anyone would dry-run this for.
+    rendered, illustrator = draw(draft, cfg, state, OUT_DIR)
+
     if cfg.dry_run:
         log.info("DRY_RUN is on; not posting")
         memory.record_skip(state, "dry run")
@@ -310,13 +400,28 @@ def run() -> int:
             f"**Why:** {draft.rationale}  \n"
             f"**Confidence:** {draft.confidence}  \n"
             f"**Length:** {guard.weighted_length(draft.post)}/{POST_CHAR_LIMIT}  \n"
-            f"**Cost:** {brain.meter.report(cfg.model)}\n"
+            + _picture_note(rendered, draft)
+            + f"**Cost:** {brain.meter.report(cfg.model)}\n"
             + spend_note
         )
         return EXIT_OK
 
+    media_ids = None
+    uploader = None
+    if rendered is not None:
+        uploader = MediaUploader(cfg)
+        try:
+            media_ids = [uploader.upload(rendered.path, rendered.alt)]
+        except MediaError as exc:
+            # The picture was a bonus. Losing it is not worth losing the post.
+            log.warning("posting without the picture: %s", exc)
+            media_ids = None
+
     client = XClient(cfg)
-    result = publish(client, brain, draft, exploration, history, recent, persona, cfg, state)
+    result = publish(
+        client, brain, draft, exploration, history, recent, persona, cfg, state,
+        media_ids=media_ids,
+    )
 
     if result is None:
         memory.save_state(STATE_PATH, state)
@@ -373,7 +478,9 @@ def run() -> int:
         f"**Why:** {draft.rationale}  \n"
         f"**Confidence:** {draft.confidence}  \n"
         f"**Length:** {guard.weighted_length(result.text)}/{POST_CHAR_LIMIT}  \n"
-        f"**Cost:** {brain.meter.report(cfg.model)}\n"
+        + _picture_note(rendered, draft, attached=media_ids is not None)
+        + f"**Cost:** {brain.meter.report(cfg.model)}\n"
+        + _media_note(illustrator, uploader, cfg)
         + spend_note
     )
     return EXIT_OK
@@ -389,6 +496,7 @@ def publish(
     persona: str,
     cfg: Config,
     state: dict,
+    media_ids: list[str] | None = None,
 ) -> PostResult | None:
     """Post it. Returns None if the run should end without a published post.
 
@@ -402,7 +510,7 @@ def publish(
 
     while True:
         try:
-            return client.post(draft.post)
+            return client.post(draft.post, media_ids=media_ids)
 
         except XDuplicateError as exc:
             # X's duplicate detection is fuzzy and undocumented, so it can
@@ -418,6 +526,13 @@ def publish(
 
             rewrites_left -= 1
             log.warning("%s; rewriting once", exc)
+
+            # The picture was drawn for the angle X just rejected, and the
+            # rewrite is required to take a different one. Carrying it over
+            # would attach a chart of a claim the new post no longer makes.
+            if media_ids:
+                log.info("dropping the picture; it belongs to the rejected draft")
+                media_ids = None
 
             try:
                 retry = brain.compose(

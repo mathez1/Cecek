@@ -241,6 +241,67 @@ cannot publish.
 
 ---
 
+## Pictures
+
+Most posts do not get one. The model is asked, as part of writing the post,
+which of five things to make, and `none` is both an allowed answer and the
+usual one.
+
+| Kind | When | What it costs |
+|---|---|---|
+| `none` | A picture would be decoration | nothing |
+| `line` | The post is about how one quantity moves with another, and the shape is the point | nothing |
+| `bar` | A handful of named things compared | nothing |
+| `stat` | One striking number with no shape to it | nothing |
+| `illustration` | Something concrete and visual that no chart can carry | one image from `IMAGE_API_KEY` |
+
+The first four are drawn locally by [`bot/chart.py`](bot/chart.py) from numbers
+the post already states, in the same monochrome as the avatar. They are
+deterministic, they involve no third party, and they take about a tenth of a
+second. There is no reason to cap them.
+
+**Charts are the point, illustrations are the exception.** This account's posts
+are full of numbers, and drawing the number is both more useful than a picture
+of the subject and safer: images are fed into the embedding X uses to decide
+who sees a post, so a chart of the actual claim files the post correctly while
+a generic illustration files it wrongly.
+
+### Illustrations
+
+Off unless `IMAGE_API_KEY` is set as a repository secret. Without it the model
+may still choose `illustration` and the post simply goes out as text.
+
+Two things are enforced rather than requested. The style suffix in
+[`bot/imagegen.py`](bot/imagegen.py) forces a flat two-colour drawing, because
+a photoreal image of a real news event is a deep fake under the EU AI Act's
+Article 3(60), whose Article 50 transparency duties have applied since 2 August
+2026. And `AI-GENERATED` is burned into the pixels, because C2PA provenance
+metadata does not survive upload to X; a label the platform strips is not a
+label.
+
+### Never photographs from the news
+
+The bot does not download images from the pages it reads, and this is not an
+oversight. Reusing a news photograph to illustrate that same news is the
+textbook losing fair-use case after *Warhol*; statutory damages run from $750
+to $30,000 per photograph, agencies employ firms that scan for exactly this,
+and the DMCA notices would end the account long before any court did.
+
+### Getting the picture on X
+
+tweepy cannot upload media any more: its only media code targets
+`upload.twitter.com/1.1/media/upload.json`, which X retired. So
+[`bot/media.py`](bot/media.py) calls the v2 endpoints directly with the OAuth
+1.0a credentials the bot already has, and tweepy still does the posting. One
+posting flow, two hosts.
+
+**One open question.** X's rate card prices creating a post and attaching alt
+text, and says nothing about the upload endpoints. Rather than assume they are
+free, every call is counted in the run summary under **Picture cost** so you can
+check it against the developer console after a few posts.
+
+---
+
 ## Shaping it
 
 ### `prompts/persona.md`
@@ -287,6 +348,9 @@ Actions → Variables). All have working defaults.
 | `ENABLE_REFUSAL_FALLBACK` | `true` | If Claude declines a request, retry it on a fallback model. Harmless to leave on: if your account is not enrolled, the bot notices once and carries on without it. |
 | `RECENT_POSTS_IN_CONTEXT` | `40` | How much history the model sees. |
 | `MAX_CONSECUTIVE_FAILURES` | `6` | Stop calling Claude after this many failed runs in a row. `0` disables it. |
+| `ENABLE_VISUALS` | `true` | Whether the model is asked for a picture at all. Off removes the question from the schema entirely. |
+| `DAILY_IMAGE_BUDGET` | `3` | Generated illustrations per day. Charts do not count: they cost nothing. `0` is unlimited. |
+| `IMAGE_MODEL` | `imagen-4.0-fast-generate-001` | Which image model `IMAGE_API_KEY` talks to. The first thing here to go stale. |
 
 To change how often it posts, edit the cron in
 [`.github/workflows/post.yml`](.github/workflows/post.yml):

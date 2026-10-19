@@ -70,6 +70,8 @@ jobs:
           X_API_SECRET: ${{ secrets.X_API_SECRET }}
           X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
           X_ACCESS_TOKEN_SECRET: ${{ secrets.X_ACCESS_TOKEN_SECRET }}
+          # Optional. Unset means charts only, which is a working bot.
+          IMAGE_API_KEY: ${{ secrets.IMAGE_API_KEY }}
           DRY_RUN: ${{ inputs.dry_run || vars.DRY_RUN || 'false' }}
           MODEL: ${{ vars.MODEL }}
           # A choice input always has a value, so a plain `inputs.effort ||
@@ -88,7 +90,20 @@ jobs:
           DAILY_POST_BUDGET: ${{ vars.DAILY_POST_BUDGET }}
           MAX_SEARCHES: ${{ vars.MAX_SEARCHES }}
           MAX_FETCHES: ${{ vars.MAX_FETCHES }}
+          ENABLE_VISUALS: ${{ vars.ENABLE_VISUALS }}
+          IMAGE_MODEL: ${{ vars.IMAGE_MODEL }}
+          DAILY_IMAGE_BUDGET: ${{ vars.DAILY_IMAGE_BUDGET }}
         run: python -m bot.main
+
+      # The picture is not committed, so this is the only way to see what a
+      # dry run drew. always(): a run that failed after drawing still has one.
+      - name: Keep the picture
+        if: always() && hashFiles('out/post.png') != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: post-image
+          path: out/post.png
+          retention-days: 14
 
       # always(): a failed run still has something worth remembering, such as
       # the failure streak that tells the next run something is wrong.

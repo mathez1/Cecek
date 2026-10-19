@@ -19,6 +19,12 @@ PERSONA_PATH = PROMPTS_DIR / "persona.md"
 FEEDS_PATH = PROMPTS_DIR / "feeds.txt"
 POSTS_PATH = MEMORY_DIR / "posts.jsonl"
 STATE_PATH = MEMORY_DIR / "state.json"
+
+# Rendered pictures. Deliberately outside memory/, which is committed on every
+# run: a PNG per post would bloat the repository forever, and the picture is
+# already on X once the post lands. The workflow uploads it as a run artifact
+# instead, which is how you see what a dry run drew.
+OUT_DIR = REPO_ROOT / "out"
 FEED_CACHE_PATH = MEMORY_DIR / "feed_cache.json"
 
 # X counts a standard post in weighted characters. 280 is the cap.
@@ -65,6 +71,9 @@ class Config:
     x_api_secret: str = field(repr=False)
     x_access_token: str = field(repr=False)
     x_access_token_secret: str = field(repr=False)
+    # Optional, and the only key that is not required to run. Without it the
+    # bot draws charts and never generates an illustration.
+    image_api_key: str = field(repr=False, default="")
 
     # --- model ---
     model: str = "claude-opus-5"
@@ -90,6 +99,15 @@ class Config:
     # unpredictably, so capping posts is more reliable than tuning the cron:
     # schedule generously, let the budget decide how many land.
     daily_post_budget: int = 10
+
+    # --- pictures ---
+    # Charts are free: they are drawn locally from numbers the post already
+    # states. Illustrations are not, which is why they have their own cap.
+    enable_visuals: bool = True
+    # The model id is the first thing here to go stale. Check it against the
+    # provider's current list before blaming the key.
+    image_model: str = "imagen-4.0-fast-generate-001"
+    daily_image_budget: int = 3
 
     # --- guards ---
     similarity_threshold: float = 0.72
@@ -146,6 +164,8 @@ def load_config() -> Config:
             "(Settings > Secrets and variables > Actions)."
         )
 
+    image_api_key = os.environ.get("IMAGE_API_KEY", "").strip()
+
     x_creds = {
         "x_api_key": os.environ.get("X_API_KEY", "").strip(),
         "x_api_secret": os.environ.get("X_API_SECRET", "").strip(),
@@ -164,6 +184,7 @@ def load_config() -> Config:
 
     cfg = Config(
         anthropic_api_key=anthropic_api_key,
+        image_api_key=image_api_key,
         **x_creds,
         model=_env_str("MODEL", "claude-opus-5"),
         effort=_env_str("EFFORT", "high"),
@@ -180,6 +201,9 @@ def load_config() -> Config:
         daily_post_budget=_env_int("DAILY_POST_BUDGET", 10),
         allow_links=_env_bool("ALLOW_LINKS", False),
         max_consecutive_failures=_env_int("MAX_CONSECUTIVE_FAILURES", 6),
+        enable_visuals=_env_bool("ENABLE_VISUALS", True),
+        image_model=_env_str("IMAGE_MODEL", "imagen-4.0-fast-generate-001"),
+        daily_image_budget=_env_int("DAILY_IMAGE_BUDGET", 3),
     )
 
     valid_efforts = {"low", "medium", "high", "xhigh", "max"}

@@ -122,9 +122,12 @@ class XClient:
         )
         self.client.session = session
 
-    def post(self, text: str) -> PostResult:
+    def post(self, text: str, media_ids: list[str] | None = None) -> PostResult:
         try:
-            response = self.client.create_tweet(text=text)
+            # tweepy builds the v2 body correctly from media_ids even though
+            # it cannot perform the upload that produces them; bot/media.py
+            # does that half.
+            response = self.client.create_tweet(text=text, media_ids=media_ids or None)
 
         except tweepy.errors.TooManyRequests as exc:
             payload = _response_payload(exc)

@@ -118,6 +118,9 @@ DEFAULT_STATE: dict[str, Any] = {
     # that then failed to publish: those cost money too, and leaving them out
     # is how a bill surprises someone.
     "monthly_spend": {},
+    # Generated illustrations per day. Charts are not counted: they cost
+    # nothing, so capping them would only make the account duller.
+    "daily_images": {},
 }
 
 
@@ -147,6 +150,12 @@ def load_state(path: Path) -> dict[str, Any]:
     if not isinstance(merged.get("daily"), dict):
         merged["daily"] = {}
     merged["daily"] = {k: _as_int(v) for k, v in merged["daily"].items()}
+
+    if not isinstance(merged.get("daily_images"), dict):
+        merged["daily_images"] = {}
+    merged["daily_images"] = {
+        k: _as_int(v) for k, v in merged["daily_images"].items()
+    }
 
     if not isinstance(merged.get("monthly_spend"), dict):
         merged["monthly_spend"] = {}
@@ -235,6 +244,17 @@ def record_success(state: dict[str, Any], when: datetime | None = None) -> None:
     _prune_monthly(state)
 
 
+def images_today(state: dict[str, Any], when: datetime | None = None) -> int:
+    return int(state.get("daily_images", {}).get(day_key(when), 0))
+
+
+def record_image(state: dict[str, Any], when: datetime | None = None) -> None:
+    daily = state.setdefault("daily_images", {})
+    key = day_key(when)
+    daily[key] = int(daily.get(key, 0)) + 1
+    _prune(daily, 14)
+
+
 def record_skip(
     state: dict[str, Any], reason: str, *, counts_as_failure: bool = False
 ) -> None:
@@ -270,6 +290,7 @@ def _prune_monthly(state: dict[str, Any], keep: int = 24) -> None:
     _prune(state.get("monthly_spend", {}), keep)
     # Days accumulate 30x faster than months, so keep far fewer.
     _prune(state.get("daily", {}), 14)
+    _prune(state.get("daily_images", {}), 14)
 
 
 def _prune(buckets: dict[str, Any], keep: int = 24) -> None:
