@@ -4,7 +4,7 @@
     "modified": "Mon, 19 Oct 2026 19:39:17 GMT"
   },
   "https://feeds.arstechnica.com/arstechnica/index": {
-    "modified": "Tue, 20 Oct 2026 14:11:59 GMT"
+    "modified": "Tue, 20 Oct 2026 21:07:14 GMT"
   },
   "https://hnrss.org/best": {
     "modified": "Mon, 19 Oct 2026 16:45:30 GMT"
@@ -13,12 +13,12 @@
     "modified": "Tue, 20 Oct 2026 09:35:40 GMT"
   },
   "https://lobste.rs/rss": {
-    "etag": "\"dm97riv3f83j-jbm-gzip\"",
-    "modified": "Mon, 19 Oct 2026 23:46:19 GMT"
+    "etag": "\"dma11nt5cv6j-ijd-gzip\"",
+    "modified": "Tue, 20 Oct 2026 22:43:06 GMT"
   },
   "https://marginalrevolution.com/feed": {
-    "etag": "\"e783ad664f1da42024c10bdb248b3687\"",
-    "modified": "Mon, 19 Oct 2026 18:31:59 GMT"
+    "etag": "\"7b9547043dac5fe8ba98a167fe0a0235\"",
+    "modified": "Tue, 20 Oct 2026 18:38:49 GMT"
   },
   "https://nautil.us/feed/": {
     "etag": "W/\"7ejdfwgenl9eh\""
@@ -69,15 +69,15 @@
     "etag": "W/\"cc29a-ivq4yj9w/vkog9pPbFVro12jKR4\""
   },
   "https://www.economist.com/latest/rss.xml": {
-    "etag": "W/\"01fb43efdeb146d2e751278a9621061c\"",
-    "modified": "Tue, 20 Oct 2026 19:26:57 GMT"
+    "etag": "W/\"5652e084ed04525552113f1e24100a9a\"",
+    "modified": "Tue, 20 Oct 2026 22:26:57 GMT"
   },
   "https://www.nasa.gov/news-release/feed/": {
     "etag": "W/\"f3d34ea4bde901f1d4494b4b24c3e711\"",
     "modified": "Tue, 20 Oct 2026 19:08:54 GMT"
   },
   "https://www.nature.com/nature.rss": {
-    "etag": "\"df907153fc863ad1582589a70a21d700\""
+    "etag": "\"bc8994b3deb0422eb5138abbf033a682\""
   },
   "https://www.newscientist.com/feed/home/": {
     "etag": "W/\"5ce86f2c4721555830fdf584211d7c21\"",
@@ -98,8 +98,8 @@
     "modified": "Tue, 20 Oct 2026 19:39:28 GMT"
   },
   "https://www.technologyreview.com/feed/": {
-    "etag": "W/\"61b3021aaab42f8dbb3e2f78ddfa2247\"",
-    "modified": "Tue, 20 Oct 2026 19:12:54 GMT"
+    "etag": "W/\"2404cab9a3a80a93bee8651feb36ecec\"",
+    "modified": "Tue, 20 Oct 2026 21:43:28 GMT"
   },
   "https://www.theatlantic.com/feed/all/": {
     "modified": "Tue, 20 Oct 2026 15:36:08 GMT"
@@ -108,7 +108,7 @@
     "etag": "W/\"hash4737776796878238780\""
   },
   "https://www.theguardian.com/world/rss": {
-    "etag": "W/\"hash1307830445959370413\""
+    "etag": "W/\"hash2167564240680174517\""
   },
   "https://www.theverge.com/rss/index.xml": {
     "etag": "W/\"4e372f23a6fcd158ad22febfb17d44ee\""
