@@ -12,14 +12,18 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 import pytest
 
+import bot.brain as brain_module
 import bot.config as config
 import bot.explore as explore
 import bot.main as main
+from bot import visual
 from bot.brain import BrainError, Draft, Exploration
+from bot.media import MediaError
 from bot.cost import Meter
 from bot.memory import load_posts, load_state
 from bot.x_client import (
     PostResult,
+    XError,
     XAuthError,
     XDuplicateError,
     XQuotaError,
@@ -71,14 +75,19 @@ class FakeXClient:
     def __init__(self, cfg):
         self.cfg = cfg
         self.posted = []
+        self.media = []
         self.raises = list(getattr(FakeXClient, "queue", []))
 
-    def post(self, text):
+    def post(self, text, media_ids=None):
+        if media_ids and getattr(FakeXClient, "rejects_media", False):
+            raise XError("X rejected the request: Invalid media_ids")
         if self.raises:
             exc = self.raises.pop(0)
             if exc is not None:
                 raise exc
         self.posted.append(text)
+        self.media.append(media_ids)
+        FakeXClient.last_media = media_ids
         return PostResult(tweet_id="1234567890", text=text)
 
 
@@ -116,11 +125,19 @@ def repo(tmp_path, monkeypatch):
     for key in [
         "DRY_RUN", "MODEL", "EFFORT", "ENABLE_WEB_SEARCH", "ALLOW_LINKS",
         "MONTHLY_POST_BUDGET", "FEED_SAMPLE_SIZE", "RECENT_POSTS_IN_CONTEXT",
+        "IMAGE_API_KEY", "IMAGE_MODEL", "DAILY_IMAGE_BUDGET",
     ]:
         monkeypatch.delenv(key, raising=False)
 
+    # Off unless a test asks for it. Every draft would otherwise carry an
+    # empty visual anyway, but being explicit keeps these tests about posting.
+    monkeypatch.setenv("ENABLE_VISUALS", "false")
+
     FakeBrain.queue = [Draft(post=GOOD_POST, topic="concrete", rationale="it is neat")]
     FakeXClient.queue = []
+    FakeXClient.last_media = None
+    FakeXClient.rejects_media = False
+    monkeypatch.setattr(config, "OUT_DIR", tmp_path / "out")
     monkeypatch.setattr(main, "Brain", FakeBrain)
     monkeypatch.setattr(main, "XClient", FakeXClient)
 
@@ -187,6 +204,300 @@ class TestDryRun:
         for key in ["X_API_KEY", "X_API_SECRET", "X_ACCESS_TOKEN", "X_ACCESS_TOKEN_SECRET"]:
             monkeypatch.delenv(key)
         assert main.run() == main.EXIT_OK
+
+
+class TestSpendIsPersisted:
+    """The monthly total has to reach disk, not just the run summary.
+
+    _spend_note mutates state, so calling it after save_state wrote the file
+    left monthly_spend permanently empty while every summary still printed a
+    figure -- a silent accounting hole, not a visible failure.
+    """
+
+    def _expected(self):
+        return Meter(calls=2, input_tokens=20_000, output_tokens=4_000, web_searches=4).cost(
+            "claude-opus-5"
+        )
+
+    def test_a_successful_post_records_its_spend(self, repo):
+        assert main.run() == main.EXIT_OK
+
+        spend = repo.state["monthly_spend"]
+        assert spend, "monthly_spend was never written"
+        assert sum(spend.values()) == pytest.approx(self._expected())
+
+    def test_a_dry_run_records_its_spend(self, repo, monkeypatch):
+        monkeypatch.setenv("DRY_RUN", "true")
+        assert main.run() == main.EXIT_OK
+
+        spend = repo.state["monthly_spend"]
+        assert spend, "monthly_spend was never written"
+        assert sum(spend.values()) == pytest.approx(self._expected())
+
+    def test_spend_accumulates_across_runs(self, repo):
+        assert main.run() == main.EXIT_OK
+        FakeBrain.queue = [Draft(post=OTHER_POST)]
+        assert main.run() == main.EXIT_OK
+
+        assert sum(repo.state["monthly_spend"].values()) == pytest.approx(
+            self._expected() * 2
+        )
+
+
+class FakeUploader:
+    """Stands in for X's media endpoints."""
+
+    instances = []
+
+    def __init__(self, cfg):
+        self.cfg = cfg
+        self.calls = 0
+        self.uploaded = []
+        self.fails = getattr(FakeUploader, "fails", False)
+        FakeUploader.instances.append(self)
+
+    def upload(self, path, alt=""):
+        self.calls += 1
+        if self.fails:
+            raise MediaError("X said no")
+        self.uploaded.append((path, alt))
+        return "media-1"
+
+
+STAT = {
+    "kind": "stat", "title": "Phobos regolith is", "subtitle": "MARS",
+    "alt": "The figure 340 ppm.", "x_label": "", "y_label": "", "points": [],
+    "linear_reference": False, "categories": [], "values": [], "highlight": -1,
+    "highlight_label": "", "figure": "340 ppm",
+    "caption": "about 34 grains of ten grams", "prompt": "",
+}
+
+ILLUSTRATION = {**STAT, "kind": "illustration", "title": "", "subtitle": "",
+                "figure": "", "caption": "", "prompt": "a bicycle on a lamp post",
+                "alt": "A drawing of a bicycle."}
+
+
+@pytest.fixture
+def pictures(repo, monkeypatch):
+    """The repo fixture, with visuals switched back on and X faked."""
+    monkeypatch.setenv("ENABLE_VISUALS", "true")
+    FakeUploader.instances = []
+    FakeUploader.fails = False
+    monkeypatch.setattr(main, "MediaUploader", FakeUploader)
+    return repo
+
+
+class TestPictures:
+    def test_a_chart_is_drawn_uploaded_and_attached(self, pictures, monkeypatch):
+        FakeBrain.queue = [Draft(post=GOOD_POST, visual=visual.parse(STAT))]
+
+        assert main.run() == main.EXIT_OK
+
+        uploader = FakeUploader.instances[0]
+        assert len(uploader.uploaded) == 1
+        path, alt = uploader.uploaded[0]
+        assert path.read_bytes()[:4] == b"\x89PNG"
+        assert alt == "The figure 340 ppm."
+
+        assert FakeXClient.last_media == ["media-1"]
+
+    def test_a_post_with_no_picture_uploads_nothing(self, pictures):
+        FakeBrain.queue = [Draft(post=GOOD_POST)]
+
+        assert main.run() == main.EXIT_OK
+        assert FakeUploader.instances == []
+        assert FakeXClient.last_media is None
+
+    def test_a_failed_upload_still_posts(self, pictures, monkeypatch, tmp_path):
+        # The picture is a bonus. Losing it must not lose the post.
+        FakeUploader.fails = True
+        FakeBrain.queue = [Draft(post=GOOD_POST, visual=visual.parse(STAT))]
+        summary_path = tmp_path / "summary.md"
+        monkeypatch.setenv("GITHUB_STEP_SUMMARY", str(summary_path))
+
+        assert main.run() == main.EXIT_OK
+        assert [p.text for p in pictures.posts] == [GOOD_POST]
+        assert FakeXClient.last_media is None
+        # Drawn-then-rejected has to read differently from never-drawn, or
+        # the summary hides which half is broken.
+        assert "would not take it" in summary_path.read_text(encoding="utf-8")
+
+    def test_a_missing_drawing_library_costs_the_picture_not_the_post(
+        self, pictures, monkeypatch
+    ):
+        # `from . import chart` reads the attribute off the already-imported
+        # package before it consults sys.modules, so both have to go or this
+        # test quietly passes while importing chart perfectly well.
+        import bot
+
+        monkeypatch.delattr(bot, "chart", raising=False)
+        monkeypatch.setitem(sys.modules, "bot.chart", None)
+        FakeBrain.queue = [Draft(post=GOOD_POST, visual=visual.parse(STAT))]
+
+        assert main.run() == main.EXIT_OK
+        assert [p.text for p in pictures.posts] == [GOOD_POST]
+        # Nothing was drawn, so nothing was uploaded. Without this the test
+        # would pass whether or not the import was actually blocked.
+        assert FakeUploader.instances == []
+        assert FakeXClient.last_media is None
+
+    def test_an_undrawable_spec_still_posts(self, pictures):
+        FakeBrain.queue = [Draft(post=GOOD_POST, visual=visual.parse({**STAT, "figure": ""}))]
+
+        assert main.run() == main.EXIT_OK
+        assert [p.text for p in pictures.posts] == [GOOD_POST]
+        assert FakeUploader.instances == []
+
+    def test_a_rewritten_post_does_not_keep_the_old_picture(self, pictures):
+        # The chart was drawn for the angle X rejected; the rewrite is
+        # required to take a different one, so the chart no longer fits.
+        FakeXClient.queue = [XDuplicateError("duplicate")]
+        FakeBrain.queue = [
+            Draft(post=GOOD_POST, visual=visual.parse(STAT)),
+            Draft(post=OTHER_POST),
+        ]
+
+        assert main.run() == main.EXIT_OK
+        assert [p.text for p in pictures.posts] == [OTHER_POST]
+        assert FakeXClient.last_media is None
+
+    def test_a_dry_run_draws_but_does_not_upload(self, pictures, monkeypatch):
+        monkeypatch.setenv("DRY_RUN", "true")
+        FakeBrain.queue = [Draft(post=GOOD_POST, visual=visual.parse(STAT))]
+
+        assert main.run() == main.EXIT_OK
+        assert FakeUploader.instances == []
+        assert (config.OUT_DIR / "post.png").exists()
+
+    def test_visuals_off_draws_nothing_even_when_a_spec_arrives(self, repo, monkeypatch):
+        # Whether the question reaches the model is tested against the real
+        # compose call in tests/test_brain.py. This is the other half: the
+        # switch also has to stop the drawing.
+        monkeypatch.setenv("ENABLE_VISUALS", "false")
+        FakeUploader.instances = []
+        monkeypatch.setattr(main, "MediaUploader", FakeUploader)
+        FakeBrain.queue = [Draft(post=GOOD_POST, visual=visual.parse(STAT))]
+
+        assert main.run() == main.EXIT_OK
+        assert FakeUploader.instances == []
+        assert FakeXClient.last_media is None
+
+    def test_a_media_id_x_will_not_take_costs_the_picture_not_the_post(self, pictures):
+        # An unusable media id fails the whole create_tweet call, so without
+        # a retry the text goes down with the picture.
+        FakeXClient.rejects_media = True
+        FakeBrain.queue = [Draft(post=GOOD_POST, visual=visual.parse(STAT))]
+
+        assert main.run() == main.EXIT_OK
+        assert [p.text for p in pictures.posts] == [GOOD_POST]
+        assert FakeXClient.last_media is None
+        assert pictures.state["consecutive_failures"] == 0
+
+    def test_a_rewrite_reports_the_post_that_actually_went_out(self, pictures, tmp_path, monkeypatch):
+        # The picture is dropped on a rewrite. A summary still claiming it
+        # was attached, with the discarded draft's alt text, describes a post
+        # that does not exist.
+        summary_path = tmp_path / "summary.md"
+        monkeypatch.setenv("GITHUB_STEP_SUMMARY", str(summary_path))
+        FakeXClient.queue = [XDuplicateError("duplicate")]
+        FakeBrain.queue = [
+            Draft(post=GOOD_POST, visual=visual.parse(STAT)),
+            Draft(post=OTHER_POST),
+        ]
+
+        assert main.run() == main.EXIT_OK
+
+        written = summary_path.read_text(encoding="utf-8")
+        assert "The figure 340 ppm." not in written
+        assert "**Picture:** stat  " not in written
+
+    def test_a_picture_that_fails_outright_does_not_fail_the_run(self, pictures, monkeypatch):
+        def explode(*args, **kwargs):
+            raise OSError("no space left on device")
+
+        monkeypatch.setattr(main, "draw", explode)
+        FakeBrain.queue = [Draft(post=GOOD_POST, visual=visual.parse(STAT))]
+
+        assert main.run() == main.EXIT_OK
+        assert [p.text for p in pictures.posts] == [GOOD_POST]
+        assert pictures.state["last_status"] == "posted"
+
+
+class TestIllustrationBudget:
+    def test_without_a_key_an_illustration_is_simply_not_made(self, pictures):
+        FakeBrain.queue = [Draft(post=GOOD_POST, visual=visual.parse(ILLUSTRATION))]
+
+        assert main.run() == main.EXIT_OK
+        assert [p.text for p in pictures.posts] == [GOOD_POST]
+        assert FakeUploader.instances == []
+
+    def test_the_budget_stops_the_vendor_call(self, pictures, monkeypatch):
+        monkeypatch.setenv("IMAGE_API_KEY", "img-key")
+        monkeypatch.setenv("DAILY_IMAGE_BUDGET", "1")
+
+        made = []
+
+        class CountingIllustrator:
+            def __init__(self, cfg):
+                self.images = 0
+
+            def __call__(self, prompt, path):
+                made.append(prompt)
+                path.write_bytes(b"\x89PNG" + b"0" * 40)
+                self.images += 1
+                return True
+
+        monkeypatch.setattr(main.imagegen, "Illustrator", CountingIllustrator)
+
+        FakeBrain.queue = [Draft(post=GOOD_POST, visual=visual.parse(ILLUSTRATION))]
+        assert main.run() == main.EXIT_OK
+        assert len(made) == 1
+        assert pictures.state["daily_images"]
+
+        FakeBrain.queue = [Draft(post=OTHER_POST, visual=visual.parse(ILLUSTRATION))]
+        assert main.run() == main.EXIT_OK
+        assert len(made) == 1, "the second run was over budget and should not have paid"
+
+    def test_an_image_that_was_paid_for_and_discarded_still_counts(self, pictures, monkeypatch):
+        # The vendor charges on delivery. An image too large to post, or one
+        # that could not be marked, is money spent; billing it to nothing let
+        # a cap of one pay for every run of the day.
+        monkeypatch.setenv("IMAGE_API_KEY", "img-key")
+        monkeypatch.setenv("DAILY_IMAGE_BUDGET", "1")
+
+        paid = []
+
+        class WastefulIllustrator:
+            def __init__(self, cfg):
+                self.images = 0
+
+            def __call__(self, prompt, path):
+                paid.append(prompt)
+                self.images += 1  # charged
+                return False      # but nothing usable came back
+
+        monkeypatch.setattr(main.imagegen, "Illustrator", WastefulIllustrator)
+
+        FakeBrain.queue = [Draft(post=GOOD_POST, visual=visual.parse(ILLUSTRATION))]
+        assert main.run() == main.EXIT_OK
+        assert len(paid) == 1
+        assert sum(pictures.state["daily_images"].values()) == 1
+
+        FakeBrain.queue = [Draft(post=OTHER_POST, visual=visual.parse(ILLUSTRATION))]
+        assert main.run() == main.EXIT_OK
+        assert len(paid) == 1, "the budget was spent on a discarded image but not counted"
+
+    def test_a_chart_is_unaffected_by_the_image_budget(self, pictures, monkeypatch):
+        monkeypatch.setenv("IMAGE_API_KEY", "img-key")
+        monkeypatch.setenv("DAILY_IMAGE_BUDGET", "0")
+        monkeypatch.setattr(
+            main.imagegen, "Illustrator",
+            lambda cfg: pytest.fail("a chart must not reach the image vendor"),
+        )
+
+        FakeBrain.queue = [Draft(post=GOOD_POST, visual=visual.parse(STAT))]
+        assert main.run() == main.EXIT_OK
+        assert FakeUploader.instances[0].uploaded
 
 
 class TestGuardsInTheLoop:

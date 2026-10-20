@@ -1,11 +1,15 @@
 """Keeps the three places a setting has to exist in agreement.
 
-A setting lives in bot/config.py, has to be passed through in
-.github/workflows/post.yml, and is documented in README.md and .env.example.
-Miss the workflow and the setting silently does nothing: an unset repository
-variable renders as an empty string, so there is no error anywhere, the value
-is just absent and the default applies. That happened to two settings, which
-is what this file exists to prevent.
+A setting lives in bot/config.py, has to be passed through in whichever
+workflow actually runs the code that reads it, and is documented in README.md
+and .env.example. Miss the workflow and the setting silently does nothing: an
+unset repository variable renders as an empty string, so there is no error
+anywhere, the value is just absent and the default applies. That happened to
+two settings, which is what this file exists to prevent.
+
+There are two workflows now. bot/config.py is shared, so a setting only the
+tracker reads is wired in views.yml and not in post.yml; a setting is in order
+if SOME workflow passes it.
 """
 
 import re
@@ -19,6 +23,7 @@ import yaml
 
 ROOT = Path(__file__).resolve().parent.parent
 POST_YML = ROOT / ".github/workflows/post.yml"
+METRICS_YML = ROOT / ".github/workflows/metrics.yml"
 README = ROOT / "README.md"
 ENV_EXAMPLE = ROOT / ".env.example"
 CONFIG_PY = ROOT / "bot/config.py"
@@ -48,15 +53,28 @@ def post_step_env() -> dict:
     return step["env"]
 
 
+def metrics_step_env() -> dict:
+    workflow = yaml.safe_load(METRICS_YML.read_text(encoding="utf-8"))
+    step = next(
+        s for s in workflow["jobs"]["views"]["steps"] if s.get("name") == "Collect views"
+    )
+    return step["env"]
+
+
+def every_wired_setting() -> set[str]:
+    return set(post_step_env()) | set(metrics_step_env())
+
+
 class TestEverySettingIsWired:
     def test_config_reads_something(self):
         assert settings_read_by_config(), "found no settings in bot/config.py"
 
     @pytest.mark.parametrize("name", sorted(settings_read_by_config() - NOT_REPO_VARIABLES))
     def test_the_workflow_passes_it_through(self, name):
-        assert name in post_step_env(), (
-            f"{name} is read by bot/config.py but never passed in post.yml, "
-            "so setting the repository variable would silently do nothing"
+        assert name in every_wired_setting(), (
+            f"{name} is read by bot/config.py but is passed in neither "
+            "post.yml nor metrics.yml, so setting the repository variable "
+            "would silently do nothing"
         )
 
     @pytest.mark.parametrize("name", sorted(settings_read_by_config() - NOT_REPO_VARIABLES))
@@ -72,9 +90,16 @@ class TestEverySettingIsWired:
 
     def test_no_secret_is_read_from_a_repository_variable(self):
         # Repository variables are readable by anyone who can see the repo.
-        env = post_step_env()
-        for name in SECRETS:
-            assert "vars." not in str(env[name]), f"{name} must not come from vars"
+        for env in (post_step_env(), metrics_step_env()):
+            for name, value in env.items():
+                if name in SECRETS:
+                    assert "vars." not in str(value), f"{name} must not come from vars"
+
+    def test_the_tracker_gets_the_credentials_it_reads_with(self):
+        env = metrics_step_env()
+        for name in SECRETS - {"ANTHROPIC_API_KEY"}:
+            assert name in env, f"{name} is not passed to the tracker"
+            assert "secrets." in str(env[name])
 
 
 class TestWorkflowSafety:

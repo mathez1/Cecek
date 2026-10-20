@@ -23,6 +23,7 @@ from typing import Any
 
 import anthropic
 
+from bot import visual
 from bot.cost import Meter
 from bot.memory import PostRecord
 
@@ -101,6 +102,22 @@ DRAFT_SCHEMA: dict[str, Any] = {
 }
 
 
+def draft_schema(with_visual: bool) -> dict[str, Any]:
+    """The compose schema, with or without the picture question.
+
+    Asking for a visual the bot cannot draw would be a waste of the model's
+    attention and of output tokens, so the field is absent entirely when
+    pictures are switched off rather than present and ignored.
+    """
+    if not with_visual:
+        return DRAFT_SCHEMA
+
+    schema = json.loads(json.dumps(DRAFT_SCHEMA))
+    schema["properties"]["visual"] = visual.VISUAL_SCHEMA
+    schema["required"] = [*DRAFT_SCHEMA["required"], "visual"]
+    return schema
+
+
 class BrainError(RuntimeError):
     """Claude could not produce something usable this run."""
 
@@ -119,6 +136,7 @@ class Draft:
     rationale: str = ""
     sources: list[str] = field(default_factory=list)
     confidence: str = "medium"
+    visual: visual.Visual = field(default_factory=visual.Visual)
 
 
 def _text_of(response: Any) -> str:
@@ -397,7 +415,10 @@ class Brain:
             thinking={"type": "adaptive"},
             output_config={
                 "effort": self.cfg.effort,
-                "format": {"type": "json_schema", "schema": DRAFT_SCHEMA},
+                "format": {
+                    "type": "json_schema",
+                    "schema": draft_schema(self.cfg.enable_visuals),
+                },
             },
             messages=[{"role": "user", "content": prompt}],
         )
@@ -426,6 +447,7 @@ class Brain:
             rationale=(data.get("rationale") or "").strip(),
             sources=[str(s) for s in sources if s],
             confidence=(data.get("confidence") or "medium").strip(),
+            visual=visual.parse(data.get("visual")),
         )
 
 

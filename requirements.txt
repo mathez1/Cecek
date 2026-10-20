@@ -3,3 +3,9 @@
 anthropic>=1.7,<2
 tweepy>=4.17,<5
 feedparser>=6.0,<7
+# Draws the charts. Brings Pillow with it, which burns the AI-generated
+# marker into illustrations.
+matplotlib>=3.9,<4
+# Signs the v2 media upload, which tweepy cannot perform. Already present as a
+# tweepy dependency; pinned here because this code imports it directly.
+requests-oauthlib>=1.2,<3

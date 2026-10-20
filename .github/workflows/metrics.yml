@@ -1,0 +1,81 @@
+name: views
+
+# Once a day is the whole schedule, and that is a cost decision rather than a
+# freshness one. X deduplicates read charges per UTC calendar day, so a second
+# run today costs nothing new -- but it also tells you nothing the first run
+# did not, because what you are paying for is the number of DISTINCT posts
+# touched, not the number of requests. Run it again by hand whenever you want.
+#
+# 07:41 UTC: late enough that the previous UTC day is complete, and off the
+# hour because GitHub drops scheduled runs during the load spike at :00.
+on:
+  schedule:
+    - cron: '41 7 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: views
+  cancel-in-progress: false
+
+jobs:
+  views:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install --disable-pip-version-check -r requirements.txt
+
+      - name: Collect views
+        timeout-minutes: 5
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          X_API_KEY: ${{ secrets.X_API_KEY }}
+          X_API_SECRET: ${{ secrets.X_API_SECRET }}
+          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_TOKEN_SECRET: ${{ secrets.X_ACCESS_TOKEN_SECRET }}
+          METRICS_WINDOW_DAYS: ${{ vars.METRICS_WINDOW_DAYS }}
+          X_USER_ID: ${{ vars.X_USER_ID }}
+        run: python -m bot.track
+
+      - name: Commit the numbers
+        if: always()
+        run: |
+          set -euo pipefail
+
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add -A memory/ -- ':!memory/*.tmp'
+
+          if git diff --cached --quiet; then
+            echo "The numbers have not moved."
+            exit 0
+          fi
+
+          git commit -m "views: $(date -u '+%Y-%m-%d %H:%M UTC')"
+
+          # The poster commits to the same branch on its own schedule, so a
+          # rebase here is the difference between a clean run and a daily
+          # conflict. Both only ever append to files in memory/.
+          for attempt in 1 2 3 4; do
+            if git pull --rebase origin "${GITHUB_REF_NAME}" && git push; then
+              echo "Pushed."
+              exit 0
+            fi
+            echo "Push failed; retrying in $((attempt * 2))s."
+            sleep $((attempt * 2))
+          done
+
+          echo "Could not push the numbers." >&2
+          exit 1

@@ -8,3 +8,6 @@ venv/
 
 # Atomic-write temp files, if a run is killed mid-save
 memory/*.tmp
+
+# Rendered post images; the workflow keeps them as run artifacts
+out/

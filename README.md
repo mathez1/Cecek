@@ -2,10 +2,10 @@
 
 **[@bob_thinks](https://x.com/bob_thinks)**
 
-An X account that runs itself. Every hour a GitHub Action wakes up, lets Claude
-read the news and search the web, and lets it post whatever it found worth
-saying. Nobody approves anything. There is no server to run and nothing to
-click.
+An X account that runs itself. Through the day a GitHub Action wakes up, lets
+Claude read the news and search the web, and lets it post whatever it found
+worth saying — up to ten times a day. Nobody approves anything. There is no
+server to run and nothing to click.
 
 You shape it by editing one file, [`prompts/persona.md`](prompts/persona.md).
 Everything else is plumbing.
@@ -49,12 +49,12 @@ Run it in dry-run mode a few times and you will know your number within a day.
 Until then, the plausible range on the defaults, worked from the prompt sizes
 this bot actually builds:
 
-| Per run | Claude, monthly at hourly | When |
+| Per run | Claude, monthly at the 10/day cap | When |
 |---|---|---|
-| ~$0.18 | ~$130 | short exploration, compact results |
-| **~$0.30** | **~$215** | **the typical case** |
-| ~$0.44 | ~$315 | heavy searching |
-| ~$0.65 | ~$470 | long exploration and two compose retries |
+| ~$0.18 | ~$54 | short exploration, compact results |
+| **~$0.30** | **~$90** | **the typical case** |
+| ~$0.44 | ~$132 | heavy searching |
+| ~$0.65 | ~$195 | long exploration and two compose retries |
 
 On `claude-sonnet-5` every row is roughly halved, and `EFFORT=medium` takes
 another third off the output side.
@@ -144,7 +144,7 @@ re-runs itself monthly.
 
 ### 6. Let it loose
 
-Two things have to be true before the hourly schedule fires:
+Two things have to be true before the schedule fires:
 
 1. **This code must be on your default branch.** GitHub only runs scheduled
    workflows from the default branch. A `schedule:` block on a feature branch
@@ -153,16 +153,19 @@ Two things have to be true before the hourly schedule fires:
 2. **The repository variable `DRY_RUN` must not be `true`.** It defaults to
    posting for real, so unless you set that variable there is nothing to do.
 
-The first post lands at 23 minutes past the next hour. GitHub schedules run
-late during load spikes and occasionally get dropped altogether, so treat "one
-post an hour" as roughly, not exactly.
+The first post lands at 23 or 53 minutes past the next hour. GitHub schedules
+run late during load spikes and are often dropped altogether on a quiet public
+repo — measured here, an hourly cron fired 3-6 times a day. The schedule asks
+twice an hour so that the real number lands near the `DAILY_POST_BUDGET` cap;
+the cap, not the cron, is what limits posting. A firing past the cap costs
+nothing: the budget check runs before the model call and exits immediately.
 
 ---
 
 ## How it works
 
 ```
- cron, every hour at :23
+ cron, twice an hour at :23 and :53
         │
         ├─ read a random dozen of the 43 feeds in prompts/feeds.txt
         │  (sends back ETags, so most fetches are empty 304s)
@@ -238,6 +241,106 @@ cannot publish.
 
 ---
 
+## Pictures
+
+Most posts do not get one. The model is asked, as part of writing the post,
+which of five things to make, and `none` is both an allowed answer and the
+usual one.
+
+| Kind | When | What it costs |
+|---|---|---|
+| `none` | A picture would be decoration | nothing |
+| `line` | The post is about how one quantity moves with another, and the shape is the point | nothing |
+| `bar` | A handful of named things compared | nothing |
+| `stat` | One striking number with no shape to it | nothing |
+| `illustration` | Something concrete and visual that no chart can carry | one image from `IMAGE_API_KEY` |
+
+The first four are drawn locally by [`bot/chart.py`](bot/chart.py) from numbers
+the post already states, in the same monochrome as the avatar. They are
+deterministic, they involve no third party, and they take about a tenth of a
+second. There is no reason to cap them.
+
+**Charts are the point, illustrations are the exception.** This account's posts
+are full of numbers, and drawing the number is both more useful than a picture
+of the subject and safer: images are fed into the embedding X uses to decide
+who sees a post, so a chart of the actual claim files the post correctly while
+a generic illustration files it wrongly.
+
+### Illustrations
+
+Off unless `IMAGE_API_KEY` is set as a repository secret. Without it the model
+may still choose `illustration` and the post simply goes out as text.
+
+Two things are enforced rather than requested. The style suffix in
+[`bot/imagegen.py`](bot/imagegen.py) forces a flat two-colour drawing, because
+a photoreal image of a real news event is a deep fake under the EU AI Act's
+Article 3(60), whose Article 50 transparency duties have applied since 2 August
+2026. And `AI-GENERATED` is burned into the pixels, because C2PA provenance
+metadata does not survive upload to X; a label the platform strips is not a
+label.
+
+### Never photographs from the news
+
+The bot does not download images from the pages it reads, and this is not an
+oversight. Reusing a news photograph to illustrate that same news is the
+textbook losing fair-use case after *Warhol*; statutory damages run from $750
+to $30,000 per photograph, agencies employ firms that scan for exactly this,
+and the DMCA notices would end the account long before any court did.
+
+### Getting the picture on X
+
+tweepy cannot upload media any more: its only media code targets
+`upload.twitter.com/1.1/media/upload.json`, which X retired. So
+[`bot/media.py`](bot/media.py) calls the v2 endpoints directly with the OAuth
+1.0a credentials the bot already has, and tweepy still does the posting. One
+posting flow, two hosts.
+
+**One open question.** X's rate card prices creating a post and attaching alt
+text, and says nothing about the upload endpoints. Rather than assume they are
+free, every call is counted in the run summary under **Picture cost** so you can
+check it against the developer console after a few posts.
+
+---
+
+## Views
+
+A second workflow, [`views`](.github/workflows/metrics.yml), reads how many
+people actually saw each post and writes the numbers into
+[`memory/METRICS.md`](memory/METRICS.md) as a table, and into
+`memory/metrics.json` with a per-day history.
+
+It is cheap, but only because of how it asks. X bills reads **per post
+returned**, and the obvious way to do this is five times more expensive than
+the right one:
+
+| How | Rate | 180 posts |
+|---|---|---|
+| `GET /2/tweets?ids=...` — the ids are right there in `posts.jsonl` | $0.005 each | $0.90 a day |
+| `GET /2/users/{id}/tweets` — your own timeline, an "Owned Read" | $0.001 each | $0.18 a day |
+
+So it reads the timeline and matches against the stored ids rather than
+asking for them by id.
+
+Two more things follow from per-resource billing. **Running it more often is
+free**: charges are deduplicated per UTC calendar day, so a second run today
+costs nothing new. **Looking further back is not**: the bill scales with how
+many distinct posts get touched. That is what `METRICS_WINDOW_DAYS` controls.
+Posts older than the window are not refreshed and not forgotten — they keep
+their last reading, which is close to final, because engagement on X is
+front-loaded.
+
+The view count is `public_metrics.impression_count`. The `non_public_metrics`
+and `organic_metrics` objects carry the same number, but only for posts under
+30 days old and only for posts you wrote, so they would buy nothing and break
+quietly on anything older.
+
+**Expect small numbers at first.** Reach on X is almost entirely the follower
+graph, and a new account does not have one. The tracker's use is not the
+total; it is seeing which posts do better than the others, once there are
+enough of them to compare.
+
+---
+
 ## Shaping it
 
 ### `prompts/persona.md`
@@ -284,11 +387,17 @@ Actions → Variables). All have working defaults.
 | `ENABLE_REFUSAL_FALLBACK` | `true` | If Claude declines a request, retry it on a fallback model. Harmless to leave on: if your account is not enrolled, the bot notices once and carries on without it. |
 | `RECENT_POSTS_IN_CONTEXT` | `40` | How much history the model sees. |
 | `MAX_CONSECUTIVE_FAILURES` | `6` | Stop calling Claude after this many failed runs in a row. `0` disables it. |
+| `ENABLE_VISUALS` | `true` | Whether the model is asked for a picture at all. Off removes the question from the schema entirely. |
+| `DAILY_IMAGE_BUDGET` | `3` | Generated illustrations per day. Charts do not count: they cost nothing. `0` is unlimited. |
+| `IMAGE_MODEL` | `imagen-4.0-fast-generate-001` | Which image model `IMAGE_API_KEY` talks to. The first thing here to go stale. |
+| `METRICS_WINDOW_DAYS` | `7` | How far back the view tracker refreshes. Older posts keep their last reading. The main cost lever on the tracker. `0` refreshes everything. |
+| `X_USER_ID` | *(looked up once)* | The account's numeric id. Optional: it is resolved once and cached in `memory/state.json`. |
 
 To change how often it posts, edit the cron in
 [`.github/workflows/post.yml`](.github/workflows/post.yml):
 
 ```yaml
+- cron: '23,53 * * * *'   # twice an hour (the default)
 - cron: '23 * * * *'      # hourly, at :23
 - cron: '23 */3 * * *'    # every 3 hours
 - cron: '23 9,13,17 * * *'  # three times a day

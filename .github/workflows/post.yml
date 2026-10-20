@@ -7,9 +7,15 @@ name: post
 # The minute is deliberately not 0. GitHub's own docs warn that scheduled runs
 # are delayed, and sometimes dropped entirely, during the load spike at the top
 # of every hour.
+#
+# Measured over 2026-10-07..18, an hourly cron here actually fired 3-6 times a
+# day: GitHub drops most scheduled runs on a quiet public repo. Asking twice an
+# hour is how you get something near the daily cap. Over-asking is free -- the
+# daily budget check runs before the model call, so a firing past the cap costs
+# nothing and exits immediately.
 on:
   schedule:
-    - cron: '23 * * * *'
+    - cron: '23,53 * * * *'
   workflow_dispatch:
     inputs:
       dry_run:
@@ -64,6 +70,8 @@ jobs:
           X_API_SECRET: ${{ secrets.X_API_SECRET }}
           X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
           X_ACCESS_TOKEN_SECRET: ${{ secrets.X_ACCESS_TOKEN_SECRET }}
+          # Optional. Unset means charts only, which is a working bot.
+          IMAGE_API_KEY: ${{ secrets.IMAGE_API_KEY }}
           DRY_RUN: ${{ inputs.dry_run || vars.DRY_RUN || 'false' }}
           MODEL: ${{ vars.MODEL }}
           # A choice input always has a value, so a plain `inputs.effort ||
@@ -82,7 +90,20 @@ jobs:
           DAILY_POST_BUDGET: ${{ vars.DAILY_POST_BUDGET }}
           MAX_SEARCHES: ${{ vars.MAX_SEARCHES }}
           MAX_FETCHES: ${{ vars.MAX_FETCHES }}
+          ENABLE_VISUALS: ${{ vars.ENABLE_VISUALS }}
+          IMAGE_MODEL: ${{ vars.IMAGE_MODEL }}
+          DAILY_IMAGE_BUDGET: ${{ vars.DAILY_IMAGE_BUDGET }}
         run: python -m bot.main
+
+      # The picture is not committed, so this is the only way to see what a
+      # dry run drew. always(): a run that failed after drawing still has one.
+      - name: Keep the picture
+        if: always() && hashFiles('out/post.png') != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: post-image
+          path: out/post.png
+          retention-days: 14
 
       # always(): a failed run still has something worth remembering, such as
       # the failure streak that tells the next run something is wrong.
