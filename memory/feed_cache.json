@@ -38,11 +38,11 @@
     "etag": "d233f343c448291ec3422d75e209268c250090759a78e5dcca7f54abce1822ac"
   },
   "https://rss.arxiv.org/rss/q-bio.PE": {
-    "etag": "b1e93b76a34471bb5e2b5cc6cb653d3f86517e0592c7791288167e03b044270e"
+    "etag": "505c6b3a5ff00314905148d481a73bbeb09402e3010a5bada5e194afa66114e4"
   },
   "https://rss.slashdot.org/Slashdot/slashdotMain": {
-    "etag": "W/\"118e3-65e3183f18c5e\"",
-    "modified": "Mon, 19 Oct 2026 13:30:20 GMT"
+    "etag": "W/\"e3e0-65e3e7a6bd686\"",
+    "modified": "Tue, 20 Oct 2026 04:58:15 GMT"
   },
   "https://spectrum.ieee.org/feeds/feed.rss": {
     "etag": "\"3b21908f3fdb302f14eb4bdd36675bf5\"",
@@ -56,8 +56,8 @@
     "etag": "W/\"152e5-PyHyBgxs0DRZuzQFt/ibzmdbcOw\""
   },
   "https://www.aljazeera.com/xml/rss/all.xml": {
-    "etag": "W/\"3605f5bf0010f405d00ef68f16f7d1b6\"",
-    "modified": "Mon, 19 Oct 2026 01:12:01 GMT"
+    "etag": "W/\"91abba4db6c193aad33d643c46c9e9bc\"",
+    "modified": "Tue, 20 Oct 2026 04:50:43 GMT"
   },
   "https://www.astralcodexten.com/feed": {
     "etag": "W/\"e6241-jCkf94XaJBufAU4bf9ISiy/3EAY\""
@@ -69,8 +69,8 @@
     "etag": "W/\"cb19f-i2ZztndrPN+pGrE8LyQIyJ4cvwU\""
   },
   "https://www.economist.com/latest/rss.xml": {
-    "etag": "W/\"379c3372ea77fe61f293401c8991deef\"",
-    "modified": "Mon, 19 Oct 2026 22:41:57 GMT"
+    "etag": "W/\"f2ab62e442bd6ccef14c566f5daa67a0\"",
+    "modified": "Tue, 20 Oct 2026 03:56:57 GMT"
   },
   "https://www.nasa.gov/news-release/feed/": {
     "etag": "W/\"3d5689957644f1bb0456becb61502d00\"",
@@ -91,11 +91,11 @@
     "modified": "Sun, 18 Oct 2026 13:47:16 GMT"
   },
   "https://www.sciencenews.org/feed": {
-    "etag": "W/\"8b769d2657ae78c0bab6dd7aaf16d50a\"",
-    "modified": "Thu, 15 Oct 2026 17:15:50 GMT"
+    "etag": "W/\"9dc501463a0b2371a017ea21f02f1cfc\"",
+    "modified": "Mon, 19 Oct 2026 19:58:48 GMT"
   },
   "https://www.smithsonianmag.com/rss/latest_articles/": {
-    "modified": "Sun, 18 Oct 2026 23:14:58 GMT"
+    "modified": "Tue, 20 Oct 2026 04:57:33 GMT"
   },
   "https://www.technologyreview.com/feed/": {
     "etag": "W/\"e38daa1f85963e8fcffec9d143ef76f2\"",
@@ -108,7 +108,7 @@
     "etag": "W/\"hash-7504256651347294050\""
   },
   "https://www.theguardian.com/world/rss": {
-    "etag": "W/\"hash-8771588588496066562\""
+    "etag": "W/\"hash-8757086155865146829\""
   },
   "https://www.theverge.com/rss/index.xml": {
     "etag": "W/\"51fed21fa223879af26beba9f2aebb6a\""
