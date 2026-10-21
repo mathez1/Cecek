@@ -7,7 +7,7 @@
     "modified": "Tue, 20 Oct 2026 22:46:43 GMT"
   },
   "https://hnrss.org/best": {
-    "modified": "Wed, 21 Oct 2026 01:47:28 GMT"
+    "modified": "Wed, 21 Oct 2026 17:29:33 GMT"
   },
   "https://hnrss.org/frontpage": {
     "modified": "Wed, 21 Oct 2026 19:44:49 GMT"
@@ -45,8 +45,8 @@
     "modified": "Wed, 21 Oct 2026 05:59:07 GMT"
   },
   "https://spectrum.ieee.org/feeds/feed.rss": {
-    "etag": "\"7ed9a756915746673a8d16426ac1d4fc\"",
-    "modified": "Tue, 20 Oct 2026 13:32:28 GMT"
+    "etag": "\"bb550ce61ee53265811ad63eea2967b9\"",
+    "modified": "Wed, 21 Oct 2026 18:00:03 GMT"
   },
   "https://techcrunch.com/feed/": {
     "etag": "W/\"a37aa704f147841ca2945f01047ff8c3\"",
@@ -63,7 +63,7 @@
     "etag": "W/\"e6241-jCkf94XaJBufAU4bf9ISiy/3EAY\""
   },
   "https://www.atlasobscura.com/feeds/latest": {
-    "etag": "W/\"67858edb5f075538e75917afd003bbfb\""
+    "etag": "W/\"e92eedd2d1b8e050da477c2871323ace\""
   },
   "https://www.construction-physics.com/feed": {
     "etag": "W/\"cc29a-ivq4yj9w/vkog9pPbFVro12jKR4\""
@@ -84,15 +84,15 @@
     "modified": "Wed, 21 Oct 2026 17:03:08 GMT"
   },
   "https://www.quantamagazine.org/feed/": {
-    "etag": "\"33b91cdc880bce423746ce20e5ad14db-gzip\"",
-    "modified": "Tue, 20 Oct 2026 13:30:21 GMT"
+    "etag": "\"a699b663af22fb46f74df225f89d6242-gzip\"",
+    "modified": "Wed, 21 Oct 2026 17:56:32 GMT"
   },
   "https://www.sciencedaily.com/rss/top/science.xml": {
     "modified": "Wed, 21 Oct 2026 13:22:43 GMT"
   },
   "https://www.sciencenews.org/feed": {
-    "etag": "W/\"42194b6d7624fc95dae201c430cc6a78\"",
-    "modified": "Mon, 19 Oct 2026 21:11:16 GMT"
+    "etag": "W/\"8882e903a3d9dca601d5d1254ad8f10f\"",
+    "modified": "Wed, 21 Oct 2026 20:17:49 GMT"
   },
   "https://www.smithsonianmag.com/rss/latest_articles/": {
     "modified": "Wed, 21 Oct 2026 17:11:05 GMT"
@@ -102,7 +102,7 @@
     "modified": "Wed, 21 Oct 2026 09:09:44 GMT"
   },
   "https://www.theatlantic.com/feed/all/": {
-    "modified": "Wed, 21 Oct 2026 00:50:04 GMT"
+    "modified": "Wed, 21 Oct 2026 23:38:17 GMT"
   },
   "https://www.theguardian.com/science/rss": {
     "etag": "W/\"hash5977855091097286671\""
@@ -111,6 +111,6 @@
     "etag": "W/\"hash2167564240680174517\""
   },
   "https://www.theverge.com/rss/index.xml": {
-    "etag": "W/\"ec5b7d5ee582c680a3dc9344fc4772dc\""
+    "etag": "W/\"5c3d30c949b252d4a0bf763d282f2ee0\""
   }
 }
