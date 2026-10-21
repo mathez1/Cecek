@@ -102,7 +102,7 @@ DRAFT_SCHEMA: dict[str, Any] = {
 }
 
 
-def draft_schema(with_visual: bool) -> dict[str, Any]:
+def draft_schema(with_visual: bool, can_illustrate: bool = False) -> dict[str, Any]:
     """The compose schema, with or without the picture question.
 
     Asking for a visual the bot cannot draw would be a waste of the model's
@@ -113,7 +113,7 @@ def draft_schema(with_visual: bool) -> dict[str, Any]:
         return DRAFT_SCHEMA
 
     schema = json.loads(json.dumps(DRAFT_SCHEMA))
-    schema["properties"]["visual"] = visual.VISUAL_SCHEMA
+    schema["properties"]["visual"] = visual.schema(can_illustrate)
     schema["required"] = [*DRAFT_SCHEMA["required"], "visual"]
     return schema
 
@@ -417,7 +417,9 @@ class Brain:
                 "effort": self.cfg.effort,
                 "format": {
                     "type": "json_schema",
-                    "schema": draft_schema(self.cfg.enable_visuals),
+                    "schema": draft_schema(
+                        self.cfg.enable_visuals, bool(self.cfg.image_api_key)
+                    ),
                 },
             },
             messages=[{"role": "user", "content": prompt}],

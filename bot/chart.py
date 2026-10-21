@@ -279,3 +279,39 @@ def draw_stat(
                      ha="center", va="center", linespacing=1.6)
         fig.savefig(path)
         plt.close(fig)
+
+
+def draw_card(path: Path, *, headline: str, subtitle: str = "") -> None:
+    """The post's hook, set large. For posts with no number to draw.
+
+    Left-aligned rather than centred: a centred block of three or four lines
+    reads as a poster, and this is a sentence. The size steps down as the
+    headline grows so a long one still fits in four lines.
+    """
+    import textwrap
+
+    length = len(headline)
+    # Widths measured on the rendered canvas, with a margin: DejaVu at these
+    # sizes fills the 16:9 frame at roughly the next width up.
+    if length <= 50:
+        size, width = 34, 26
+    elif length <= 85:
+        size, width = 28, 32
+    else:
+        size, width = 23, 40
+    wrapped = textwrap.fill(headline, width=width)
+
+    with plt.rc_context(_RC):
+        fig = _figure()
+        # A short rule above the headline, the one mark that is not text.
+        fig.add_artist(plt.Line2D(
+            [LEFT, LEFT + 0.06], [0.79, 0.79],
+            transform=fig.transFigure, color=INK_MUTED, linewidth=2.0,
+        ))
+        fig.text(LEFT, 0.71, wrapped, fontsize=size, color=INK,
+                 ha="left", va="top", linespacing=1.25)
+        if subtitle:
+            fig.text(LEFT, 0.17, subtitle, fontsize=11, color=INK_2,
+                     ha="left", va="bottom")
+        fig.savefig(path)
+        plt.close(fig)

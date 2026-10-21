@@ -221,7 +221,11 @@ class TestRendering:
         assert rendered.path.read_bytes()[:4] == b"\x89PNG"
         assert rendered.alt
 
-    @pytest.mark.parametrize("spec", [line(), bar(), stat()], ids=["line", "bar", "stat"])
+    @pytest.mark.parametrize(
+        "spec",
+        [line(), bar(), stat(), stat(kind="card", title="A headline for the card")],
+        ids=["line", "bar", "stat", "card"],
+    )
     def test_the_canvas_is_dark_and_the_ink_is_not(self, spec, tmp_path):
         """A blank image raises nothing and passes a file-exists check.
 
@@ -303,3 +307,65 @@ class TestIllustrations:
             raise RuntimeError("vendor is down")
 
         assert visual.render(self._spec(), tmp_path, draw) is None
+
+
+class TestEveryPostGetsAPicture:
+    """Offered "none", the model took it on six posts out of six."""
+
+    def test_none_is_never_offered(self):
+        for can_illustrate in (True, False):
+            offered = visual.schema(can_illustrate)["properties"]["kind"]["enum"]
+            assert "none" not in offered
+
+    def test_an_illustration_is_offered_only_with_a_key(self):
+        # Without one it can never be drawn, so picking it would always land
+        # on the plain fallback card instead of a real chart.
+        assert "illustration" in visual.schema(True)["properties"]["kind"]["enum"]
+        without = visual.schema(False)
+        assert "illustration" not in without["properties"]["kind"]["enum"]
+        assert "illustration" not in without["description"]
+
+    def test_the_schema_is_not_mutated_by_asking_for_a_narrower_one(self):
+        visual.schema(False)
+        assert "illustration" in visual.VISUAL_SCHEMA["properties"]["kind"]["enum"]
+
+    def test_a_card_draws(self, tmp_path):
+        card = visual.parse(stat(kind="card", figure="", caption="",
+                                 title="Methanol was a by-product of cooking logs"))
+        rendered = visual.render(card, tmp_path)
+        assert rendered is not None and rendered.kind == "card"
+
+    def test_a_card_needs_a_headline(self):
+        assert "headline" in visual.problem(visual.parse(stat(kind="card", title="")))
+
+
+class TestTheFallbackCard:
+    def test_it_uses_the_first_sentence(self):
+        card = visual.fallback_card(
+            "Perstorp started in 1881 by heating beech wood. Acetic acid, and methanol.",
+            visual.Visual(),
+        )
+        assert card.title == "Perstorp started in 1881 by heating beech wood."
+
+    def test_a_long_post_is_cut_at_a_word(self):
+        post = "word " * 60
+        card = visual.fallback_card(post, visual.Visual())
+        assert len(card.title) <= visual.CARD_HEADLINE_LIMIT + 3
+        assert card.title.endswith("...")
+        assert "wor..." not in card.title
+
+    def test_the_models_own_card_headline_wins(self):
+        wanted = visual.Visual(kind="card", title="A better hook than the opener")
+        card = visual.fallback_card("Some long post. With sentences.", wanted)
+        assert card.title == "A better hook than the opener"
+
+    def test_a_failed_charts_title_is_not_borrowed(self):
+        # A chart's title names a finding about data that was never drawn.
+        wanted = visual.Visual(kind="line", title="Power runs on the cube of speed")
+        card = visual.fallback_card("Fans are odd. Very odd.", wanted)
+        assert card.title == "Fans are odd."
+
+    def test_it_always_has_alt_text_and_draws(self, tmp_path):
+        card = visual.fallback_card("Anything at all.", visual.Visual())
+        assert card.alt
+        assert visual.render(card, tmp_path) is not None
