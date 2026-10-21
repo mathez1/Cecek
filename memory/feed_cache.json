@@ -1,7 +1,7 @@
 {
   "https://bigthink.com/feed/": {
-    "etag": "W/\"0cbea13dd3c4d16cfa0d7d2ee7e0456a\"",
-    "modified": "Tue, 20 Oct 2026 06:29:27 GMT"
+    "etag": "W/\"6320db537c634b6cc8721f642a97e723\"",
+    "modified": "Wed, 21 Oct 2026 17:03:17 GMT"
   },
   "https://feeds.arstechnica.com/arstechnica/index": {
     "modified": "Tue, 20 Oct 2026 22:46:43 GMT"
@@ -21,7 +21,7 @@
     "modified": "Tue, 20 Oct 2026 18:38:49 GMT"
   },
   "https://nautil.us/feed/": {
-    "etag": "W/\"128hinep5jz86w\""
+    "etag": "W/\"yvvzyope6982f\""
   },
   "https://news.harvard.edu/gazette/feed/": {
     "etag": "W/\"d8793dd950324c005bb18cec2dc08df4\"",
@@ -69,8 +69,8 @@
     "etag": "W/\"cc29a-ivq4yj9w/vkog9pPbFVro12jKR4\""
   },
   "https://www.economist.com/latest/rss.xml": {
-    "etag": "W/\"62056d190394796af5f8dd5c7cb0c791\"",
-    "modified": "Wed, 21 Oct 2026 05:41:57 GMT"
+    "etag": "W/\"f95148bd4229927baaa71a0e90ba1496\"",
+    "modified": "Wed, 21 Oct 2026 17:11:57 GMT"
   },
   "https://www.nasa.gov/news-release/feed/": {
     "etag": "W/\"f3d34ea4bde901f1d4494b4b24c3e711\"",
@@ -80,22 +80,22 @@
     "etag": "\"bc8994b3deb0422eb5138abbf033a682\""
   },
   "https://www.newscientist.com/feed/home/": {
-    "etag": "W/\"437069eab713769699f90a9ec4e21a10\"",
-    "modified": "Wed, 21 Oct 2026 11:46:24 GMT"
+    "etag": "W/\"f8404ca84777d6ac226011d6aa4fe076\"",
+    "modified": "Wed, 21 Oct 2026 17:03:08 GMT"
   },
   "https://www.quantamagazine.org/feed/": {
     "etag": "\"33b91cdc880bce423746ce20e5ad14db-gzip\"",
     "modified": "Tue, 20 Oct 2026 13:30:21 GMT"
   },
   "https://www.sciencedaily.com/rss/top/science.xml": {
-    "modified": "Tue, 20 Oct 2026 13:01:17 GMT"
+    "modified": "Wed, 21 Oct 2026 13:22:43 GMT"
   },
   "https://www.sciencenews.org/feed": {
-    "etag": "W/\"9dc501463a0b2371a017ea21f02f1cfc\"",
-    "modified": "Mon, 19 Oct 2026 19:58:48 GMT"
+    "etag": "W/\"42194b6d7624fc95dae201c430cc6a78\"",
+    "modified": "Mon, 19 Oct 2026 21:11:16 GMT"
   },
   "https://www.smithsonianmag.com/rss/latest_articles/": {
-    "modified": "Wed, 21 Oct 2026 05:59:56 GMT"
+    "modified": "Wed, 21 Oct 2026 17:11:05 GMT"
   },
   "https://www.technologyreview.com/feed/": {
     "etag": "W/\"cb366c25ba2b08304fd23734728cd1ae\"",
