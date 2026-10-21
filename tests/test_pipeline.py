@@ -301,12 +301,20 @@ class TestPictures:
 
         assert FakeXClient.last_media == ["media-1"]
 
-    def test_a_post_with_no_picture_uploads_nothing(self, pictures):
+    def test_a_draft_with_no_picture_still_gets_a_title_card(self, pictures):
+        # Every post gets a picture. Offered the choice, the model declined
+        # one on six posts out of six, so the choice was removed and anything
+        # that arrives without one gets a card made from the post itself.
         FakeBrain.queue = [Draft(post=GOOD_POST)]
 
         assert main.run() == main.EXIT_OK
-        assert FakeUploader.instances == []
-        assert FakeXClient.last_media is None
+        assert FakeXClient.last_media == ["media-1"]
+        path, alt = FakeUploader.instances[0].uploaded[0]
+        assert alt.startswith("A title card reading: Portland cement does not dry")
+
+        record = pictures.posts[0]
+        assert record.picture == "card"
+        assert record.picture_wanted == "none"
 
     def test_a_failed_upload_still_posts(self, pictures, monkeypatch, tmp_path):
         # The picture is a bonus. Losing it must not lose the post.
@@ -341,12 +349,15 @@ class TestPictures:
         assert FakeUploader.instances == []
         assert FakeXClient.last_media is None
 
-    def test_an_undrawable_spec_still_posts(self, pictures):
+    def test_an_undrawable_spec_falls_back_to_a_card(self, pictures):
         FakeBrain.queue = [Draft(post=GOOD_POST, visual=visual.parse({**STAT, "figure": ""}))]
 
         assert main.run() == main.EXIT_OK
         assert [p.text for p in pictures.posts] == [GOOD_POST]
-        assert FakeUploader.instances == []
+        assert FakeXClient.last_media == ["media-1"]
+        assert pictures.posts[0].picture == "card"
+        # What was asked for is kept, so a run of fallbacks is visible.
+        assert pictures.posts[0].picture_wanted == "stat"
 
     def test_a_rewritten_post_does_not_keep_the_old_picture(self, pictures):
         # The chart was drawn for the angle X rejected; the rewrite is
@@ -424,12 +435,13 @@ class TestPictures:
 
 
 class TestIllustrationBudget:
-    def test_without_a_key_an_illustration_is_simply_not_made(self, pictures):
+    def test_without_a_key_an_illustration_becomes_a_card(self, pictures):
         FakeBrain.queue = [Draft(post=GOOD_POST, visual=visual.parse(ILLUSTRATION))]
 
         assert main.run() == main.EXIT_OK
         assert [p.text for p in pictures.posts] == [GOOD_POST]
-        assert FakeUploader.instances == []
+        assert FakeXClient.last_media == ["media-1"]
+        assert pictures.posts[0].picture == "card"
 
     def test_the_budget_stops_the_vendor_call(self, pictures, monkeypatch):
         monkeypatch.setenv("IMAGE_API_KEY", "img-key")

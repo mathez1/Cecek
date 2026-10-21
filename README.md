@@ -243,17 +243,23 @@ cannot publish.
 
 ## Pictures
 
-Most posts do not get one. The model is asked, as part of writing the post,
-which of five things to make, and `none` is both an allowed answer and the
-usual one.
+Every post gets one. The model is asked, as part of writing the post, which
+kind to make. It used to be allowed to say `none`; it said so on six posts out
+of six, so that option is gone.
 
 | Kind | When | What it costs |
 |---|---|---|
-| `none` | A picture would be decoration | nothing |
 | `line` | The post is about how one quantity moves with another, and the shape is the point | nothing |
 | `bar` | A handful of named things compared | nothing |
 | `stat` | One striking number with no shape to it | nothing |
-| `illustration` | Something concrete and visual that no chart can carry | one image from `IMAGE_API_KEY` |
+| `card` | No number to draw: the post's hook set as a headline | nothing |
+| `illustration` | Something concrete and visual. Only offered when `IMAGE_API_KEY` is set | one image |
+
+If the chosen picture cannot be made — no image key, a spec that will not
+draw, an answer that could not be read — a title card built from the post's
+first sentence goes out instead. `memory/posts.jsonl` records what went out
+(`picture`) beside what was asked for (`picture_wanted`), so a run of
+fallbacks is visible.
 
 The first four are drawn locally by [`bot/chart.py`](bot/chart.py) from numbers
 the post already states, in the same monochrome as the avatar. They are

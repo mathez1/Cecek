@@ -135,36 +135,44 @@ def write_draft(
 def draw(
     draft: Draft, cfg: Config, state: dict, out_dir: Path
 ) -> tuple[object | None, object | None]:
-    """Make the picture the model asked for, if it asked for one.
+    """Make a picture for this post. Every post gets one.
+
+    The model's choice is tried first. Whenever that cannot be made - an
+    illustration with no key or over budget, a spec that will not draw, an
+    answer that could not be read at all - a title card made from the post
+    itself goes out instead. Offered the choice, the model declined a picture
+    on six posts out of six, so the choice is no longer offered.
 
     Returns the rendered picture and the illustrator that was used, the
-    latter only so the run can report what it spent. Both are None when the
-    post goes out as text, which is the common case and not a failure.
+    latter only so the run can report what it spent. The picture is None
+    only when visuals are switched off or nothing at all could be drawn.
     """
-    kind = getattr(draft.visual, "kind", "none")
-    if not cfg.enable_visuals or kind == "none":
+    if not cfg.enable_visuals:
         return None, None
 
+    wanted = draft.visual
+    kind = getattr(wanted, "kind", "none")
+
     illustrator = None
+    attempt = kind != "none"
     if kind == "illustration":
         # The only branch that can spend money, so it is the only one that
-        # looks at a key or a budget. Charts are drawn here regardless.
+        # looks at a key or a budget.
+        used = memory.images_today(state)
         if not cfg.image_api_key:
             log.info("an illustration was chosen but IMAGE_API_KEY is not set")
-            return None, None
-
-        used = memory.images_today(state)
-        if 0 < cfg.daily_image_budget <= used:
+            attempt = False
+        elif 0 < cfg.daily_image_budget <= used:
             log.info(
-                "daily image budget reached (%d/%d); posting without a picture",
+                "daily image budget reached (%d/%d); using a title card",
                 used,
                 cfg.daily_image_budget,
             )
-            return None, None
+            attempt = False
+        else:
+            illustrator = imagegen.Illustrator(cfg)
 
-        illustrator = imagegen.Illustrator(cfg)
-
-    rendered = visual.render(draft.visual, out_dir, illustrator)
+    rendered = visual.render(wanted, out_dir, illustrator) if attempt else None
 
     # Counted from what the vendor was actually asked for, not from whether a
     # picture came out of it. An image that was paid for and then discarded -
@@ -172,6 +180,10 @@ def draw(
     # let a one-a-day cap pay for every run of the day.
     for _ in range(getattr(illustrator, "images", 0)):
         memory.record_image(state)
+
+    if rendered is None:
+        log.info("no %s could be made; falling back to a title card", kind)
+        rendered = visual.render(visual.fallback_card(draft.post, wanted), out_dir)
 
     if rendered is None:
         return None, illustrator
@@ -458,6 +470,8 @@ def run() -> int:
                 sources=draft.sources or exploration.sources[:5],
                 tweet_id=result.tweet_id,
                 url=result.url,
+                picture=rendered.kind if (rendered is not None and media_ids) else "none",
+                picture_wanted=getattr(draft.visual, "kind", "none"),
             ),
         )
     except OSError as exc:

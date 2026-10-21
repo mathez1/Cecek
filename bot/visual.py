@@ -12,6 +12,7 @@ nothing.
 
 from __future__ import annotations
 
+import copy
 import logging
 import math
 from dataclasses import dataclass, field
@@ -20,7 +21,13 @@ from typing import Any, Callable
 
 log = logging.getLogger(__name__)
 
-KINDS = ("none", "line", "bar", "stat", "illustration")
+# "none" is still a value parse() can return, for an answer it cannot read,
+# but it is never offered to the model: every post gets a picture. Given the
+# option, the model took it on six posts out of six.
+KINDS = ("none", "line", "bar", "stat", "card", "illustration")
+
+# A headline long enough to need a fourth line has stopped being a headline.
+CARD_HEADLINE_LIMIT = 120
 
 # X truncates alt text past 1000 characters.
 ALT_LIMIT = 1000
@@ -33,30 +40,37 @@ MAX_POINTS = 400
 # Past about eight bars the labels collide at feed size.
 MAX_BARS = 8
 
+ILLUSTRATION_CHOICE = (
+    "Choose 'illustration' when the post is about something concrete and "
+    "visual. "
+)
+
 VISUAL_SCHEMA: dict[str, Any] = {
     "type": "object",
     "description": (
-        "A picture for this post, or none. Choose 'line' when the post is "
-        "about how one quantity changes with another and the shape is the "
-        "point. Choose 'bar' to compare a handful of named things. Choose "
-        "'stat' when the post turns on a single striking number with no shape "
-        "to it. Choose 'illustration' only when the post is about something "
-        "concrete and visual that no chart could carry. Choose 'none' "
-        "whenever a picture would be decoration, which is most of the time. "
-        "Never draw a number the post does not already state."
+        "The picture that goes with this post. Every post gets one. Choose "
+        "'line' when the post is about how one quantity changes with "
+        "another. Choose 'bar' to compare a handful of named things. Choose "
+        "'stat' when the post turns on one striking number. "
+        + ILLUSTRATION_CHOICE
+        + "Choose 'card' for everything else: a title card carrying "
+        "the post's hook as a headline. Prefer a chart or a stat whenever the "
+        "post states a number worth seeing. Never draw a number the post "
+        "does not already state."
     ),
     "properties": {
         "kind": {
             "type": "string",
-            "enum": list(KINDS),
-            "description": "Which of the five to make.",
+            "enum": [k for k in KINDS if k != "none"],
+            "description": "Which to make.",
         },
         "title": {
             "type": "string",
             "description": (
-                "Headline across the top, or for 'stat' the short line above "
-                "the number. Says the finding, not the subject. Empty for "
-                "'none' and 'illustration'."
+                "Headline across the top; for 'stat' the short line above "
+                "the number; for 'card' the headline itself, at most "
+                f"{CARD_HEADLINE_LIMIT} characters, the post's hook rather "
+                "than its subject. Empty for 'illustration'."
             ),
         },
         "subtitle": {
@@ -67,7 +81,7 @@ VISUAL_SCHEMA: dict[str, Any] = {
             "type": "string",
             "description": (
                 "Alt text describing the picture for someone who cannot see "
-                "it, including the numbers it shows. Empty only for 'none'."
+                "it, including the numbers it shows."
             ),
         },
         "x_label": {"type": "string", "description": "Horizontal axis label. Line and bar."},
@@ -146,6 +160,21 @@ VISUAL_SCHEMA: dict[str, Any] = {
     ],
     "additionalProperties": False,
 }
+
+
+def schema(can_illustrate: bool) -> dict[str, Any]:
+    """The visual question, offering only what this run can actually draw.
+
+    Without an image key an illustration can never be made, so offering it
+    would let the model pick the one thing that is guaranteed to fall back to
+    a plain title card, on exactly the posts where it judged a picture of the
+    subject would serve best.
+    """
+    out = copy.deepcopy(VISUAL_SCHEMA)
+    if not can_illustrate:
+        out["properties"]["kind"]["enum"].remove("illustration")
+        out["description"] = out["description"].replace(ILLUSTRATION_CHOICE, "")
+    return out
 
 
 @dataclass
@@ -308,6 +337,11 @@ def problem(visual: Visual) -> str | None:
             return "no figure to show"
         return None
 
+    if visual.kind == "card":
+        if not visual.title:
+            return "no headline for the card"
+        return None
+
     if visual.kind == "illustration":
         if not visual.prompt:
             return "no prompt to draw from"
@@ -377,6 +411,12 @@ def render(
                 subtitle=visual.subtitle,
                 caption=visual.caption,
             )
+        elif visual.kind == "card":
+            chart.draw_card(
+                path,
+                headline=visual.title[:CARD_HEADLINE_LIMIT],
+                subtitle=visual.subtitle,
+            )
         elif visual.kind == "illustration":
             if illustrator is None:
                 log.info("an illustration was chosen but no image key is set")
@@ -394,3 +434,32 @@ def render(
         return None
 
     return Rendered(path=path, alt=visual.alt, kind=visual.kind)
+
+
+def _hook(post: str) -> str:
+    """The post's first sentence, cut at a word if it runs long."""
+    text = " ".join(post.split())
+    for end in (". ", "? ", "! ", ": "):
+        cut = text.find(end)
+        if 0 < cut < CARD_HEADLINE_LIMIT:
+            return text[: cut + 1].rstrip(":")
+    if len(text) <= CARD_HEADLINE_LIMIT:
+        return text
+    return text[: CARD_HEADLINE_LIMIT].rsplit(" ", 1)[0].rstrip(",;:") + "..."
+
+
+def fallback_card(post: str, wanted: Visual) -> Visual:
+    """A title card from the post itself, for when nothing else was drawn.
+
+    Every post gets a picture, so when the model's choice cannot be made (no
+    image key, an unreadable spec, a chart that failed to render) this is
+    what goes out instead. It uses the model's own headline when there is
+    one, and the post's opening sentence when there is not, so it never
+    claims anything the post does not.
+    """
+    headline = wanted.title if wanted.kind == "card" and wanted.title else _hook(post)
+    return Visual(
+        kind="card",
+        title=headline,
+        alt=f"A title card reading: {headline}",
+    )

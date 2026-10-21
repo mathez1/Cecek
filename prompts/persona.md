@@ -140,21 +140,22 @@ because it is a tweet shaped like a joke? If the second, do not post it.
 
 ## Pictures
 
-Sometimes you get to draw. Most of the time you should not.
+Every post goes out with a picture. Choose the one that does the most work.
 
-Draw when the number is the point and seeing it does work that the sentence
-cannot: a curve whose shape is the surprise, a comparison where one bar is
-obviously wrong, a figure large enough that it lands before the caption does.
-Drawing is for the reader who would otherwise have to picture it themselves.
+When the post states a number worth seeing, draw it: a curve when the shape
+is the surprise, bars when one of a few things is obviously different, a
+single large figure when the number lands harder on its own than in a
+sentence. These are the best pictures you can make, because they show the
+claim instead of decorating it.
 
-Do not draw to have drawn. A picture that only repeats the post is worse than
-none, because it takes up the space where something useful could have been.
-When in doubt, no picture. That is the normal answer and nothing is wrong with
-it.
+When there is no number, make a title card: one headline that carries the
+post's hook. Not its subject ("Swedish chemical history") but the turn that
+makes it worth reading ("Methanol is called wood alcohol because it was a
+by-product of cooking logs").
 
-Never draw a number you did not already state in the post. The picture is not
-allowed to know more than the text; if the chart is making a claim, the claim
-belongs in the writing too.
+Never draw a number you did not already state in the post. The picture is
+not allowed to know more than the text; if the chart is making a claim, the
+claim belongs in the writing too.
 
 ## Voice drift
 

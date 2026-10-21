@@ -53,6 +53,12 @@ class PostRecord:
     tweet_id: str | None = None
     url: str | None = None
     dry_run: bool = False
+    # What went out with the post, and what the model asked for. Recorded
+    # here because the run summary is the only other place it is written,
+    # and the summary cannot be read from outside GitHub's own pages: six
+    # posts went out without a picture before anyone could see why.
+    picture: str = ""
+    picture_wanted: str = ""
 
     def to_json(self) -> str:
         return json.dumps(asdict(self), ensure_ascii=False, sort_keys=True)
@@ -66,6 +72,8 @@ class PostRecord:
         known["rationale"] = known.get("rationale") or ""
         known["sources"] = known.get("sources") or []
         known["dry_run"] = bool(known.get("dry_run"))
+        known["picture"] = known.get("picture") or ""
+        known["picture_wanted"] = known.get("picture_wanted") or ""
         return cls(**known)
 
 
