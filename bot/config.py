@@ -108,10 +108,15 @@ class Config:
     # Charts are free: they are drawn locally from numbers the post already
     # states. Illustrations are not, which is why they have their own cap.
     enable_visuals: bool = True
-    # The model id is the first thing here to go stale. Check it against the
-    # provider's current list before blaming the key.
-    image_model: str = "imagen-4.0-fast-generate-001"
-    daily_image_budget: int = 3
+    # The model id is the first thing here to go stale. This one is the id
+    # Google's own cookbook calls as of October 2026; a "fast" variant that
+    # was assumed earlier appears nowhere in it, and an id the API does not
+    # know fails every illustration quietly into a title card.
+    image_model: str = "imagen-4.0-generate-001"
+    # Matches the daily post cap, because the owner wants an illustration on
+    # every post. At about $0.04 each that is up to ~$12 a month. Lower it to
+    # spend less: posts past the cap get a chart or a title card instead.
+    daily_image_budget: int = 10
 
     # --- views ---
     # X bills reads per post returned and deduplicates per UTC day, so how
@@ -216,8 +221,8 @@ def load_config() -> Config:
         allow_links=_env_bool("ALLOW_LINKS", False),
         max_consecutive_failures=_env_int("MAX_CONSECUTIVE_FAILURES", 6),
         enable_visuals=_env_bool("ENABLE_VISUALS", True),
-        image_model=_env_str("IMAGE_MODEL", "imagen-4.0-fast-generate-001"),
-        daily_image_budget=_env_int("DAILY_IMAGE_BUDGET", 3),
+        image_model=_env_str("IMAGE_MODEL", "imagen-4.0-generate-001"),
+        daily_image_budget=_env_int("DAILY_IMAGE_BUDGET", 10),
         metrics_window_days=_env_int("METRICS_WINDOW_DAYS", 7),
         x_user_id=_env_str("X_USER_ID", ""),
     )

@@ -316,3 +316,34 @@ def _one_real_png() -> bytes:
     buffer = io.BytesIO()
     Image.new("RGB", (640, 360), (128, 128, 128)).save(buffer, format="PNG")
     return buffer.getvalue()
+
+
+class TestImagenReturnsJpeg:
+    """Google's own example saves Imagen's output as .jpeg.
+
+    The bot writes it to post.png and uploads it as image/png. That is only
+    true because marking re-encodes it; this pins that down, since a JPEG
+    labelled PNG is the kind of mismatch X can reject without saying why.
+    """
+
+    def test_a_jpeg_from_the_vendor_is_posted_as_a_real_png(self, tmp_path, monkeypatch):
+        import base64
+        import io
+
+        from PIL import Image
+
+        buffer = io.BytesIO()
+        Image.new("RGB", (640, 360), (90, 90, 90)).save(buffer, format="JPEG")
+        jpeg = buffer.getvalue()
+        assert jpeg[:2] == b"\xff\xd8"
+
+        monkeypatch.setattr(
+            imagegen.requests, "post",
+            lambda *a, **k: FakeResponse(
+                200, {"predictions": [{"bytesBase64Encoded": base64.b64encode(jpeg).decode()}]}
+            ),
+        )
+
+        path = tmp_path / "post.png"
+        assert imagegen.Illustrator(Cfg())("a beech log", path) is True
+        assert path.read_bytes()[:8] == b"\x89PNG\r\n\x1a\n"

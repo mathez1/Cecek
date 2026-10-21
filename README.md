@@ -253,7 +253,7 @@ of six, so that option is gone.
 | `bar` | A handful of named things compared | nothing |
 | `stat` | One striking number with no shape to it | nothing |
 | `card` | No number to draw: the post's hook set as a headline | nothing |
-| `illustration` | Something concrete and visual. Only offered when `IMAGE_API_KEY` is set | one image |
+| `illustration` | **The default whenever `IMAGE_API_KEY` is set**: BoB's own picture of the idea, literal or a visual metaphor. Not offered without a key | ~$0.04 |
 
 If the chosen picture cannot be made — no image key, a spec that will not
 draw, an answer that could not be read — a title card built from the post's
@@ -394,8 +394,8 @@ Actions → Variables). All have working defaults.
 | `RECENT_POSTS_IN_CONTEXT` | `40` | How much history the model sees. |
 | `MAX_CONSECUTIVE_FAILURES` | `6` | Stop calling Claude after this many failed runs in a row. `0` disables it. |
 | `ENABLE_VISUALS` | `true` | Whether the model is asked for a picture at all. Off removes the question from the schema entirely. |
-| `DAILY_IMAGE_BUDGET` | `3` | Generated illustrations per day. Charts do not count: they cost nothing. `0` is unlimited. |
-| `IMAGE_MODEL` | `imagen-4.0-fast-generate-001` | Which image model `IMAGE_API_KEY` talks to. The first thing here to go stale. |
+| `DAILY_IMAGE_BUDGET` | `10` | Generated illustrations per day, about $0.04 each. Matches the post cap so every post can have one. Posts past it get a chart or title card. `0` is unlimited. |
+| `IMAGE_MODEL` | `imagen-4.0-generate-001` | Which Google image model `IMAGE_API_KEY` talks to. Paid-only on Google's side. The first thing here to go stale. |
 | `METRICS_WINDOW_DAYS` | `7` | How far back the view tracker refreshes. Older posts keep their last reading. The main cost lever on the tracker. `0` refreshes everything. |
 | `X_USER_ID` | *(looked up once)* | The account's numeric id. Optional: it is resolved once and cached in `memory/state.json`. |
 

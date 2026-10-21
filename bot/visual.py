@@ -40,28 +40,41 @@ MAX_POINTS = 400
 # Past about eight bars the labels collide at feed size.
 MAX_BARS = 8
 
-ILLUSTRATION_CHOICE = (
-    "Choose 'illustration' when the post is about something concrete and "
-    "visual. "
+# Two framings of the same question, because what the model should reach
+# for first depends on whether this run can draw from imagination at all.
+#
+# With an image key, the illustration is the default: the owner wants the
+# picture to be what BoB sees when he thinks about the subject, not a
+# readout of it. Charts stay available for the post that is nothing but a
+# number. Without a key, charts and title cards are all there is.
+DESCRIBE_WITH_ILLUSTRATION = (
+    "The picture that goes with this post. Every post gets one. Choose "
+    "'illustration' for nearly every post: a drawing of what you see in "
+    "your head when you think about this, literal or a visual metaphor, "
+    "your own idea of it rather than a diagram. Choose 'line', 'bar' or "
+    "'stat' only when the post is entirely about one number or one curve "
+    "and seeing that number is the point. Choose 'card' only if nothing "
+    "else fits. Never draw a number the post does not already state."
+)
+
+DESCRIBE_WITHOUT_ILLUSTRATION = (
+    "The picture that goes with this post. Every post gets one. Choose "
+    "'line' when the post is about how one quantity changes with another. "
+    "Choose 'bar' to compare a handful of named things. Choose 'stat' when "
+    "the post turns on one striking number. Choose 'card' for everything "
+    "else: a title card carrying the post's hook as a headline. Prefer a "
+    "chart or a stat whenever the post states a number worth seeing. Never "
+    "draw a number the post does not already state."
 )
 
 VISUAL_SCHEMA: dict[str, Any] = {
     "type": "object",
-    "description": (
-        "The picture that goes with this post. Every post gets one. Choose "
-        "'line' when the post is about how one quantity changes with "
-        "another. Choose 'bar' to compare a handful of named things. Choose "
-        "'stat' when the post turns on one striking number. "
-        + ILLUSTRATION_CHOICE
-        + "Choose 'card' for everything else: a title card carrying "
-        "the post's hook as a headline. Prefer a chart or a stat whenever the "
-        "post states a number worth seeing. Never draw a number the post "
-        "does not already state."
-    ),
+    "description": DESCRIBE_WITH_ILLUSTRATION,
     "properties": {
         "kind": {
             "type": "string",
-            "enum": [k for k in KINDS if k != "none"],
+            # Illustration first: the order is part of what the model reads.
+            "enum": ["illustration", "line", "bar", "stat", "card"],
             "description": "Which to make.",
         },
         "title": {
@@ -147,9 +160,13 @@ VISUAL_SCHEMA: dict[str, Any] = {
         "prompt": {
             "type": "string",
             "description": (
-                "For 'illustration': what to draw, as one concrete sentence "
-                "naming objects and their arrangement. No style words, no "
-                "brand or person names, nothing photographic. Empty otherwise."
+                "For 'illustration': what you picture, as one or two concrete "
+                "sentences naming the objects, what they are doing and how "
+                "they are arranged. It can be a scene, a single object, or a "
+                "visual metaphor for the idea - make it yours, the thing that "
+                "would make someone stop scrolling. The style is fixed for "
+                "you, so no style words. No text in the image, no brand or "
+                "real person's names, nothing photographic. Empty otherwise."
             ),
         },
     },
@@ -173,7 +190,7 @@ def schema(can_illustrate: bool) -> dict[str, Any]:
     out = copy.deepcopy(VISUAL_SCHEMA)
     if not can_illustrate:
         out["properties"]["kind"]["enum"].remove("illustration")
-        out["description"] = out["description"].replace(ILLUSTRATION_CHOICE, "")
+        out["description"] = DESCRIBE_WITHOUT_ILLUSTRATION
     return out
 
 
