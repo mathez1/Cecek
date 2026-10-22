@@ -418,7 +418,8 @@ class Brain:
                 "format": {
                     "type": "json_schema",
                     "schema": draft_schema(
-                        self.cfg.enable_visuals, bool(self.cfg.image_api_key)
+                        self.cfg.enable_visuals,
+                        bool(self.cfg.image_api_key or self.cfg.xai_api_key),
                     ),
                 },
             },

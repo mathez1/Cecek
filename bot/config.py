@@ -78,6 +78,9 @@ class Config:
     # Optional, and the only key that is not required to run. Without it the
     # bot draws charts and never generates an illustration.
     image_api_key: str = field(repr=False, default="")
+    # xAI's key, for Grok Imagine. Preferred over Google's when both are set:
+    # it is X's own image model, and about half the price.
+    xai_api_key: str = field(repr=False, default="")
 
     # --- model ---
     model: str = "claude-opus-5"
@@ -117,6 +120,9 @@ class Config:
     # every post. At about $0.04 each that is up to ~$12 a month. Lower it to
     # spend less: posts past the cap get a chart or a title card instead.
     daily_image_budget: int = 10
+    # Grok Imagine's standard tier, about $0.02 an image. "-quality" is the
+    # dearer one. Named in xAI's own SDK, which is where this was checked.
+    xai_image_model: str = "grok-imagine-image"
 
     # --- views ---
     # X bills reads per post returned and deduplicates per UTC day, so how
@@ -184,6 +190,7 @@ def load_config() -> Config:
         )
 
     image_api_key = os.environ.get("IMAGE_API_KEY", "").strip()
+    xai_api_key = os.environ.get("XAI_API_KEY", "").strip()
 
     x_creds = {
         "x_api_key": os.environ.get("X_API_KEY", "").strip(),
@@ -204,6 +211,7 @@ def load_config() -> Config:
     cfg = Config(
         anthropic_api_key=anthropic_api_key,
         image_api_key=image_api_key,
+        xai_api_key=xai_api_key,
         **x_creds,
         model=_env_str("MODEL", "claude-opus-5"),
         effort=_env_str("EFFORT", "high"),
@@ -223,6 +231,7 @@ def load_config() -> Config:
         enable_visuals=_env_bool("ENABLE_VISUALS", True),
         image_model=_env_str("IMAGE_MODEL", "imagen-4.0-generate-001"),
         daily_image_budget=_env_int("DAILY_IMAGE_BUDGET", 10),
+        xai_image_model=_env_str("XAI_IMAGE_MODEL", "grok-imagine-image"),
         metrics_window_days=_env_int("METRICS_WINDOW_DAYS", 7),
         x_user_id=_env_str("X_USER_ID", ""),
     )

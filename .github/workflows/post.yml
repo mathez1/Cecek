@@ -72,6 +72,8 @@ jobs:
           X_ACCESS_TOKEN_SECRET: ${{ secrets.X_ACCESS_TOKEN_SECRET }}
           # Optional. Unset means charts only, which is a working bot.
           IMAGE_API_KEY: ${{ secrets.IMAGE_API_KEY }}
+          # Grok Imagine. Used in preference to IMAGE_API_KEY when both exist.
+          XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
           DRY_RUN: ${{ inputs.dry_run || vars.DRY_RUN || 'false' }}
           MODEL: ${{ vars.MODEL }}
           # A choice input always has a value, so a plain `inputs.effort ||
@@ -93,6 +95,7 @@ jobs:
           ENABLE_VISUALS: ${{ vars.ENABLE_VISUALS }}
           IMAGE_MODEL: ${{ vars.IMAGE_MODEL }}
           DAILY_IMAGE_BUDGET: ${{ vars.DAILY_IMAGE_BUDGET }}
+          XAI_IMAGE_MODEL: ${{ vars.XAI_IMAGE_MODEL }}
         run: python -m bot.main
 
       # The picture is not committed, so this is the only way to see what a

@@ -234,3 +234,14 @@ class TestTheDocsMatchTheCode:
 
         claimed = {int(n) for n in re.findall(r"(\d+) weighted characters", README.read_text(encoding="utf-8"))}
         assert claimed <= {POST_CHAR_LIMIT}
+
+
+class TestImageKeysStaySecret:
+    """Repository variables are readable by anyone who can see the repo."""
+
+    @pytest.mark.parametrize("name", ["IMAGE_API_KEY", "XAI_API_KEY"])
+    def test_it_comes_from_secrets(self, name):
+        env = post_step_env()
+        assert name in env, f"{name} is not passed to the posting step"
+        assert "secrets." in str(env[name]), f"{name} must come from secrets"
+        assert "vars." not in str(env[name]), f"{name} must not come from vars"

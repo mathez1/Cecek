@@ -347,3 +347,110 @@ class TestImagenReturnsJpeg:
         path = tmp_path / "post.png"
         assert imagegen.Illustrator(Cfg())("a beech log", path) is True
         assert path.read_bytes()[:8] == b"\x89PNG\r\n\x1a\n"
+
+
+class FakeXai:
+    """Stands in for xai_sdk.Client, recording what it was asked for."""
+
+    last = None
+    behaviour = "ok"
+
+    def __init__(self, api_key=None, timeout=None, **kwargs):
+        self.api_key = api_key
+        self.timeout = timeout
+        self.calls = []
+        FakeXai.last = self
+        self.image = self
+
+    def sample(self, **kwargs):
+        import base64
+        self.calls.append(kwargs)
+        if FakeXai.behaviour == "raises":
+            raise RuntimeError("grpc: UNAVAILABLE")
+
+        class Response:
+            cost_usd = 0.02
+
+            @property
+            def base64(_self):
+                if FakeXai.behaviour == "moderated":
+                    raise ValueError("Image did not respect moderation rules")
+                data = base64.b64encode(_one_real_png()).decode()
+                if FakeXai.behaviour == "data_url":
+                    return "data:image/jpeg;base64," + data
+                return data
+
+        return Response()
+
+
+class XaiCfg(Cfg):
+    image_api_key = ""
+    xai_api_key = "xai-test"
+    xai_image_model = "grok-imagine-image"
+
+
+@pytest.fixture
+def xai(monkeypatch):
+    import types
+    FakeXai.behaviour = "ok"
+    module = types.ModuleType("xai_sdk")
+    module.Client = FakeXai
+    monkeypatch.setitem(sys.modules, "xai_sdk", module)
+    return FakeXai
+
+
+class TestGrokImagine:
+    def test_xai_is_preferred_when_both_keys_exist(self):
+        class Both(XaiCfg):
+            image_api_key = "google-key"
+
+        assert imagegen.provider(Both()) == "xai"
+        assert imagegen.provider(Cfg()) == "google"
+
+        class Neither(Cfg):
+            image_api_key = ""
+
+        assert imagegen.provider(Neither()) == ""
+
+    def test_it_draws_marks_and_reports_the_cost(self, tmp_path, xai):
+        path = tmp_path / "post.png"
+        illustrator = imagegen.Illustrator(XaiCfg())
+
+        assert illustrator("a key that is the digit 4", path) is True
+        assert path.read_bytes()[:8] == b"\x89PNG\r\n\x1a\n"
+        assert illustrator.images == 1
+        assert illustrator.cost_usd == pytest.approx(0.02)
+
+        call = xai.last.calls[0]
+        assert call["model"] == "grok-imagine-image"
+        assert call["aspect_ratio"] == "16:9"
+        assert call["image_format"] == "base64"
+        assert "not photographic" in call["prompt"]
+
+    def test_it_never_waits_twenty_seven_minutes(self, tmp_path, xai):
+        # The SDK's own default would outlive the 12-minute posting step.
+        imagegen.Illustrator(XaiCfg())("a beech log", tmp_path / "p.png")
+        assert xai.last.timeout == imagegen.XAI_TIMEOUT
+        assert xai.last.timeout <= 120
+
+    def test_a_data_url_is_accepted(self, tmp_path, xai):
+        xai.behaviour = "data_url"
+        assert imagegen.Illustrator(XaiCfg())("a beech log", tmp_path / "p.png") is True
+
+    def test_a_moderated_image_is_counted_but_not_posted(self, tmp_path, xai):
+        # The request was made and billed; nothing usable came back.
+        xai.behaviour = "moderated"
+        path = tmp_path / "p.png"
+        illustrator = imagegen.Illustrator(XaiCfg())
+
+        assert illustrator("a beech log", path) is False
+        assert illustrator.images == 1
+        assert not path.exists()
+
+    def test_a_grpc_failure_is_not_an_exception(self, tmp_path, xai):
+        xai.behaviour = "raises"
+        assert imagegen.Illustrator(XaiCfg())("a beech log", tmp_path / "p.png") is False
+
+    def test_a_missing_sdk_costs_the_picture_not_the_run(self, tmp_path, monkeypatch):
+        monkeypatch.setitem(sys.modules, "xai_sdk", None)
+        assert imagegen.Illustrator(XaiCfg())("a beech log", tmp_path / "p.png") is False

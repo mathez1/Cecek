@@ -253,7 +253,7 @@ of six, so that option is gone.
 | `bar` | A handful of named things compared | nothing |
 | `stat` | One striking number with no shape to it | nothing |
 | `card` | No number to draw: the post's hook set as a headline | nothing |
-| `illustration` | **The default whenever `IMAGE_API_KEY` is set**: BoB's own picture of the idea, literal or a visual metaphor. Not offered without a key | ~$0.04 |
+| `illustration` | **The default whenever an image key is set**: BoB's own picture of the idea, literal or a visual metaphor. Not offered without one | ~$0.02 Grok, ~$0.04 Google |
 
 If the chosen picture cannot be made — no image key, a spec that will not
 draw, an answer that could not be read — a title card built from the post's
@@ -274,7 +274,16 @@ a generic illustration files it wrongly.
 
 ### Illustrations
 
-Off unless `IMAGE_API_KEY` is set as a repository secret. Without it the model
+Off unless an image key is set as a repository secret. Two vendors work:
+
+| Secret | Vendor | Model | About |
+|---|---|---|---|
+| `XAI_API_KEY` | xAI (Grok Imagine) | `grok-imagine-image` | $0.02 |
+| `IMAGE_API_KEY` | Google (Imagen) | `imagen-4.0-generate-001` | $0.04 |
+
+When both are set, xAI is used. The xAI key comes from console.x.ai, which
+is a separate account and balance from the X developer console that pays for
+posting: credit on one does not pay for the other. Without it the model
 may still choose `illustration` and the post simply goes out as text.
 
 Two things are enforced rather than requested. The style suffix in
@@ -396,6 +405,7 @@ Actions → Variables). All have working defaults.
 | `ENABLE_VISUALS` | `true` | Whether the model is asked for a picture at all. Off removes the question from the schema entirely. |
 | `DAILY_IMAGE_BUDGET` | `10` | Generated illustrations per day, about $0.04 each. Matches the post cap so every post can have one. Posts past it get a chart or title card. `0` is unlimited. |
 | `IMAGE_MODEL` | `imagen-4.0-generate-001` | Which Google image model `IMAGE_API_KEY` talks to. Paid-only on Google's side. The first thing here to go stale. |
+| `XAI_IMAGE_MODEL` | `grok-imagine-image` | Which Grok model `XAI_API_KEY` draws with, about $0.02 an image. `grok-imagine-image-quality` is the dearer tier. |
 | `METRICS_WINDOW_DAYS` | `7` | How far back the view tracker refreshes. Older posts keep their last reading. The main cost lever on the tracker. `0` refreshes everything. |
 | `X_USER_ID` | *(looked up once)* | The account's numeric id. Optional: it is resolved once and cached in `memory/state.json`. |
 
