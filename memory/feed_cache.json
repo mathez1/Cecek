@@ -1,7 +1,7 @@
 {
   "https://bigthink.com/feed/": {
-    "etag": "W/\"f65735a6d8d3d4c0078a5882cf1804be\"",
-    "modified": "Wed, 21 Oct 2026 12:51:42 GMT"
+    "etag": "W/\"009f2c79d12c454b68c1c622e517f690\"",
+    "modified": "Thu, 22 Oct 2026 20:03:33 GMT"
   },
   "https://feeds.arstechnica.com/arstechnica/index": {
     "modified": "Thu, 22 Oct 2026 17:23:42 GMT"
@@ -45,8 +45,8 @@
     "modified": "Wed, 21 Oct 2026 05:59:07 GMT"
   },
   "https://spectrum.ieee.org/feeds/feed.rss": {
-    "etag": "\"7bfe52ed876c23fd25df47c805cd4db1\"",
-    "modified": "Thu, 22 Oct 2026 13:01:20 GMT"
+    "etag": "\"6dedb7d06270f09612cebd721914e9da\"",
+    "modified": "Thu, 22 Oct 2026 18:02:20 GMT"
   },
   "https://techcrunch.com/feed/": {
     "etag": "W/\"095d920180617ec1b3dc246409d4b068\"",
@@ -56,8 +56,8 @@
     "etag": "W/\"1a9fd-7UjTrOJpq/ijzYhwLp9VxyeJkwA\""
   },
   "https://www.aljazeera.com/xml/rss/all.xml": {
-    "etag": "W/\"296ca79a0f13e102f992f1653c1963c3\"",
-    "modified": "Thu, 22 Oct 2026 07:34:57 GMT"
+    "etag": "W/\"2e93ac6fbbfca811902d8e6923f92e60\"",
+    "modified": "Thu, 22 Oct 2026 21:06:48 GMT"
   },
   "https://www.astralcodexten.com/feed": {
     "etag": "W/\"e6241-jCkf94XaJBufAU4bf9ISiy/3EAY\""
@@ -66,7 +66,7 @@
     "etag": "W/\"a4080922d06a0cd0a59381ac74d89088\""
   },
   "https://www.construction-physics.com/feed": {
-    "etag": "W/\"cc672-/v9MpE2g7H1Y1oWD5rOaQ99Zjf8\""
+    "etag": "W/\"cc672-kcn+RFbCwJZxevH15FyYgtXR2v0\""
   },
   "https://www.economist.com/latest/rss.xml": {
     "etag": "W/\"cc30812646b8c608a948d7f13da01134\"",
@@ -77,15 +77,15 @@
     "modified": "Thu, 22 Oct 2026 17:55:07 GMT"
   },
   "https://www.nature.com/nature.rss": {
-    "etag": "\"4d9ed6b32e70e3af6e35cd38824cd214\""
+    "etag": "\"da97e4e301e4402804ca368f37228c72\""
   },
   "https://www.newscientist.com/feed/home/": {
-    "etag": "W/\"8e69ceb921971104a26a676405b122a1\"",
-    "modified": "Wed, 21 Oct 2026 19:18:25 GMT"
+    "etag": "W/\"93c19d67e19b527e9f607f36da63920b\"",
+    "modified": "Thu, 22 Oct 2026 19:52:00 GMT"
   },
   "https://www.quantamagazine.org/feed/": {
-    "etag": "\"61baf70b69f40812782b251bc5827676-gzip\"",
-    "modified": "Thu, 22 Oct 2026 14:50:42 GMT"
+    "etag": "\"da3a5d9cd357fb400de44908ac5db554-gzip\"",
+    "modified": "Thu, 22 Oct 2026 19:16:18 GMT"
   },
   "https://www.sciencedaily.com/rss/top/science.xml": {
     "modified": "Thu, 22 Oct 2026 12:45:04 GMT"
