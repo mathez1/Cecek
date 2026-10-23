@@ -10,11 +10,11 @@
     "modified": "Wed, 21 Oct 2026 17:29:33 GMT"
   },
   "https://hnrss.org/frontpage": {
-    "modified": "Thu, 22 Oct 2026 16:27:47 GMT"
+    "modified": "Thu, 22 Oct 2026 23:56:39 GMT"
   },
   "https://lobste.rs/rss": {
-    "etag": "\"dmat3bw5f8la-ixh-gzip\"",
-    "modified": "Wed, 21 Oct 2026 20:41:48 GMT"
+    "etag": "\"dmbs79cajkpm-cq2-gzip\"",
+    "modified": "Fri, 23 Oct 2026 00:12:35 GMT"
   },
   "https://marginalrevolution.com/feed": {
     "etag": "\"19ed4e41b7249051c98e9594a706a425\"",
@@ -32,13 +32,13 @@
     "modified": "Tue, 20 Oct 2026 16:09:55 GMT"
   },
   "https://rss.arxiv.org/rss/cs.AI": {
-    "etag": "e6ec36acff5072486e79b45ef716da43c287e44f9768e08b4d98ff86fc046db9"
+    "etag": "bcfb952d717f7a0f945e12e68e4a71135a6b3783842189ee7cbf07483c944457"
   },
   "https://rss.arxiv.org/rss/econ.GN": {
     "etag": "0848027ec514165d93b3e0016f145e96c5600d0f590c87fbfbf58e1560a81bd7"
   },
   "https://rss.arxiv.org/rss/q-bio.PE": {
-    "etag": "98baf70d384fb05d238c2ee3ff2ee40efb8e6ea1b2c68213d6e0371635dbbcb6"
+    "etag": "c086ef3bc86514edba2a9b735d68c053d2ec82f9fe2d2fb1245c006ec261278a"
   },
   "https://rss.slashdot.org/Slashdot/slashdotMain": {
     "etag": "W/\"e2ee-65e5371f252b7\"",
@@ -56,11 +56,11 @@
     "etag": "W/\"1a9fd-7UjTrOJpq/ijzYhwLp9VxyeJkwA\""
   },
   "https://www.aljazeera.com/xml/rss/all.xml": {
-    "etag": "W/\"2e93ac6fbbfca811902d8e6923f92e60\"",
-    "modified": "Thu, 22 Oct 2026 21:06:48 GMT"
+    "etag": "W/\"6dae4b00582d5c4cfa44eb1152ab331a\"",
+    "modified": "Fri, 23 Oct 2026 00:03:00 GMT"
   },
   "https://www.astralcodexten.com/feed": {
-    "etag": "W/\"e6241-jCkf94XaJBufAU4bf9ISiy/3EAY\""
+    "etag": "W/\"e69e2-QKt7YJEPwGY8u47crQ8oh4RwEhI\""
   },
   "https://www.atlasobscura.com/feeds/latest": {
     "etag": "W/\"a4080922d06a0cd0a59381ac74d89088\""
@@ -91,8 +91,8 @@
     "modified": "Thu, 22 Oct 2026 12:45:04 GMT"
   },
   "https://www.sciencenews.org/feed": {
-    "etag": "W/\"5462c1621d82fb69e6cd86727389e3af\"",
-    "modified": "Wed, 21 Oct 2026 17:53:21 GMT"
+    "etag": "W/\"cb9f6a0e264275455ec39fa8a8365da2\"",
+    "modified": "Thu, 22 Oct 2026 21:19:54 GMT"
   },
   "https://www.smithsonianmag.com/rss/latest_articles/": {
     "modified": "Wed, 21 Oct 2026 17:11:05 GMT"
@@ -102,7 +102,7 @@
     "modified": "Wed, 21 Oct 2026 16:49:01 GMT"
   },
   "https://www.theatlantic.com/feed/all/": {
-    "modified": "Wed, 21 Oct 2026 23:38:17 GMT"
+    "modified": "Thu, 22 Oct 2026 23:51:52 GMT"
   },
   "https://www.theguardian.com/science/rss": {
     "etag": "W/\"hash-5790748806164173672\""
