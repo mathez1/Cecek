@@ -10,7 +10,7 @@
     "modified": "Fri, 23 Oct 2026 14:03:19 GMT"
   },
   "https://hnrss.org/best": {
-    "modified": "Wed, 21 Oct 2026 17:29:33 GMT"
+    "modified": "Fri, 23 Oct 2026 16:59:08 GMT"
   },
   "https://hnrss.org/frontpage": {
     "modified": "Fri, 23 Oct 2026 03:20:38 GMT"
@@ -59,21 +59,21 @@
     "etag": "W/\"1f8fc-YBNT9PGdgzPhd2rClOOPqCoke+k\""
   },
   "https://www.aljazeera.com/xml/rss/all.xml": {
-    "etag": "W/\"6dae4b00582d5c4cfa44eb1152ab331a\"",
-    "modified": "Fri, 23 Oct 2026 00:03:00 GMT"
+    "etag": "W/\"0777f9752c9b2710df40aa776684d6f3\"",
+    "modified": "Fri, 23 Oct 2026 19:02:58 GMT"
   },
   "https://www.astralcodexten.com/feed": {
     "etag": "W/\"e65ab-aNhZIFNKeZ/xi/w8298QN46G4Lo\""
   },
   "https://www.atlasobscura.com/feeds/latest": {
-    "etag": "W/\"a4080922d06a0cd0a59381ac74d89088\""
+    "etag": "W/\"2366080201e9a9f6f4b61c0e343c8741\""
   },
   "https://www.construction-physics.com/feed": {
-    "etag": "W/\"cc59a-3WD0rlidY6KUYNyYr+XOJtwgdE4\""
+    "etag": "W/\"cc3f6-Pu2apeX1FbhtBxZVbr9EtDJiyCE\""
   },
   "https://www.economist.com/latest/rss.xml": {
-    "etag": "W/\"cc30812646b8c608a948d7f13da01134\"",
-    "modified": "Thu, 22 Oct 2026 13:11:57 GMT"
+    "etag": "W/\"b351dfeccbafa7a629b76e918c0f2c43\"",
+    "modified": "Fri, 23 Oct 2026 18:56:57 GMT"
   },
   "https://www.nasa.gov/news-release/feed/": {
     "etag": "W/\"b8e0b65924040b91c2a8713e0b3a0380\"",
@@ -83,12 +83,12 @@
     "etag": "\"202bfc73d516fdc91a5f43693278f090\""
   },
   "https://www.newscientist.com/feed/home/": {
-    "etag": "W/\"de50b08ecba3c30a762c21b858c5d55e\"",
-    "modified": "Fri, 23 Oct 2026 15:08:49 GMT"
+    "etag": "W/\"c44c554ac5916f9f0d52ad0bf10dbb4e\"",
+    "modified": "Fri, 23 Oct 2026 15:39:28 GMT"
   },
   "https://www.quantamagazine.org/feed/": {
-    "etag": "\"c8a6ecff0875ea2732b03c126006a403-gzip\"",
-    "modified": "Fri, 23 Oct 2026 14:54:35 GMT"
+    "etag": "\"de50b08ecba3c30a762c21b858c5d55e-gzip\"",
+    "modified": "Fri, 23 Oct 2026 15:08:49 GMT"
   },
   "https://www.sciencedaily.com/rss/top/science.xml": {
     "modified": "Thu, 22 Oct 2026 12:45:04 GMT"
