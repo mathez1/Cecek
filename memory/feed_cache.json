@@ -3,11 +3,11 @@
     "etag": "W/\"f27daf6d953ec4f8232307a996b784de\""
   },
   "https://bigthink.com/feed/": {
-    "etag": "W/\"009f2c79d12c454b68c1c622e517f690\"",
-    "modified": "Thu, 22 Oct 2026 20:03:33 GMT"
+    "etag": "W/\"83cf632f9f51d4c335c573f892ba525b\"",
+    "modified": "Tue, 20 Oct 2026 17:04:10 GMT"
   },
   "https://feeds.arstechnica.com/arstechnica/index": {
-    "modified": "Thu, 22 Oct 2026 17:23:42 GMT"
+    "modified": "Fri, 23 Oct 2026 14:03:19 GMT"
   },
   "https://hnrss.org/best": {
     "modified": "Wed, 21 Oct 2026 17:29:33 GMT"
@@ -63,7 +63,7 @@
     "modified": "Fri, 23 Oct 2026 00:03:00 GMT"
   },
   "https://www.astralcodexten.com/feed": {
-    "etag": "W/\"e6863-HxNNy0bArLyQOrYCpB6XSIrvIZU\""
+    "etag": "W/\"e65ab-aNhZIFNKeZ/xi/w8298QN46G4Lo\""
   },
   "https://www.atlasobscura.com/feeds/latest": {
     "etag": "W/\"a4080922d06a0cd0a59381ac74d89088\""
@@ -80,22 +80,22 @@
     "modified": "Fri, 23 Oct 2026 06:40:06 GMT"
   },
   "https://www.nature.com/nature.rss": {
-    "etag": "\"da97e4e301e4402804ca368f37228c72\""
+    "etag": "\"202bfc73d516fdc91a5f43693278f090\""
   },
   "https://www.newscientist.com/feed/home/": {
-    "etag": "W/\"93c19d67e19b527e9f607f36da63920b\"",
-    "modified": "Thu, 22 Oct 2026 19:52:00 GMT"
+    "etag": "W/\"de50b08ecba3c30a762c21b858c5d55e\"",
+    "modified": "Fri, 23 Oct 2026 15:08:49 GMT"
   },
   "https://www.quantamagazine.org/feed/": {
-    "etag": "\"da3a5d9cd357fb400de44908ac5db554-gzip\"",
-    "modified": "Thu, 22 Oct 2026 19:16:18 GMT"
+    "etag": "\"c8a6ecff0875ea2732b03c126006a403-gzip\"",
+    "modified": "Fri, 23 Oct 2026 14:54:35 GMT"
   },
   "https://www.sciencedaily.com/rss/top/science.xml": {
     "modified": "Thu, 22 Oct 2026 12:45:04 GMT"
   },
   "https://www.sciencenews.org/feed": {
-    "etag": "W/\"cb9f6a0e264275455ec39fa8a8365da2\"",
-    "modified": "Thu, 22 Oct 2026 21:19:54 GMT"
+    "etag": "W/\"59da3d2123430c4af773fd25e0dd7aa9\"",
+    "modified": "Thu, 22 Oct 2026 12:43:51 GMT"
   },
   "https://www.smithsonianmag.com/rss/latest_articles/": {
     "modified": "Fri, 23 Oct 2026 04:56:42 GMT"
@@ -105,7 +105,7 @@
     "modified": "Thu, 22 Oct 2026 11:33:16 GMT"
   },
   "https://www.theatlantic.com/feed/all/": {
-    "modified": "Fri, 23 Oct 2026 01:36:31 GMT"
+    "modified": "Fri, 23 Oct 2026 14:51:41 GMT"
   },
   "https://www.theguardian.com/science/rss": {
     "etag": "W/\"hash-5790748806164173672\""
@@ -114,6 +114,6 @@
     "etag": "W/\"hash7080041564545677965\""
   },
   "https://www.theverge.com/rss/index.xml": {
-    "etag": "W/\"57b817c0b5dd747c4071f46cb278018a\""
+    "etag": "W/\"68e45032f4414ef4474cfd9ad47231a2\""
   }
 }
