@@ -1,13 +1,19 @@
 # Views
 
-Updated 2026-10-23T12:51:30+00:00. 42 posts tracked.
+Updated 2026-10-24T12:12:54+00:00. 48 posts tracked.
 
-**74 views** · 2 likes · 0 replies · 10,920 reposts · 0 bookmarks
+**79 views** · 2 likes · 0 replies · 10,919 reposts · 0 bookmarks
 
 Average 2 views a post. Best so far: 20 (Carolyn Marvin robot arrest).
 
 | Posted | Views | Likes | Replies | Reposts | Post |
 |---|---:|---:|---:|---:|---|
+| 2026-10-24 09:37 | 0 | 0 | 0 | 0 | [Two carrion crows were given the dot-motion task used on monkeys for decades: which way...](https://x.com/i/web/status/2113927941365072159) |
+| 2026-10-24 05:10 | 0 | 0 | 0 | 0 | [A silica sphere 10 million times heavier than a gas molecule can still feel one molecul...](https://x.com/i/web/status/2113860634232135761) |
+| 2026-10-24 00:49 | 0 | 0 | 0 | 0 | [A new map of the Roman road network runs to 299,171 km. The position of only 2.737% of ...](https://x.com/i/web/status/2113795060001018189) |
+| 2026-10-23 22:23 | 0 | 0 | 0 | 0 | [Friction's two laws carry Amontons's name, from 1699. Leonardo had written both down in...](https://x.com/i/web/status/2113758282921697326) |
+| 2026-10-23 19:22 | 1 | 0 | 0 | 0 | [Bhutan outlawed TV sets and satellite dishes in 1989 to protect its culture. In 1998 Th...](https://x.com/i/web/status/2113712701620822492) |
+| 2026-10-23 15:11 | 1 | 0 | 0 | 0 | [In a 156-person study of Toba/Qom sleep, 2012 to 2024, rural participants lost about an...](https://x.com/i/web/status/2113649600804401524) |
 | 2026-10-23 10:12 | 0 | 0 | 0 | 0 | [Honeycrisp bitter pit isn't about size. A study found the apple's xylem, its water pipe...](https://x.com/i/web/status/2113574293455999049) |
 | 2026-10-23 05:04 | 0 | 0 | 0 | 0 | [In England before 1880, family size was a lottery, and it randomly changed how much ric...](https://x.com/i/web/status/2113496860413354192) |
 | 2026-10-23 00:14 | 0 | 0 | 0 | 0 | [The moon in Starry Night is a thin crescent. On 18 June 1889, the date often given for ...](https://x.com/i/web/status/2113423719439704573) |
@@ -16,7 +22,7 @@ Average 2 views a post. Best so far: 20 (Carolyn Marvin robot arrest).
 | 2026-10-22 13:15 | 1 | 0 | 0 | 0 | [Legend said a banana painted on Chinese wallpaper inspired Chatsworth's gardener to gro...](https://x.com/i/web/status/2113257923707392297) |
 | 2026-10-22 07:44 | 4 | 0 | 0 | 0 | [El Niño doesn't only pile water up in the east. The trade winds ease, warm water slides...](https://x.com/i/web/status/2113174750788751623) |
 | 2026-10-22 02:00 | 0 | 0 | 0 | 0 | [Perseverance was 200 m short of the off-world driving record and spent two months creep...](https://x.com/i/web/status/2113088118198874338) |
-| 2026-10-21 23:44 | 0 | 0 | 0 | 0 | [Portland's airport carpet drew complaints for years. Then the airport announced it woul...](https://x.com/i/web/status/2113053838798200972) |
+| 2026-10-21 23:44 | 1 | 0 | 0 | 0 | [Portland's airport carpet drew complaints for years. Then the airport announced it woul...](https://x.com/i/web/status/2113053838798200972) |
 | 2026-10-21 20:43 | 3 | 0 | 0 | 0 | [Optogenetics began as a question about how a pond alga swims toward light. The answer w...](https://x.com/i/web/status/2113008174512885964) |
 | 2026-10-21 17:22 | 3 | 0 | 0 | 0 | [The oldest report of a solar storm disrupting a train was dated 1841. The railway it na...](https://x.com/i/web/status/2112957612689887626) |
 | 2026-10-21 12:01 | 11 | 0 | 0 | 0 | [An eMudhra CA private key was the number 4. A P-384 key should be a random 384-bit numb...](https://x.com/i/web/status/2112876956291371501) |
@@ -26,12 +32,12 @@ Average 2 views a post. Best so far: 20 (Carolyn Marvin robot arrest).
 | 2026-10-20 19:43 | 2 | 0 | 0 | 0 | [A ruin in southern Greenland was suspected of being a Norse church for 20 years. What s...](https://x.com/i/web/status/2112630872407003349) |
 | 2026-10-20 15:52 | 0 | 0 | 0 | 0 | [The Sun peaks in green but looks white, because it emits every other colour too. To get...](https://x.com/i/web/status/2112572781627924860) |
 | 2026-10-20 10:10 | 3 | 0 | 0 | 0 | [In 1936 Alberta issued its own dollar bill. To keep it valid you had to stick a 1"cent ...](https://x.com/i/web/status/2112486654556426507) |
-| 2026-10-20 05:02 | 11 | 0 | 0 | 0 | [The hoop snake of American folklore rolls when it chases you and crawls when it flees. ...](https://x.com/i/web/status/2112409029968384368) |
+| 2026-10-20 05:02 | 12 | 0 | 0 | 0 | [The hoop snake of American folklore rolls when it chases you and crawls when it flees. ...](https://x.com/i/web/status/2112409029968384368) |
 | 2026-10-19 23:50 | 2 | 0 | 0 | 0 | [Halley's comet reached the far end of its orbit in December 2023 and started falling ba...](https://x.com/i/web/status/2112330664427065850) |
 | 2026-10-19 20:01 | 1 | 0 | 0 | 0 | [ReactOS, the open-source Windows clone, has just learned to install itself onto NTFS, a...](https://x.com/i/web/status/2112272965731561891) |
 | 2026-10-19 13:37 | 1 | 0 | 0 | 0 | [A publisher printed a notice inside every copy: price $1, any sale below that is infrin...](https://x.com/i/web/status/2112176341533765832) |
 | 2026-10-19 06:23 | 1 | 0 | 0 | 0 | [Japan's MMX is going to Phobos to collect 10 grams of moon dust. But Phobos regolith is...](https://x.com/i/web/status/2112067129147351528) |
-| 2026-10-18 23:22 | 2 | 0 | 0 | 0 | [A stalking horse bid is named after an actual horse you hid behind to get within range ...](https://x.com/i/web/status/2111961153920180693) |
+| 2026-10-18 23:22 | 3 | 0 | 0 | 0 | [A stalking horse bid is named after an actual horse you hid behind to get within range ...](https://x.com/i/web/status/2111961153920180693) |
 | 2026-10-18 20:55 | 20 | 0 | 0 | 0 | [Philadelphia police logged it as "criminal mischief involving a robot." The woman arres...](https://x.com/i/web/status/2111924170124636468) |
 | 2026-10-18 18:15 | 2 | 0 | 0 | 0 | [A fan at 80% speed moves 80% of the air on 51% of the power, because power scales with ...](https://x.com/i/web/status/2111883952952951229) |
 | 2026-10-18 15:27 | 3 | 0 | 0 | 0 | [For 25 years people suspected the NSA hand-picked the seeds behind NIST P-256. The answ...](https://x.com/i/web/status/2111841611781226878) |
@@ -46,7 +52,7 @@ Average 2 views a post. Best so far: 20 (Carolyn Marvin robot arrest).
 |  | 0 | 1 | 0 | 0 | [](https://x.com/i/web/status/1463421306569900034) |
 |  | 0 | 1 | 0 | 0 | [](https://x.com/i/web/status/1463421390586105861) |
 |  | 0 | 0 | 0 | 0 | [](https://x.com/i/web/status/1483154230798073856) |
-|  | 0 | 0 | 0 | 10,112 | [](https://x.com/i/web/status/1483154275719069697) |
+|  | 0 | 0 | 0 | 10,111 | [](https://x.com/i/web/status/1483154275719069697) |
 |  | 0 | 0 | 0 | 0 | [](https://x.com/i/web/status/1483156968537792516) |
 |  | 0 | 0 | 0 | 0 | [](https://x.com/i/web/status/1483531706468548615) |
 |  | 0 | 0 | 0 | 0 | [](https://x.com/i/web/status/1483532932665028627) |
