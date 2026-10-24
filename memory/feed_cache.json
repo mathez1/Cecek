@@ -52,8 +52,8 @@
     "modified": "Fri, 23 Oct 2026 18:47:37 GMT"
   },
   "https://techcrunch.com/feed/": {
-    "etag": "W/\"bddcb9dfe318cf6511547d53af5fa3ce\"",
-    "modified": "Sat, 24 Oct 2026 16:11:49 GMT"
+    "etag": "W/\"dfe0c5e34fa2407c5a56d76f58ed7533\"",
+    "modified": "Sat, 24 Oct 2026 20:56:33 GMT"
   },
   "https://www.404media.co/rss/": {
     "etag": "W/\"205d2-CAIazCWlscV8MAVY7f48rzDCiDI\""
@@ -63,7 +63,7 @@
     "modified": "Fri, 23 Oct 2026 19:02:58 GMT"
   },
   "https://www.astralcodexten.com/feed": {
-    "etag": "W/\"c555c-xlAKnhzsz0EZqiMPcB+sM1WPBa8\""
+    "etag": "W/\"c555c-0aovlz20HT2up1POzKy5E0RKiBA\""
   },
   "https://www.atlasobscura.com/feeds/latest": {
     "etag": "W/\"897508a894fa453b84f399541934d921\""
@@ -76,8 +76,8 @@
     "modified": "Sat, 24 Oct 2026 13:11:57 GMT"
   },
   "https://www.nasa.gov/news-release/feed/": {
-    "etag": "W/\"668addb0203c6c454eecfbf62bba9242\"",
-    "modified": "Sat, 24 Oct 2026 15:40:03 GMT"
+    "etag": "W/\"12330061665097265826054b4bd10ac4\"",
+    "modified": "Sat, 24 Oct 2026 18:26:56 GMT"
   },
   "https://www.nature.com/nature.rss": {
     "etag": "\"5f7f315f3b9ffb5560bad50b06c7d658\""
@@ -87,11 +87,11 @@
     "modified": "Fri, 23 Oct 2026 15:39:28 GMT"
   },
   "https://www.quantamagazine.org/feed/": {
-    "etag": "\"de50b08ecba3c30a762c21b858c5d55e-gzip\"",
-    "modified": "Fri, 23 Oct 2026 15:08:49 GMT"
+    "etag": "\"65438387ed5fb9e71c7f19aedfdb52b7-gzip\"",
+    "modified": "Fri, 23 Oct 2026 17:10:36 GMT"
   },
   "https://www.sciencedaily.com/rss/top/science.xml": {
-    "modified": "Thu, 22 Oct 2026 12:45:04 GMT"
+    "modified": "Sat, 24 Oct 2026 13:15:25 GMT"
   },
   "https://www.sciencenews.org/feed": {
     "etag": "W/\"244d710a82ae7a8f66cda7066fcfc811\"",
@@ -111,7 +111,7 @@
     "etag": "W/\"hash1108581766944549503\""
   },
   "https://www.theguardian.com/world/rss": {
-    "etag": "W/\"hash-3545094821231545504\""
+    "etag": "W/\"hash2780550916943866042\""
   },
   "https://www.theverge.com/rss/index.xml": {
     "etag": "W/\"c5e1775f6f8015f5f0c7237a695a83eb\""
