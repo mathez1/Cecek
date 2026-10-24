@@ -3,11 +3,11 @@
     "etag": "W/\"f27daf6d953ec4f8232307a996b784de\""
   },
   "https://bigthink.com/feed/": {
-    "etag": "W/\"4ef5788fcfebc0c27b45a61554abf344\"",
-    "modified": "Fri, 23 Oct 2026 17:17:26 GMT"
+    "etag": "W/\"85c45630d9b70dfee61f912d2fe56879\"",
+    "modified": "Sat, 24 Oct 2026 06:46:51 GMT"
   },
   "https://feeds.arstechnica.com/arstechnica/index": {
-    "modified": "Sat, 24 Oct 2026 12:37:02 GMT"
+    "modified": "Sat, 24 Oct 2026 15:08:07 GMT"
   },
   "https://hnrss.org/best": {
     "modified": "Fri, 23 Oct 2026 16:59:08 GMT"
@@ -16,8 +16,8 @@
     "modified": "Sat, 24 Oct 2026 05:49:57 GMT"
   },
   "https://lobste.rs/rss": {
-    "etag": "\"dmd3yx4j22hl-c76-gzip\"",
-    "modified": "Sat, 24 Oct 2026 13:38:34 GMT"
+    "etag": "\"dmdbhtr8dm0t-c16-gzip\"",
+    "modified": "Sat, 24 Oct 2026 19:32:24 GMT"
   },
   "https://marginalrevolution.com/feed": {
     "etag": "\"6466a29dfb6df514af50c95d27d5ee57\"",
@@ -63,7 +63,7 @@
     "modified": "Fri, 23 Oct 2026 19:02:58 GMT"
   },
   "https://www.astralcodexten.com/feed": {
-    "etag": "W/\"e65ab-aNhZIFNKeZ/xi/w8298QN46G4Lo\""
+    "etag": "W/\"c555c-xlAKnhzsz0EZqiMPcB+sM1WPBa8\""
   },
   "https://www.atlasobscura.com/feeds/latest": {
     "etag": "W/\"897508a894fa453b84f399541934d921\""
@@ -108,12 +108,12 @@
     "modified": "Sat, 24 Oct 2026 12:57:36 GMT"
   },
   "https://www.theguardian.com/science/rss": {
-    "etag": "W/\"hash-5790748806164173672\""
+    "etag": "W/\"hash1108581766944549503\""
   },
   "https://www.theguardian.com/world/rss": {
     "etag": "W/\"hash-3545094821231545504\""
   },
   "https://www.theverge.com/rss/index.xml": {
-    "etag": "W/\"b035d8b12c10158b90fa6490a5f407ab\""
+    "etag": "W/\"c5e1775f6f8015f5f0c7237a695a83eb\""
   }
 }
