@@ -13,11 +13,11 @@
     "modified": "Fri, 23 Oct 2026 16:59:08 GMT"
   },
   "https://hnrss.org/frontpage": {
-    "modified": "Fri, 23 Oct 2026 03:20:38 GMT"
+    "modified": "Sat, 24 Oct 2026 04:42:10 GMT"
   },
   "https://lobste.rs/rss": {
-    "etag": "\"dmckg4m6edte-c30-gzip\"",
-    "modified": "Fri, 23 Oct 2026 22:20:41 GMT"
+    "etag": "\"dmct2klqylcr-c2h-gzip\"",
+    "modified": "Sat, 24 Oct 2026 05:06:08 GMT"
   },
   "https://marginalrevolution.com/feed": {
     "etag": "\"6466a29dfb6df514af50c95d27d5ee57\"",
@@ -41,7 +41,7 @@
     "etag": "0848027ec514165d93b3e0016f145e96c5600d0f590c87fbfbf58e1560a81bd7"
   },
   "https://rss.arxiv.org/rss/q-bio.PE": {
-    "etag": "c086ef3bc86514edba2a9b735d68c053d2ec82f9fe2d2fb1245c006ec261278a"
+    "etag": "a95917f780ca27f2a1dcc572301e1aa17005883070cd79a75d217ce31bb9350b"
   },
   "https://rss.slashdot.org/Slashdot/slashdotMain": {
     "etag": "W/\"f08a-65e8b62b9df17\"",
@@ -72,15 +72,15 @@
     "etag": "W/\"cc3f6-d8DllI/lUucZTUk3zeFTG+mWW74\""
   },
   "https://www.economist.com/latest/rss.xml": {
-    "etag": "W/\"eafd4c101be7537771f0b6b0a7f4aa90\"",
-    "modified": "Fri, 23 Oct 2026 21:56:57 GMT"
+    "etag": "W/\"302a051b418f95b61fa2b7ddb1c61660\"",
+    "modified": "Sat, 24 Oct 2026 04:11:57 GMT"
   },
   "https://www.nasa.gov/news-release/feed/": {
     "etag": "W/\"b8e0b65924040b91c2a8713e0b3a0380\"",
     "modified": "Fri, 23 Oct 2026 06:40:06 GMT"
   },
   "https://www.nature.com/nature.rss": {
-    "etag": "\"202bfc73d516fdc91a5f43693278f090\""
+    "etag": "\"5f7f315f3b9ffb5560bad50b06c7d658\""
   },
   "https://www.newscientist.com/feed/home/": {
     "etag": "W/\"c44c554ac5916f9f0d52ad0bf10dbb4e\"",
@@ -94,8 +94,8 @@
     "modified": "Thu, 22 Oct 2026 12:45:04 GMT"
   },
   "https://www.sciencenews.org/feed": {
-    "etag": "W/\"59da3d2123430c4af773fd25e0dd7aa9\"",
-    "modified": "Thu, 22 Oct 2026 12:43:51 GMT"
+    "etag": "W/\"244d710a82ae7a8f66cda7066fcfc811\"",
+    "modified": "Fri, 23 Oct 2026 20:14:19 GMT"
   },
   "https://www.smithsonianmag.com/rss/latest_articles/": {
     "modified": "Fri, 23 Oct 2026 04:56:42 GMT"
@@ -111,7 +111,7 @@
     "etag": "W/\"hash-5790748806164173672\""
   },
   "https://www.theguardian.com/world/rss": {
-    "etag": "W/\"hash416659096349628765\""
+    "etag": "W/\"hash-3212702019231767761\""
   },
   "https://www.theverge.com/rss/index.xml": {
     "etag": "W/\"b035d8b12c10158b90fa6490a5f407ab\""
