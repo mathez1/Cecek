@@ -13,15 +13,15 @@
     "modified": "Sun, 25 Oct 2026 10:42:01 GMT"
   },
   "https://hnrss.org/frontpage": {
-    "modified": "Sun, 25 Oct 2026 13:28:06 GMT"
+    "modified": "Sun, 25 Oct 2026 22:02:33 GMT"
   },
   "https://lobste.rs/rss": {
     "etag": "\"dmdzltmqufg0-c09-gzip\"",
     "modified": "Sun, 25 Oct 2026 14:26:04 GMT"
   },
   "https://marginalrevolution.com/feed": {
-    "etag": "\"4b8c20c4c442170e02c5416fdb810a87\"",
-    "modified": "Sun, 25 Oct 2026 11:15:45 GMT"
+    "etag": "\"adcd34377cc6d1c47635ebe7861ea8be\"",
+    "modified": "Sun, 25 Oct 2026 15:42:58 GMT"
   },
   "https://nautil.us/feed/": {
     "etag": "W/\"rq7r4iy9ma9g3\""
@@ -35,7 +35,7 @@
     "modified": "Fri, 23 Oct 2026 15:15:10 GMT"
   },
   "https://rss.arxiv.org/rss/cs.AI": {
-    "etag": "9ed5e509238801128ace607b9e0ba7f6cc626ab833b2bf2d2b83f95d51fabbf1"
+    "etag": "e10dda337d5221f63fbeb8393d174b3eac1d4d75db9ab06be424e52e1b41a0b1"
   },
   "https://rss.arxiv.org/rss/econ.GN": {
     "etag": "d71a36f521e60f2bb6eefe62abc39805c8750647aa41aead22150cb83d0ed683"
@@ -63,17 +63,17 @@
     "modified": "Sun, 25 Oct 2026 17:39:42 GMT"
   },
   "https://www.astralcodexten.com/feed": {
-    "etag": "W/\"c555c-WdbjEjcolwiQmu2dNfYWXvFmdAE\""
+    "etag": "W/\"c5598-V3+ruLU/BNdxWm14MzPLVxaDLiM\""
   },
   "https://www.atlasobscura.com/feeds/latest": {
     "etag": "W/\"897508a894fa453b84f399541934d921\""
   },
   "https://www.construction-physics.com/feed": {
-    "etag": "W/\"c9480-Vu1sajmaqcdF2FSphOaYZr39gvA\""
+    "etag": "W/\"c9480-mcJgSA7mM38UEr3LwXEvq2FHYNk\""
   },
   "https://www.economist.com/latest/rss.xml": {
-    "etag": "W/\"65f66bf7862a18e214d70cb2a24ac6ab\"",
-    "modified": "Sun, 25 Oct 2026 14:11:57 GMT"
+    "etag": "W/\"d867f1ceb5d358de937b6f95dfff9d86\"",
+    "modified": "Sun, 25 Oct 2026 23:11:57 GMT"
   },
   "https://www.nasa.gov/news-release/feed/": {
     "etag": "W/\"05540eadff2d372a10edfeee3907f3bd\"",
@@ -105,7 +105,7 @@
     "modified": "Fri, 23 Oct 2026 18:37:37 GMT"
   },
   "https://www.theatlantic.com/feed/all/": {
-    "modified": "Sat, 24 Oct 2026 17:51:42 GMT"
+    "modified": "Sun, 25 Oct 2026 16:01:56 GMT"
   },
   "https://www.theguardian.com/science/rss": {
     "etag": "W/\"hash1108581766944549503\""
