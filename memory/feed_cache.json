@@ -7,17 +7,17 @@
     "modified": "Sat, 24 Oct 2026 06:46:51 GMT"
   },
   "https://feeds.arstechnica.com/arstechnica/index": {
-    "modified": "Sat, 24 Oct 2026 15:08:07 GMT"
+    "modified": "Sun, 25 Oct 2026 01:58:15 GMT"
   },
   "https://hnrss.org/best": {
     "modified": "Sat, 24 Oct 2026 20:30:31 GMT"
   },
   "https://hnrss.org/frontpage": {
-    "modified": "Sat, 24 Oct 2026 05:49:57 GMT"
+    "modified": "Sun, 25 Oct 2026 03:56:01 GMT"
   },
   "https://lobste.rs/rss": {
-    "etag": "\"dmdbhtr8dm0t-c16-gzip\"",
-    "modified": "Sat, 24 Oct 2026 19:32:24 GMT"
+    "etag": "\"dmdnif19bglv-byd-gzip\"",
+    "modified": "Sun, 25 Oct 2026 04:57:23 GMT"
   },
   "https://marginalrevolution.com/feed": {
     "etag": "\"6466a29dfb6df514af50c95d27d5ee57\"",
@@ -38,10 +38,10 @@
     "etag": "9ed5e509238801128ace607b9e0ba7f6cc626ab833b2bf2d2b83f95d51fabbf1"
   },
   "https://rss.arxiv.org/rss/econ.GN": {
-    "etag": "0848027ec514165d93b3e0016f145e96c5600d0f590c87fbfbf58e1560a81bd7"
+    "etag": "d71a36f521e60f2bb6eefe62abc39805c8750647aa41aead22150cb83d0ed683"
   },
   "https://rss.arxiv.org/rss/q-bio.PE": {
-    "etag": "a95917f780ca27f2a1dcc572301e1aa17005883070cd79a75d217ce31bb9350b"
+    "etag": "f4f3cf7f7bed3f82d818303b9b0bf803add658a2ea69490f08b5679e90c6f7dc"
   },
   "https://rss.slashdot.org/Slashdot/slashdotMain": {
     "etag": "W/\"f08a-65e8b62b9df17\"",
@@ -59,8 +59,8 @@
     "etag": "W/\"205d2-CAIazCWlscV8MAVY7f48rzDCiDI\""
   },
   "https://www.aljazeera.com/xml/rss/all.xml": {
-    "etag": "W/\"16ebf25b1df7e55ddc928469101989d6\"",
-    "modified": "Sun, 25 Oct 2026 00:05:00 GMT"
+    "etag": "W/\"425f647b38eec8cb0ba7781af8cfb611\"",
+    "modified": "Sun, 25 Oct 2026 04:47:12 GMT"
   },
   "https://www.astralcodexten.com/feed": {
     "etag": "W/\"c555c-0aovlz20HT2up1POzKy5E0RKiBA\""
@@ -105,13 +105,13 @@
     "modified": "Fri, 23 Oct 2026 18:37:37 GMT"
   },
   "https://www.theatlantic.com/feed/all/": {
-    "modified": "Sat, 24 Oct 2026 12:57:36 GMT"
+    "modified": "Sat, 24 Oct 2026 17:51:42 GMT"
   },
   "https://www.theguardian.com/science/rss": {
     "etag": "W/\"hash1108581766944549503\""
   },
   "https://www.theguardian.com/world/rss": {
-    "etag": "W/\"hash-10099636713722165\""
+    "etag": "W/\"hash8786487728550124819\""
   },
   "https://www.theverge.com/rss/index.xml": {
     "etag": "W/\"c5e1775f6f8015f5f0c7237a695a83eb\""
