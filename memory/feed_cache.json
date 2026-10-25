@@ -10,7 +10,7 @@
     "modified": "Sun, 25 Oct 2026 01:58:15 GMT"
   },
   "https://hnrss.org/best": {
-    "modified": "Sat, 24 Oct 2026 20:30:31 GMT"
+    "modified": "Sun, 25 Oct 2026 10:42:01 GMT"
   },
   "https://hnrss.org/frontpage": {
     "modified": "Sun, 25 Oct 2026 13:28:06 GMT"
@@ -48,7 +48,7 @@
     "modified": "Sat, 24 Oct 2026 01:10:13 GMT"
   },
   "https://spectrum.ieee.org/feeds/feed.rss": {
-    "etag": "\"6571e4267315ef81247dd2ed42729898\"",
+    "etag": "\"009321ca181c7b023a9c04bfa8599e48\"",
     "modified": "Fri, 23 Oct 2026 18:47:37 GMT"
   },
   "https://techcrunch.com/feed/": {
@@ -59,17 +59,17 @@
     "etag": "W/\"205d2-CAIazCWlscV8MAVY7f48rzDCiDI\""
   },
   "https://www.aljazeera.com/xml/rss/all.xml": {
-    "etag": "W/\"425f647b38eec8cb0ba7781af8cfb611\"",
-    "modified": "Sun, 25 Oct 2026 04:47:12 GMT"
+    "etag": "W/\"c5e700695efa52eb95c77d4b51d44328\"",
+    "modified": "Sun, 25 Oct 2026 17:39:42 GMT"
   },
   "https://www.astralcodexten.com/feed": {
-    "etag": "W/\"c555c-sZqDOguKF4zslUi6yRJmN7Fl/JU\""
+    "etag": "W/\"c555c-WdbjEjcolwiQmu2dNfYWXvFmdAE\""
   },
   "https://www.atlasobscura.com/feeds/latest": {
     "etag": "W/\"897508a894fa453b84f399541934d921\""
   },
   "https://www.construction-physics.com/feed": {
-    "etag": "W/\"c9480-OJcZ0smOJoTh6YUE1nkf79q9ct8\""
+    "etag": "W/\"c9480-Vu1sajmaqcdF2FSphOaYZr39gvA\""
   },
   "https://www.economist.com/latest/rss.xml": {
     "etag": "W/\"65f66bf7862a18e214d70cb2a24ac6ab\"",
@@ -91,7 +91,7 @@
     "modified": "Fri, 23 Oct 2026 17:10:36 GMT"
   },
   "https://www.sciencedaily.com/rss/top/science.xml": {
-    "modified": "Sat, 24 Oct 2026 13:15:25 GMT"
+    "modified": "Sun, 25 Oct 2026 12:35:32 GMT"
   },
   "https://www.sciencenews.org/feed": {
     "etag": "W/\"ea9623b49afebc7e52a8c31718f2194d\"",
@@ -111,7 +111,7 @@
     "etag": "W/\"hash1108581766944549503\""
   },
   "https://www.theguardian.com/world/rss": {
-    "etag": "W/\"hash8786487728550124819\""
+    "etag": "W/\"hash8655232906794548945\""
   },
   "https://www.theverge.com/rss/index.xml": {
     "etag": "W/\"e026d95bae5f3d1d16629689c981542e\""
