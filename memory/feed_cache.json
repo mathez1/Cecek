@@ -13,15 +13,15 @@
     "modified": "Sat, 24 Oct 2026 20:30:31 GMT"
   },
   "https://hnrss.org/frontpage": {
-    "modified": "Sun, 25 Oct 2026 03:56:01 GMT"
+    "modified": "Sun, 25 Oct 2026 13:28:06 GMT"
   },
   "https://lobste.rs/rss": {
-    "etag": "\"dmdnif19bglv-byd-gzip\"",
-    "modified": "Sun, 25 Oct 2026 04:57:23 GMT"
+    "etag": "\"dmdzltmqufg0-c09-gzip\"",
+    "modified": "Sun, 25 Oct 2026 14:26:04 GMT"
   },
   "https://marginalrevolution.com/feed": {
-    "etag": "\"6466a29dfb6df514af50c95d27d5ee57\"",
-    "modified": "Fri, 23 Oct 2026 04:51:50 GMT"
+    "etag": "\"4b8c20c4c442170e02c5416fdb810a87\"",
+    "modified": "Sun, 25 Oct 2026 11:15:45 GMT"
   },
   "https://nautil.us/feed/": {
     "etag": "W/\"rq7r4iy9ma9g3\""
@@ -72,15 +72,15 @@
     "etag": "W/\"c9480-OJcZ0smOJoTh6YUE1nkf79q9ct8\""
   },
   "https://www.economist.com/latest/rss.xml": {
-    "etag": "W/\"94746bc454d2559267fa7f467b72285c\"",
-    "modified": "Sun, 25 Oct 2026 09:11:57 GMT"
+    "etag": "W/\"65f66bf7862a18e214d70cb2a24ac6ab\"",
+    "modified": "Sun, 25 Oct 2026 14:11:57 GMT"
   },
   "https://www.nasa.gov/news-release/feed/": {
     "etag": "W/\"0a439c27647576a57c6c1e822d230539\"",
     "modified": "Sun, 25 Oct 2026 08:19:48 GMT"
   },
   "https://www.nature.com/nature.rss": {
-    "etag": "\"5f7f315f3b9ffb5560bad50b06c7d658\""
+    "etag": "\"06efa9da428887dd2183c0cfcfb4a01e\""
   },
   "https://www.newscientist.com/feed/home/": {
     "etag": "W/\"c44c554ac5916f9f0d52ad0bf10dbb4e\"",
@@ -114,6 +114,6 @@
     "etag": "W/\"hash8786487728550124819\""
   },
   "https://www.theverge.com/rss/index.xml": {
-    "etag": "W/\"c5e1775f6f8015f5f0c7237a695a83eb\""
+    "etag": "W/\"e026d95bae5f3d1d16629689c981542e\""
   }
 }
