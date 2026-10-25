@@ -10,7 +10,7 @@
     "modified": "Sat, 24 Oct 2026 15:08:07 GMT"
   },
   "https://hnrss.org/best": {
-    "modified": "Fri, 23 Oct 2026 16:59:08 GMT"
+    "modified": "Sat, 24 Oct 2026 20:30:31 GMT"
   },
   "https://hnrss.org/frontpage": {
     "modified": "Sat, 24 Oct 2026 05:49:57 GMT"
@@ -27,8 +27,8 @@
     "etag": "W/\"rq7r4iy9ma9g3\""
   },
   "https://news.harvard.edu/gazette/feed/": {
-    "etag": "W/\"655594c149bfbe88c625f70005081685\"",
-    "modified": "Wed, 21 Oct 2026 19:34:53 GMT"
+    "etag": "W/\"c7913145b4d0fe3ed08b6b75c6208918\"",
+    "modified": "Sat, 24 Oct 2026 16:06:12 GMT"
   },
   "https://physicsworld.com/feed/": {
     "etag": "W/\"5b8e3bd377307417b5b4cc1c7e1a585e\"",
@@ -59,8 +59,8 @@
     "etag": "W/\"205d2-CAIazCWlscV8MAVY7f48rzDCiDI\""
   },
   "https://www.aljazeera.com/xml/rss/all.xml": {
-    "etag": "W/\"0777f9752c9b2710df40aa776684d6f3\"",
-    "modified": "Fri, 23 Oct 2026 19:02:58 GMT"
+    "etag": "W/\"16ebf25b1df7e55ddc928469101989d6\"",
+    "modified": "Sun, 25 Oct 2026 00:05:00 GMT"
   },
   "https://www.astralcodexten.com/feed": {
     "etag": "W/\"c555c-0aovlz20HT2up1POzKy5E0RKiBA\""
@@ -76,8 +76,8 @@
     "modified": "Sat, 24 Oct 2026 13:11:57 GMT"
   },
   "https://www.nasa.gov/news-release/feed/": {
-    "etag": "W/\"12330061665097265826054b4bd10ac4\"",
-    "modified": "Sat, 24 Oct 2026 18:26:56 GMT"
+    "etag": "W/\"1d0d0d3df414b445f50a25c81821fda2\"",
+    "modified": "Sat, 24 Oct 2026 22:09:23 GMT"
   },
   "https://www.nature.com/nature.rss": {
     "etag": "\"5f7f315f3b9ffb5560bad50b06c7d658\""
@@ -111,7 +111,7 @@
     "etag": "W/\"hash1108581766944549503\""
   },
   "https://www.theguardian.com/world/rss": {
-    "etag": "W/\"hash2780550916943866042\""
+    "etag": "W/\"hash-10099636713722165\""
   },
   "https://www.theverge.com/rss/index.xml": {
     "etag": "W/\"c5e1775f6f8015f5f0c7237a695a83eb\""
