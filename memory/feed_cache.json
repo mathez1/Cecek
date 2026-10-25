@@ -76,8 +76,8 @@
     "modified": "Sun, 25 Oct 2026 14:11:57 GMT"
   },
   "https://www.nasa.gov/news-release/feed/": {
-    "etag": "W/\"0a439c27647576a57c6c1e822d230539\"",
-    "modified": "Sun, 25 Oct 2026 08:19:48 GMT"
+    "etag": "W/\"05540eadff2d372a10edfeee3907f3bd\"",
+    "modified": "Sun, 25 Oct 2026 19:45:57 GMT"
   },
   "https://www.nature.com/nature.rss": {
     "etag": "\"06efa9da428887dd2183c0cfcfb4a01e\""
@@ -111,7 +111,7 @@
     "etag": "W/\"hash1108581766944549503\""
   },
   "https://www.theguardian.com/world/rss": {
-    "etag": "W/\"hash8655232906794548945\""
+    "etag": "W/\"hash-6264020064428931222\""
   },
   "https://www.theverge.com/rss/index.xml": {
     "etag": "W/\"e026d95bae5f3d1d16629689c981542e\""
