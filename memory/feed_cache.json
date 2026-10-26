@@ -27,8 +27,8 @@
     "etag": "W/\"rq7r4iy9ma9g3\""
   },
   "https://news.harvard.edu/gazette/feed/": {
-    "etag": "W/\"455131c371774660c979d3ffff6e24bf\"",
-    "modified": "Mon, 26 Oct 2026 12:44:32 GMT"
+    "etag": "W/\"4e5b989d7207add1a194c54b87762a89\"",
+    "modified": "Mon, 26 Oct 2026 19:05:11 GMT"
   },
   "https://physicsworld.com/feed/": {
     "etag": "W/\"5b8e3bd377307417b5b4cc1c7e1a585e\"",
@@ -38,7 +38,7 @@
     "etag": "16e4de61dd01996ee7c1777d234dc3647f78288120be117d246c637bd4c2f695"
   },
   "https://rss.arxiv.org/rss/econ.GN": {
-    "etag": "d71a36f521e60f2bb6eefe62abc39805c8750647aa41aead22150cb83d0ed683"
+    "etag": "798f800ebc43e23d565a0bd53dfcf331f059c144ee52d3819f6496086fc56ece"
   },
   "https://rss.arxiv.org/rss/q-bio.PE": {
     "etag": "f4f3cf7f7bed3f82d818303b9b0bf803add658a2ea69490f08b5679e90c6f7dc"
@@ -56,11 +56,11 @@
     "modified": "Sat, 24 Oct 2026 20:56:33 GMT"
   },
   "https://www.404media.co/rss/": {
-    "etag": "W/\"205d2-VVhO6uQ3MJl7izft2tDkIbzRJCI\""
+    "etag": "W/\"2067f-YkoAcu/9Zjl8vSqyMVEyog6RqK0\""
   },
   "https://www.aljazeera.com/xml/rss/all.xml": {
-    "etag": "W/\"c80fa9855fcd91a42ed70e7bd80b4c62\"",
-    "modified": "Mon, 26 Oct 2026 00:57:23 GMT"
+    "etag": "W/\"6d13fc67bba967bc99b819d6d2f9d4e6\"",
+    "modified": "Mon, 26 Oct 2026 19:20:00 GMT"
   },
   "https://www.astralcodexten.com/feed": {
     "etag": "W/\"c5598-hXyXUor74U7ccKMZCxMxM8jsfeo\""
@@ -72,12 +72,12 @@
     "etag": "W/\"c9480-LQ2/hRMH40Fvx08Fl8rCYyp6shw\""
   },
   "https://www.economist.com/latest/rss.xml": {
-    "etag": "W/\"e9a4ec62616e99d6bc1415be5bc77303\"",
-    "modified": "Mon, 26 Oct 2026 00:11:57 GMT"
+    "etag": "W/\"dd46bb0238594d81348ca719cf1d70c4\"",
+    "modified": "Mon, 26 Oct 2026 18:56:57 GMT"
   },
   "https://www.nasa.gov/news-release/feed/": {
-    "etag": "W/\"42db45c724780779d1c8d203ac7c020a\"",
-    "modified": "Mon, 26 Oct 2026 05:43:45 GMT"
+    "etag": "W/\"1488b00e39c5a97bde98c1a6faddc6ab\"",
+    "modified": "Mon, 26 Oct 2026 19:19:34 GMT"
   },
   "https://www.nature.com/nature.rss": {
     "etag": "\"06efa9da428887dd2183c0cfcfb4a01e\""
@@ -108,7 +108,7 @@
     "modified": "Sun, 25 Oct 2026 16:01:56 GMT"
   },
   "https://www.theguardian.com/science/rss": {
-    "etag": "W/\"hash-8383559037033183481\""
+    "etag": "W/\"hash-6796259132973015084\""
   },
   "https://www.theguardian.com/world/rss": {
     "etag": "W/\"hash-6264020064428931222\""
