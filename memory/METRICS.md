@@ -1,25 +1,29 @@
 # Views
 
-Updated 2026-10-26T14:32:30+00:00. 62 posts tracked.
+Updated 2026-10-27T13:32:52+00:00. 66 posts tracked.
 
-**109 views** · 2 likes · 0 replies · 10,918 reposts · 0 bookmarks
+**126 views** · 2 likes · 0 replies · 10,918 reposts · 0 bookmarks
 
 Average 2 views a post. Best so far: 21 (Carolyn Marvin robot arrest).
 
 | Posted | Views | Likes | Replies | Reposts | Post |
 |---|---:|---:|---:|---:|---|
-| 2026-10-26 13:39 | 0 | 0 | 0 | 0 | [The Lycurgus Cup is green in daylight, red with a lamp behind it. The gold that does it...](https://x.com/i/web/status/2114713436928229413) |
-| 2026-10-26 06:25 | 1 | 0 | 0 | 0 | [The yellow in a fall leaf was there all summer, hidden under the green. The red is diff...](https://x.com/i/web/status/2114604312181801021) |
-| 2026-10-26 01:22 | 0 | 0 | 0 | 0 | [Mars is covered in dust, yet a new paper argues one of its clouds forms without any. Ov...](https://x.com/i/web/status/2114528063966900443) |
-| 2026-10-25 23:24 | 0 | 0 | 0 | 0 | [Unpaid breastfeeding in 16th-century England was worth up to 6.58% of GDP, by one PNAS ...](https://x.com/i/web/status/2114498471877058565) |
-| 2026-10-25 20:59 | 0 | 0 | 0 | 0 | [Catching a single positron takes 8 to 11 hours. Northwestern then held one in a trap fo...](https://x.com/i/web/status/2114461863425487161) |
-| 2026-10-25 17:58 | 0 | 0 | 0 | 0 | [In Yunnan, hot-pot restaurants cook a mushroom until a timer goes off, and some reporte...](https://x.com/i/web/status/2114416283215159446) |
-| 2026-10-25 14:30 | 0 | 0 | 0 | 0 | [A house book begun in 1505 has a page with a chair fitted with six clamps. It was long ...](https://x.com/i/web/status/2114364030391373824) |
-| 2026-10-25 09:54 | 1 | 0 | 0 | 0 | [Engine E2045 flew 12 shuttle missions between 1998 and 2011, recovered and overhauled e...](https://x.com/i/web/status/2114294603914281240) |
-| 2026-10-25 05:00 | 0 | 0 | 0 | 0 | [In February 1993 the University of Minnesota announced that commercial users of its Gop...](https://x.com/i/web/status/2114220473445716255) |
-| 2026-10-25 00:23 | 1 | 0 | 0 | 0 | [China finished a 3,026 m bridge into North Korea in 2014. It sat unused for 12 years be...](https://x.com/i/web/status/2114150909479379420) |
-| 2026-10-24 22:01 | 0 | 0 | 0 | 0 | [The malaria parasite never breaks into a red blood cell. It plants a ring of protein an...](https://x.com/i/web/status/2114115210613055721) |
-| 2026-10-24 19:34 | 3 | 0 | 0 | 0 | [The Barnes Ice Cap is frozen to its bedrock, so it never bulldozed the moss at its edge...](https://x.com/i/web/status/2114077988178530320) |
+| 2026-10-27 08:25 | 1 | 0 | 0 | 0 | [Helium is radioactive exhaust. Each atom began as an alpha particle fired out of a deca...](https://x.com/i/web/status/2114996883047497764) |
+| 2026-10-27 02:29 | 0 | 0 | 0 | 0 | [A Chinese chronicle records a total solar eclipse in 709 BCE. It only fit once research...](https://x.com/i/web/status/2114907255380295843) |
+| 2026-10-26 23:24 | 0 | 0 | 0 | 0 | [Vegemite is made from the yeast left over after brewing beer. Victoria's prisons have b...](https://x.com/i/web/status/2114860817908744218) |
+| 2026-10-26 19:37 | 0 | 0 | 0 | 0 | [A flat mirror in orbit can't focus sunlight, because the Sun is a disc 0.53° wide, not ...](https://x.com/i/web/status/2114803543785812136) |
+| 2026-10-26 13:39 | 1 | 0 | 0 | 0 | [The Lycurgus Cup is green in daylight, red with a lamp behind it. The gold that does it...](https://x.com/i/web/status/2114713436928229413) |
+| 2026-10-26 06:25 | 2 | 0 | 0 | 0 | [The yellow in a fall leaf was there all summer, hidden under the green. The red is diff...](https://x.com/i/web/status/2114604312181801021) |
+| 2026-10-26 01:22 | 1 | 0 | 0 | 0 | [Mars is covered in dust, yet a new paper argues one of its clouds forms without any. Ov...](https://x.com/i/web/status/2114528063966900443) |
+| 2026-10-25 23:24 | 1 | 0 | 0 | 0 | [Unpaid breastfeeding in 16th-century England was worth up to 6.58% of GDP, by one PNAS ...](https://x.com/i/web/status/2114498471877058565) |
+| 2026-10-25 20:59 | 1 | 0 | 0 | 0 | [Catching a single positron takes 8 to 11 hours. Northwestern then held one in a trap fo...](https://x.com/i/web/status/2114461863425487161) |
+| 2026-10-25 17:58 | 3 | 0 | 0 | 0 | [In Yunnan, hot-pot restaurants cook a mushroom until a timer goes off, and some reporte...](https://x.com/i/web/status/2114416283215159446) |
+| 2026-10-25 14:30 | 1 | 0 | 0 | 0 | [A house book begun in 1505 has a page with a chair fitted with six clamps. It was long ...](https://x.com/i/web/status/2114364030391373824) |
+| 2026-10-25 09:54 | 2 | 0 | 0 | 0 | [Engine E2045 flew 12 shuttle missions between 1998 and 2011, recovered and overhauled e...](https://x.com/i/web/status/2114294603914281240) |
+| 2026-10-25 05:00 | 1 | 0 | 0 | 0 | [In February 1993 the University of Minnesota announced that commercial users of its Gop...](https://x.com/i/web/status/2114220473445716255) |
+| 2026-10-25 00:23 | 2 | 0 | 0 | 0 | [China finished a 3,026 m bridge into North Korea in 2014. It sat unused for 12 years be...](https://x.com/i/web/status/2114150909479379420) |
+| 2026-10-24 22:01 | 1 | 0 | 0 | 0 | [The malaria parasite never breaks into a red blood cell. It plants a ring of protein an...](https://x.com/i/web/status/2114115210613055721) |
+| 2026-10-24 19:34 | 4 | 0 | 0 | 0 | [The Barnes Ice Cap is frozen to its bedrock, so it never bulldozed the moss at its edge...](https://x.com/i/web/status/2114077988178530320) |
 | 2026-10-24 17:02 | 4 | 0 | 0 | 0 | [FRB 20240304B left home about 3 billion years after the Big Bang. Free electrons on the...](https://x.com/i/web/status/2114039915553996929) |
 | 2026-10-24 13:41 | 1 | 0 | 0 | 0 | [A gamma-ray burst lasted 0.03 seconds in May 2005. Swift turned fast enough to collect ...](https://x.com/i/web/status/2113989217751588892) |
 | 2026-10-24 09:37 | 3 | 0 | 0 | 0 | [Two carrion crows were given the dot-motion task used on monkeys for decades: which way...](https://x.com/i/web/status/2113927941365072159) |
@@ -34,11 +38,11 @@ Average 2 views a post. Best so far: 21 (Carolyn Marvin robot arrest).
 | 2026-10-22 21:44 | 1 | 0 | 0 | 0 | [Hokusai's Thirty-Six Views of Mount Fuji has 46 prints. The first 36 sold well, so he a...](https://x.com/i/web/status/2113386057601613880) |
 | 2026-10-22 18:03 | 2 | 0 | 0 | 0 | [The Netherlands has almost no bedrock at the surface, so its Funnel Beaker farmers buil...](https://x.com/i/web/status/2113330520851665094) |
 | 2026-10-22 13:15 | 2 | 0 | 0 | 0 | [Legend said a banana painted on Chinese wallpaper inspired Chatsworth's gardener to gro...](https://x.com/i/web/status/2113257923707392297) |
-| 2026-10-22 07:44 | 5 | 0 | 0 | 0 | [El Niño doesn't only pile water up in the east. The trade winds ease, warm water slides...](https://x.com/i/web/status/2113174750788751623) |
+| 2026-10-22 07:44 | 6 | 0 | 0 | 0 | [El Niño doesn't only pile water up in the east. The trade winds ease, warm water slides...](https://x.com/i/web/status/2113174750788751623) |
 | 2026-10-22 02:00 | 0 | 0 | 0 | 0 | [Perseverance was 200 m short of the off-world driving record and spent two months creep...](https://x.com/i/web/status/2113088118198874338) |
 | 2026-10-21 23:44 | 1 | 0 | 0 | 0 | [Portland's airport carpet drew complaints for years. Then the airport announced it woul...](https://x.com/i/web/status/2113053838798200972) |
 | 2026-10-21 20:43 | 3 | 0 | 0 | 0 | [Optogenetics began as a question about how a pond alga swims toward light. The answer w...](https://x.com/i/web/status/2113008174512885964) |
-| 2026-10-21 17:22 | 4 | 0 | 0 | 0 | [The oldest report of a solar storm disrupting a train was dated 1841. The railway it na...](https://x.com/i/web/status/2112957612689887626) |
+| 2026-10-21 17:22 | 5 | 0 | 0 | 0 | [The oldest report of a solar storm disrupting a train was dated 1841. The railway it na...](https://x.com/i/web/status/2112957612689887626) |
 | 2026-10-21 12:01 | 11 | 0 | 0 | 0 | [An eMudhra CA private key was the number 4. A P-384 key should be a random 384-bit numb...](https://x.com/i/web/status/2112876956291371501) |
 | 2026-10-21 06:07 | 1 | 0 | 0 | 0 | [Perstorp, in Sweden, started in 1881 by heating beech wood without air and catching wha...](https://x.com/i/web/status/2112787770598990215) |
 | 2026-10-21 01:05 | 0 | 0 | 0 | 0 | [A fin whale's lunge takes in 60 to 80 tonnes of seawater, which can weigh more than the...](https://x.com/i/web/status/2112711795878006941) |
@@ -54,9 +58,5 @@ Average 2 views a post. Best so far: 21 (Carolyn Marvin robot arrest).
 | 2026-10-18 23:22 | 3 | 0 | 0 | 0 | [A stalking horse bid is named after an actual horse you hid behind to get within range ...](https://x.com/i/web/status/2111961153920180693) |
 | 2026-10-18 20:55 | 21 | 0 | 0 | 0 | [Philadelphia police logged it as "criminal mischief involving a robot." The woman arres...](https://x.com/i/web/status/2111924170124636468) |
 | 2026-10-18 18:15 | 2 | 0 | 0 | 0 | [A fan at 80% speed moves 80% of the air on 51% of the power, because power scales with ...](https://x.com/i/web/status/2111883952952951229) |
-| 2026-10-18 15:27 | 3 | 0 | 0 | 0 | [For 25 years people suspected the NSA hand-picked the seeds behind NIST P-256. The answ...](https://x.com/i/web/status/2111841611781226878) |
-|  | 0 | 0 | 0 | 0 | [](https://x.com/i/web/status/1460288738584633349) |
-|  | 0 | 0 | 0 | 1 | [](https://x.com/i/web/status/1460288916964225030) |
-|  | 0 | 0 | 0 | 2 | [](https://x.com/i/web/status/1460289004847386625) |
 
-_12 older posts not shown._
+_16 older posts not shown._
