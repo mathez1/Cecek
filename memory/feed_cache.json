@@ -1,16 +1,16 @@
 {
   "https://aeon.co/feed.rss": {
-    "etag": "W/\"f27daf6d953ec4f8232307a996b784de\""
+    "etag": "W/\"bb4e36c36a0f3da0730fcc8527e5223d\""
   },
   "https://bigthink.com/feed/": {
     "etag": "W/\"85c45630d9b70dfee61f912d2fe56879\"",
     "modified": "Sat, 24 Oct 2026 06:46:51 GMT"
   },
   "https://feeds.arstechnica.com/arstechnica/index": {
-    "modified": "Mon, 26 Oct 2026 03:45:24 GMT"
+    "modified": "Mon, 26 Oct 2026 23:13:54 GMT"
   },
   "https://hnrss.org/best": {
-    "modified": "Sun, 25 Oct 2026 21:08:28 GMT"
+    "modified": "Mon, 26 Oct 2026 21:59:15 GMT"
   },
   "https://hnrss.org/frontpage": {
     "modified": "Sun, 25 Oct 2026 22:02:33 GMT"
@@ -24,7 +24,7 @@
     "modified": "Mon, 26 Oct 2026 11:23:46 GMT"
   },
   "https://nautil.us/feed/": {
-    "etag": "W/\"uvtp7ap6px99o\""
+    "etag": "W/\"10wwv0m7xbb99k\""
   },
   "https://news.harvard.edu/gazette/feed/": {
     "etag": "W/\"4e5b989d7207add1a194c54b87762a89\"",
@@ -44,8 +44,8 @@
     "etag": "42ef110942ef31f0d3bba69e8b88150778a8aff13048544cfedd6035b5189f88"
   },
   "https://rss.slashdot.org/Slashdot/slashdotMain": {
-    "etag": "W/\"f08a-65e8bc2534772\"",
-    "modified": "Sat, 24 Oct 2026 01:10:13 GMT"
+    "etag": "W/\"ee05-65ec9122e3822\"",
+    "modified": "Tue, 27 Oct 2026 02:19:06 GMT"
   },
   "https://spectrum.ieee.org/feeds/feed.rss": {
     "etag": "\"009321ca181c7b023a9c04bfa8599e48\"",
@@ -83,15 +83,15 @@
     "etag": "\"06efa9da428887dd2183c0cfcfb4a01e\""
   },
   "https://www.newscientist.com/feed/home/": {
-    "etag": "W/\"3f74178092fb3d195e46c9bda17faa7f\"",
-    "modified": "Mon, 26 Oct 2026 13:31:11 GMT"
+    "etag": "W/\"d33dc147653713d8ec9f04422b3f2445\"",
+    "modified": "Mon, 26 Oct 2026 18:26:21 GMT"
   },
   "https://www.quantamagazine.org/feed/": {
     "etag": "\"e69b4976ccbb83a19e38a64fd66eca79-gzip\"",
     "modified": "Mon, 26 Oct 2026 14:57:59 GMT"
   },
   "https://www.sciencedaily.com/rss/top/science.xml": {
-    "modified": "Sun, 25 Oct 2026 12:35:32 GMT"
+    "modified": "Mon, 26 Oct 2026 11:36:24 GMT"
   },
   "https://www.sciencenews.org/feed": {
     "etag": "W/\"ea9623b49afebc7e52a8c31718f2194d\"",
@@ -114,6 +114,6 @@
     "etag": "W/\"hash-6264020064428931222\""
   },
   "https://www.theverge.com/rss/index.xml": {
-    "etag": "W/\"bddeb1e1e081f38527a87d02a261cefb\""
+    "etag": "W/\"1aed2bf7a896e8cf5b00ebc4196c05b6\""
   }
 }
