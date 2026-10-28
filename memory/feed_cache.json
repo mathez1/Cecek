@@ -10,7 +10,7 @@
     "modified": "Wed, 28 Oct 2026 00:21:24 GMT"
   },
   "https://hnrss.org/best": {
-    "modified": "Tue, 27 Oct 2026 16:51:22 GMT"
+    "modified": "Tue, 27 Oct 2026 19:55:06 GMT"
   },
   "https://hnrss.org/frontpage": {
     "modified": "Wed, 28 Oct 2026 01:47:50 GMT"
@@ -31,8 +31,8 @@
     "modified": "Tue, 27 Oct 2026 20:31:24 GMT"
   },
   "https://physicsworld.com/feed/": {
-    "etag": "W/\"707f7bcdb6484549f2f25c26f8a03bc6\"",
-    "modified": "Tue, 27 Oct 2026 15:20:50 GMT"
+    "etag": "W/\"16c335957f7fca0f1bb3729648fa2a4e\"",
+    "modified": "Wed, 28 Oct 2026 08:51:33 GMT"
   },
   "https://rss.arxiv.org/rss/cs.AI": {
     "etag": "6f6a6b9565cad42f103e9c5fb3b9d0da85a17b390bb4026cc1b2df1a9a97ee71"
@@ -44,8 +44,8 @@
     "etag": "42ef110942ef31f0d3bba69e8b88150778a8aff13048544cfedd6035b5189f88"
   },
   "https://rss.slashdot.org/Slashdot/slashdotMain": {
-    "etag": "W/\"df5b-65ed7f2f4cb26\"",
-    "modified": "Tue, 27 Oct 2026 20:04:07 GMT"
+    "etag": "W/\"e94f-65ee2ca684a00\"",
+    "modified": "Wed, 28 Oct 2026 09:00:11 GMT"
   },
   "https://spectrum.ieee.org/feeds/feed.rss": {
     "etag": "\"1193f115f004498d86b4a2bd31a8daa3\"",
@@ -56,14 +56,14 @@
     "modified": "Wed, 28 Oct 2026 01:15:28 GMT"
   },
   "https://www.404media.co/rss/": {
-    "etag": "W/\"2067f-YkoAcu/9Zjl8vSqyMVEyog6RqK0\""
+    "etag": "W/\"1c079-IwfdR2qTrU5UWX5iej6odmqFygI\""
   },
   "https://www.aljazeera.com/xml/rss/all.xml": {
     "etag": "W/\"6d13fc67bba967bc99b819d6d2f9d4e6\"",
     "modified": "Mon, 26 Oct 2026 19:20:00 GMT"
   },
   "https://www.astralcodexten.com/feed": {
-    "etag": "W/\"b4670-hlpL+KumNmkp4VW0hyei023rcM8\""
+    "etag": "W/\"b4670-3Qghg8HoU/UNrj+j3MeQsKkdBZk\""
   },
   "https://www.atlasobscura.com/feeds/latest": {
     "etag": "W/\"a1da6246ad1df14a9fdc4ea09e05a563\""
@@ -76,8 +76,8 @@
     "modified": "Tue, 27 Oct 2026 07:26:57 GMT"
   },
   "https://www.nasa.gov/news-release/feed/": {
-    "etag": "W/\"a20e83c4137739386e9937786e438133\"",
-    "modified": "Tue, 27 Oct 2026 23:40:01 GMT"
+    "etag": "W/\"e3f3ccf80e5c2ab23ae2b3edd970c5eb\"",
+    "modified": "Wed, 28 Oct 2026 05:39:46 GMT"
   },
   "https://www.nature.com/nature.rss": {
     "etag": "\"47026a2ace45b864b0b5f806aa7c5124\""
@@ -91,7 +91,7 @@
     "modified": "Mon, 26 Oct 2026 14:57:59 GMT"
   },
   "https://www.sciencedaily.com/rss/top/science.xml": {
-    "modified": "Mon, 26 Oct 2026 11:36:24 GMT"
+    "modified": "Wed, 28 Oct 2026 03:56:54 GMT"
   },
   "https://www.sciencenews.org/feed": {
     "etag": "W/\"ea6926eb451c787838b63bace3e9a975\"",
@@ -101,14 +101,14 @@
     "modified": "Wed, 28 Oct 2026 02:35:40 GMT"
   },
   "https://www.technologyreview.com/feed/": {
-    "etag": "W/\"c8c8e6d961929816916ea93771ce9d4e\"",
-    "modified": "Fri, 23 Oct 2026 18:37:37 GMT"
+    "etag": "W/\"6c01df26be55f62a0071c5219d150f13\"",
+    "modified": "Tue, 27 Oct 2026 21:33:25 GMT"
   },
   "https://www.theatlantic.com/feed/all/": {
     "modified": "Mon, 26 Oct 2026 23:22:48 GMT"
   },
   "https://www.theguardian.com/science/rss": {
-    "etag": "W/\"hash2113928104150040793\""
+    "etag": "W/\"hash-4626046903848824991\""
   },
   "https://www.theguardian.com/world/rss": {
     "etag": "W/\"hash-1573501924427230407\""
