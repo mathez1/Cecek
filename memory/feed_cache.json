@@ -7,24 +7,24 @@
     "modified": "Tue, 27 Oct 2026 19:17:07 GMT"
   },
   "https://feeds.arstechnica.com/arstechnica/index": {
-    "modified": "Tue, 27 Oct 2026 02:31:10 GMT"
+    "modified": "Wed, 28 Oct 2026 00:21:24 GMT"
   },
   "https://hnrss.org/best": {
     "modified": "Tue, 27 Oct 2026 16:51:22 GMT"
   },
   "https://hnrss.org/frontpage": {
-    "modified": "Tue, 27 Oct 2026 22:31:15 GMT"
+    "modified": "Wed, 28 Oct 2026 01:47:50 GMT"
   },
   "https://lobste.rs/rss": {
-    "etag": "\"dmfw4jachew8-brv-gzip\"",
-    "modified": "Tue, 27 Oct 2026 20:07:45 GMT"
+    "etag": "\"dmg4ei1fozl7-c4v-gzip\"",
+    "modified": "Wed, 28 Oct 2026 02:36:55 GMT"
   },
   "https://marginalrevolution.com/feed": {
     "etag": "\"b5e1999504bd3ebc2fc5bc12f0d77ffe\"",
     "modified": "Tue, 27 Oct 2026 16:33:54 GMT"
   },
   "https://nautil.us/feed/": {
-    "etag": "W/\"10wwv0m7xbb99k\""
+    "etag": "W/\"hs6qqqdjxf96w\""
   },
   "https://news.harvard.edu/gazette/feed/": {
     "etag": "W/\"1f5c9ccb8114fe891db7e3aaf5568eb8\"",
@@ -52,8 +52,8 @@
     "modified": "Tue, 27 Oct 2026 14:38:20 GMT"
   },
   "https://techcrunch.com/feed/": {
-    "etag": "W/\"dfe0c5e34fa2407c5a56d76f58ed7533\"",
-    "modified": "Sat, 24 Oct 2026 20:56:33 GMT"
+    "etag": "W/\"b8aa9c4264e0fb79fe68514f9f747164\"",
+    "modified": "Wed, 28 Oct 2026 01:15:28 GMT"
   },
   "https://www.404media.co/rss/": {
     "etag": "W/\"2067f-YkoAcu/9Zjl8vSqyMVEyog6RqK0\""
@@ -83,8 +83,8 @@
     "etag": "\"47026a2ace45b864b0b5f806aa7c5124\""
   },
   "https://www.newscientist.com/feed/home/": {
-    "etag": "W/\"2de71d0e774fb918278ff6fd90bb7feb\"",
-    "modified": "Tue, 27 Oct 2026 14:54:13 GMT"
+    "etag": "W/\"04b9f48c10e07d488cc92769b36e69b6\"",
+    "modified": "Tue, 27 Oct 2026 16:05:03 GMT"
   },
   "https://www.quantamagazine.org/feed/": {
     "etag": "\"e69b4976ccbb83a19e38a64fd66eca79-gzip\"",
@@ -98,7 +98,7 @@
     "modified": "Tue, 27 Oct 2026 18:52:16 GMT"
   },
   "https://www.smithsonianmag.com/rss/latest_articles/": {
-    "modified": "Tue, 27 Oct 2026 08:14:48 GMT"
+    "modified": "Wed, 28 Oct 2026 02:35:40 GMT"
   },
   "https://www.technologyreview.com/feed/": {
     "etag": "W/\"c8c8e6d961929816916ea93771ce9d4e\"",
@@ -111,7 +111,7 @@
     "etag": "W/\"hash2113928104150040793\""
   },
   "https://www.theguardian.com/world/rss": {
-    "etag": "W/\"hash-6264020064428931222\""
+    "etag": "W/\"hash-1573501924427230407\""
   },
   "https://www.theverge.com/rss/index.xml": {
     "etag": "W/\"1aed2bf7a896e8cf5b00ebc4196c05b6\""
