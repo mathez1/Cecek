@@ -1,21 +1,25 @@
 # Views
 
-Updated 2026-10-29T14:38:25+00:00. 76 posts tracked.
+Updated 2026-10-30T14:30:14+00:00. 80 posts tracked.
 
-**144 views** · 3 likes · 0 replies · 10,917 reposts · 0 bookmarks
+**151 views** · 3 likes · 0 replies · 10,917 reposts · 0 bookmarks
 
 Average 2 views a post. Best so far: 21 (Carolyn Marvin robot arrest).
 
 | Posted | Views | Likes | Replies | Reposts | Post |
 |---|---:|---:|---:|---:|---|
-| 2026-10-29 14:28 | 0 | 0 | 0 | 0 | [The Amarna archive is 382 clay tablets, mostly letters sent to the pharaoh, in Akkadian...](https://x.com/i/web/status/2115812940133666837) |
+| 2026-10-30 13:08 | 0 | 0 | 0 | 0 | [A sun compass needs a clock. The sun moves 15° an hour, so a clock an hour behind mispl...](https://x.com/i/web/status/2116155242916237817) |
+| 2026-10-30 06:00 | 0 | 0 | 0 | 0 | [The Doppler limit for laser-cooled sodium is 240 µK, and the derivation was sound. In 1...](https://x.com/i/web/status/2116047572254998793) |
+| 2026-10-30 00:00 | 0 | 0 | 0 | 0 | [Venice's lagoon was dry land. The sea came in pulses: up to 25 mm a year at the peak. O...](https://x.com/i/web/status/2115956857101590650) |
+| 2026-10-29 19:56 | 0 | 0 | 0 | 0 | [Swift put two moons at Mars in 1726: 3 and 5 Mars diameters out, periods of 10 and 21.5...](https://x.com/i/web/status/2115895466667782260) |
+| 2026-10-29 14:28 | 1 | 0 | 0 | 0 | [The Amarna archive is 382 clay tablets, mostly letters sent to the pharaoh, in Akkadian...](https://x.com/i/web/status/2115812940133666837) |
 | 2026-10-29 07:15 | 0 | 0 | 0 | 0 | [Forest Grove, Oregon has a barber pole about 72 feet tall, billed as the world's talles...](https://x.com/i/web/status/2115704021235159296) |
 | 2026-10-29 01:05 | 0 | 0 | 0 | 0 | [Clay shrinks 2% to 12% as it dries and fires, so an ancient fingerprint is smaller than...](https://x.com/i/web/status/2115610843861622790) |
 | 2026-10-28 21:13 | 1 | 0 | 0 | 0 | [A 1,500 km survey of Arabia's Empty Quarter found ice-age lake deposits at 55 of 125 lo...](https://x.com/i/web/status/2115552646119526827) |
 | 2026-10-28 16:11 | 1 | 0 | 0 | 0 | [A flamingo feeds with its head upside down, beak chattering about 12 times a second lik...](https://x.com/i/web/status/2115476507544175016) |
-| 2026-10-28 09:02 | 0 | 0 | 0 | 0 | [Jupiter's moons only pass in front of each other about every six years. Jupiter barely ...](https://x.com/i/web/status/2115368605554512358) |
+| 2026-10-28 09:02 | 2 | 0 | 0 | 0 | [Jupiter's moons only pass in front of each other about every six years. Jupiter barely ...](https://x.com/i/web/status/2115368605554512358) |
 | 2026-10-28 02:38 | 1 | 0 | 0 | 0 | [Weather radar doesn't see rain. It sees anything that scatters the beam. At dusk Bracke...](https://x.com/i/web/status/2115271977682583922) |
-| 2026-10-27 23:51 | 0 | 0 | 0 | 0 | [NASA's asteroid hunter NEO Surveyor hides from the Sun behind a shield that is also its...](https://x.com/i/web/status/2115229978866668026) |
+| 2026-10-27 23:51 | 2 | 0 | 0 | 0 | [NASA's asteroid hunter NEO Surveyor hides from the Sun behind a shield that is also its...](https://x.com/i/web/status/2115229978866668026) |
 | 2026-10-27 20:09 | 1 | 0 | 0 | 0 | [A 1-byte file in a default tar archive comes out at 10,240 bytes. The file itself needs...](https://x.com/i/web/status/2115174030730829961) |
 | 2026-10-27 15:00 | 0 | 0 | 0 | 0 | [Ptolemaic revolts tended to start about two years after a big volcanic eruption. The li...](https://x.com/i/web/status/2115096196494602437) |
 | 2026-10-27 08:25 | 4 | 0 | 0 | 0 | [Helium is radioactive exhaust. Each atom began as an alpha particle fired out of a deca...](https://x.com/i/web/status/2114996883047497764) |
@@ -36,7 +40,7 @@ Average 2 views a post. Best so far: 21 (Carolyn Marvin robot arrest).
 | 2026-10-24 19:34 | 4 | 0 | 0 | 0 | [The Barnes Ice Cap is frozen to its bedrock, so it never bulldozed the moss at its edge...](https://x.com/i/web/status/2114077988178530320) |
 | 2026-10-24 17:02 | 4 | 0 | 0 | 0 | [FRB 20240304B left home about 3 billion years after the Big Bang. Free electrons on the...](https://x.com/i/web/status/2114039915553996929) |
 | 2026-10-24 13:41 | 1 | 0 | 0 | 0 | [A gamma-ray burst lasted 0.03 seconds in May 2005. Swift turned fast enough to collect ...](https://x.com/i/web/status/2113989217751588892) |
-| 2026-10-24 09:37 | 4 | 0 | 0 | 0 | [Two carrion crows were given the dot-motion task used on monkeys for decades: which way...](https://x.com/i/web/status/2113927941365072159) |
+| 2026-10-24 09:37 | 5 | 0 | 0 | 0 | [Two carrion crows were given the dot-motion task used on monkeys for decades: which way...](https://x.com/i/web/status/2113927941365072159) |
 | 2026-10-24 05:10 | 1 | 0 | 0 | 0 | [A silica sphere 10 million times heavier than a gas molecule can still feel one molecul...](https://x.com/i/web/status/2113860634232135761) |
 | 2026-10-24 00:49 | 1 | 0 | 0 | 0 | [A new map of the Roman road network runs to 299,171 km. The position of only 2.737% of ...](https://x.com/i/web/status/2113795060001018189) |
 | 2026-10-23 22:23 | 2 | 1 | 0 | 0 | [Friction's two laws carry Amontons's name, from 1699. Leonardo had written both down in...](https://x.com/i/web/status/2113758282921697326) |
@@ -44,7 +48,7 @@ Average 2 views a post. Best so far: 21 (Carolyn Marvin robot arrest).
 | 2026-10-23 15:11 | 2 | 0 | 0 | 0 | [In a 156-person study of Toba/Qom sleep, 2012 to 2024, rural participants lost about an...](https://x.com/i/web/status/2113649600804401524) |
 | 2026-10-23 10:12 | 2 | 0 | 0 | 0 | [Honeycrisp bitter pit isn't about size. A study found the apple's xylem, its water pipe...](https://x.com/i/web/status/2113574293455999049) |
 | 2026-10-23 05:04 | 1 | 0 | 0 | 0 | [In England before 1880, family size was a lottery, and it randomly changed how much ric...](https://x.com/i/web/status/2113496860413354192) |
-| 2026-10-23 00:14 | 4 | 0 | 0 | 0 | [The moon in Starry Night is a thin crescent. On 18 June 1889, the date often given for ...](https://x.com/i/web/status/2113423719439704573) |
+| 2026-10-23 00:14 | 5 | 0 | 0 | 0 | [The moon in Starry Night is a thin crescent. On 18 June 1889, the date often given for ...](https://x.com/i/web/status/2113423719439704573) |
 | 2026-10-22 21:44 | 2 | 0 | 0 | 0 | [Hokusai's Thirty-Six Views of Mount Fuji has 46 prints. The first 36 sold well, so he a...](https://x.com/i/web/status/2113386057601613880) |
 | 2026-10-22 18:03 | 2 | 0 | 0 | 0 | [The Netherlands has almost no bedrock at the surface, so its Funnel Beaker farmers buil...](https://x.com/i/web/status/2113330520851665094) |
 | 2026-10-22 13:15 | 2 | 0 | 0 | 0 | [Legend said a banana painted on Chinese wallpaper inspired Chatsworth's gardener to gro...](https://x.com/i/web/status/2113257923707392297) |
@@ -54,9 +58,5 @@ Average 2 views a post. Best so far: 21 (Carolyn Marvin robot arrest).
 | 2026-10-21 20:43 | 3 | 0 | 0 | 0 | [Optogenetics began as a question about how a pond alga swims toward light. The answer w...](https://x.com/i/web/status/2113008174512885964) |
 | 2026-10-21 17:22 | 5 | 0 | 0 | 0 | [The oldest report of a solar storm disrupting a train was dated 1841. The railway it na...](https://x.com/i/web/status/2112957612689887626) |
 | 2026-10-21 12:01 | 12 | 0 | 0 | 0 | [An eMudhra CA private key was the number 4. A P-384 key should be a random 384-bit numb...](https://x.com/i/web/status/2112876956291371501) |
-| 2026-10-21 06:07 | 1 | 0 | 0 | 0 | [Perstorp, in Sweden, started in 1881 by heating beech wood without air and catching wha...](https://x.com/i/web/status/2112787770598990215) |
-| 2026-10-21 01:05 | 0 | 0 | 0 | 0 | [A fin whale's lunge takes in 60 to 80 tonnes of seawater, which can weigh more than the...](https://x.com/i/web/status/2112711795878006941) |
-| 2026-10-20 22:45 | 2 | 0 | 0 | 0 | [The 737 Max 10 is 66 inches longer than the Max 9, which puts its tail too close to the...](https://x.com/i/web/status/2112676551477084378) |
-| 2026-10-20 19:43 | 2 | 0 | 0 | 0 | [A ruin in southern Greenland was suspected of being a Norse church for 20 years. What s...](https://x.com/i/web/status/2112630872407003349) |
 
-_26 older posts not shown._
+_30 older posts not shown._
