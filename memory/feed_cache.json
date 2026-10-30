@@ -7,7 +7,7 @@
     "modified": "Thu, 29 Oct 2026 16:24:51 GMT"
   },
   "https://feeds.arstechnica.com/arstechnica/index": {
-    "modified": "Thu, 29 Oct 2026 22:49:08 GMT"
+    "modified": "Fri, 30 Oct 2026 12:28:11 GMT"
   },
   "https://hnrss.org/best": {
     "modified": "Wed, 28 Oct 2026 17:10:37 GMT"
@@ -20,8 +20,8 @@
     "modified": "Wed, 28 Oct 2026 16:08:20 GMT"
   },
   "https://marginalrevolution.com/feed": {
-    "etag": "\"245e18e37b9244b4643f3fb44320a9e0\"",
-    "modified": "Thu, 29 Oct 2026 18:02:03 GMT"
+    "etag": "\"8013b999512840d2941bd9e96526cb52\"",
+    "modified": "Fri, 30 Oct 2026 11:18:21 GMT"
   },
   "https://nautil.us/feed/": {
     "etag": "W/\"hs6qqqdjxf96w\""
@@ -38,7 +38,7 @@
     "etag": "6f6a6b9565cad42f103e9c5fb3b9d0da85a17b390bb4026cc1b2df1a9a97ee71"
   },
   "https://rss.arxiv.org/rss/econ.GN": {
-    "etag": "97bf2ab8e54c01df47bde40cc273b303c3f8c3eaf7e347b92e9f64455820008a"
+    "etag": "b6a196d68d2b1f61f061591a335c6248bca426da0aa4bb981926738f5268835f"
   },
   "https://rss.arxiv.org/rss/q-bio.PE": {
     "etag": "9b877d8baa1c4093887c41ef94caf1236132068e5f98b1156491fc140f53454f"
@@ -56,7 +56,7 @@
     "modified": "Thu, 29 Oct 2026 13:53:47 GMT"
   },
   "https://www.404media.co/rss/": {
-    "etag": "W/\"1b531-EeJotnfv/vEMLD8KZCS0tV1mQ4o\""
+    "etag": "W/\"1ca3e-lpxdlcPNCb4ceXZcZ6MhIOeZ9CM\""
   },
   "https://www.aljazeera.com/xml/rss/all.xml": {
     "etag": "W/\"dc9518535e3c4f1f2c48eecb24f81af2\"",
@@ -80,11 +80,11 @@
     "modified": "Thu, 29 Oct 2026 19:44:57 GMT"
   },
   "https://www.nature.com/nature.rss": {
-    "etag": "\"0369dc881583eb716934ed7542a7fd2f\""
+    "etag": "\"c731b91f3e74117e1592580837faf732\""
   },
   "https://www.newscientist.com/feed/home/": {
-    "etag": "W/\"eef7b3e7e61d8199d70c765e9dcb689e\"",
-    "modified": "Wed, 28 Oct 2026 20:42:57 GMT"
+    "etag": "W/\"9c449901751b3621d7e82a847ed3fcc8\"",
+    "modified": "Fri, 30 Oct 2026 13:05:55 GMT"
   },
   "https://www.quantamagazine.org/feed/": {
     "etag": "\"f97545aa9ad8246992ead766b7770053-gzip\"",
@@ -101,19 +101,19 @@
     "modified": "Thu, 29 Oct 2026 19:48:10 GMT"
   },
   "https://www.technologyreview.com/feed/": {
-    "etag": "W/\"787a14517c638a96238f8253fa84fc22\"",
-    "modified": "Thu, 29 Oct 2026 12:05:04 GMT"
+    "etag": "W/\"1419c8cf9bc5365bd3fcc946fc7736c8\"",
+    "modified": "Fri, 30 Oct 2026 12:16:59 GMT"
   },
   "https://www.theatlantic.com/feed/all/": {
     "modified": "Thu, 29 Oct 2026 21:18:12 GMT"
   },
   "https://www.theguardian.com/science/rss": {
-    "etag": "W/\"hash1809997317024981433\""
+    "etag": "W/\"hash-4447846211836149366\""
   },
   "https://www.theguardian.com/world/rss": {
     "etag": "W/\"hash535412025629268641\""
   },
   "https://www.theverge.com/rss/index.xml": {
-    "etag": "W/\"6919cda432216bb1c9cb5b66aa511c23\""
+    "etag": "W/\"5b31c64386d057a5673ce3624bcac788\""
   }
 }
