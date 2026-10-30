@@ -7,7 +7,7 @@
     "modified": "Thu, 29 Oct 2026 16:24:51 GMT"
   },
   "https://feeds.arstechnica.com/arstechnica/index": {
-    "modified": "Fri, 30 Oct 2026 12:28:11 GMT"
+    "modified": "Fri, 30 Oct 2026 21:04:37 GMT"
   },
   "https://hnrss.org/best": {
     "modified": "Wed, 28 Oct 2026 17:10:37 GMT"
@@ -16,19 +16,19 @@
     "modified": "Thu, 29 Oct 2026 13:40:04 GMT"
   },
   "https://lobste.rs/rss": {
-    "etag": "\"dmglnrq3wjib-c71-gzip\"",
-    "modified": "Wed, 28 Oct 2026 16:08:20 GMT"
+    "etag": "\"dmij90yr5xn6-doo-gzip\"",
+    "modified": "Fri, 30 Oct 2026 22:40:23 GMT"
   },
   "https://marginalrevolution.com/feed": {
-    "etag": "\"8013b999512840d2941bd9e96526cb52\"",
-    "modified": "Fri, 30 Oct 2026 11:18:21 GMT"
+    "etag": "\"eb6b174226790c58de797fcff9715dec\"",
+    "modified": "Fri, 30 Oct 2026 16:16:29 GMT"
   },
   "https://nautil.us/feed/": {
     "etag": "W/\"187bl8jfut38rx\""
   },
   "https://news.harvard.edu/gazette/feed/": {
-    "etag": "W/\"48befcf91926c23a4edaf975a22859b1\"",
-    "modified": "Fri, 30 Oct 2026 02:40:02 GMT"
+    "etag": "W/\"c40b17ac6530964b29fa7a9e76494502\"",
+    "modified": "Fri, 30 Oct 2026 21:50:21 GMT"
   },
   "https://physicsworld.com/feed/": {
     "etag": "W/\"5a7c3da03ff725e8e77d688250c667cb\"",
@@ -44,8 +44,8 @@
     "etag": "9b877d8baa1c4093887c41ef94caf1236132068e5f98b1156491fc140f53454f"
   },
   "https://rss.slashdot.org/Slashdot/slashdotMain": {
-    "etag": "W/\"d620-65efff18d4d63\"",
-    "modified": "Thu, 29 Oct 2026 19:47:02 GMT"
+    "etag": "W/\"f576-65f16689b240f\"",
+    "modified": "Fri, 30 Oct 2026 22:35:09 GMT"
   },
   "https://spectrum.ieee.org/feeds/feed.rss": {
     "etag": "\"6865fe5be9c467104e9e3ba2deb3e5bd\"",
@@ -63,10 +63,10 @@
     "modified": "Fri, 30 Oct 2026 18:24:42 GMT"
   },
   "https://www.astralcodexten.com/feed": {
-    "etag": "W/\"b80f4-nwnCPPC9JvQMKJjr0vh1af/AH8E\""
+    "etag": "W/\"c1d6e-5ub3iLCmwFz0dgdJVovrrTKgVgY\""
   },
   "https://www.atlasobscura.com/feeds/latest": {
-    "etag": "W/\"d27a0fd16cd9d0f28afed66d11f63a7b\""
+    "etag": "W/\"0a9ba6dcd9ae0ff3d5eb743ab3cd9127\""
   },
   "https://www.construction-physics.com/feed": {
     "etag": "W/\"c94d4-+aH9r9MqCOPqBG2w1JznvQGdye4\""
@@ -76,15 +76,15 @@
     "modified": "Tue, 27 Oct 2026 07:26:57 GMT"
   },
   "https://www.nasa.gov/news-release/feed/": {
-    "etag": "W/\"f03db33fdab8b056e32f646e54245e30\"",
-    "modified": "Thu, 29 Oct 2026 19:44:57 GMT"
+    "etag": "W/\"d049bc8b2b3db3cd5dba5f470ab4cce8\"",
+    "modified": "Fri, 30 Oct 2026 22:33:42 GMT"
   },
   "https://www.nature.com/nature.rss": {
     "etag": "\"c731b91f3e74117e1592580837faf732\""
   },
   "https://www.newscientist.com/feed/home/": {
-    "etag": "W/\"9c449901751b3621d7e82a847ed3fcc8\"",
-    "modified": "Fri, 30 Oct 2026 13:05:55 GMT"
+    "etag": "W/\"d84c41eb12408e92295850739022e440\"",
+    "modified": "Fri, 30 Oct 2026 19:49:51 GMT"
   },
   "https://www.quantamagazine.org/feed/": {
     "etag": "\"6bc2cdb0613091d8fdafc2ddbac24e36-gzip\"",
