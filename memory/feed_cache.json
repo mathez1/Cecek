@@ -3,8 +3,8 @@
     "etag": "W/\"bb4e36c36a0f3da0730fcc8527e5223d\""
   },
   "https://bigthink.com/feed/": {
-    "etag": "W/\"02220abe71ee42b868075b7ec29f0b30\"",
-    "modified": "Thu, 29 Oct 2026 16:24:51 GMT"
+    "etag": "W/\"bf96f0b4ec66cbbbf482dae8cf111daa\"",
+    "modified": "Thu, 30 Sep 2021 20:35:12 GMT"
   },
   "https://feeds.arstechnica.com/arstechnica/index": {
     "modified": "Fri, 30 Oct 2026 21:04:37 GMT"
@@ -13,7 +13,7 @@
     "modified": "Wed, 28 Oct 2026 17:10:37 GMT"
   },
   "https://hnrss.org/frontpage": {
-    "modified": "Sat, 31 Oct 2026 02:46:36 GMT"
+    "modified": "Sat, 31 Oct 2026 13:25:10 GMT"
   },
   "https://lobste.rs/rss": {
     "etag": "\"dmiumnx2xqk1-dri-gzip\"",
@@ -31,14 +31,14 @@
     "modified": "Fri, 30 Oct 2026 21:50:21 GMT"
   },
   "https://physicsworld.com/feed/": {
-    "etag": "W/\"5a7c3da03ff725e8e77d688250c667cb\"",
-    "modified": "Thu, 29 Oct 2026 15:48:06 GMT"
+    "etag": "W/\"e411762dfa32b2b2599968749335d356\"",
+    "modified": "Fri, 30 Oct 2026 16:05:22 GMT"
   },
   "https://rss.arxiv.org/rss/cs.AI": {
     "etag": "3d54c071942e5c5fff30fdcf6ed6602bd9b740e8f7e01eda29b5a4dcec21510a"
   },
   "https://rss.arxiv.org/rss/econ.GN": {
-    "etag": "b6a196d68d2b1f61f061591a335c6248bca426da0aa4bb981926738f5268835f"
+    "etag": "c5046be39210ca55983f91a8116cb1576ed7089d4d1b9f7d23b0f7d9a51012f1"
   },
   "https://rss.arxiv.org/rss/q-bio.PE": {
     "etag": "b94e9d0e3c298f8ca05d0a89ec7d9f068fa5d264a2020d6674cb3dd8f24c4cce"
@@ -72,12 +72,12 @@
     "etag": "W/\"d29f1-iame0ID+MkrvbCNP53bh+Um+EJM\""
   },
   "https://www.economist.com/latest/rss.xml": {
-    "etag": "W/\"5c4dc1c897564564cbce6539ddc90c1f\"",
-    "modified": "Sat, 31 Oct 2026 00:56:57 GMT"
+    "etag": "W/\"14f8c6dd276d61aa482e332ae69b62b2\"",
+    "modified": "Sat, 31 Oct 2026 13:26:57 GMT"
   },
   "https://www.nasa.gov/news-release/feed/": {
-    "etag": "W/\"8862b1661b46809a18328b5d73f6b4e5\"",
-    "modified": "Sat, 31 Oct 2026 04:05:00 GMT"
+    "etag": "W/\"15f58b9577ff93250c0a2c533676c3fa\"",
+    "modified": "Sat, 31 Oct 2026 12:40:19 GMT"
   },
   "https://www.nature.com/nature.rss": {
     "etag": "\"322c3740fb772a31e419602eb50b00af\""
