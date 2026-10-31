@@ -13,11 +13,11 @@
     "modified": "Wed, 28 Oct 2026 17:10:37 GMT"
   },
   "https://hnrss.org/frontpage": {
-    "modified": "Thu, 29 Oct 2026 13:40:04 GMT"
+    "modified": "Sat, 31 Oct 2026 02:46:36 GMT"
   },
   "https://lobste.rs/rss": {
-    "etag": "\"dmij90yr5xn6-doo-gzip\"",
-    "modified": "Fri, 30 Oct 2026 22:40:23 GMT"
+    "etag": "\"dmiumnx2xqk1-dri-gzip\"",
+    "modified": "Sat, 31 Oct 2026 07:35:24 GMT"
   },
   "https://marginalrevolution.com/feed": {
     "etag": "\"eb6b174226790c58de797fcff9715dec\"",
@@ -41,7 +41,7 @@
     "etag": "b6a196d68d2b1f61f061591a335c6248bca426da0aa4bb981926738f5268835f"
   },
   "https://rss.arxiv.org/rss/q-bio.PE": {
-    "etag": "9b877d8baa1c4093887c41ef94caf1236132068e5f98b1156491fc140f53454f"
+    "etag": "b94e9d0e3c298f8ca05d0a89ec7d9f068fa5d264a2020d6674cb3dd8f24c4cce"
   },
   "https://rss.slashdot.org/Slashdot/slashdotMain": {
     "etag": "W/\"f576-65f16689b240f\"",
@@ -59,11 +59,11 @@
     "etag": "W/\"1abb0-otXGcUC6a1PyjRbfOZkJ4UBeemk\""
   },
   "https://www.aljazeera.com/xml/rss/all.xml": {
-    "etag": "W/\"6522a8c5df058272d3d1797fc074e9f3\"",
-    "modified": "Fri, 30 Oct 2026 18:24:42 GMT"
+    "etag": "W/\"1483191d8ba5061517701201cc9cd3d3\"",
+    "modified": "Sat, 31 Oct 2026 07:20:47 GMT"
   },
   "https://www.astralcodexten.com/feed": {
-    "etag": "W/\"c1d6e-5ub3iLCmwFz0dgdJVovrrTKgVgY\""
+    "etag": "W/\"c1d6e-xO3wJjIILNdPhgbHIZeXxK2L1hE\""
   },
   "https://www.atlasobscura.com/feeds/latest": {
     "etag": "W/\"0a9ba6dcd9ae0ff3d5eb743ab3cd9127\""
@@ -76,8 +76,8 @@
     "modified": "Sat, 31 Oct 2026 00:56:57 GMT"
   },
   "https://www.nasa.gov/news-release/feed/": {
-    "etag": "W/\"d049bc8b2b3db3cd5dba5f470ab4cce8\"",
-    "modified": "Fri, 30 Oct 2026 22:33:42 GMT"
+    "etag": "W/\"8862b1661b46809a18328b5d73f6b4e5\"",
+    "modified": "Sat, 31 Oct 2026 04:05:00 GMT"
   },
   "https://www.nature.com/nature.rss": {
     "etag": "\"322c3740fb772a31e419602eb50b00af\""
@@ -105,7 +105,7 @@
     "modified": "Fri, 30 Oct 2026 12:16:59 GMT"
   },
   "https://www.theatlantic.com/feed/all/": {
-    "modified": "Fri, 30 Oct 2026 18:35:10 GMT"
+    "modified": "Fri, 30 Oct 2026 23:02:14 GMT"
   },
   "https://www.theguardian.com/science/rss": {
     "etag": "W/\"hash-5325218102117157985\""
