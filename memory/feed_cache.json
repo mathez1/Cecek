@@ -7,7 +7,7 @@
     "modified": "Mon, 05 Dec 2022 19:50:41 GMT"
   },
   "https://feeds.arstechnica.com/arstechnica/index": {
-    "modified": "Fri, 30 Oct 2026 21:04:37 GMT"
+    "modified": "Sat, 31 Oct 2026 20:16:24 GMT"
   },
   "https://hnrss.org/best": {
     "modified": "Wed, 28 Oct 2026 17:10:37 GMT"
@@ -44,16 +44,16 @@
     "etag": "b94e9d0e3c298f8ca05d0a89ec7d9f068fa5d264a2020d6674cb3dd8f24c4cce"
   },
   "https://rss.slashdot.org/Slashdot/slashdotMain": {
-    "etag": "W/\"f576-65f16689b240f\"",
-    "modified": "Fri, 30 Oct 2026 22:35:09 GMT"
+    "etag": "W/\"f996-65f29e7b05d5d\"",
+    "modified": "Sat, 31 Oct 2026 21:50:45 GMT"
   },
   "https://spectrum.ieee.org/feeds/feed.rss": {
     "etag": "\"6865fe5be9c467104e9e3ba2deb3e5bd\"",
     "modified": "Thu, 29 Oct 2026 19:18:20 GMT"
   },
   "https://techcrunch.com/feed/": {
-    "etag": "W/\"2fabfaa55d91b4f08c135377fef78ce9\"",
-    "modified": "Sat, 31 Oct 2026 17:09:18 GMT"
+    "etag": "W/\"e9318b87eacc0f6606585fc56e97fd88\"",
+    "modified": "Sat, 31 Oct 2026 21:41:00 GMT"
   },
   "https://www.404media.co/rss/": {
     "etag": "W/\"1abb0-otXGcUC6a1PyjRbfOZkJ4UBeemk\""
@@ -63,7 +63,7 @@
     "modified": "Sat, 31 Oct 2026 07:20:47 GMT"
   },
   "https://www.astralcodexten.com/feed": {
-    "etag": "W/\"c1d6e-a7yM3HlzRKNfjC+83KqTe4VGYgU\""
+    "etag": "W/\"c1d6e-BGyP7aI12HSXyKm80Sn7hblip3U\""
   },
   "https://www.atlasobscura.com/feeds/latest": {
     "etag": "W/\"0a9ba6dcd9ae0ff3d5eb743ab3cd9127\""
@@ -101,8 +101,8 @@
     "modified": "Fri, 30 Oct 2026 18:30:07 GMT"
   },
   "https://www.technologyreview.com/feed/": {
-    "etag": "W/\"1419c8cf9bc5365bd3fcc946fc7736c8\"",
-    "modified": "Fri, 30 Oct 2026 12:16:59 GMT"
+    "etag": "W/\"96d36a393ffdc744c9a31444e415955b\"",
+    "modified": "Fri, 30 Oct 2026 20:09:29 GMT"
   },
   "https://www.theatlantic.com/feed/all/": {
     "modified": "Fri, 30 Oct 2026 23:02:14 GMT"
@@ -114,6 +114,6 @@
     "etag": "W/\"hash4196956726837778808\""
   },
   "https://www.theverge.com/rss/index.xml": {
-    "etag": "W/\"aac660842f6dded45fbca16ce53b5e0c\""
+    "etag": "W/\"5947450d3157dc05ebea65a84d580952\""
   }
 }
