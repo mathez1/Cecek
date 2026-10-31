@@ -3,8 +3,8 @@
     "etag": "W/\"bb4e36c36a0f3da0730fcc8527e5223d\""
   },
   "https://bigthink.com/feed/": {
-    "etag": "W/\"bf96f0b4ec66cbbbf482dae8cf111daa\"",
-    "modified": "Thu, 30 Sep 2021 20:35:12 GMT"
+    "etag": "W/\"24b3ab9e30ade842ea07a66d0389b9f2\"",
+    "modified": "Mon, 05 Dec 2022 19:50:41 GMT"
   },
   "https://feeds.arstechnica.com/arstechnica/index": {
     "modified": "Fri, 30 Oct 2026 21:04:37 GMT"
@@ -16,12 +16,12 @@
     "modified": "Sat, 31 Oct 2026 13:25:10 GMT"
   },
   "https://lobste.rs/rss": {
-    "etag": "\"dmiumnx2xqk1-dri-gzip\"",
-    "modified": "Sat, 31 Oct 2026 07:35:24 GMT"
+    "etag": "\"dmj8pz3rrzmu-c5v-gzip\"",
+    "modified": "Sat, 31 Oct 2026 18:37:59 GMT"
   },
   "https://marginalrevolution.com/feed": {
-    "etag": "\"eb6b174226790c58de797fcff9715dec\"",
-    "modified": "Fri, 30 Oct 2026 16:16:29 GMT"
+    "etag": "\"110789070137101e87c83a959a229d2a\"",
+    "modified": "Sat, 31 Oct 2026 18:33:58 GMT"
   },
   "https://nautil.us/feed/": {
     "etag": "W/\"187bl8jfut38rx\""
@@ -52,8 +52,8 @@
     "modified": "Thu, 29 Oct 2026 19:18:20 GMT"
   },
   "https://techcrunch.com/feed/": {
-    "etag": "W/\"15f9b999a5364414e233689315a37e64\"",
-    "modified": "Thu, 29 Oct 2026 13:53:47 GMT"
+    "etag": "W/\"2fabfaa55d91b4f08c135377fef78ce9\"",
+    "modified": "Sat, 31 Oct 2026 17:09:18 GMT"
   },
   "https://www.404media.co/rss/": {
     "etag": "W/\"1abb0-otXGcUC6a1PyjRbfOZkJ4UBeemk\""
@@ -63,7 +63,7 @@
     "modified": "Sat, 31 Oct 2026 07:20:47 GMT"
   },
   "https://www.astralcodexten.com/feed": {
-    "etag": "W/\"c1d6e-xO3wJjIILNdPhgbHIZeXxK2L1hE\""
+    "etag": "W/\"c1d6e-a7yM3HlzRKNfjC+83KqTe4VGYgU\""
   },
   "https://www.atlasobscura.com/feeds/latest": {
     "etag": "W/\"0a9ba6dcd9ae0ff3d5eb743ab3cd9127\""
@@ -108,7 +108,7 @@
     "modified": "Fri, 30 Oct 2026 23:02:14 GMT"
   },
   "https://www.theguardian.com/science/rss": {
-    "etag": "W/\"hash-5325218102117157985\""
+    "etag": "W/\"hash6591868798162258065\""
   },
   "https://www.theguardian.com/world/rss": {
     "etag": "W/\"hash4196956726837778808\""
