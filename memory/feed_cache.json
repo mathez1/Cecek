@@ -16,8 +16,8 @@
     "modified": "Sat, 31 Oct 2026 13:25:10 GMT"
   },
   "https://lobste.rs/rss": {
-    "etag": "\"dmj8pz3rrzmu-c5v-gzip\"",
-    "modified": "Sat, 31 Oct 2026 18:37:59 GMT"
+    "etag": "\"dmjh6oaur4f2-c42-gzip\"",
+    "modified": "Sun, 01 Nov 2026 01:15:56 GMT"
   },
   "https://marginalrevolution.com/feed": {
     "etag": "\"110789070137101e87c83a959a229d2a\"",
@@ -44,8 +44,8 @@
     "etag": "b94e9d0e3c298f8ca05d0a89ec7d9f068fa5d264a2020d6674cb3dd8f24c4cce"
   },
   "https://rss.slashdot.org/Slashdot/slashdotMain": {
-    "etag": "W/\"f996-65f29e7b05d5d\"",
-    "modified": "Sat, 31 Oct 2026 21:50:45 GMT"
+    "etag": "W/\"f9c0-65f2ca2f2d77f\"",
+    "modified": "Sun, 01 Nov 2026 01:06:17 GMT"
   },
   "https://spectrum.ieee.org/feeds/feed.rss": {
     "etag": "\"6865fe5be9c467104e9e3ba2deb3e5bd\"",
@@ -72,8 +72,8 @@
     "etag": "W/\"d29f1-iame0ID+MkrvbCNP53bh+Um+EJM\""
   },
   "https://www.economist.com/latest/rss.xml": {
-    "etag": "W/\"14f8c6dd276d61aa482e332ae69b62b2\"",
-    "modified": "Sat, 31 Oct 2026 13:26:57 GMT"
+    "etag": "W/\"625e3c38c80a3e86b52f660bed704010\"",
+    "modified": "Sun, 01 Nov 2026 00:11:57 GMT"
   },
   "https://www.nasa.gov/news-release/feed/": {
     "etag": "W/\"15f58b9577ff93250c0a2c533676c3fa\"",
@@ -98,17 +98,17 @@
     "modified": "Fri, 30 Oct 2026 19:06:01 GMT"
   },
   "https://www.smithsonianmag.com/rss/latest_articles/": {
-    "modified": "Fri, 30 Oct 2026 18:30:07 GMT"
+    "modified": "Sun, 01 Nov 2026 01:06:30 GMT"
   },
   "https://www.technologyreview.com/feed/": {
     "etag": "W/\"96d36a393ffdc744c9a31444e415955b\"",
     "modified": "Fri, 30 Oct 2026 20:09:29 GMT"
   },
   "https://www.theatlantic.com/feed/all/": {
-    "modified": "Fri, 30 Oct 2026 23:02:14 GMT"
+    "modified": "Sat, 31 Oct 2026 20:02:42 GMT"
   },
   "https://www.theguardian.com/science/rss": {
-    "etag": "W/\"hash6591868798162258065\""
+    "etag": "W/\"hash3318655959393760703\""
   },
   "https://www.theguardian.com/world/rss": {
     "etag": "W/\"hash4196956726837778808\""
