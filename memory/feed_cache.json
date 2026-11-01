@@ -41,7 +41,7 @@
     "etag": "662cef448e0eb66d54b2f792374c3e80bddbf0766114b79bb048ccb41d2902ae"
   },
   "https://rss.arxiv.org/rss/q-bio.PE": {
-    "etag": "b94e9d0e3c298f8ca05d0a89ec7d9f068fa5d264a2020d6674cb3dd8f24c4cce"
+    "etag": "9a1053551195df2f8c4c2772a56690e3ad8476cb1c1100419da1394dc2b74e2b"
   },
   "https://rss.slashdot.org/Slashdot/slashdotMain": {
     "etag": "W/\"10474-65f3200375437\"",
@@ -59,11 +59,11 @@
     "etag": "W/\"1abb0-otXGcUC6a1PyjRbfOZkJ4UBeemk\""
   },
   "https://www.aljazeera.com/xml/rss/all.xml": {
-    "etag": "W/\"06d22437507a2f30b675c288588fe3a0\"",
-    "modified": "Sun, 01 Nov 2026 07:28:14 GMT"
+    "etag": "W/\"b46f555add8e2db51f525f830612bc29\"",
+    "modified": "Sun, 01 Nov 2026 14:20:00 GMT"
   },
   "https://www.astralcodexten.com/feed": {
-    "etag": "W/\"c1d6e-BGyP7aI12HSXyKm80Sn7hblip3U\""
+    "etag": "W/\"c1d6e-OW1kUcMpOYh1fbmUMssZLNOPFgM\""
   },
   "https://www.atlasobscura.com/feeds/latest": {
     "etag": "W/\"0a9ba6dcd9ae0ff3d5eb743ab3cd9127\""
@@ -83,8 +83,8 @@
     "etag": "\"322c3740fb772a31e419602eb50b00af\""
   },
   "https://www.newscientist.com/feed/home/": {
-    "etag": "W/\"d84c41eb12408e92295850739022e440\"",
-    "modified": "Fri, 30 Oct 2026 19:49:51 GMT"
+    "etag": "W/\"092ce740167fe30af13e13d0dfb0a69f\"",
+    "modified": "Fri, 30 Oct 2026 15:59:54 GMT"
   },
   "https://www.quantamagazine.org/feed/": {
     "etag": "\"6bc2cdb0613091d8fdafc2ddbac24e36-gzip\"",
@@ -98,7 +98,7 @@
     "modified": "Fri, 30 Oct 2026 19:06:01 GMT"
   },
   "https://www.smithsonianmag.com/rss/latest_articles/": {
-    "modified": "Sun, 01 Nov 2026 01:06:30 GMT"
+    "modified": "Sun, 01 Nov 2026 14:26:54 GMT"
   },
   "https://www.technologyreview.com/feed/": {
     "etag": "W/\"96d36a393ffdc744c9a31444e415955b\"",
@@ -111,7 +111,7 @@
     "etag": "W/\"hash3318655959393760703\""
   },
   "https://www.theguardian.com/world/rss": {
-    "etag": "W/\"hash4196956726837778808\""
+    "etag": "W/\"hash-3282746466293504044\""
   },
   "https://www.theverge.com/rss/index.xml": {
     "etag": "W/\"6c3ade0b987eea849154fe7e45f647e5\""
