@@ -20,11 +20,11 @@
     "modified": "Mon, 02 Nov 2026 10:03:29 GMT"
   },
   "https://marginalrevolution.com/feed": {
-    "etag": "\"110789070137101e87c83a959a229d2a\"",
-    "modified": "Sat, 31 Oct 2026 18:33:58 GMT"
+    "etag": "\"4d525fcdc82f292400d5cbd90d7b56d9\"",
+    "modified": "Mon, 02 Nov 2026 19:45:50 GMT"
   },
   "https://nautil.us/feed/": {
-    "etag": "W/\"12o4u3m8nbj8qk\""
+    "etag": "W/\"bzhtgczmr8od\""
   },
   "https://news.harvard.edu/gazette/feed/": {
     "etag": "W/\"c40b17ac6530964b29fa7a9e76494502\"",
@@ -59,14 +59,14 @@
     "etag": "W/\"1abb0-otXGcUC6a1PyjRbfOZkJ4UBeemk\""
   },
   "https://www.aljazeera.com/xml/rss/all.xml": {
-    "etag": "W/\"86488bf49ca3025925047ec1e7e5d0cc\"",
-    "modified": "Mon, 02 Nov 2026 02:28:01 GMT"
+    "etag": "W/\"886edc8effee4e308c3b3fe6449c9b41\"",
+    "modified": "Mon, 02 Nov 2026 20:00:00 GMT"
   },
   "https://www.astralcodexten.com/feed": {
-    "etag": "W/\"c1d6e-CykDNXkCUgvhSUKdlpqM0wuhr6Y\""
+    "etag": "W/\"ba978-jthSHnJcb1S30DYGeRAM7VWgSCs\""
   },
   "https://www.atlasobscura.com/feeds/latest": {
-    "etag": "W/\"0a9ba6dcd9ae0ff3d5eb743ab3cd9127\""
+    "etag": "W/\"d47d3f610eb8cd76b96be41a34a4f3d4\""
   },
   "https://www.construction-physics.com/feed": {
     "etag": "W/\"cc7f2-4UQ3KLRoo1X49YV50DAUaOUGOwI\""
@@ -111,7 +111,7 @@
     "etag": "W/\"hash-128098484914197584\""
   },
   "https://www.theguardian.com/world/rss": {
-    "etag": "W/\"hash-5353310239886953821\""
+    "etag": "W/\"hash7601604356291396713\""
   },
   "https://www.theverge.com/rss/index.xml": {
     "etag": "W/\"71671b68f82475834be620bc2d4586dd\""
