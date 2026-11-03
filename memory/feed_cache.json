@@ -10,7 +10,7 @@
     "modified": "Tue, 3 Nov 2026 03:09:37 GMT"
   },
   "https://hnrss.org/best": {
-    "modified": "Mon, 02 Nov 2026 21:38:49 GMT"
+    "modified": "Tue, 03 Nov 2026 17:40:00 GMT"
   },
   "https://hnrss.org/frontpage": {
     "modified": "Tue, 03 Nov 2026 17:22:37 GMT"
@@ -20,11 +20,11 @@
     "modified": "Mon, 02 Nov 2026 10:03:29 GMT"
   },
   "https://marginalrevolution.com/feed": {
-    "etag": "\"81abed7c93e29b2c8bc479aebb3dd1b2\"",
-    "modified": "Tue, 03 Nov 2026 17:01:23 GMT"
+    "etag": "\"e379aa1ac3dfc35cece3212bf85c383d\"",
+    "modified": "Tue, 03 Nov 2026 19:26:51 GMT"
   },
   "https://nautil.us/feed/": {
-    "etag": "W/\"r0081l0ntt8sj\""
+    "etag": "W/\"mj6ztnhic99j1\""
   },
   "https://news.harvard.edu/gazette/feed/": {
     "etag": "W/\"d6f00987d339dad3a9a92e8819dfd4cf\"",
@@ -38,7 +38,7 @@
     "etag": "b1ade58ab4cae9f2f91cbbd5ab5c3b9ffdc772722f2bc21c91572dfebb30ee82"
   },
   "https://rss.arxiv.org/rss/econ.GN": {
-    "etag": "662cef448e0eb66d54b2f792374c3e80bddbf0766114b79bb048ccb41d2902ae"
+    "etag": "6d13610802a7228ec0a6a595965903f95935cbf226c9b8a190d5d74e010cc837"
   },
   "https://rss.arxiv.org/rss/q-bio.PE": {
     "etag": "9a1053551195df2f8c4c2772a56690e3ad8476cb1c1100419da1394dc2b74e2b"
@@ -48,8 +48,8 @@
     "modified": "Sun, 01 Nov 2026 07:30:16 GMT"
   },
   "https://spectrum.ieee.org/feeds/feed.rss": {
-    "etag": "\"178f5e80068d250a528ffb5db1e62d92\"",
-    "modified": "Mon, 02 Nov 2026 14:16:15 GMT"
+    "etag": "\"7eb6b08fa47c396539d90347ec7f9f1c\"",
+    "modified": "Tue, 03 Nov 2026 19:00:47 GMT"
   },
   "https://techcrunch.com/feed/": {
     "etag": "W/\"429d1d00ae0f4fcac92142eb9bf319d4\"",
@@ -72,8 +72,8 @@
     "etag": "W/\"cc7f2-KzhZIuA46jZGYuKnfy+F0KLWhWQ\""
   },
   "https://www.economist.com/latest/rss.xml": {
-    "etag": "W/\"f072b3f34fa0cd7c59572bde941583e5\"",
-    "modified": "Tue, 03 Nov 2026 01:56:57 GMT"
+    "etag": "W/\"d08575beee1dec78e998e5894dc3f7ef\"",
+    "modified": "Tue, 03 Nov 2026 23:11:57 GMT"
   },
   "https://www.nasa.gov/news-release/feed/": {
     "etag": "W/\"101ea211b386fc2a3922d5a85cf34fb1\"",
@@ -105,13 +105,13 @@
     "modified": "Fri, 30 Oct 2026 20:09:29 GMT"
   },
   "https://www.theatlantic.com/feed/all/": {
-    "modified": "Tue, 03 Nov 2026 10:01:56 GMT"
+    "modified": "Tue, 03 Nov 2026 23:03:40 GMT"
   },
   "https://www.theguardian.com/science/rss": {
-    "etag": "W/\"hash-128098484914197584\""
+    "etag": "W/\"hash8875570236961026186\""
   },
   "https://www.theguardian.com/world/rss": {
-    "etag": "W/\"hash-6248497816749904626\""
+    "etag": "W/\"hash-6181903260938931916\""
   },
   "https://www.theverge.com/rss/index.xml": {
     "etag": "W/\"71671b68f82475834be620bc2d4586dd\""
