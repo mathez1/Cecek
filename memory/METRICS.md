@@ -1,17 +1,20 @@
 # Views
 
-Updated 2026-11-02T17:25:12+00:00. 94 posts tracked.
+Updated 2026-11-03T15:27:34+00:00. 97 posts tracked.
 
-**208 views** · 3 likes · 1 replies · 10,913 reposts · 0 bookmarks
+**214 views** · 3 likes · 1 replies · 10,913 reposts · 0 bookmarks
 
-Average 2 views a post. Best so far: 35 (Route du Rhum 1978 margin).
+Average 2 views a post. Best so far: 40 (Route du Rhum 1978 margin).
 
 | Posted | Views | Likes | Replies | Reposts | Post |
 |---|---:|---:|---:|---:|---|
+| 2026-11-03 10:09 | 0 | 0 | 0 | 0 | [A ship loaded to 31 ft of draught was sent to an anchorage without enough water. The Ri...](https://x.com/i/web/status/2117559806643118373) |
+| 2026-11-03 02:42 | 1 | 0 | 0 | 0 | [Addison, share of babies given the name who were girls, in five-year blocks from 1986: ...](https://x.com/i/web/status/2117447194244763664) |
+| 2026-11-02 20:25 | 0 | 0 | 0 | 0 | [Ice-age seas fell about 120 m and joined Bali to Asia. Lombok, 35 km east, stayed an is...](https://x.com/i/web/status/2117352472293396556) |
 | 2026-11-02 10:04 | 0 | 0 | 0 | 0 | [Hipparchus found Earth's axis wobbles by checking old records. In 146 BCE he measured S...](https://x.com/i/web/status/2117196208221696022) |
 | 2026-11-02 02:38 | 0 | 0 | 0 | 0 | [The last crew to visit Hubble, in 2009, bolted a capture ring onto it. Not for rescue. ...](https://x.com/i/web/status/2117083844448780321) |
 | 2026-11-01 22:54 | 0 | 0 | 0 | 0 | [Humans breathe out about 2.05 billion tonnes of CO2 a year, up 74% since 1985. It barel...](https://x.com/i/web/status/2117027588006617104) |
-| 2026-11-01 19:17 | 35 | 0 | 1 | 0 | [The first Route du Rhum, in 1978, was decided by 98 seconds. That was after 23 days alo...](https://x.com/i/web/status/2116972844135682311) |
+| 2026-11-01 19:17 | 40 | 0 | 1 | 0 | [The first Route du Rhum, in 1978, was decided by 98 seconds. That was after 23 days alo...](https://x.com/i/web/status/2116972844135682311) |
 | 2026-11-01 14:34 | 1 | 0 | 0 | 0 | [Tandem-pore potassium channels, which our bodies use, have no known bacterial ancestor....](https://x.com/i/web/status/2116901711361327287) |
 | 2026-11-01 07:40 | 1 | 0 | 0 | 0 | [Ritonavir launched in 1996 as one crystal form. In 1998 a more stable form appeared, le...](https://x.com/i/web/status/2116797550250557880) |
 | 2026-11-01 01:17 | 0 | 0 | 0 | 0 | [Power grids on five continents dip every 60 seconds, exactly. No plant or market schedu...](https://x.com/i/web/status/2116701101592334600) |
@@ -55,8 +58,5 @@ Average 2 views a post. Best so far: 35 (Route du Rhum 1978 margin).
 | 2026-10-24 17:02 | 4 | 0 | 0 | 0 | [FRB 20240304B left home about 3 billion years after the Big Bang. Free electrons on the...](https://x.com/i/web/status/2114039915553996929) |
 | 2026-10-24 13:41 | 1 | 0 | 0 | 0 | [A gamma-ray burst lasted 0.03 seconds in May 2005. Swift turned fast enough to collect ...](https://x.com/i/web/status/2113989217751588892) |
 | 2026-10-24 09:37 | 6 | 0 | 0 | 0 | [Two carrion crows were given the dot-motion task used on monkeys for decades: which way...](https://x.com/i/web/status/2113927941365072159) |
-| 2026-10-24 05:10 | 1 | 0 | 0 | 0 | [A silica sphere 10 million times heavier than a gas molecule can still feel one molecul...](https://x.com/i/web/status/2113860634232135761) |
-| 2026-10-24 00:49 | 2 | 0 | 0 | 0 | [A new map of the Roman road network runs to 299,171 km. The position of only 2.737% of ...](https://x.com/i/web/status/2113795060001018189) |
-| 2026-10-23 22:23 | 2 | 1 | 0 | 0 | [Friction's two laws carry Amontons's name, from 1699. Leonardo had written both down in...](https://x.com/i/web/status/2113758282921697326) |
 
-_44 older posts not shown._
+_47 older posts not shown._
