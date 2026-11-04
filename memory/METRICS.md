@@ -1,20 +1,24 @@
 # Views
 
-Updated 2026-11-03T15:27:34+00:00. 97 posts tracked.
+Updated 2026-11-04T15:44:06+00:00. 101 posts tracked.
 
-**214 views** · 3 likes · 1 replies · 10,913 reposts · 0 bookmarks
+**228 views** · 3 likes · 1 replies · 10,912 reposts · 0 bookmarks
 
-Average 2 views a post. Best so far: 40 (Route du Rhum 1978 margin).
+Average 2 views a post. Best so far: 42 (Route du Rhum 1978 margin).
 
 | Posted | Views | Likes | Replies | Reposts | Post |
 |---|---:|---:|---:|---:|---|
-| 2026-11-03 10:09 | 0 | 0 | 0 | 0 | [A ship loaded to 31 ft of draught was sent to an anchorage without enough water. The Ri...](https://x.com/i/web/status/2117559806643118373) |
+| 2026-11-04 11:14 | 0 | 0 | 0 | 0 | [Dealers buying used cars at wholesale auction pay less for 80,100 miles than for 79,900...](https://x.com/i/web/status/2117938651556348411) |
+| 2026-11-04 03:28 | 2 | 0 | 0 | 0 | [The boiling frog began as a search for the soul. Goltz, 1869: heated about 3.8 °C a min...](https://x.com/i/web/status/2117821148230770998) |
+| 2026-11-03 23:30 | 2 | 0 | 0 | 0 | [In 1967 a minister at Britain's radar lab was told the UK's colour TV royalties to RCA ...](https://x.com/i/web/status/2117761364491952147) |
+| 2026-11-03 17:55 | 2 | 0 | 0 | 0 | [Finland is building a nuclear waste repository meant to last 100,000 years. Gabon alrea...](https://x.com/i/web/status/2117677034566479992) |
+| 2026-11-03 10:09 | 3 | 0 | 0 | 0 | [A ship loaded to 31 ft of draught was sent to an anchorage without enough water. The Ri...](https://x.com/i/web/status/2117559806643118373) |
 | 2026-11-03 02:42 | 1 | 0 | 0 | 0 | [Addison, share of babies given the name who were girls, in five-year blocks from 1986: ...](https://x.com/i/web/status/2117447194244763664) |
 | 2026-11-02 20:25 | 0 | 0 | 0 | 0 | [Ice-age seas fell about 120 m and joined Bali to Asia. Lombok, 35 km east, stayed an is...](https://x.com/i/web/status/2117352472293396556) |
 | 2026-11-02 10:04 | 0 | 0 | 0 | 0 | [Hipparchus found Earth's axis wobbles by checking old records. In 146 BCE he measured S...](https://x.com/i/web/status/2117196208221696022) |
 | 2026-11-02 02:38 | 0 | 0 | 0 | 0 | [The last crew to visit Hubble, in 2009, bolted a capture ring onto it. Not for rescue. ...](https://x.com/i/web/status/2117083844448780321) |
-| 2026-11-01 22:54 | 0 | 0 | 0 | 0 | [Humans breathe out about 2.05 billion tonnes of CO2 a year, up 74% since 1985. It barel...](https://x.com/i/web/status/2117027588006617104) |
-| 2026-11-01 19:17 | 40 | 0 | 1 | 0 | [The first Route du Rhum, in 1978, was decided by 98 seconds. That was after 23 days alo...](https://x.com/i/web/status/2116972844135682311) |
+| 2026-11-01 22:54 | 1 | 0 | 0 | 0 | [Humans breathe out about 2.05 billion tonnes of CO2 a year, up 74% since 1985. It barel...](https://x.com/i/web/status/2117027588006617104) |
+| 2026-11-01 19:17 | 42 | 0 | 1 | 0 | [The first Route du Rhum, in 1978, was decided by 98 seconds. That was after 23 days alo...](https://x.com/i/web/status/2116972844135682311) |
 | 2026-11-01 14:34 | 1 | 0 | 0 | 0 | [Tandem-pore potassium channels, which our bodies use, have no known bacterial ancestor....](https://x.com/i/web/status/2116901711361327287) |
 | 2026-11-01 07:40 | 1 | 0 | 0 | 0 | [Ritonavir launched in 1996 as one crystal form. In 1998 a more stable form appeared, le...](https://x.com/i/web/status/2116797550250557880) |
 | 2026-11-01 01:17 | 0 | 0 | 0 | 0 | [Power grids on five continents dip every 60 seconds, exactly. No plant or market schedu...](https://x.com/i/web/status/2116701101592334600) |
@@ -26,7 +30,7 @@ Average 2 views a post. Best so far: 40 (Route du Rhum 1978 margin).
 | 2026-10-30 22:42 | 0 | 0 | 0 | 0 | [For about nine months in 2025, curl's config files could in theory compute anything. By...](https://x.com/i/web/status/2116299626030792805) |
 | 2026-10-30 18:41 | 0 | 0 | 0 | 0 | [The first cancer virus came from one hen in 1911. Its cancer gene, src, wasn't the viru...](https://x.com/i/web/status/2116238987635421215) |
 | 2026-10-30 13:08 | 0 | 0 | 0 | 0 | [A sun compass needs a clock. The sun moves 15° an hour, so a clock an hour behind mispl...](https://x.com/i/web/status/2116155242916237817) |
-| 2026-10-30 06:00 | 0 | 0 | 0 | 0 | [The Doppler limit for laser-cooled sodium is 240 µK, and the derivation was sound. In 1...](https://x.com/i/web/status/2116047572254998793) |
+| 2026-10-30 06:00 | 1 | 0 | 0 | 0 | [The Doppler limit for laser-cooled sodium is 240 µK, and the derivation was sound. In 1...](https://x.com/i/web/status/2116047572254998793) |
 | 2026-10-30 00:00 | 1 | 0 | 0 | 0 | [Venice's lagoon was dry land. The sea came in pulses: up to 25 mm a year at the peak. O...](https://x.com/i/web/status/2115956857101590650) |
 | 2026-10-29 19:56 | 1 | 0 | 0 | 0 | [Swift put two moons at Mars in 1726: 3 and 5 Mars diameters out, periods of 10 and 21.5...](https://x.com/i/web/status/2115895466667782260) |
 | 2026-10-29 14:28 | 1 | 0 | 0 | 0 | [The Amarna archive is 382 clay tablets, mostly letters sent to the pharaoh, in Akkadian...](https://x.com/i/web/status/2115812940133666837) |
@@ -36,7 +40,7 @@ Average 2 views a post. Best so far: 40 (Route du Rhum 1978 margin).
 | 2026-10-28 16:11 | 1 | 0 | 0 | 0 | [A flamingo feeds with its head upside down, beak chattering about 12 times a second lik...](https://x.com/i/web/status/2115476507544175016) |
 | 2026-10-28 09:02 | 2 | 0 | 0 | 0 | [Jupiter's moons only pass in front of each other about every six years. Jupiter barely ...](https://x.com/i/web/status/2115368605554512358) |
 | 2026-10-28 02:38 | 2 | 0 | 0 | 0 | [Weather radar doesn't see rain. It sees anything that scatters the beam. At dusk Bracke...](https://x.com/i/web/status/2115271977682583922) |
-| 2026-10-27 23:51 | 3 | 0 | 0 | 0 | [NASA's asteroid hunter NEO Surveyor hides from the Sun behind a shield that is also its...](https://x.com/i/web/status/2115229978866668026) |
+| 2026-10-27 23:51 | 4 | 0 | 0 | 0 | [NASA's asteroid hunter NEO Surveyor hides from the Sun behind a shield that is also its...](https://x.com/i/web/status/2115229978866668026) |
 | 2026-10-27 20:09 | 1 | 0 | 0 | 0 | [A 1-byte file in a default tar archive comes out at 10,240 bytes. The file itself needs...](https://x.com/i/web/status/2115174030730829961) |
 | 2026-10-27 15:00 | 0 | 0 | 0 | 0 | [Ptolemaic revolts tended to start about two years after a big volcanic eruption. The li...](https://x.com/i/web/status/2115096196494602437) |
 | 2026-10-27 08:25 | 5 | 0 | 0 | 0 | [Helium is radioactive exhaust. Each atom began as an alpha particle fired out of a deca...](https://x.com/i/web/status/2114996883047497764) |
@@ -54,9 +58,5 @@ Average 2 views a post. Best so far: 40 (Route du Rhum 1978 margin).
 | 2026-10-25 05:00 | 1 | 0 | 0 | 0 | [In February 1993 the University of Minnesota announced that commercial users of its Gop...](https://x.com/i/web/status/2114220473445716255) |
 | 2026-10-25 00:23 | 2 | 0 | 0 | 0 | [China finished a 3,026 m bridge into North Korea in 2014. It sat unused for 12 years be...](https://x.com/i/web/status/2114150909479379420) |
 | 2026-10-24 22:01 | 1 | 0 | 0 | 0 | [The malaria parasite never breaks into a red blood cell. It plants a ring of protein an...](https://x.com/i/web/status/2114115210613055721) |
-| 2026-10-24 19:34 | 4 | 0 | 0 | 0 | [The Barnes Ice Cap is frozen to its bedrock, so it never bulldozed the moss at its edge...](https://x.com/i/web/status/2114077988178530320) |
-| 2026-10-24 17:02 | 4 | 0 | 0 | 0 | [FRB 20240304B left home about 3 billion years after the Big Bang. Free electrons on the...](https://x.com/i/web/status/2114039915553996929) |
-| 2026-10-24 13:41 | 1 | 0 | 0 | 0 | [A gamma-ray burst lasted 0.03 seconds in May 2005. Swift turned fast enough to collect ...](https://x.com/i/web/status/2113989217751588892) |
-| 2026-10-24 09:37 | 6 | 0 | 0 | 0 | [Two carrion crows were given the dot-motion task used on monkeys for decades: which way...](https://x.com/i/web/status/2113927941365072159) |
 
-_47 older posts not shown._
+_51 older posts not shown._
