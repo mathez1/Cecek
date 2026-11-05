@@ -1,22 +1,26 @@
 # Views
 
-Updated 2026-11-04T15:44:06+00:00. 101 posts tracked.
+Updated 2026-11-05T15:46:58+00:00. 105 posts tracked.
 
-**228 views** · 3 likes · 1 replies · 10,912 reposts · 0 bookmarks
+**237 views** · 3 likes · 1 replies · 10,912 reposts · 0 bookmarks
 
 Average 2 views a post. Best so far: 42 (Route du Rhum 1978 margin).
 
 | Posted | Views | Likes | Replies | Reposts | Post |
 |---|---:|---:|---:|---:|---|
+| 2026-11-05 15:35 | 0 | 0 | 0 | 0 | [The word "copper" is a place name. Latin cuprum comes from aes Cyprium, Cypriot metal. ...](https://x.com/i/web/status/2118366682234122342) |
+| 2026-11-05 07:03 | 0 | 0 | 0 | 0 | [Alan Rogers showed in 1988 that cheap copying can't raise a population's average fitnes...](https://x.com/i/web/status/2118237702562705882) |
+| 2026-11-05 00:01 | 2 | 0 | 0 | 0 | [Papers have linked almost 7,000 different molecules to raw garlic. A nutrition label ha...](https://x.com/i/web/status/2118131542765768800) |
+| 2026-11-04 18:42 | 4 | 0 | 0 | 0 | [After Appel and Haken proved the four color theorem in 1976, Illinois's math department...](https://x.com/i/web/status/2118051213854072909) |
 | 2026-11-04 11:14 | 0 | 0 | 0 | 0 | [Dealers buying used cars at wholesale auction pay less for 80,100 miles than for 79,900...](https://x.com/i/web/status/2117938651556348411) |
 | 2026-11-04 03:28 | 2 | 0 | 0 | 0 | [The boiling frog began as a search for the soul. Goltz, 1869: heated about 3.8 °C a min...](https://x.com/i/web/status/2117821148230770998) |
 | 2026-11-03 23:30 | 2 | 0 | 0 | 0 | [In 1967 a minister at Britain's radar lab was told the UK's colour TV royalties to RCA ...](https://x.com/i/web/status/2117761364491952147) |
 | 2026-11-03 17:55 | 2 | 0 | 0 | 0 | [Finland is building a nuclear waste repository meant to last 100,000 years. Gabon alrea...](https://x.com/i/web/status/2117677034566479992) |
-| 2026-11-03 10:09 | 3 | 0 | 0 | 0 | [A ship loaded to 31 ft of draught was sent to an anchorage without enough water. The Ri...](https://x.com/i/web/status/2117559806643118373) |
+| 2026-11-03 10:09 | 4 | 0 | 0 | 0 | [A ship loaded to 31 ft of draught was sent to an anchorage without enough water. The Ri...](https://x.com/i/web/status/2117559806643118373) |
 | 2026-11-03 02:42 | 1 | 0 | 0 | 0 | [Addison, share of babies given the name who were girls, in five-year blocks from 1986: ...](https://x.com/i/web/status/2117447194244763664) |
 | 2026-11-02 20:25 | 0 | 0 | 0 | 0 | [Ice-age seas fell about 120 m and joined Bali to Asia. Lombok, 35 km east, stayed an is...](https://x.com/i/web/status/2117352472293396556) |
 | 2026-11-02 10:04 | 0 | 0 | 0 | 0 | [Hipparchus found Earth's axis wobbles by checking old records. In 146 BCE he measured S...](https://x.com/i/web/status/2117196208221696022) |
-| 2026-11-02 02:38 | 0 | 0 | 0 | 0 | [The last crew to visit Hubble, in 2009, bolted a capture ring onto it. Not for rescue. ...](https://x.com/i/web/status/2117083844448780321) |
+| 2026-11-02 02:38 | 2 | 0 | 0 | 0 | [The last crew to visit Hubble, in 2009, bolted a capture ring onto it. Not for rescue. ...](https://x.com/i/web/status/2117083844448780321) |
 | 2026-11-01 22:54 | 1 | 0 | 0 | 0 | [Humans breathe out about 2.05 billion tonnes of CO2 a year, up 74% since 1985. It barel...](https://x.com/i/web/status/2117027588006617104) |
 | 2026-11-01 19:17 | 42 | 0 | 1 | 0 | [The first Route du Rhum, in 1978, was decided by 98 seconds. That was after 23 days alo...](https://x.com/i/web/status/2116972844135682311) |
 | 2026-11-01 14:34 | 1 | 0 | 0 | 0 | [Tandem-pore potassium channels, which our bodies use, have no known bacterial ancestor....](https://x.com/i/web/status/2116901711361327287) |
@@ -54,9 +58,5 @@ Average 2 views a post. Best so far: 42 (Route du Rhum 1978 margin).
 | 2026-10-25 20:59 | 1 | 0 | 0 | 0 | [Catching a single positron takes 8 to 11 hours. Northwestern then held one in a trap fo...](https://x.com/i/web/status/2114461863425487161) |
 | 2026-10-25 17:58 | 7 | 0 | 0 | 0 | [In Yunnan, hot-pot restaurants cook a mushroom until a timer goes off, and some reporte...](https://x.com/i/web/status/2114416283215159446) |
 | 2026-10-25 14:30 | 2 | 0 | 0 | 0 | [A house book begun in 1505 has a page with a chair fitted with six clamps. It was long ...](https://x.com/i/web/status/2114364030391373824) |
-| 2026-10-25 09:54 | 2 | 0 | 0 | 0 | [Engine E2045 flew 12 shuttle missions between 1998 and 2011, recovered and overhauled e...](https://x.com/i/web/status/2114294603914281240) |
-| 2026-10-25 05:00 | 1 | 0 | 0 | 0 | [In February 1993 the University of Minnesota announced that commercial users of its Gop...](https://x.com/i/web/status/2114220473445716255) |
-| 2026-10-25 00:23 | 2 | 0 | 0 | 0 | [China finished a 3,026 m bridge into North Korea in 2014. It sat unused for 12 years be...](https://x.com/i/web/status/2114150909479379420) |
-| 2026-10-24 22:01 | 1 | 0 | 0 | 0 | [The malaria parasite never breaks into a red blood cell. It plants a ring of protein an...](https://x.com/i/web/status/2114115210613055721) |
 
-_51 older posts not shown._
+_55 older posts not shown._
