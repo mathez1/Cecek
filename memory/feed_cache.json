@@ -7,10 +7,10 @@
     "modified": "Mon, 05 Dec 2022 19:50:41 GMT"
   },
   "https://feeds.arstechnica.com/arstechnica/index": {
-    "modified": "Tue, 3 Nov 2026 23:57:29 GMT"
+    "modified": "Thu, 5 Nov 2026 20:39:09 GMT"
   },
   "https://hnrss.org/best": {
-    "modified": "Tue, 03 Nov 2026 17:40:00 GMT"
+    "modified": "Thu, 05 Nov 2026 16:01:34 GMT"
   },
   "https://hnrss.org/frontpage": {
     "modified": "Wed, 04 Nov 2026 11:02:23 GMT"
@@ -20,11 +20,11 @@
     "modified": "Thu, 05 Nov 2026 06:57:31 GMT"
   },
   "https://marginalrevolution.com/feed": {
-    "etag": "\"e379aa1ac3dfc35cece3212bf85c383d\"",
-    "modified": "Tue, 03 Nov 2026 19:26:51 GMT"
+    "etag": "\"a743a018467e087a1bf7a6b07f586705\"",
+    "modified": "Thu, 05 Nov 2026 19:55:13 GMT"
   },
   "https://nautil.us/feed/": {
-    "etag": "W/\"8qqlbfoe2t96g\""
+    "etag": "W/\"13fmvh1kqgc8mq\""
   },
   "https://news.harvard.edu/gazette/feed/": {
     "etag": "W/\"f14296808a194b7ce78e396bd8aa8373\"",
@@ -76,8 +76,8 @@
     "modified": "Wed, 04 Nov 2026 22:56:57 GMT"
   },
   "https://www.nasa.gov/news-release/feed/": {
-    "etag": "W/\"13640f655b7b2c68534b1fe6d459cd41\"",
-    "modified": "Thu, 05 Nov 2026 15:26:22 GMT"
+    "etag": "W/\"c2f1ac3878151634ef991b54a00bf0cf\"",
+    "modified": "Thu, 05 Nov 2026 21:22:27 GMT"
   },
   "https://www.nature.com/nature.rss": {
     "etag": "\"5783bd50a170a1f39f1f3e283f3e672f\""
@@ -87,8 +87,8 @@
     "modified": "Wed, 04 Nov 2026 17:58:45 GMT"
   },
   "https://www.quantamagazine.org/feed/": {
-    "etag": "\"1882ef7f3b7fa51611f824915af9ee96-gzip\"",
-    "modified": "Thu, 05 Nov 2026 13:45:10 GMT"
+    "etag": "\"13ad9c72169ec6f8589deda027157d9d-gzip\"",
+    "modified": "Thu, 05 Nov 2026 17:04:03 GMT"
   },
   "https://www.sciencedaily.com/rss/top/science.xml": {
     "modified": "Thu, 05 Nov 2026 14:04:44 GMT"
@@ -111,7 +111,7 @@
     "etag": "W/\"hash4816621380163151730\""
   },
   "https://www.theguardian.com/world/rss": {
-    "etag": "W/\"hash-5132633856435207262\""
+    "etag": "W/\"hash2916287496183337349\""
   },
   "https://www.theverge.com/rss/index.xml": {
     "etag": "W/\"419185462327db05d59cb89c03468129\""
