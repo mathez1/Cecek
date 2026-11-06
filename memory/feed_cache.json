@@ -20,8 +20,8 @@
     "modified": "Thu, 05 Nov 2026 06:57:31 GMT"
   },
   "https://marginalrevolution.com/feed": {
-    "etag": "\"a743a018467e087a1bf7a6b07f586705\"",
-    "modified": "Thu, 05 Nov 2026 19:55:13 GMT"
+    "etag": "\"eb5136c61b64c0808db2270cfebef590\"",
+    "modified": "Fri, 06 Nov 2026 06:18:58 GMT"
   },
   "https://nautil.us/feed/": {
     "etag": "W/\"13fmvh1kqgc8mq\""
@@ -35,17 +35,17 @@
     "modified": "Wed, 04 Nov 2026 16:07:11 GMT"
   },
   "https://rss.arxiv.org/rss/cs.AI": {
-    "etag": "89966061a6504b8c643eb4970cded0c67d9bd89edcccbea636ae7b0af5574d8c"
+    "etag": "b7958fd8e9c18ffa20906cbf2ca16c282dca4ced8a627578ad564bb8bb894e3e"
   },
   "https://rss.arxiv.org/rss/econ.GN": {
-    "etag": "8d0144c12518978f31ec5dd0d020c8ce1c6a93c5bc4ec0c2f5dd80d4ba91d140"
+    "etag": "bf4bd37df85a860275aec16a090ef7fa40a8f01d80a96d9625a34d0f56e6d015"
   },
   "https://rss.arxiv.org/rss/q-bio.PE": {
     "etag": "9df90205c02e1214095fa349d9ba9b9ef13a0f179b171e52fc6e3ff95f487308"
   },
   "https://rss.slashdot.org/Slashdot/slashdotMain": {
-    "etag": "W/\"e407-65f716f9cd283\"",
-    "modified": "Wed, 04 Nov 2026 11:11:08 GMT"
+    "etag": "W/\"e3ac-65f971223acc7\"",
+    "modified": "Fri, 06 Nov 2026 08:05:09 GMT"
   },
   "https://spectrum.ieee.org/feeds/feed.rss": {
     "etag": "\"e5701d6df30003cb7d6d53b1a3e1d1e7\"",
@@ -83,8 +83,8 @@
     "etag": "\"e94387f774af6073ba12582ab7484991\""
   },
   "https://www.newscientist.com/feed/home/": {
-    "etag": "W/\"8e979b7beeb8f2492a6df608778138b1\"",
-    "modified": "Wed, 04 Nov 2026 17:58:45 GMT"
+    "etag": "W/\"875b1f8e0c8d8997d6229e2623ce7d29\"",
+    "modified": "Thu, 05 Nov 2026 20:45:33 GMT"
   },
   "https://www.quantamagazine.org/feed/": {
     "etag": "\"13ad9c72169ec6f8589deda027157d9d-gzip\"",
@@ -111,7 +111,7 @@
     "etag": "W/\"hash4816621380163151730\""
   },
   "https://www.theguardian.com/world/rss": {
-    "etag": "W/\"hash2916287496183337349\""
+    "etag": "W/\"hash2124537595470257493\""
   },
   "https://www.theverge.com/rss/index.xml": {
     "etag": "W/\"a859d2d61b40a9f29b9b04a145c9c966\""
