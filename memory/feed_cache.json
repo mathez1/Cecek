@@ -3,17 +3,17 @@
     "etag": "W/\"7fc9eb1bfdaf33200d14d5c60bc665b8\""
   },
   "https://bigthink.com/feed/": {
-    "etag": "W/\"24b3ab9e30ade842ea07a66d0389b9f2\"",
-    "modified": "Mon, 05 Dec 2022 19:50:41 GMT"
+    "etag": "W/\"bb9bb935dc5a302c010642c445e7ff70\"",
+    "modified": "Fri, 06 Nov 2026 20:15:24 GMT"
   },
   "https://feeds.arstechnica.com/arstechnica/index": {
-    "modified": "Fri, 6 Nov 2026 15:16:02 GMT"
+    "modified": "Fri, 6 Nov 2026 19:10:56 GMT"
   },
   "https://hnrss.org/best": {
     "modified": "Thu, 05 Nov 2026 22:17:15 GMT"
   },
   "https://hnrss.org/frontpage": {
-    "modified": "Fri, 06 Nov 2026 15:44:36 GMT"
+    "modified": "Fri, 06 Nov 2026 20:42:08 GMT"
   },
   "https://lobste.rs/rss": {
     "etag": "\"dmn2ydyelri3-c0t-gzip\"",
@@ -48,8 +48,8 @@
     "modified": "Fri, 06 Nov 2026 08:05:09 GMT"
   },
   "https://spectrum.ieee.org/feeds/feed.rss": {
-    "etag": "\"e5701d6df30003cb7d6d53b1a3e1d1e7\"",
-    "modified": "Thu, 05 Nov 2026 18:06:36 GMT"
+    "etag": "\"874b344d577741e8927ff612d7978511\"",
+    "modified": "Fri, 06 Nov 2026 15:43:37 GMT"
   },
   "https://techcrunch.com/feed/": {
     "etag": "W/\"d32d8da94ed4ff80cc80e035bc8d5a36\"",
@@ -63,17 +63,17 @@
     "modified": "Fri, 06 Nov 2026 16:04:19 GMT"
   },
   "https://www.astralcodexten.com/feed": {
-    "etag": "W/\"ce6cc-pWBbwVrTy4qP1kjRtEt/C7HZV8A\""
+    "etag": "W/\"d806b-R6jm/YM9UJ+sp8KlW0nTA/zDGEA\""
   },
   "https://www.atlasobscura.com/feeds/latest": {
-    "etag": "W/\"0230fe51b67aaae61441f98661af9ad8\""
+    "etag": "W/\"47f82af64f2de833778e2ee2e58afea4\""
   },
   "https://www.construction-physics.com/feed": {
     "etag": "W/\"cc7f2-SzfxIb5VzkMws60BoieoXUlUfTI\""
   },
   "https://www.economist.com/latest/rss.xml": {
-    "etag": "W/\"200ad8855c3f3424e6a71bcf7b89d26c\"",
-    "modified": "Wed, 04 Nov 2026 22:56:57 GMT"
+    "etag": "W/\"9211b2c1581697351dc6e86a417735dc\"",
+    "modified": "Fri, 06 Nov 2026 21:11:57 GMT"
   },
   "https://www.nasa.gov/news-release/feed/": {
     "etag": "W/\"fc80277220b2222a45fbea93cf10ec86\"",
@@ -98,7 +98,7 @@
     "modified": "Thu, 05 Nov 2026 14:55:34 GMT"
   },
   "https://www.smithsonianmag.com/rss/latest_articles/": {
-    "modified": "Fri, 06 Nov 2026 16:19:22 GMT"
+    "modified": "Fri, 06 Nov 2026 21:35:02 GMT"
   },
   "https://www.technologyreview.com/feed/": {
     "etag": "W/\"8e542988fbaf6124141dc9a075c650a3\"",
@@ -114,6 +114,6 @@
     "etag": "W/\"hash2124537595470257493\""
   },
   "https://www.theverge.com/rss/index.xml": {
-    "etag": "W/\"a859d2d61b40a9f29b9b04a145c9c966\""
+    "etag": "W/\"7301edb3314397cdba19ed48a46c2912\""
   }
 }
