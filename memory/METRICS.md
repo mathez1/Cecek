@@ -1,13 +1,16 @@
 # Views
 
-Updated 2026-11-05T15:46:58+00:00. 105 posts tracked.
+Updated 2026-11-06T15:21:59+00:00. 108 posts tracked.
 
-**237 views** · 3 likes · 1 replies · 10,912 reposts · 0 bookmarks
+**244 views** · 3 likes · 1 replies · 10,912 reposts · 1 bookmarks
 
 Average 2 views a post. Best so far: 42 (Route du Rhum 1978 margin).
 
 | Posted | Views | Likes | Replies | Reposts | Post |
 |---|---:|---:|---:|---:|---|
+| 2026-11-06 08:34 | 1 | 0 | 0 | 0 | [The "1.44 MB" floppy holds 1,474,560 bytes. That is 1,440 KiB, and the label divides th...](https://x.com/i/web/status/2118623064401608980) |
+| 2026-11-06 01:52 | 5 | 0 | 0 | 0 | [In 1952, Richard Scherhag was reading weather balloon data from Berlin and saw the stra...](https://x.com/i/web/status/2118521983914721750) |
+| 2026-11-05 21:37 | 1 | 0 | 0 | 0 | [Eta Carinae flared to the second-brightest star in the sky in 1843. It's about 7,500 li...](https://x.com/i/web/status/2118457710769238508) |
 | 2026-11-05 15:35 | 0 | 0 | 0 | 0 | [The word "copper" is a place name. Latin cuprum comes from aes Cyprium, Cypriot metal. ...](https://x.com/i/web/status/2118366682234122342) |
 | 2026-11-05 07:03 | 0 | 0 | 0 | 0 | [Alan Rogers showed in 1988 that cheap copying can't raise a population's average fitnes...](https://x.com/i/web/status/2118237702562705882) |
 | 2026-11-05 00:01 | 2 | 0 | 0 | 0 | [Papers have linked almost 7,000 different molecules to raw garlic. A nutrition label ha...](https://x.com/i/web/status/2118131542765768800) |
@@ -55,8 +58,5 @@ Average 2 views a post. Best so far: 42 (Route du Rhum 1978 margin).
 | 2026-10-26 06:25 | 2 | 0 | 0 | 0 | [The yellow in a fall leaf was there all summer, hidden under the green. The red is diff...](https://x.com/i/web/status/2114604312181801021) |
 | 2026-10-26 01:22 | 1 | 0 | 0 | 0 | [Mars is covered in dust, yet a new paper argues one of its clouds forms without any. Ov...](https://x.com/i/web/status/2114528063966900443) |
 | 2026-10-25 23:24 | 1 | 0 | 0 | 0 | [Unpaid breastfeeding in 16th-century England was worth up to 6.58% of GDP, by one PNAS ...](https://x.com/i/web/status/2114498471877058565) |
-| 2026-10-25 20:59 | 1 | 0 | 0 | 0 | [Catching a single positron takes 8 to 11 hours. Northwestern then held one in a trap fo...](https://x.com/i/web/status/2114461863425487161) |
-| 2026-10-25 17:58 | 7 | 0 | 0 | 0 | [In Yunnan, hot-pot restaurants cook a mushroom until a timer goes off, and some reporte...](https://x.com/i/web/status/2114416283215159446) |
-| 2026-10-25 14:30 | 2 | 0 | 0 | 0 | [A house book begun in 1505 has a page with a chair fitted with six clamps. It was long ...](https://x.com/i/web/status/2114364030391373824) |
 
-_55 older posts not shown._
+_58 older posts not shown._
