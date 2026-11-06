@@ -1,6 +1,6 @@
 {
   "https://aeon.co/feed.rss": {
-    "etag": "W/\"bb4e36c36a0f3da0730fcc8527e5223d\""
+    "etag": "W/\"7fc9eb1bfdaf33200d14d5c60bc665b8\""
   },
   "https://bigthink.com/feed/": {
     "etag": "W/\"24b3ab9e30ade842ea07a66d0389b9f2\"",
@@ -10,7 +10,7 @@
     "modified": "Thu, 5 Nov 2026 20:39:09 GMT"
   },
   "https://hnrss.org/best": {
-    "modified": "Thu, 05 Nov 2026 16:01:34 GMT"
+    "modified": "Thu, 05 Nov 2026 22:17:15 GMT"
   },
   "https://hnrss.org/frontpage": {
     "modified": "Wed, 04 Nov 2026 11:02:23 GMT"
@@ -48,8 +48,8 @@
     "modified": "Wed, 04 Nov 2026 11:11:08 GMT"
   },
   "https://spectrum.ieee.org/feeds/feed.rss": {
-    "etag": "\"9c713a68be823210d64a326af4519fa0\"",
-    "modified": "Tue, 03 Nov 2026 19:00:47 GMT"
+    "etag": "\"e5701d6df30003cb7d6d53b1a3e1d1e7\"",
+    "modified": "Thu, 05 Nov 2026 18:06:36 GMT"
   },
   "https://techcrunch.com/feed/": {
     "etag": "W/\"2223cd5051f1f6c379bb84c0f75fd5a1\"",
@@ -63,7 +63,7 @@
     "modified": "Thu, 05 Nov 2026 06:30:28 GMT"
   },
   "https://www.astralcodexten.com/feed": {
-    "etag": "W/\"ba978-gyHjVtpGrw0ippyjXOWO3U2mDn8\""
+    "etag": "W/\"ce6cc-Zyv7yET5003k4T+Y0mXF+CNYecU\""
   },
   "https://www.atlasobscura.com/feeds/latest": {
     "etag": "W/\"0230fe51b67aaae61441f98661af9ad8\""
@@ -76,11 +76,11 @@
     "modified": "Wed, 04 Nov 2026 22:56:57 GMT"
   },
   "https://www.nasa.gov/news-release/feed/": {
-    "etag": "W/\"c2f1ac3878151634ef991b54a00bf0cf\"",
-    "modified": "Thu, 05 Nov 2026 21:22:27 GMT"
+    "etag": "W/\"fc80277220b2222a45fbea93cf10ec86\"",
+    "modified": "Fri, 06 Nov 2026 00:40:18 GMT"
   },
   "https://www.nature.com/nature.rss": {
-    "etag": "\"5783bd50a170a1f39f1f3e283f3e672f\""
+    "etag": "\"e94387f774af6073ba12582ab7484991\""
   },
   "https://www.newscientist.com/feed/home/": {
     "etag": "W/\"8e979b7beeb8f2492a6df608778138b1\"",
@@ -114,6 +114,6 @@
     "etag": "W/\"hash2916287496183337349\""
   },
   "https://www.theverge.com/rss/index.xml": {
-    "etag": "W/\"419185462327db05d59cb89c03468129\""
+    "etag": "W/\"a859d2d61b40a9f29b9b04a145c9c966\""
   }
 }
