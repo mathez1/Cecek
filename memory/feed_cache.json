@@ -38,10 +38,10 @@
     "etag": "b7958fd8e9c18ffa20906cbf2ca16c282dca4ced8a627578ad564bb8bb894e3e"
   },
   "https://rss.arxiv.org/rss/econ.GN": {
-    "etag": "bf4bd37df85a860275aec16a090ef7fa40a8f01d80a96d9625a34d0f56e6d015"
+    "etag": "da0b46b62311111055e0149b65f6cb19725e8767158445c06a6bfba1b32c1286"
   },
   "https://rss.arxiv.org/rss/q-bio.PE": {
-    "etag": "9df90205c02e1214095fa349d9ba9b9ef13a0f179b171e52fc6e3ff95f487308"
+    "etag": "59f7911f281aaf396348cdba6d6d743031fc54cba422c66d5bbbed621eecc801"
   },
   "https://rss.slashdot.org/Slashdot/slashdotMain": {
     "etag": "W/\"e462-65faa49af1a28\"",
@@ -76,8 +76,8 @@
     "modified": "Fri, 06 Nov 2026 21:11:57 GMT"
   },
   "https://www.nasa.gov/news-release/feed/": {
-    "etag": "W/\"929a0cd488325e64974345e74b371b5c\"",
-    "modified": "Sat, 07 Nov 2026 13:40:18 GMT"
+    "etag": "W/\"5092f71f3f6a082f8cfde44c1d4d9dea\"",
+    "modified": "Sat, 07 Nov 2026 18:33:12 GMT"
   },
   "https://www.nature.com/nature.rss": {
     "etag": "\"58edf5beb2783d4b6fa70f823faa883f\""
@@ -98,14 +98,14 @@
     "modified": "Fri, 06 Nov 2026 22:03:22 GMT"
   },
   "https://www.smithsonianmag.com/rss/latest_articles/": {
-    "modified": "Sat, 07 Nov 2026 07:14:51 GMT"
+    "modified": "Sat, 07 Nov 2026 18:45:17 GMT"
   },
   "https://www.technologyreview.com/feed/": {
     "etag": "W/\"8e542988fbaf6124141dc9a075c650a3\"",
     "modified": "Fri, 06 Nov 2026 12:47:41 GMT"
   },
   "https://www.theatlantic.com/feed/all/": {
-    "modified": "Sat, 07 Nov 2026 03:10:08 GMT"
+    "modified": "Sat, 07 Nov 2026 18:09:20 GMT"
   },
   "https://www.theguardian.com/science/rss": {
     "etag": "W/\"hash4816621380163151730\""
