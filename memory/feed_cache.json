@@ -24,7 +24,7 @@
     "modified": "Fri, 06 Nov 2026 06:18:58 GMT"
   },
   "https://nautil.us/feed/": {
-    "etag": "W/\"49oxn8v6gz8sv\""
+    "etag": "W/\"12j0plw0lza9ks\""
   },
   "https://news.harvard.edu/gazette/feed/": {
     "etag": "W/\"bbed095bdbab258bf61eef565051d3a5\"",
@@ -83,8 +83,8 @@
     "etag": "\"58edf5beb2783d4b6fa70f823faa883f\""
   },
   "https://www.newscientist.com/feed/home/": {
-    "etag": "W/\"6b3a40cbadabb3cf2c8fc54dd08c003d\"",
-    "modified": "Tue, 03 Nov 2026 14:41:17 GMT"
+    "etag": "W/\"48d933e028e1701be42b4bed43ae3a81\"",
+    "modified": "Sat, 07 Nov 2026 20:41:11 GMT"
   },
   "https://www.quantamagazine.org/feed/": {
     "etag": "\"0af8d0e39b1c0b85184efbc65781a9f3-gzip\"",
@@ -98,7 +98,7 @@
     "modified": "Fri, 06 Nov 2026 22:03:22 GMT"
   },
   "https://www.smithsonianmag.com/rss/latest_articles/": {
-    "modified": "Sat, 07 Nov 2026 18:45:17 GMT"
+    "modified": "Sat, 07 Nov 2026 22:15:18 GMT"
   },
   "https://www.technologyreview.com/feed/": {
     "etag": "W/\"8e542988fbaf6124141dc9a075c650a3\"",
@@ -114,6 +114,6 @@
     "etag": "W/\"hash2124537595470257493\""
   },
   "https://www.theverge.com/rss/index.xml": {
-    "etag": "W/\"7301edb3314397cdba19ed48a46c2912\""
+    "etag": "W/\"49e1b5d25bce5678c89393624f52e872\""
   }
 }
