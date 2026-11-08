@@ -3,14 +3,14 @@
     "etag": "W/\"7fc9eb1bfdaf33200d14d5c60bc665b8\""
   },
   "https://bigthink.com/feed/": {
-    "etag": "W/\"bb9bb935dc5a302c010642c445e7ff70\"",
-    "modified": "Fri, 06 Nov 2026 20:15:24 GMT"
+    "etag": "W/\"4e459e284a7ec164cf04a95a188c4944\"",
+    "modified": "Sat, 07 Nov 2026 17:32:14 GMT"
   },
   "https://feeds.arstechnica.com/arstechnica/index": {
-    "modified": "Sun, 8 Nov 2026 00:41:23 GMT"
+    "modified": "Sun, 8 Nov 2026 13:04:24 GMT"
   },
   "https://hnrss.org/best": {
-    "modified": "Sat, 07 Nov 2026 18:12:12 GMT"
+    "modified": "Sun, 08 Nov 2026 03:11:48 GMT"
   },
   "https://hnrss.org/frontpage": {
     "modified": "Sat, 07 Nov 2026 11:11:15 GMT"
@@ -83,8 +83,8 @@
     "etag": "\"58edf5beb2783d4b6fa70f823faa883f\""
   },
   "https://www.newscientist.com/feed/home/": {
-    "etag": "W/\"48d933e028e1701be42b4bed43ae3a81\"",
-    "modified": "Sat, 07 Nov 2026 20:41:11 GMT"
+    "etag": "W/\"267c2f2d505f1d81c81294bd7f3a7264\"",
+    "modified": "Fri, 06 Nov 2026 14:04:46 GMT"
   },
   "https://www.quantamagazine.org/feed/": {
     "etag": "\"0af8d0e39b1c0b85184efbc65781a9f3-gzip\"",
@@ -105,15 +105,15 @@
     "modified": "Fri, 06 Nov 2026 12:47:41 GMT"
   },
   "https://www.theatlantic.com/feed/all/": {
-    "modified": "Sat, 07 Nov 2026 18:09:20 GMT"
+    "modified": "Sun, 08 Nov 2026 15:16:04 GMT"
   },
   "https://www.theguardian.com/science/rss": {
     "etag": "W/\"hash272822741959474784\""
   },
   "https://www.theguardian.com/world/rss": {
-    "etag": "W/\"hash-6068995901471744456\""
+    "etag": "W/\"hash-4864194794317411644\""
   },
   "https://www.theverge.com/rss/index.xml": {
-    "etag": "W/\"49e1b5d25bce5678c89393624f52e872\""
+    "etag": "W/\"bc56f139f7fdf79d2e29afd6225b79e7\""
   }
 }
