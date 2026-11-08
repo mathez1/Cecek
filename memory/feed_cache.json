@@ -10,7 +10,7 @@
     "modified": "Sun, 8 Nov 2026 13:04:24 GMT"
   },
   "https://hnrss.org/best": {
-    "modified": "Sun, 08 Nov 2026 03:11:48 GMT"
+    "modified": "Sun, 08 Nov 2026 18:16:07 GMT"
   },
   "https://hnrss.org/frontpage": {
     "modified": "Sat, 07 Nov 2026 11:11:15 GMT"
@@ -41,19 +41,19 @@
     "etag": "da0b46b62311111055e0149b65f6cb19725e8767158445c06a6bfba1b32c1286"
   },
   "https://rss.arxiv.org/rss/q-bio.PE": {
-    "etag": "59f7911f281aaf396348cdba6d6d743031fc54cba422c66d5bbbed621eecc801"
+    "etag": "eb1994a3a9e36aa6ce7d9352011e3c3ee236cf150726cd75a958c7d84ebd104f"
   },
   "https://rss.slashdot.org/Slashdot/slashdotMain": {
-    "etag": "W/\"108c2-65fbf29dce388\"",
-    "modified": "Sun, 08 Nov 2026 07:55:05 GMT"
+    "etag": "W/\"11764-65fc8ffb9b8d2\"",
+    "modified": "Sun, 08 Nov 2026 19:39:08 GMT"
   },
   "https://spectrum.ieee.org/feeds/feed.rss": {
     "etag": "\"874b344d577741e8927ff612d7978511\"",
     "modified": "Fri, 06 Nov 2026 15:43:37 GMT"
   },
   "https://techcrunch.com/feed/": {
-    "etag": "W/\"489d397a1dcb72267fce54d56a369158\"",
-    "modified": "Fri, 06 Nov 2026 23:32:47 GMT"
+    "etag": "W/\"67a329ba581e1f343650e3dc2a572f7c\"",
+    "modified": "Sun, 08 Nov 2026 19:23:23 GMT"
   },
   "https://www.404media.co/rss/": {
     "etag": "W/\"1f7e6-xlefwR5cPwpFGKS4ZM5SXGwMRpE\""
@@ -63,7 +63,7 @@
     "modified": "Sat, 07 Nov 2026 13:42:42 GMT"
   },
   "https://www.astralcodexten.com/feed": {
-    "etag": "W/\"d809b-O96SKl1HJgW+Kngr/t0lG9ucF1M\""
+    "etag": "W/\"d809b-03c4Czl0cBY7ikN1lzCmQ2+yocs\""
   },
   "https://www.atlasobscura.com/feeds/latest": {
     "etag": "W/\"47f82af64f2de833778e2ee2e58afea4\""
