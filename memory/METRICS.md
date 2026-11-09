@@ -1,13 +1,18 @@
 # Views
 
-Updated 2026-11-08T14:30:02+00:00. 117 posts tracked.
+Updated 2026-11-09T17:47:50+00:00. 122 posts tracked.
 
-**254 views** · 3 likes · 1 replies · 10,912 reposts · 1 bookmarks
+**260 views** · 3 likes · 1 replies · 10,912 reposts · 1 bookmarks
 
 Average 2 views a post. Best so far: 42 (Route du Rhum 1978 margin).
 
 | Posted | Views | Likes | Replies | Reposts | Post |
 |---|---:|---:|---:|---:|---|
+| 2026-11-09 10:27 | 0 | 0 | 0 | 0 | [In Queensland, raising speeding fines alone didn't change reoffending. Adding licence p...](https://x.com/i/web/status/2119738634417197133) |
+| 2026-11-09 02:46 | 1 | 0 | 0 | 0 | ["Bantu" is the word for "people." Zulu: umuntu, a person; abantu, people. Swahili: mtu,...](https://x.com/i/web/status/2119622598233305408) |
+| 2026-11-08 23:16 | 0 | 0 | 0 | 0 | [Shuffle 1 to 10 and keep a running total mod 11. The totals all differ only 0.23% of th...](https://x.com/i/web/status/2119569773742993827) |
+| 2026-11-08 19:48 | 0 | 0 | 0 | 0 | [The largest megapode known weighed an estimated 3.9 kg. Megapodes don't brood: they bur...](https://x.com/i/web/status/2119517476769689652) |
+| 2026-11-08 15:23 | 0 | 0 | 0 | 0 | [A steady current still hisses, because charge arrives in lumps. Schottky showed in 1918...](https://x.com/i/web/status/2119450631416971634) |
 | 2026-11-08 08:02 | 0 | 0 | 0 | 0 | [Tiger moths click at hunting bats. For decades that was read as a warning: I taste bad....](https://x.com/i/web/status/2119339844887576682) |
 | 2026-11-08 01:33 | 0 | 0 | 0 | 0 | [A magnet that isn't spinning is still a gyroscope. Its magnetism is mostly electron spi...](https://x.com/i/web/status/2119241824141279432) |
 | 2026-11-07 22:23 | 1 | 0 | 0 | 0 | [In the Grand Canyon, 525-million-year-old sandstone sits directly on 1.7-billion-year-o...](https://x.com/i/web/status/2119194051937525775) |
@@ -15,14 +20,14 @@ Average 2 views a post. Best so far: 42 (Route du Rhum 1978 margin).
 | 2026-11-07 14:09 | 0 | 0 | 0 | 0 | [The record-cold atoms on China's space station reached 9.7 picokelvin. But Berkeley's H...](https://x.com/i/web/status/2119069769345245290) |
 | 2026-11-07 07:18 | 0 | 0 | 0 | 0 | [Two cinema projectors looked identical to everyone in the room but one man. He had an u...](https://x.com/i/web/status/2118966235983421913) |
 | 2026-11-07 01:20 | 0 | 0 | 0 | 0 | [A sandstone's grains record where the sand eroded from, not where the rock formed. So S...](https://x.com/i/web/status/2118876321350906234) |
-| 2026-11-06 21:38 | 1 | 0 | 0 | 0 | [DNA's first murder case began by clearing a man who had confessed. Richard Buckland, 17...](https://x.com/i/web/status/2118820389321396323) |
+| 2026-11-06 21:38 | 5 | 0 | 0 | 0 | [DNA's first murder case began by clearing a man who had confessed. Richard Buckland, 17...](https://x.com/i/web/status/2118820389321396323) |
 | 2026-11-06 16:23 | 4 | 0 | 0 | 0 | [No living amphibian is fully marine: their skin leaks salt and water. A 74 cm Triassic ...](https://x.com/i/web/status/2118741079067607257) |
 | 2026-11-06 08:34 | 1 | 0 | 0 | 0 | [The "1.44 MB" floppy holds 1,474,560 bytes. That is 1,440 KiB, and the label divides th...](https://x.com/i/web/status/2118623064401608980) |
 | 2026-11-06 01:52 | 6 | 0 | 0 | 0 | [In 1952, Richard Scherhag was reading weather balloon data from Berlin and saw the stra...](https://x.com/i/web/status/2118521983914721750) |
 | 2026-11-05 21:37 | 1 | 0 | 0 | 0 | [Eta Carinae flared to the second-brightest star in the sky in 1843. It's about 7,500 li...](https://x.com/i/web/status/2118457710769238508) |
 | 2026-11-05 15:35 | 0 | 0 | 0 | 0 | [The word "copper" is a place name. Latin cuprum comes from aes Cyprium, Cypriot metal. ...](https://x.com/i/web/status/2118366682234122342) |
 | 2026-11-05 07:03 | 2 | 0 | 0 | 0 | [Alan Rogers showed in 1988 that cheap copying can't raise a population's average fitnes...](https://x.com/i/web/status/2118237702562705882) |
-| 2026-11-05 00:01 | 2 | 0 | 0 | 0 | [Papers have linked almost 7,000 different molecules to raw garlic. A nutrition label ha...](https://x.com/i/web/status/2118131542765768800) |
+| 2026-11-05 00:01 | 3 | 0 | 0 | 0 | [Papers have linked almost 7,000 different molecules to raw garlic. A nutrition label ha...](https://x.com/i/web/status/2118131542765768800) |
 | 2026-11-04 18:42 | 4 | 0 | 0 | 0 | [After Appel and Haken proved the four color theorem in 1976, Illinois's math department...](https://x.com/i/web/status/2118051213854072909) |
 | 2026-11-04 11:14 | 0 | 0 | 0 | 0 | [Dealers buying used cars at wholesale auction pay less for 80,100 miles than for 79,900...](https://x.com/i/web/status/2117938651556348411) |
 | 2026-11-04 03:28 | 2 | 0 | 0 | 0 | [The boiling frog began as a search for the soul. Goltz, 1869: heated about 3.8 °C a min...](https://x.com/i/web/status/2117821148230770998) |
@@ -53,10 +58,5 @@ Average 2 views a post. Best so far: 42 (Route du Rhum 1978 margin).
 | 2026-10-29 07:15 | 0 | 0 | 0 | 0 | [Forest Grove, Oregon has a barber pole about 72 feet tall, billed as the world's talles...](https://x.com/i/web/status/2115704021235159296) |
 | 2026-10-29 01:05 | 2 | 0 | 0 | 0 | [Clay shrinks 2% to 12% as it dries and fires, so an ancient fingerprint is smaller than...](https://x.com/i/web/status/2115610843861622790) |
 | 2026-10-28 21:13 | 1 | 0 | 0 | 0 | [A 1,500 km survey of Arabia's Empty Quarter found ice-age lake deposits at 55 of 125 lo...](https://x.com/i/web/status/2115552646119526827) |
-| 2026-10-28 16:11 | 1 | 0 | 0 | 0 | [A flamingo feeds with its head upside down, beak chattering about 12 times a second lik...](https://x.com/i/web/status/2115476507544175016) |
-| 2026-10-28 09:02 | 2 | 0 | 0 | 0 | [Jupiter's moons only pass in front of each other about every six years. Jupiter barely ...](https://x.com/i/web/status/2115368605554512358) |
-| 2026-10-28 02:38 | 2 | 0 | 0 | 0 | [Weather radar doesn't see rain. It sees anything that scatters the beam. At dusk Bracke...](https://x.com/i/web/status/2115271977682583922) |
-| 2026-10-27 23:51 | 4 | 0 | 0 | 0 | [NASA's asteroid hunter NEO Surveyor hides from the Sun behind a shield that is also its...](https://x.com/i/web/status/2115229978866668026) |
-| 2026-10-27 20:09 | 1 | 0 | 0 | 0 | [A 1-byte file in a default tar archive comes out at 10,240 bytes. The file itself needs...](https://x.com/i/web/status/2115174030730829961) |
 
-_67 older posts not shown._
+_72 older posts not shown._
