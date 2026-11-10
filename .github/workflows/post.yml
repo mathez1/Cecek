@@ -99,6 +99,29 @@ jobs:
           XAI_IMAGE_MODEL: ${{ vars.XAI_IMAGE_MODEL }}
         run: python -m bot.main
 
+      # Answers people who @mentioned BoB, which is the only replying X lets
+      # an API account do. Its own step so it still runs after the posting
+      # step stopped at the daily cap, and continue-on-error because a reply
+      # is never worth a red run.
+      - name: Answer mentions
+        if: always()
+        continue-on-error: true
+        timeout-minutes: 5
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          X_API_KEY: ${{ secrets.X_API_KEY }}
+          X_API_SECRET: ${{ secrets.X_API_SECRET }}
+          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_TOKEN_SECRET: ${{ secrets.X_ACCESS_TOKEN_SECRET }}
+          DRY_RUN: ${{ inputs.dry_run || vars.DRY_RUN || 'false' }}
+          MODEL: ${{ vars.MODEL }}
+          ALLOW_LINKS: ${{ vars.ALLOW_LINKS }}
+          X_USER_ID: ${{ vars.X_USER_ID }}
+          ENABLE_REPLIES: ${{ vars.ENABLE_REPLIES }}
+          MAX_REPLIES_PER_RUN: ${{ vars.MAX_REPLIES_PER_RUN }}
+          DAILY_REPLY_BUDGET: ${{ vars.DAILY_REPLY_BUDGET }}
+        run: python -m bot.replies
+
       # The picture is not committed, so this is the only way to see what a
       # dry run drew. always(): a run that failed after drawing still has one.
       - name: Keep the picture

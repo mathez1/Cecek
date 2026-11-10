@@ -113,6 +113,14 @@ class Config:
     # this rather than leaving it to chance.
     news_percent: int = 70
 
+    # --- replies ---
+    # X lets an API account reply only to someone who @mentioned it or
+    # quoted its post, so that is all this ever answers. The caps keep a
+    # pile-on, or another bot replying back, from becoming a bill or a loop.
+    enable_replies: bool = True
+    max_replies_per_run: int = 3
+    daily_reply_budget: int = 20
+
     # --- pictures ---
     # Charts are free: they are drawn locally from numbers the post already
     # states. Illustrations are not, which is why they have their own cap.
@@ -235,6 +243,9 @@ def load_config() -> Config:
         allow_links=_env_bool("ALLOW_LINKS", False),
         max_consecutive_failures=_env_int("MAX_CONSECUTIVE_FAILURES", 6),
         news_percent=_env_int("NEWS_PERCENT", 70),
+        enable_replies=_env_bool("ENABLE_REPLIES", True),
+        max_replies_per_run=_env_int("MAX_REPLIES_PER_RUN", 3),
+        daily_reply_budget=_env_int("DAILY_REPLY_BUDGET", 20),
         enable_visuals=_env_bool("ENABLE_VISUALS", True),
         image_model=_env_str("IMAGE_MODEL", "imagen-4.0-generate-001"),
         daily_image_budget=_env_int("DAILY_IMAGE_BUDGET", 10),

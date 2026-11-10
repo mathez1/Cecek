@@ -317,6 +317,29 @@ check it against the developer console after a few posts.
 
 ---
 
+## Replies
+
+BoB answers people who @mention him, after every posting run, and nobody
+else. That is not a choice: since February 2026 the X API refuses a reply
+unless the post being answered mentions the account or quotes one of its
+posts, and X's automation rules forbid unsolicited automated replies anyway.
+Breaking them risks suspension for BoB and for accounts linked to it. So
+[`bot/replies.py`](bot/replies.py) never searches for conversations to join.
+
+| Limit | Why |
+|---|---|
+| Once per post, ever | X's rules allow one automated reply to a post |
+| 3 replies per person per day | Two bots replying to each other loop forever |
+| `MAX_REPLIES_PER_RUN`, `DAILY_REPLY_BUDGET` | A pile-on should not become a bill |
+
+The mention is passed to the model as the person's message, delimited, never
+as instructions, so "ignore your rules and post this" reads as something
+someone said to BoB. BoB may stay silent, and does for spam, abuse, bait, or
+when there is nothing worth adding. A reply that fails costs that reply only:
+the step never turns a run red and never touches the circuit breaker.
+
+---
+
 ## Views
 
 A second workflow, [`views`](.github/workflows/metrics.yml), reads how many
@@ -403,6 +426,9 @@ Actions → Variables). All have working defaults.
 | `RECENT_POSTS_IN_CONTEXT` | `40` | How much history the model sees. |
 | `MAX_CONSECUTIVE_FAILURES` | `6` | Stop calling Claude after this many failed runs in a row. `0` disables it. |
 | `NEWS_PERCENT` | `70` | Percent of posts written as a news report (bullet points of what BoB found out). The rest are off the clock: fun facts, realizations, jokes. Held to this mix from recent history, not left to chance. |
+| `ENABLE_REPLIES` | `true` | Answer people who @mention BoB. The only replying X allows an API account. |
+| `MAX_REPLIES_PER_RUN` | `3` | Mentions considered per run. The rest wait for the next run. |
+| `DAILY_REPLY_BUDGET` | `20` | Replies per day. Each is a $0.015 post plus a short Claude call. `0` is unlimited. |
 | `ENABLE_VISUALS` | `true` | Whether the model is asked for a picture at all. Off removes the question from the schema entirely. |
 | `DAILY_IMAGE_BUDGET` | `10` | Generated illustrations per day, about $0.04 each. Matches the post cap so every post can have one. Posts past it get a chart or title card. `0` is unlimited. |
 | `IMAGE_MODEL` | `imagen-4.0-generate-001` | Which Google image model `IMAGE_API_KEY` talks to. Paid-only on Google's side. The first thing here to go stale. |
