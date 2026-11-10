@@ -62,7 +62,19 @@ def metrics_step_env() -> dict:
 
 
 def every_wired_setting() -> set[str]:
-    return set(post_step_env()) | set(metrics_step_env())
+    """Every variable any step of either workflow passes through.
+
+    Settings are read by different entry points (the poster, the replier,
+    the view tracker), each in its own step, so a setting is wired if some
+    step passes it.
+    """
+    names: set[str] = set()
+    for path in (POST_YML, METRICS_YML):
+        workflow = yaml.safe_load(path.read_text(encoding="utf-8"))
+        for job in workflow["jobs"].values():
+            for step in job["steps"]:
+                names |= set((step.get("env") or {}).keys())
+    return names
 
 
 class TestEverySettingIsWired:
@@ -234,3 +246,39 @@ class TestTheDocsMatchTheCode:
 
         claimed = {int(n) for n in re.findall(r"(\d+) weighted characters", README.read_text(encoding="utf-8"))}
         assert claimed <= {POST_CHAR_LIMIT}
+
+
+class TestImageKeysStaySecret:
+    """Repository variables are readable by anyone who can see the repo."""
+
+    @pytest.mark.parametrize("name", ["IMAGE_API_KEY", "XAI_API_KEY"])
+    def test_it_comes_from_secrets(self, name):
+        env = post_step_env()
+        assert name in env, f"{name} is not passed to the posting step"
+        assert "secrets." in str(env[name]), f"{name} must come from secrets"
+        assert "vars." not in str(env[name]), f"{name} must not come from vars"
+
+
+class TestTheReplyStep:
+    def _step(self):
+        workflow = yaml.safe_load(POST_YML.read_text(encoding="utf-8"))
+        return next(
+            s for s in workflow["jobs"]["post"]["steps"]
+            if s.get("name") == "Answer mentions"
+        )
+
+    def test_it_runs_even_when_posting_stopped(self):
+        assert "always()" in str(self._step().get("if", ""))
+
+    def test_a_reply_failure_never_turns_the_run_red(self):
+        assert self._step().get("continue-on-error") is True
+
+    def test_it_runs_before_memory_is_committed(self):
+        workflow = yaml.safe_load(POST_YML.read_text(encoding="utf-8"))
+        names = [s.get("name") for s in workflow["jobs"]["post"]["steps"]]
+        assert names.index("Answer mentions") < names.index("Commit memory")
+
+    def test_its_keys_come_from_secrets(self):
+        env = self._step()["env"]
+        for name in SECRETS:
+            assert "secrets." in str(env[name])

@@ -17,7 +17,7 @@ import random
 import sys
 from pathlib import Path
 
-from bot import cost, explore, guard, imagegen, memory, visual
+from bot import cost, explore, guard, imagegen, memory, modes, visual
 from bot.brain import Brain, BrainError, Draft, Exploration
 from bot.config import POST_CHAR_LIMIT, Config, ConfigError, load_config
 from bot.media import MediaError, MediaUploader
@@ -159,8 +159,8 @@ def draw(
         # The only branch that can spend money, so it is the only one that
         # looks at a key or a budget.
         used = memory.images_today(state)
-        if not cfg.image_api_key:
-            log.info("an illustration was chosen but IMAGE_API_KEY is not set")
+        if not imagegen.provider(cfg):
+            log.info("an illustration was chosen but no image key is set")
             attempt = False
         elif 0 < cfg.daily_image_budget <= used:
             log.info(
@@ -227,7 +227,11 @@ def _media_note(illustrator: object | None, uploader: object | None, cfg: Config
 
     parts = []
     if images:
-        parts.append(f"{images} generated image ({cfg.image_model})")
+        vendor = getattr(illustrator, "vendor", "")
+        model = cfg.xai_image_model if vendor == "xai" else cfg.image_model
+        spent = getattr(illustrator, "cost_usd", 0.0)
+        priced = f", ${spent:.3f}" if spent else ""
+        parts.append(f"{images} generated image ({model}{priced})")
     if calls:
         parts.append(f"{calls} X media call{'s' if calls != 1 else ''}, price unpublished")
     return "**Picture cost:** " + ", ".join(parts) + "  \n"
@@ -388,7 +392,9 @@ def run() -> int:
     brain = Brain(cfg)
 
     try:
-        exploration = brain.explore(digest, history, persona)
+        mode = modes.pick(history, cfg.news_percent / 100)
+        log.info("mode this run: %s", mode)
+        exploration = brain.explore(digest, history, persona, mode=mode)
         draft = write_draft(brain, exploration, history, recent, persona, cfg)
     except BrainError as exc:
         log.error("could not write a post: %s", exc)
@@ -472,6 +478,7 @@ def run() -> int:
                 url=result.url,
                 picture=rendered.kind if (rendered is not None and media_ids) else "none",
                 picture_wanted=getattr(draft.visual, "kind", "none"),
+                mode=getattr(exploration, "mode", ""),
             ),
         )
     except OSError as exc:

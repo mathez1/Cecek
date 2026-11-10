@@ -128,8 +128,13 @@ _BAIT_PATTERNS: tuple[tuple[str, str], ...] = (
     (r"\bfollow (?:me|for more)\b", "self-promotion / follow bait"),
     (r"^\s*\d+\s*[/|]\s*\d+\b", "looks like a numbered thread part"),
     (r"\b(?:1/|1/\d+)\s*$", "looks like the start of a thread"),
-    (r"#\w+", "contains a hashtag"),
 )
+
+# A hashtag as X parses one: a letter or underscore first, so "#1" and "C#"
+# are not hashtags. One is allowed, for a live event people are searching;
+# two or more read as spam to readers and to X's own filters.
+_HASHTAG = re.compile(r"(?<![\w&#])#[^\W\d]\w*")
+MAX_HASHTAGS = 1
 
 # Containment is only trustworthy once there is enough vocabulary for an
 # overlap to mean something. Below this, two unrelated short posts can share
@@ -231,6 +236,13 @@ def check_draft(
 
     if stripped.count("\n\n") >= 3:
         problems.append("reads like a thread; it must be one standalone post")
+
+    hashtags = _HASHTAG.findall(stripped)
+    if len(hashtags) > MAX_HASHTAGS:
+        problems.append(
+            f"has {len(hashtags)} hashtags; at most {MAX_HASHTAGS}, and only "
+            "for a live event or trending topic"
+        )
 
     if "—" in stripped or "–" in stripped:
         problems.append("contains an em dash or en dash; the persona forbids them")

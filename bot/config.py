@@ -78,6 +78,9 @@ class Config:
     # Optional, and the only key that is not required to run. Without it the
     # bot draws charts and never generates an illustration.
     image_api_key: str = field(repr=False, default="")
+    # xAI's key, for Grok Imagine. Preferred over Google's when both are set:
+    # it is X's own image model, and about half the price.
+    xai_api_key: str = field(repr=False, default="")
 
     # --- model ---
     model: str = "claude-opus-5"
@@ -104,14 +107,36 @@ class Config:
     # schedule generously, let the budget decide how many land.
     daily_post_budget: int = 10
 
+    # --- what to post ---
+    # Percent of posts written as a news report; the rest are off the clock
+    # (fun facts, realizations, jokes). bot/modes.py holds the recent mix to
+    # this rather than leaving it to chance.
+    news_percent: int = 70
+
+    # --- replies ---
+    # X lets an API account reply only to someone who @mentioned it or
+    # quoted its post, so that is all this ever answers. The caps keep a
+    # pile-on, or another bot replying back, from becoming a bill or a loop.
+    enable_replies: bool = True
+    max_replies_per_run: int = 3
+    daily_reply_budget: int = 20
+
     # --- pictures ---
     # Charts are free: they are drawn locally from numbers the post already
     # states. Illustrations are not, which is why they have their own cap.
     enable_visuals: bool = True
-    # The model id is the first thing here to go stale. Check it against the
-    # provider's current list before blaming the key.
-    image_model: str = "imagen-4.0-fast-generate-001"
-    daily_image_budget: int = 3
+    # The model id is the first thing here to go stale. This one is the id
+    # Google's own cookbook calls as of October 2026; a "fast" variant that
+    # was assumed earlier appears nowhere in it, and an id the API does not
+    # know fails every illustration quietly into a title card.
+    image_model: str = "imagen-4.0-generate-001"
+    # Matches the daily post cap, because the owner wants an illustration on
+    # every post. At about $0.04 each that is up to ~$12 a month. Lower it to
+    # spend less: posts past the cap get a chart or a title card instead.
+    daily_image_budget: int = 10
+    # Grok Imagine's standard tier, about $0.02 an image. "-quality" is the
+    # dearer one. Named in xAI's own SDK, which is where this was checked.
+    xai_image_model: str = "grok-imagine-image"
 
     # --- views ---
     # X bills reads per post returned and deduplicates per UTC day, so how
@@ -179,6 +204,7 @@ def load_config() -> Config:
         )
 
     image_api_key = os.environ.get("IMAGE_API_KEY", "").strip()
+    xai_api_key = os.environ.get("XAI_API_KEY", "").strip()
 
     x_creds = {
         "x_api_key": os.environ.get("X_API_KEY", "").strip(),
@@ -199,6 +225,7 @@ def load_config() -> Config:
     cfg = Config(
         anthropic_api_key=anthropic_api_key,
         image_api_key=image_api_key,
+        xai_api_key=xai_api_key,
         **x_creds,
         model=_env_str("MODEL", "claude-opus-5"),
         effort=_env_str("EFFORT", "high"),
@@ -215,9 +242,14 @@ def load_config() -> Config:
         daily_post_budget=_env_int("DAILY_POST_BUDGET", 10),
         allow_links=_env_bool("ALLOW_LINKS", False),
         max_consecutive_failures=_env_int("MAX_CONSECUTIVE_FAILURES", 6),
+        news_percent=_env_int("NEWS_PERCENT", 70),
+        enable_replies=_env_bool("ENABLE_REPLIES", True),
+        max_replies_per_run=_env_int("MAX_REPLIES_PER_RUN", 3),
+        daily_reply_budget=_env_int("DAILY_REPLY_BUDGET", 20),
         enable_visuals=_env_bool("ENABLE_VISUALS", True),
-        image_model=_env_str("IMAGE_MODEL", "imagen-4.0-fast-generate-001"),
-        daily_image_budget=_env_int("DAILY_IMAGE_BUDGET", 3),
+        image_model=_env_str("IMAGE_MODEL", "imagen-4.0-generate-001"),
+        daily_image_budget=_env_int("DAILY_IMAGE_BUDGET", 10),
+        xai_image_model=_env_str("XAI_IMAGE_MODEL", "grok-imagine-image"),
         metrics_window_days=_env_int("METRICS_WINDOW_DAYS", 7),
         x_user_id=_env_str("X_USER_ID", ""),
     )

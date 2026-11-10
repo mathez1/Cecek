@@ -55,15 +55,32 @@ REQUEST_TIMEOUT = 60
 MAX_BYTES = 5 * 1024 * 1024  # X rejects images past 5 MB on the simple route
 
 
+# xAI's SDK defaults to a 27-minute timeout, far past the 12 the posting step
+# is given. A stalled image request would take the whole run down with it,
+# post and all, so the vendor gets a minute.
+XAI_TIMEOUT = 60
+
+
+def provider(cfg) -> str:
+    """Which vendor draws, or "" if none can. xAI first: Grok is X's own."""
+    if getattr(cfg, "xai_api_key", ""):
+        return "xai"
+    if getattr(cfg, "image_api_key", ""):
+        return "google"
+    return ""
+
+
 class Illustrator:
     """Callable that writes one PNG, or returns False having written nothing."""
 
     def __init__(self, cfg) -> None:
         self.cfg = cfg
-        self.images = 0  # what cost.py prices
+        self.images = 0  # what the daily cap counts
+        self.cost_usd = 0.0  # what the vendor says it charged, when it says
+        self.vendor = provider(cfg)
 
     def __call__(self, prompt: str, path: Path) -> bool:
-        if not self.cfg.image_api_key:
+        if not self.vendor:
             return False
 
         if _PHOTOREAL.search(prompt):
@@ -71,7 +88,10 @@ class Illustrator:
             return False
 
         try:
-            data = self._generate(prompt + STYLE)
+            if self.vendor == "xai":
+                data = self._generate_xai(prompt + STYLE)
+            else:
+                data = self._generate(prompt + STYLE)
         except requests.exceptions.RequestException as exc:
             # Network trouble at a vendor that is not on the critical path is
             # not worth failing a run over.
@@ -86,7 +106,10 @@ class Illustrator:
             return False
 
         path.write_bytes(data)
-        self.images += 1
+        if self.vendor != "xai":
+            # xAI is counted when its answer arrives (see _generate_xai),
+            # since a moderated image is still a request it bills.
+            self.images += 1
 
         try:
             _mark(path)
@@ -137,6 +160,56 @@ class Illustrator:
             return base64.b64decode(encoded, validate=True)
         except (binascii.Error, ValueError) as exc:
             raise ImageError(f"image data would not decode: {exc}") from exc
+
+
+    def _generate_xai(self, prompt: str) -> bytes:
+        """Grok Imagine, through xAI's own SDK.
+
+        The SDK speaks gRPC rather than a documented REST shape, so using it
+        is the only way to call this without guessing at the wire format.
+        Imported here so a broken grpc install costs the picture, never the
+        post.
+        """
+        try:
+            from xai_sdk import Client
+        except ImportError as exc:
+            raise ImageError(f"xai-sdk is not installed: {exc}") from exc
+
+        client = Client(api_key=self.cfg.xai_api_key, timeout=XAI_TIMEOUT)
+        try:
+            response = client.image.sample(
+                prompt=prompt,
+                model=self.cfg.xai_image_model,
+                image_format="base64",
+                aspect_ratio="16:9",
+                resolution="1k",
+            )
+        except ImageError:
+            raise
+        except Exception as exc:  # noqa: BLE001 - grpc raises its own types
+            raise ImageError(f"xAI request failed: {exc}") from exc
+
+        # An answer arrived, so the request was made and is billed whether or
+        # not the image survives moderation. Count it before looking inside.
+        self.images += 1
+        try:
+            self.cost_usd += float(response.cost_usd or 0.0)
+        except (TypeError, ValueError, AttributeError):
+            pass
+
+        try:
+            encoded = response.base64
+        except ValueError as exc:
+            # Raised when moderation withheld the image.
+            raise ImageError(str(exc)) from exc
+
+        # Accept either bare base64 or a data: URL around it.
+        if encoded.startswith("data:") and "," in encoded:
+            encoded = encoded.split(",", 1)[1]
+        try:
+            return base64.b64decode(encoded, validate=True)
+        except (binascii.Error, ValueError) as exc:
+            raise ImageError(f"xAI image data would not decode: {exc}") from exc
 
 
 class ImageError(RuntimeError):

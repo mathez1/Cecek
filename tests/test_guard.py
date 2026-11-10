@@ -199,7 +199,8 @@ class TestCheckDraft:
         assert result.closest_match is None
 
     def test_feedback_mentions_every_problem(self):
-        result = guard("x" * 300 + " #tag")
+        # Two hashtags: one is now allowed, for a live event.
+        result = guard("x" * 300 + " #tag #another")
         text = result.feedback()
         assert "too long" in text
         assert "hashtag" in text

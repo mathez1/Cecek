@@ -59,6 +59,9 @@ class PostRecord:
     # posts went out without a picture before anyone could see why.
     picture: str = ""
     picture_wanted: str = ""
+    # "news" or "fun": which hat the post was written in. bot/modes.py reads
+    # this back to keep the mix at the owner's ratio.
+    mode: str = ""
 
     def to_json(self) -> str:
         return json.dumps(asdict(self), ensure_ascii=False, sort_keys=True)
@@ -74,6 +77,7 @@ class PostRecord:
         known["dry_run"] = bool(known.get("dry_run"))
         known["picture"] = known.get("picture") or ""
         known["picture_wanted"] = known.get("picture_wanted") or ""
+        known["mode"] = known.get("mode") or ""
         return cls(**known)
 
 
@@ -129,6 +133,12 @@ DEFAULT_STATE: dict[str, Any] = {
     # Generated illustrations per day. Charts are not counted: they cost
     # nothing, so capping them would only make the account duller.
     "daily_images": {},
+    # Replies to mentions. since_id is where the next read starts, so each
+    # mention is fetched (and billed) once. replied holds the ids answered,
+    # because X's rules allow one automated reply per post, never two.
+    "mentions_since_id": None,
+    "replied": [],
+    "daily_replies": {},
 }
 
 
@@ -164,6 +174,15 @@ def load_state(path: Path) -> dict[str, Any]:
     merged["daily_images"] = {
         k: _as_int(v) for k, v in merged["daily_images"].items()
     }
+
+    if not isinstance(merged.get("daily_replies"), dict):
+        merged["daily_replies"] = {}
+    merged["daily_replies"] = {
+        k: _as_int(v) for k, v in merged["daily_replies"].items()
+    }
+    if not isinstance(merged.get("replied"), list):
+        merged["replied"] = []
+    merged["replied"] = [str(i) for i in merged["replied"] if i]
 
     if not isinstance(merged.get("monthly_spend"), dict):
         merged["monthly_spend"] = {}
@@ -261,6 +280,23 @@ def record_image(state: dict[str, Any], when: datetime | None = None) -> None:
     key = day_key(when)
     daily[key] = int(daily.get(key, 0)) + 1
     _prune(daily, 14)
+
+
+def replies_today(state: dict[str, Any], when: datetime | None = None) -> int:
+    return int(state.get("daily_replies", {}).get(day_key(when), 0))
+
+
+def record_reply(state: dict[str, Any], tweet_id: str, when: datetime | None = None) -> None:
+    daily = state.setdefault("daily_replies", {})
+    key = day_key(when)
+    daily[key] = int(daily.get(key, 0)) + 1
+    _prune(daily, 14)
+
+    replied = state.setdefault("replied", [])
+    replied.append(str(tweet_id))
+    # Enough to recognise anything still likely to come back through the
+    # mentions endpoint, small enough to commit on every run.
+    del replied[:-500]
 
 
 def record_skip(

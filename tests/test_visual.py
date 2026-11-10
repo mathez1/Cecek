@@ -369,3 +369,20 @@ class TestTheFallbackCard:
         card = visual.fallback_card("Anything at all.", visual.Visual())
         assert card.alt
         assert visual.render(card, tmp_path) is not None
+
+
+class TestIllustrationIsTheDefaultWithAKey:
+    """The owner wants the picture to come from BoB's head, not a readout."""
+
+    def test_it_is_offered_first(self):
+        assert visual.schema(True)["properties"]["kind"]["enum"][0] == "illustration"
+
+    def test_the_question_leads_with_it(self):
+        description = visual.schema(True)["description"]
+        assert description.index("'illustration'") < description.index("'line'")
+        assert "nearly every post" in description
+
+    def test_without_a_key_charts_lead_instead(self):
+        description = visual.schema(False)["description"]
+        assert "illustration" not in description
+        assert "Prefer a chart" in description

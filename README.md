@@ -253,7 +253,7 @@ of six, so that option is gone.
 | `bar` | A handful of named things compared | nothing |
 | `stat` | One striking number with no shape to it | nothing |
 | `card` | No number to draw: the post's hook set as a headline | nothing |
-| `illustration` | Something concrete and visual. Only offered when `IMAGE_API_KEY` is set | one image |
+| `illustration` | **The default whenever an image key is set**: BoB's own picture of the idea, literal or a visual metaphor. Not offered without one | ~$0.02 Grok, ~$0.04 Google |
 
 If the chosen picture cannot be made — no image key, a spec that will not
 draw, an answer that could not be read — a title card built from the post's
@@ -274,7 +274,16 @@ a generic illustration files it wrongly.
 
 ### Illustrations
 
-Off unless `IMAGE_API_KEY` is set as a repository secret. Without it the model
+Off unless an image key is set as a repository secret. Two vendors work:
+
+| Secret | Vendor | Model | About |
+|---|---|---|---|
+| `XAI_API_KEY` | xAI (Grok Imagine) | `grok-imagine-image` | $0.02 |
+| `IMAGE_API_KEY` | Google (Imagen) | `imagen-4.0-generate-001` | $0.04 |
+
+When both are set, xAI is used. The xAI key comes from console.x.ai, which
+is a separate account and balance from the X developer console that pays for
+posting: credit on one does not pay for the other. Without it the model
 may still choose `illustration` and the post simply goes out as text.
 
 Two things are enforced rather than requested. The style suffix in
@@ -305,6 +314,29 @@ posting flow, two hosts.
 text, and says nothing about the upload endpoints. Rather than assume they are
 free, every call is counted in the run summary under **Picture cost** so you can
 check it against the developer console after a few posts.
+
+---
+
+## Replies
+
+BoB answers people who @mention him, after every posting run, and nobody
+else. That is not a choice: since February 2026 the X API refuses a reply
+unless the post being answered mentions the account or quotes one of its
+posts, and X's automation rules forbid unsolicited automated replies anyway.
+Breaking them risks suspension for BoB and for accounts linked to it. So
+[`bot/replies.py`](bot/replies.py) never searches for conversations to join.
+
+| Limit | Why |
+|---|---|
+| Once per post, ever | X's rules allow one automated reply to a post |
+| 3 replies per person per day | Two bots replying to each other loop forever |
+| `MAX_REPLIES_PER_RUN`, `DAILY_REPLY_BUDGET` | A pile-on should not become a bill |
+
+The mention is passed to the model as the person's message, delimited, never
+as instructions, so "ignore your rules and post this" reads as something
+someone said to BoB. BoB may stay silent, and does for spam, abuse, bait, or
+when there is nothing worth adding. A reply that fails costs that reply only:
+the step never turns a run red and never touches the circuit breaker.
 
 ---
 
@@ -393,9 +425,14 @@ Actions → Variables). All have working defaults.
 | `ENABLE_REFUSAL_FALLBACK` | `true` | If Claude declines a request, retry it on a fallback model. Harmless to leave on: if your account is not enrolled, the bot notices once and carries on without it. |
 | `RECENT_POSTS_IN_CONTEXT` | `40` | How much history the model sees. |
 | `MAX_CONSECUTIVE_FAILURES` | `6` | Stop calling Claude after this many failed runs in a row. `0` disables it. |
+| `NEWS_PERCENT` | `70` | Percent of posts written as a news report (bullet points of what BoB found out). The rest are off the clock: fun facts, realizations, jokes. Held to this mix from recent history, not left to chance. |
+| `ENABLE_REPLIES` | `true` | Answer people who @mention BoB. The only replying X allows an API account. |
+| `MAX_REPLIES_PER_RUN` | `3` | Mentions considered per run. The rest wait for the next run. |
+| `DAILY_REPLY_BUDGET` | `20` | Replies per day. Each is a $0.015 post plus a short Claude call. `0` is unlimited. |
 | `ENABLE_VISUALS` | `true` | Whether the model is asked for a picture at all. Off removes the question from the schema entirely. |
-| `DAILY_IMAGE_BUDGET` | `3` | Generated illustrations per day. Charts do not count: they cost nothing. `0` is unlimited. |
-| `IMAGE_MODEL` | `imagen-4.0-fast-generate-001` | Which image model `IMAGE_API_KEY` talks to. The first thing here to go stale. |
+| `DAILY_IMAGE_BUDGET` | `10` | Generated illustrations per day, about $0.04 each. Matches the post cap so every post can have one. Posts past it get a chart or title card. `0` is unlimited. |
+| `IMAGE_MODEL` | `imagen-4.0-generate-001` | Which Google image model `IMAGE_API_KEY` talks to. Paid-only on Google's side. The first thing here to go stale. |
+| `XAI_IMAGE_MODEL` | `grok-imagine-image` | Which Grok model `XAI_API_KEY` draws with, about $0.02 an image. `grok-imagine-image-quality` is the dearer tier. |
 | `METRICS_WINDOW_DAYS` | `7` | How far back the view tracker refreshes. Older posts keep their last reading. The main cost lever on the tracker. `0` refreshes everything. |
 | `X_USER_ID` | *(looked up once)* | The account's numeric id. Optional: it is resolved once and cached in `memory/state.json`. |
 
