@@ -7,17 +7,17 @@
     "modified": "Fri, 06 Nov 2026 09:55:54 GMT"
   },
   "https://feeds.arstechnica.com/arstechnica/index": {
-    "modified": "Sun, 8 Nov 2026 13:04:24 GMT"
+    "modified": "Mon, 9 Nov 2026 23:39:51 GMT"
   },
   "https://hnrss.org/best": {
-    "modified": "Mon, 09 Nov 2026 18:56:29 GMT"
-  },
-  "https://hnrss.org/frontpage": {
     "modified": "Mon, 09 Nov 2026 20:04:55 GMT"
   },
+  "https://hnrss.org/frontpage": {
+    "modified": "Tue, 10 Nov 2026 00:10:46 GMT"
+  },
   "https://lobste.rs/rss": {
-    "etag": "\"dmq7jwpauwbt-eoq-gzip\"",
-    "modified": "Sun, 08 Nov 2026 23:11:42 GMT"
+    "etag": "\"dmr7uk94m105-c7v-gzip\"",
+    "modified": "Tue, 10 Nov 2026 03:38:17 GMT"
   },
   "https://marginalrevolution.com/feed": {
     "etag": "\"eb5136c61b64c0808db2270cfebef590\"",
@@ -35,7 +35,7 @@
     "modified": "Fri, 06 Nov 2026 16:29:44 GMT"
   },
   "https://rss.arxiv.org/rss/cs.AI": {
-    "etag": "e80076ae69cdb8f9ff6cabf4f0187da0b58d14d28beb2e2caffa461ac610275a"
+    "etag": "e8ffc536b174340ecbae9a095cac6175657e84af5db0b9f114b42dd9311f3bc8"
   },
   "https://rss.arxiv.org/rss/econ.GN": {
     "etag": "dbd9b9ab28bf8f4c78a0d6a22c4cd2edf88d5ec26a1b5c8e5c643551b5047429"
@@ -56,7 +56,7 @@
     "modified": "Sun, 08 Nov 2026 19:23:23 GMT"
   },
   "https://www.404media.co/rss/": {
-    "etag": "W/\"1f7e6-QZQwEG6BEcsZMHfbrULIFehr1cg\""
+    "etag": "W/\"1f886-1lgH97f7Tg2VvbJ0npRpRrJz7Pc\""
   },
   "https://www.aljazeera.com/xml/rss/all.xml": {
     "etag": "W/\"e4486869ac623a0c8db04ec22532d824\"",
@@ -87,33 +87,33 @@
     "modified": "Mon, 09 Nov 2026 09:45:13 GMT"
   },
   "https://www.quantamagazine.org/feed/": {
-    "etag": "\"0af8d0e39b1c0b85184efbc65781a9f3-gzip\"",
-    "modified": "Fri, 06 Nov 2026 18:49:25 GMT"
+    "etag": "\"ed816ec73cb1049d5269753454824ab0-gzip\"",
+    "modified": "Mon, 09 Nov 2026 17:17:43 GMT"
   },
   "https://www.sciencedaily.com/rss/top/science.xml": {
     "modified": "Mon, 09 Nov 2026 11:44:44 GMT"
   },
   "https://www.sciencenews.org/feed": {
-    "etag": "W/\"74b5eaa2e1eb5c78b3ed75a35da91ef0\"",
-    "modified": "Mon, 09 Nov 2026 17:41:08 GMT"
+    "etag": "W/\"9677811103b96e84d19d75ef640fd647\"",
+    "modified": "Mon, 09 Nov 2026 23:32:02 GMT"
   },
   "https://www.smithsonianmag.com/rss/latest_articles/": {
-    "modified": "Mon, 09 Nov 2026 02:38:08 GMT"
+    "modified": "Tue, 10 Nov 2026 03:29:13 GMT"
   },
   "https://www.technologyreview.com/feed/": {
-    "etag": "W/\"8e542988fbaf6124141dc9a075c650a3\"",
-    "modified": "Fri, 06 Nov 2026 12:47:41 GMT"
+    "etag": "W/\"78494128e5177f075aaf9f39116c6d06\"",
+    "modified": "Mon, 09 Nov 2026 22:48:33 GMT"
   },
   "https://www.theatlantic.com/feed/all/": {
     "modified": "Mon, 09 Nov 2026 10:09:17 GMT"
   },
   "https://www.theguardian.com/science/rss": {
-    "etag": "W/\"hash272822741959474784\""
+    "etag": "W/\"hash8084881833742781540\""
   },
   "https://www.theguardian.com/world/rss": {
     "etag": "W/\"hash425814519418056551\""
   },
   "https://www.theverge.com/rss/index.xml": {
-    "etag": "W/\"547248b4e015a1b064765886b207d978\""
+    "etag": "W/\"4e54aaeb77d9d7e75cc7cdbece902c57\""
   }
 }
