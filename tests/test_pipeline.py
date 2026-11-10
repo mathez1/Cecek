@@ -41,6 +41,8 @@ OTHER_POST = (
 
 
 class FakeBrain:
+    modes_seen: list = []
+
     """Stands in for Claude. Returns queued drafts, records the feedback it got."""
 
     def __init__(self, cfg):
@@ -57,9 +59,10 @@ class FakeBrain:
             web_searches=4,
         )
 
-    def explore(self, digest, history, persona):
+    def explore(self, digest, history, persona, mode="fun"):
         self.explore_calls += 1
-        return Exploration(notes="some notes", sources=["https://example.com/a"])
+        FakeBrain.modes_seen.append(mode)
+        return Exploration(notes="some notes", sources=["https://example.com/a"], mode=mode)
 
     def compose(self, exploration, history, persona, feedback=None):
         self.feedback_seen.append(feedback)
@@ -179,9 +182,9 @@ class TestHappyPath:
         seen = {}
         original = FakeBrain.explore
 
-        def spy(self, digest, history, persona):
+        def spy(self, digest, history, persona, **kwargs):
             seen["recent"] = [r.text for r in history]
-            return original(self, digest, history, persona)
+            return original(self, digest, history, persona, **kwargs)
 
         monkeypatch.setattr(FakeBrain, "explore", spy)
         FakeBrain.queue = [Draft(post=OTHER_POST)]
@@ -853,7 +856,7 @@ class TestBrainFailure:
         assert repo.state["consecutive_failures"] == 1
 
     def test_exploration_failure_goes_red_immediately(self, repo, monkeypatch):
-        def boom(self, digest, history, persona):
+        def boom(self, digest, history, persona, **kwargs):
             raise BrainError("web search is unavailable")
 
         monkeypatch.setattr(FakeBrain, "explore", boom)
@@ -875,3 +878,20 @@ class TestStepSummary:
     def test_missing_summary_path_is_harmless(self, repo, monkeypatch):
         monkeypatch.delenv("GITHUB_STEP_SUMMARY", raising=False)
         assert main.run() == main.EXIT_OK
+
+
+class TestReporterMode:
+    def test_a_run_picks_a_mode_passes_it_in_and_records_it(self, repo):
+        FakeBrain.modes_seen = []
+        assert main.run() == main.EXIT_OK
+
+        # A fresh account leads with the thing it is now for.
+        assert FakeBrain.modes_seen == ["news"]
+        assert repo.posts[0].mode == "news"
+
+    def test_the_setting_reaches_the_choice(self, repo, monkeypatch):
+        monkeypatch.setenv("NEWS_PERCENT", "0")
+        FakeBrain.modes_seen = []
+        assert main.run() == main.EXIT_OK
+        assert FakeBrain.modes_seen == ["fun"]
+        assert repo.posts[0].mode == "fun"

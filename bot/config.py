@@ -107,6 +107,12 @@ class Config:
     # schedule generously, let the budget decide how many land.
     daily_post_budget: int = 10
 
+    # --- what to post ---
+    # Percent of posts written as a news report; the rest are off the clock
+    # (fun facts, realizations, jokes). bot/modes.py holds the recent mix to
+    # this rather than leaving it to chance.
+    news_percent: int = 70
+
     # --- pictures ---
     # Charts are free: they are drawn locally from numbers the post already
     # states. Illustrations are not, which is why they have their own cap.
@@ -228,6 +234,7 @@ def load_config() -> Config:
         daily_post_budget=_env_int("DAILY_POST_BUDGET", 10),
         allow_links=_env_bool("ALLOW_LINKS", False),
         max_consecutive_failures=_env_int("MAX_CONSECUTIVE_FAILURES", 6),
+        news_percent=_env_int("NEWS_PERCENT", 70),
         enable_visuals=_env_bool("ENABLE_VISUALS", True),
         image_model=_env_str("IMAGE_MODEL", "imagen-4.0-generate-001"),
         daily_image_budget=_env_int("DAILY_IMAGE_BUDGET", 10),

@@ -24,6 +24,7 @@ from typing import Any
 import anthropic
 
 from bot import visual
+from bot.modes import FUN, NEWS
 from bot.cost import Meter
 from bot.memory import PostRecord
 
@@ -75,7 +76,9 @@ DRAFT_SCHEMA: dict[str, Any] = {
             "type": "string",
             "description": (
                 "The post exactly as it should appear on X. At most 280 "
-                "characters. No hashtags, no em dashes, no thread markers."
+                "characters. Reports use bullet lines starting with '• '. At "
+                "most one hashtag, only for a live event or trending topic. "
+                "No em dashes, no thread markers."
             ),
         },
         "topic": {
@@ -127,6 +130,9 @@ class Exploration:
     notes: str
     sources: list[str] = field(default_factory=list)
     searched: bool = False
+    # Carried on the exploration rather than passed to every compose call, so
+    # a retry or a duplicate rewrite cannot quietly drop back to the default.
+    mode: str = FUN
 
 
 @dataclass
@@ -315,7 +321,9 @@ class Brain:
 
     # ------------------------------------------------------------- stage one
 
-    def explore(self, digest: str, history: list[PostRecord], persona: str) -> Exploration:
+    def explore(
+        self, digest: str, history: list[PostRecord], persona: str, mode: str = FUN
+    ) -> Exploration:
         """Let the model roam. Returns its notes, not a post."""
         tools = []
         if self.cfg.enable_web_search:
@@ -324,7 +332,7 @@ class Brain:
                 web_fetch_tool(self.cfg.max_fetches),
             ]
 
-        prompt = _explore_prompt(digest, history, self.cfg.enable_web_search)
+        prompt = _explore_prompt(digest, history, self.cfg.enable_web_search, mode)
 
         kwargs: dict[str, Any] = {
             "model": self.cfg.model,
@@ -384,7 +392,7 @@ class Brain:
             len(notes),
             len(sources),
         )
-        return Exploration(notes=notes, sources=sources, searched=bool(tools))
+        return Exploration(notes=notes, sources=sources, searched=bool(tools), mode=mode)
 
     # ------------------------------------------------------------- stage two
 
@@ -457,8 +465,29 @@ class Brain:
 # ---------------------------------------------------------------- prompt text
 
 
-def _explore_prompt(digest: str, history: list[PostRecord], can_search: bool) -> str:
+REPORTER_BRIEF = """This run you are REPORTING.
+
+Find one story that is in the news right now, ideally from the last day or
+two, in science, space or technology, or one of the strange corners of the
+world that make people say "wait, really?". It should be something people are
+actually talking about today. Then dig: establish what happened (who, what,
+when, the key number), and go looking for what most of the coverage left out:
+the mechanism, the history, the number that reframes it, the odd detail.
+Verify the facts your findings rest on. Prefer a story you can add something
+to over the biggest headline of the day."""
+
+OFF_THE_CLOCK_BRIEF = """This run you are OFF THE CLOCK.
+
+No news duty. Follow your own curiosity: a fun fact, a realization, a
+mechanism, something genuinely funny. It does not have to connect to
+anything in today's feeds."""
+
+
+def _explore_prompt(
+    digest: str, history: list[PostRecord], can_search: bool, mode: str = FUN
+) -> str:
     history_text = _format_history(history)
+    brief = REPORTER_BRIEF if mode == NEWS else OFF_THE_CLOCK_BRIEF
 
     search_clause = (
         "You have web search and web fetch. Use them. Follow whatever thread "
@@ -473,6 +502,8 @@ def _explore_prompt(digest: str, history: list[PostRecord], can_search: bool) ->
     )
 
     return f"""This is your hourly run. Nobody is going to review what you write.
+
+{brief}
 
 {search_clause}
 
@@ -520,16 +551,32 @@ An earlier draft was rejected. Do not repeat the mistake.
 {retry_clause}
 Now write the post.
 
-One post. At most 280 characters. Take the idea you picked and write the
-sharpest version of it. Cut every word that is not carrying weight. If the
-result is boring, pick a different idea from your notes rather than dressing
-this one up.
+{_shape_for(exploration.mode)}
 
 Set confidence to "low" if any factual claim in the post is something you did
 not verify this run. Be honest about that. It is used to decide whether the
 post goes out.
 
 Return the JSON object and nothing else."""
+
+
+def _shape_for(mode: str) -> str:
+    if mode == NEWS:
+        return """You are reporting, so write a report. At most 280 characters:
+
+- one opening line saying what happened, plainly, with the detail that makes
+  it matter
+- then two or three lines starting with "• ", each one concrete thing you
+  found out (a number, a name, a date, a mechanism, the history behind it)
+  that the headline did not already say
+- optionally one closing line: your realization, or the funny part
+
+280 characters is tight for this. Two sharp bullets beat three thin ones."""
+
+    return """One post. At most 280 characters. Take the idea you picked and write the
+sharpest version of it. Cut every word that is not carrying weight. If the
+result is boring, pick a different idea from your notes rather than dressing
+this one up."""
 
 
 def _format_history(history: list[PostRecord]) -> str:

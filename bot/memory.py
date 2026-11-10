@@ -59,6 +59,9 @@ class PostRecord:
     # posts went out without a picture before anyone could see why.
     picture: str = ""
     picture_wanted: str = ""
+    # "news" or "fun": which hat the post was written in. bot/modes.py reads
+    # this back to keep the mix at the owner's ratio.
+    mode: str = ""
 
     def to_json(self) -> str:
         return json.dumps(asdict(self), ensure_ascii=False, sort_keys=True)
@@ -74,6 +77,7 @@ class PostRecord:
         known["dry_run"] = bool(known.get("dry_run"))
         known["picture"] = known.get("picture") or ""
         known["picture_wanted"] = known.get("picture_wanted") or ""
+        known["mode"] = known.get("mode") or ""
         return cls(**known)
 
 

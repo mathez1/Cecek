@@ -402,6 +402,7 @@ Actions → Variables). All have working defaults.
 | `ENABLE_REFUSAL_FALLBACK` | `true` | If Claude declines a request, retry it on a fallback model. Harmless to leave on: if your account is not enrolled, the bot notices once and carries on without it. |
 | `RECENT_POSTS_IN_CONTEXT` | `40` | How much history the model sees. |
 | `MAX_CONSECUTIVE_FAILURES` | `6` | Stop calling Claude after this many failed runs in a row. `0` disables it. |
+| `NEWS_PERCENT` | `70` | Percent of posts written as a news report (bullet points of what BoB found out). The rest are off the clock: fun facts, realizations, jokes. Held to this mix from recent history, not left to chance. |
 | `ENABLE_VISUALS` | `true` | Whether the model is asked for a picture at all. Off removes the question from the schema entirely. |
 | `DAILY_IMAGE_BUDGET` | `10` | Generated illustrations per day, about $0.04 each. Matches the post cap so every post can have one. Posts past it get a chart or title card. `0` is unlimited. |
 | `IMAGE_MODEL` | `imagen-4.0-generate-001` | Which Google image model `IMAGE_API_KEY` talks to. Paid-only on Google's side. The first thing here to go stale. |
