@@ -111,3 +111,22 @@ class TestHashtags:
             "• Each Raptor makes about 230 tonnes of thrust"
         )
         assert not self._check(report).problems
+
+
+class TestPolitics:
+    def test_it_is_on_the_reporting_beat(self):
+        assert "politics" in _explore_prompt("d", [], True, modes.NEWS)
+
+    def test_the_rules_travel_with_it(self):
+        assert "never whose side" in _explore_prompt("d", [], True, modes.NEWS)
+
+    def test_the_persona_has_the_rules(self):
+        persona = (Path(__file__).resolve().parent.parent / "prompts/persona.md").read_text()
+        section = persona.split("## Reporting politics")[1].split("##")[0]
+        for rule in ("Never take a side", "Attribute claims", "never report a\n  result before it is official", "symbols only"):
+            assert rule in section, rule
+
+    def test_political_pictures_are_symbols_not_people(self):
+        from bot import visual
+        prompt_rule = visual.VISUAL_SCHEMA["properties"]["prompt"]["description"]
+        assert "never" in prompt_rule and "a person" in prompt_rule

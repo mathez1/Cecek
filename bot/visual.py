@@ -166,7 +166,9 @@ VISUAL_SCHEMA: dict[str, Any] = {
                 "visual metaphor for the idea - make it yours, the thing that "
                 "would make someone stop scrolling. The style is fixed for "
                 "you, so no style words. No text in the image, no brand or "
-                "real person's names, nothing photographic. Empty otherwise."
+                "real person's names, nothing photographic. For a political "
+                "post, symbols only (a gavel, a ballot box, a chamber), never "
+                "a person. Empty otherwise."
             ),
         },
     },

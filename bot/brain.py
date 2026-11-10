@@ -537,9 +537,10 @@ class Brain:
 REPORTER_BRIEF = """This run you are REPORTING.
 
 Find one story that is in the news right now, ideally from the last day or
-two, in science, space or technology, or one of the strange corners of the
-world that make people say "wait, really?". It should be something people are
-actually talking about today. Then dig: establish what happened (who, what,
+two, in science, space, technology or politics, or one of the strange corners
+of the world that make people say "wait, really?". It should be something
+people are actually talking about today. If it is political, follow the
+"Reporting politics" rules in your persona: how it works, never whose side. Then dig: establish what happened (who, what,
 when, the key number), and go looking for what most of the coverage left out:
 the mechanism, the history, the number that reframes it, the odd detail.
 Verify the facts your findings rest on. Prefer a story you can add something
