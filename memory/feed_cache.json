@@ -10,7 +10,7 @@
     "modified": "Mon, 9 Nov 2026 23:39:51 GMT"
   },
   "https://hnrss.org/best": {
-    "modified": "Tue, 10 Nov 2026 12:11:12 GMT"
+    "modified": "Tue, 10 Nov 2026 16:37:44 GMT"
   },
   "https://hnrss.org/frontpage": {
     "modified": "Tue, 10 Nov 2026 18:02:54 GMT"
@@ -35,7 +35,7 @@
     "modified": "Tue, 10 Nov 2026 17:32:09 GMT"
   },
   "https://rss.arxiv.org/rss/cs.AI": {
-    "etag": "e8ffc536b174340ecbae9a095cac6175657e84af5db0b9f114b42dd9311f3bc8"
+    "etag": "7da3f73e05e3423f2727139cb926e160ef90963bfb373c94a34de7d66107bff4"
   },
   "https://rss.arxiv.org/rss/econ.GN": {
     "etag": "dbd9b9ab28bf8f4c78a0d6a22c4cd2edf88d5ec26a1b5c8e5c643551b5047429"
@@ -52,15 +52,15 @@
     "modified": "Fri, 06 Nov 2026 15:43:37 GMT"
   },
   "https://techcrunch.com/feed/": {
-    "etag": "W/\"67a329ba581e1f343650e3dc2a572f7c\"",
-    "modified": "Sun, 08 Nov 2026 19:23:23 GMT"
+    "etag": "W/\"ac32d75eeb3b6a74d2b499ec59590f50\"",
+    "modified": "Tue, 10 Nov 2026 23:27:39 GMT"
   },
   "https://www.404media.co/rss/": {
-    "etag": "W/\"1f886-tR1xaJFH5Y02/+HeaxSSHvbzYlM\""
+    "etag": "W/\"1c544-NygR4nIz9GByZ2+ZdNz478K4EAQ\""
   },
   "https://www.aljazeera.com/xml/rss/all.xml": {
-    "etag": "W/\"e4486869ac623a0c8db04ec22532d824\"",
-    "modified": "Mon, 09 Nov 2026 10:11:03 GMT"
+    "etag": "W/\"36afe8acc916157478427dd9e819b6fc\"",
+    "modified": "Tue, 10 Nov 2026 23:53:45 GMT"
   },
   "https://www.astralcodexten.com/feed": {
     "etag": "W/\"d809b-4yRoWy2/Ukm+JnPBCk8IqwJQbjw\""
@@ -94,8 +94,8 @@
     "modified": "Tue, 10 Nov 2026 01:47:57 GMT"
   },
   "https://www.sciencenews.org/feed": {
-    "etag": "W/\"9677811103b96e84d19d75ef640fd647\"",
-    "modified": "Mon, 09 Nov 2026 23:32:02 GMT"
+    "etag": "W/\"9cd78afa11e844a763f517582659d10a\"",
+    "modified": "Tue, 10 Nov 2026 15:32:10 GMT"
   },
   "https://www.smithsonianmag.com/rss/latest_articles/": {
     "modified": "Tue, 10 Nov 2026 03:29:13 GMT"
@@ -111,7 +111,7 @@
     "etag": "W/\"hash8084881833742781540\""
   },
   "https://www.theguardian.com/world/rss": {
-    "etag": "W/\"hash425814519418056551\""
+    "etag": "W/\"hash-7263241475089913948\""
   },
   "https://www.theverge.com/rss/index.xml": {
     "etag": "W/\"f6116d5a27e1e0e8a25317cc292a2132\""
