@@ -10,10 +10,10 @@
     "modified": "Wed, 11 Nov 2026 02:11:23 GMT"
   },
   "https://hnrss.org/best": {
-    "modified": "Tue, 10 Nov 2026 16:37:44 GMT"
+    "modified": "Tue, 10 Nov 2026 22:17:56 GMT"
   },
   "https://hnrss.org/frontpage": {
-    "modified": "Tue, 10 Nov 2026 18:02:54 GMT"
+    "modified": "Wed, 11 Nov 2026 14:21:27 GMT"
   },
   "https://lobste.rs/rss": {
     "etag": "\"dmr7uk94m105-c7v-gzip\"",
@@ -38,14 +38,14 @@
     "etag": "62e7b72fdaae5270e8a09c0f983e59e76a6936cbfcbe2348f341f3c9cefa5c4a"
   },
   "https://rss.arxiv.org/rss/econ.GN": {
-    "etag": "dbd9b9ab28bf8f4c78a0d6a22c4cd2edf88d5ec26a1b5c8e5c643551b5047429"
+    "etag": "088189c579f93582dacfa5f5f65f668967ca459bc05d3729d07561261a4560e0"
   },
   "https://rss.arxiv.org/rss/q-bio.PE": {
     "etag": "71b3b6dd089302b40c6b643d8b758cd322451066be685654f9ff88323c2d3f24"
   },
   "https://rss.slashdot.org/Slashdot/slashdotMain": {
-    "etag": "W/\"11764-65fc8ffb9b8d2\"",
-    "modified": "Sun, 08 Nov 2026 19:39:08 GMT"
+    "etag": "W/\"ded0-6600137657622\"",
+    "modified": "Wed, 11 Nov 2026 14:43:20 GMT"
   },
   "https://spectrum.ieee.org/feeds/feed.rss": {
     "etag": "\"874b344d577741e8927ff612d7978511\"",
@@ -72,12 +72,12 @@
     "etag": "W/\"d4d3d-OgYrouKX304Pp7iSQD1m1K42hKE\""
   },
   "https://www.economist.com/latest/rss.xml": {
-    "etag": "W/\"6f5e9aeccec5b55b990504dd4c5b1b03\"",
-    "modified": "Wed, 11 Nov 2026 06:11:58 GMT"
+    "etag": "W/\"7d24d4d801f792294d5388a1267e5198\"",
+    "modified": "Wed, 11 Nov 2026 14:26:57 GMT"
   },
   "https://www.nasa.gov/news-release/feed/": {
-    "etag": "W/\"5092f71f3f6a082f8cfde44c1d4d9dea\"",
-    "modified": "Sat, 07 Nov 2026 18:33:12 GMT"
+    "etag": "W/\"51670e01911e85606df98f5587afa1dd\"",
+    "modified": "Wed, 11 Nov 2026 14:22:48 GMT"
   },
   "https://www.nature.com/nature.rss": {
     "etag": "\"d7ae8af23426d59bdc40e50acea128c0\""
@@ -98,7 +98,7 @@
     "modified": "Tue, 10 Nov 2026 15:32:10 GMT"
   },
   "https://www.smithsonianmag.com/rss/latest_articles/": {
-    "modified": "Tue, 10 Nov 2026 03:29:13 GMT"
+    "modified": "Wed, 11 Nov 2026 14:41:46 GMT"
   },
   "https://www.technologyreview.com/feed/": {
     "etag": "W/\"75c888988551e6aa1126403e2ef2b310\"",
@@ -114,6 +114,6 @@
     "etag": "W/\"hash-7263241475089913948\""
   },
   "https://www.theverge.com/rss/index.xml": {
-    "etag": "W/\"1efd14ee31545cb628f8aa7180f74b70\""
+    "etag": "W/\"97c4ddb307c841d4b7a090e5d75eea01\""
   }
 }
