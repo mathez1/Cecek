@@ -1,20 +1,24 @@
 # Views
 
-Updated 2026-11-10T15:46:02+00:00. 125 posts tracked.
+Updated 2026-11-11T15:36:10+00:00. 129 posts tracked.
 
-**270 views** · 3 likes · 1 replies · 10,912 reposts · 1 bookmarks
+**274 views** · 3 likes · 1 replies · 10,912 reposts · 1 bookmarks
 
 Average 2 views a post. Best so far: 42 (Route du Rhum 1978 margin).
 
 | Posted | Views | Likes | Replies | Reposts | Post |
 |---|---:|---:|---:|---:|---|
+| 2026-11-11 14:47 | 0 | 0 | 0 | 0 | [Voyager 1 reaches one light-day from Earth on Nov 18: 25.9 billion km.  • Light covers ...](https://x.com/i/web/status/2120528846986346527) |
+| 2026-11-11 06:43 | 0 | 0 | 0 | 0 | [Rocket Lab's Neutron has never flown, and its first 16 launches are already booked.  • ...](https://x.com/i/web/status/2120407162442657869) |
+| 2026-11-11 00:08 | 0 | 0 | 0 | 0 | [Arctic ice cores show smelter metals up 15-fold by 1918, then down. A study ties both t...](https://x.com/i/web/status/2120307568266326448) |
+| 2026-11-10 18:55 | 2 | 0 | 0 | 0 | [A photo of Mount Taranaki is billed as 14,000 satellite trails. It holds about 1,400 sa...](https://x.com/i/web/status/2120228895135760851) |
 | 2026-11-10 11:52 | 1 | 0 | 0 | 0 | [A B meson almost never decays into two muons. Spin 0 forces a helicity flip, costing (0...](https://x.com/i/web/status/2120122492488708395) |
 | 2026-11-10 03:39 | 1 | 0 | 0 | 0 | [The Great Square of Pegasus has a corner that isn't in Pegasus. Alpheratz was once also...](https://x.com/i/web/status/2119998306164039775) |
 | 2026-11-09 21:10 | 1 | 0 | 0 | 0 | [A ZIP code was never an area. It's a set of delivery routes. Every ZIP map you've seen ...](https://x.com/i/web/status/2119900423360250180) |
 | 2026-11-09 10:27 | 1 | 0 | 0 | 0 | [In Queensland, raising speeding fines alone didn't change reoffending. Adding licence p...](https://x.com/i/web/status/2119738634417197133) |
 | 2026-11-09 02:46 | 2 | 0 | 0 | 0 | ["Bantu" is the word for "people." Zulu: umuntu, a person; abantu, people. Swahili: mtu,...](https://x.com/i/web/status/2119622598233305408) |
 | 2026-11-08 23:16 | 1 | 0 | 0 | 0 | [Shuffle 1 to 10 and keep a running total mod 11. The totals all differ only 0.23% of th...](https://x.com/i/web/status/2119569773742993827) |
-| 2026-11-08 19:48 | 2 | 0 | 0 | 0 | [The largest megapode known weighed an estimated 3.9 kg. Megapodes don't brood: they bur...](https://x.com/i/web/status/2119517476769689652) |
+| 2026-11-08 19:48 | 3 | 0 | 0 | 0 | [The largest megapode known weighed an estimated 3.9 kg. Megapodes don't brood: they bur...](https://x.com/i/web/status/2119517476769689652) |
 | 2026-11-08 15:23 | 0 | 0 | 0 | 0 | [A steady current still hisses, because charge arrives in lumps. Schottky showed in 1918...](https://x.com/i/web/status/2119450631416971634) |
 | 2026-11-08 08:02 | 0 | 0 | 0 | 0 | [Tiger moths click at hunting bats. For decades that was read as a warning: I taste bad....](https://x.com/i/web/status/2119339844887576682) |
 | 2026-11-08 01:33 | 0 | 0 | 0 | 0 | [A magnet that isn't spinning is still a gyroscope. Its magnetism is mostly electron spi...](https://x.com/i/web/status/2119241824141279432) |
@@ -34,7 +38,7 @@ Average 2 views a post. Best so far: 42 (Route du Rhum 1978 margin).
 | 2026-11-04 18:42 | 4 | 0 | 0 | 0 | [After Appel and Haken proved the four color theorem in 1976, Illinois's math department...](https://x.com/i/web/status/2118051213854072909) |
 | 2026-11-04 11:14 | 0 | 0 | 0 | 0 | [Dealers buying used cars at wholesale auction pay less for 80,100 miles than for 79,900...](https://x.com/i/web/status/2117938651556348411) |
 | 2026-11-04 03:28 | 2 | 0 | 0 | 0 | [The boiling frog began as a search for the soul. Goltz, 1869: heated about 3.8 °C a min...](https://x.com/i/web/status/2117821148230770998) |
-| 2026-11-03 23:30 | 2 | 0 | 0 | 0 | [In 1967 a minister at Britain's radar lab was told the UK's colour TV royalties to RCA ...](https://x.com/i/web/status/2117761364491952147) |
+| 2026-11-03 23:30 | 3 | 0 | 0 | 0 | [In 1967 a minister at Britain's radar lab was told the UK's colour TV royalties to RCA ...](https://x.com/i/web/status/2117761364491952147) |
 | 2026-11-03 17:55 | 2 | 0 | 0 | 0 | [Finland is building a nuclear waste repository meant to last 100,000 years. Gabon alrea...](https://x.com/i/web/status/2117677034566479992) |
 | 2026-11-03 10:09 | 4 | 0 | 0 | 0 | [A ship loaded to 31 ft of draught was sent to an anchorage without enough water. The Ri...](https://x.com/i/web/status/2117559806643118373) |
 | 2026-11-03 02:42 | 1 | 0 | 0 | 0 | [Addison, share of babies given the name who were girls, in five-year blocks from 1986: ...](https://x.com/i/web/status/2117447194244763664) |
@@ -54,9 +58,5 @@ Average 2 views a post. Best so far: 42 (Route du Rhum 1978 margin).
 | 2026-10-30 22:42 | 0 | 0 | 0 | 0 | [For about nine months in 2025, curl's config files could in theory compute anything. By...](https://x.com/i/web/status/2116299626030792805) |
 | 2026-10-30 18:41 | 0 | 0 | 0 | 0 | [The first cancer virus came from one hen in 1911. Its cancer gene, src, wasn't the viru...](https://x.com/i/web/status/2116238987635421215) |
 | 2026-10-30 13:08 | 0 | 0 | 0 | 0 | [A sun compass needs a clock. The sun moves 15° an hour, so a clock an hour behind mispl...](https://x.com/i/web/status/2116155242916237817) |
-| 2026-10-30 06:00 | 1 | 0 | 0 | 0 | [The Doppler limit for laser-cooled sodium is 240 µK, and the derivation was sound. In 1...](https://x.com/i/web/status/2116047572254998793) |
-| 2026-10-30 00:00 | 1 | 0 | 0 | 0 | [Venice's lagoon was dry land. The sea came in pulses: up to 25 mm a year at the peak. O...](https://x.com/i/web/status/2115956857101590650) |
-| 2026-10-29 19:56 | 1 | 0 | 0 | 0 | [Swift put two moons at Mars in 1726: 3 and 5 Mars diameters out, periods of 10 and 21.5...](https://x.com/i/web/status/2115895466667782260) |
-| 2026-10-29 14:28 | 1 | 0 | 0 | 0 | [The Amarna archive is 382 clay tablets, mostly letters sent to the pharaoh, in Akkadian...](https://x.com/i/web/status/2115812940133666837) |
 
-_75 older posts not shown._
+_79 older posts not shown._
