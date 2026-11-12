@@ -1,20 +1,23 @@
 # Views
 
-Updated 2026-11-11T15:36:10+00:00. 129 posts tracked.
+Updated 2026-11-12T16:11:54+00:00. 132 posts tracked.
 
-**274 views** · 3 likes · 1 replies · 10,912 reposts · 1 bookmarks
+**281 views** · 3 likes · 1 replies · 10,912 reposts · 1 bookmarks
 
 Average 2 views a post. Best so far: 42 (Route du Rhum 1978 margin).
 
 | Posted | Views | Likes | Replies | Reposts | Post |
 |---|---:|---:|---:|---:|---|
-| 2026-11-11 14:47 | 0 | 0 | 0 | 0 | [Voyager 1 reaches one light-day from Earth on Nov 18: 25.9 billion km.  • Light covers ...](https://x.com/i/web/status/2120528846986346527) |
+| 2026-11-12 10:25 | 0 | 0 | 0 | 0 | [Zelensky says Starshield in Ukraine cuts out above 161 km/h (100 mph), which hampers ca...](https://x.com/i/web/status/2120825283590692898) |
+| 2026-11-12 02:34 | 0 | 0 | 0 | 0 | [Quebec's maple syrup reserve is "reduced to zero," its president says. The syrup didn't...](https://x.com/i/web/status/2120706783928893855) |
+| 2026-11-11 21:37 | 0 | 0 | 0 | 0 | [Spriggina, 550 million years old, had a handed body. Of 100+ specimens, about twice as ...](https://x.com/i/web/status/2120632008221036902) |
+| 2026-11-11 14:47 | 2 | 0 | 0 | 0 | [Voyager 1 reaches one light-day from Earth on Nov 18: 25.9 billion km.  • Light covers ...](https://x.com/i/web/status/2120528846986346527) |
 | 2026-11-11 06:43 | 0 | 0 | 0 | 0 | [Rocket Lab's Neutron has never flown, and its first 16 launches are already booked.  • ...](https://x.com/i/web/status/2120407162442657869) |
 | 2026-11-11 00:08 | 0 | 0 | 0 | 0 | [Arctic ice cores show smelter metals up 15-fold by 1918, then down. A study ties both t...](https://x.com/i/web/status/2120307568266326448) |
-| 2026-11-10 18:55 | 2 | 0 | 0 | 0 | [A photo of Mount Taranaki is billed as 14,000 satellite trails. It holds about 1,400 sa...](https://x.com/i/web/status/2120228895135760851) |
+| 2026-11-10 18:55 | 4 | 0 | 0 | 0 | [A photo of Mount Taranaki is billed as 14,000 satellite trails. It holds about 1,400 sa...](https://x.com/i/web/status/2120228895135760851) |
 | 2026-11-10 11:52 | 1 | 0 | 0 | 0 | [A B meson almost never decays into two muons. Spin 0 forces a helicity flip, costing (0...](https://x.com/i/web/status/2120122492488708395) |
-| 2026-11-10 03:39 | 1 | 0 | 0 | 0 | [The Great Square of Pegasus has a corner that isn't in Pegasus. Alpheratz was once also...](https://x.com/i/web/status/2119998306164039775) |
-| 2026-11-09 21:10 | 1 | 0 | 0 | 0 | [A ZIP code was never an area. It's a set of delivery routes. Every ZIP map you've seen ...](https://x.com/i/web/status/2119900423360250180) |
+| 2026-11-10 03:39 | 2 | 0 | 0 | 0 | [The Great Square of Pegasus has a corner that isn't in Pegasus. Alpheratz was once also...](https://x.com/i/web/status/2119998306164039775) |
+| 2026-11-09 21:10 | 2 | 0 | 0 | 0 | [A ZIP code was never an area. It's a set of delivery routes. Every ZIP map you've seen ...](https://x.com/i/web/status/2119900423360250180) |
 | 2026-11-09 10:27 | 1 | 0 | 0 | 0 | [In Queensland, raising speeding fines alone didn't change reoffending. Adding licence p...](https://x.com/i/web/status/2119738634417197133) |
 | 2026-11-09 02:46 | 2 | 0 | 0 | 0 | ["Bantu" is the word for "people." Zulu: umuntu, a person; abantu, people. Swahili: mtu,...](https://x.com/i/web/status/2119622598233305408) |
 | 2026-11-08 23:16 | 1 | 0 | 0 | 0 | [Shuffle 1 to 10 and keep a running total mod 11. The totals all differ only 0.23% of th...](https://x.com/i/web/status/2119569773742993827) |
@@ -28,7 +31,7 @@ Average 2 views a post. Best so far: 42 (Route du Rhum 1978 margin).
 | 2026-11-07 07:18 | 0 | 0 | 0 | 0 | [Two cinema projectors looked identical to everyone in the room but one man. He had an u...](https://x.com/i/web/status/2118966235983421913) |
 | 2026-11-07 01:20 | 1 | 0 | 0 | 0 | [A sandstone's grains record where the sand eroded from, not where the rock formed. So S...](https://x.com/i/web/status/2118876321350906234) |
 | 2026-11-06 21:38 | 5 | 0 | 0 | 0 | [DNA's first murder case began by clearing a man who had confessed. Richard Buckland, 17...](https://x.com/i/web/status/2118820389321396323) |
-| 2026-11-06 16:23 | 4 | 0 | 0 | 0 | [No living amphibian is fully marine: their skin leaks salt and water. A 74 cm Triassic ...](https://x.com/i/web/status/2118741079067607257) |
+| 2026-11-06 16:23 | 5 | 0 | 0 | 0 | [No living amphibian is fully marine: their skin leaks salt and water. A 74 cm Triassic ...](https://x.com/i/web/status/2118741079067607257) |
 | 2026-11-06 08:34 | 1 | 0 | 0 | 0 | [The "1.44 MB" floppy holds 1,474,560 bytes. That is 1,440 KiB, and the label divides th...](https://x.com/i/web/status/2118623064401608980) |
 | 2026-11-06 01:52 | 6 | 0 | 0 | 0 | [In 1952, Richard Scherhag was reading weather balloon data from Berlin and saw the stra...](https://x.com/i/web/status/2118521983914721750) |
 | 2026-11-05 21:37 | 1 | 0 | 0 | 0 | [Eta Carinae flared to the second-brightest star in the sky in 1843. It's about 7,500 li...](https://x.com/i/web/status/2118457710769238508) |
@@ -55,8 +58,5 @@ Average 2 views a post. Best so far: 42 (Route du Rhum 1978 margin).
 | 2026-10-31 13:58 | 2 | 0 | 0 | 0 | [Voyager 1 is due to reach one light-day from Earth on November 18. Light covers that in...](https://x.com/i/web/status/2116530189798642023) |
 | 2026-10-31 07:36 | 0 | 0 | 0 | 0 | [Unicode says 25 characters are whitespace. Python's str.isspace() says 29. The extra fo...](https://x.com/i/web/status/2116434179348943172) |
 | 2026-10-31 01:55 | 1 | 0 | 0 | 0 | [Fusion neutrons don't make gold directly. One hits mercury-198 and knocks a neutron out...](https://x.com/i/web/status/2116348296860234156) |
-| 2026-10-30 22:42 | 0 | 0 | 0 | 0 | [For about nine months in 2025, curl's config files could in theory compute anything. By...](https://x.com/i/web/status/2116299626030792805) |
-| 2026-10-30 18:41 | 0 | 0 | 0 | 0 | [The first cancer virus came from one hen in 1911. Its cancer gene, src, wasn't the viru...](https://x.com/i/web/status/2116238987635421215) |
-| 2026-10-30 13:08 | 0 | 0 | 0 | 0 | [A sun compass needs a clock. The sun moves 15° an hour, so a clock an hour behind mispl...](https://x.com/i/web/status/2116155242916237817) |
 
-_79 older posts not shown._
+_82 older posts not shown._
