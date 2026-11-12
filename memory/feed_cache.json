@@ -3,11 +3,12 @@
     "etag": "W/\"7fc9eb1bfdaf33200d14d5c60bc665b8\""
   },
   "https://bigthink.com/feed/": {
-    "etag": "W/\"2b35ec216d902e3f2e0e4c4d040909d7\"",
-    "modified": "Wed, 11 Nov 2026 21:15:17 GMT"
+    "etag": "W/\"0e0f4c11075c73e8a1bea048258f95dc\"",
+    "modified": "Wed, 11 Nov 2026 03:04:23 GMT"
   },
   "https://feeds.arstechnica.com/arstechnica/index": {
-    "modified": "Wed, 11 Nov 2026 02:11:23 GMT"
+    "etag": "\"ea8057763671815de3df31865c7fb322\"",
+    "modified": "Thu, 12 Nov 2026 03:21:49 GMT"
   },
   "https://hnrss.org/best": {
     "modified": "Wed, 11 Nov 2026 22:31:06 GMT"
@@ -24,7 +25,7 @@
     "modified": "Wed, 11 Nov 2026 05:55:45 GMT"
   },
   "https://nautil.us/feed/": {
-    "etag": "W/\"aalmgjjcnx8bh\""
+    "etag": "W/\"bj69kx5eli8ay\""
   },
   "https://news.harvard.edu/gazette/feed/": {
     "etag": "W/\"ad0ed6cbc34aca5d0e0658fb74c3dc10\"",
@@ -35,7 +36,7 @@
     "modified": "Tue, 10 Nov 2026 17:32:09 GMT"
   },
   "https://rss.arxiv.org/rss/cs.AI": {
-    "etag": "62e7b72fdaae5270e8a09c0f983e59e76a6936cbfcbe2348f341f3c9cefa5c4a"
+    "etag": "12cc48a13d2a1e68f8378be7d3039dc2c451d4a52c21a3773b17f5efe8ee8e70"
   },
   "https://rss.arxiv.org/rss/econ.GN": {
     "etag": "088189c579f93582dacfa5f5f65f668967ca459bc05d3729d07561261a4560e0"
@@ -48,25 +49,25 @@
     "modified": "Thu, 12 Nov 2026 02:31:07 GMT"
   },
   "https://spectrum.ieee.org/feeds/feed.rss": {
-    "etag": "\"874b344d577741e8927ff612d7978511\"",
-    "modified": "Fri, 06 Nov 2026 15:43:37 GMT"
+    "etag": "\"89f82c2b8e05cd1865c2a5fa64e9086b\"",
+    "modified": "Wed, 11 Nov 2026 14:30:34 GMT"
   },
   "https://techcrunch.com/feed/": {
     "etag": "W/\"6b48c2d8b9fb2826045c3a81f85d554c\"",
     "modified": "Thu, 12 Nov 2026 01:36:11 GMT"
   },
   "https://www.404media.co/rss/": {
-    "etag": "W/\"1c544-NygR4nIz9GByZ2+ZdNz478K4EAQ\""
+    "etag": "W/\"18345-S++Walxtg1u8ol4CLzkfQjnPZXs\""
   },
   "https://www.aljazeera.com/xml/rss/all.xml": {
     "etag": "W/\"0a65d3f34a4dea18eb7ed4d9fb497f6c\"",
     "modified": "Wed, 11 Nov 2026 21:15:00 GMT"
   },
   "https://www.astralcodexten.com/feed": {
-    "etag": "W/\"d809b-4yRoWy2/Ukm+JnPBCk8IqwJQbjw\""
+    "etag": "W/\"d9bfe-32WoFckxPXJJ1Y/6p3cqbcv/dC4\""
   },
   "https://www.atlasobscura.com/feeds/latest": {
-    "etag": "W/\"47f82af64f2de833778e2ee2e58afea4\""
+    "etag": "W/\"a7ed3beb1fae40ab0ab01d23a84a41fb\""
   },
   "https://www.construction-physics.com/feed": {
     "etag": "W/\"d4d3d-OgYrouKX304Pp7iSQD1m1K42hKE\""
