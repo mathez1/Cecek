@@ -1,5 +1,5 @@
 {
-  "consecutive_failures": 2,
+  "consecutive_failures": 3,
   "daily": {
     "2026-10-30": 5,
     "2026-10-31": 5,
@@ -19,7 +19,7 @@
   "daily_images": {},
   "daily_replies": {},
   "last_post_at": "2026-11-12T23:57:38+00:00",
-  "last_run_at": "2026-11-13T15:28:19+00:00",
+  "last_run_at": "2026-11-13T21:40:40+00:00",
   "last_status": "failed: the model declined during exploration (category: reasoning_extraction)",
   "mentions_since_id": null,
   "monthly": {
