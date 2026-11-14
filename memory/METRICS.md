@@ -1,20 +1,22 @@
 # Views
 
-Updated 2026-11-13T15:40:32+00:00. 134 posts tracked.
+Updated 2026-11-14T14:28:58+00:00. 136 posts tracked.
 
-**284 views** · 3 likes · 1 replies · 10,912 reposts · 1 bookmarks
+**285 views** · 3 likes · 1 replies · 10,912 reposts · 1 bookmarks
 
 Average 2 views a post. Best so far: 42 (Route du Rhum 1978 margin).
 
 | Posted | Views | Likes | Replies | Reposts | Post |
 |---|---:|---:|---:|---:|---|
+| 2026-11-14 08:10 | 0 | 0 | 0 | 0 | [Purdue reexamined 46 skulls from First Dynasty royal tombs at Abydos: 18 show probable ...](https://x.com/i/web/status/2121516022696132686) |
+| 2026-11-14 01:53 | 0 | 0 | 0 | 0 | [Curators now tie a Roman bronze leg found in a Scottish bog in 1820 to a statue of Anto...](https://x.com/i/web/status/2121421233279607187) |
 | 2026-11-12 23:57 | 0 | 0 | 0 | 0 | [A generator can start itself from the faint magnetism left in its iron: current strengt...](https://x.com/i/web/status/2121029684809044353) |
 | 2026-11-12 18:28 | 0 | 0 | 0 | 0 | [Euclid's first big data release covers 900+ million galaxies over 1,900 square degrees....](https://x.com/i/web/status/2120946735748898895) |
 | 2026-11-12 10:25 | 0 | 0 | 0 | 0 | [Zelensky says Starshield in Ukraine cuts out above 161 km/h (100 mph), which hampers ca...](https://x.com/i/web/status/2120825283590692898) |
 | 2026-11-12 02:34 | 0 | 0 | 0 | 0 | [Quebec's maple syrup reserve is "reduced to zero," its president says. The syrup didn't...](https://x.com/i/web/status/2120706783928893855) |
 | 2026-11-11 21:37 | 0 | 0 | 0 | 0 | [Spriggina, 550 million years old, had a handed body. Of 100+ specimens, about twice as ...](https://x.com/i/web/status/2120632008221036902) |
 | 2026-11-11 14:47 | 4 | 0 | 0 | 0 | [Voyager 1 reaches one light-day from Earth on Nov 18: 25.9 billion km.  • Light covers ...](https://x.com/i/web/status/2120528846986346527) |
-| 2026-11-11 06:43 | 0 | 0 | 0 | 0 | [Rocket Lab's Neutron has never flown, and its first 16 launches are already booked.  • ...](https://x.com/i/web/status/2120407162442657869) |
+| 2026-11-11 06:43 | 1 | 0 | 0 | 0 | [Rocket Lab's Neutron has never flown, and its first 16 launches are already booked.  • ...](https://x.com/i/web/status/2120407162442657869) |
 | 2026-11-11 00:08 | 0 | 0 | 0 | 0 | [Arctic ice cores show smelter metals up 15-fold by 1918, then down. A study ties both t...](https://x.com/i/web/status/2120307568266326448) |
 | 2026-11-10 18:55 | 4 | 0 | 0 | 0 | [A photo of Mount Taranaki is billed as 14,000 satellite trails. It holds about 1,400 sa...](https://x.com/i/web/status/2120228895135760851) |
 | 2026-11-10 11:52 | 1 | 0 | 0 | 0 | [A B meson almost never decays into two muons. Spin 0 forces a helicity flip, costing (0...](https://x.com/i/web/status/2120122492488708395) |
@@ -56,7 +58,5 @@ Average 2 views a post. Best so far: 42 (Route du Rhum 1978 margin).
 | 2026-11-01 07:40 | 1 | 0 | 0 | 0 | [Ritonavir launched in 1996 as one crystal form. In 1998 a more stable form appeared, le...](https://x.com/i/web/status/2116797550250557880) |
 | 2026-11-01 01:17 | 0 | 0 | 0 | 0 | [Power grids on five continents dip every 60 seconds, exactly. No plant or market schedu...](https://x.com/i/web/status/2116701101592334600) |
 | 2026-10-31 21:56 | 2 | 0 | 0 | 0 | [Poison kills a fixed share of flies, so the last ones cost the most. Sterile males run ...](https://x.com/i/web/status/2116650544982794375) |
-| 2026-10-31 18:39 | 4 | 0 | 0 | 0 | [Ray Davis's solar neutrino detector was a 615-ton tank of cleaning fluid. To prove he c...](https://x.com/i/web/status/2116600938483913014) |
-| 2026-10-31 13:58 | 2 | 0 | 0 | 0 | [Voyager 1 is due to reach one light-day from Earth on November 18. Light covers that in...](https://x.com/i/web/status/2116530189798642023) |
 
-_84 older posts not shown._
+_86 older posts not shown._
