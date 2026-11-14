@@ -36,7 +36,7 @@
     "modified": "Fri, 13 Nov 2026 17:07:48 GMT"
   },
   "https://rss.arxiv.org/rss/cs.AI": {
-    "etag": "284bd520ed6cf4907683ffcf3a9295524d5a7c379e931781890f0133ac2a76de"
+    "etag": "5240b2c417ea6e47c2a22821f15dd3f99f23886048a5c5c62671441934f3b0c2"
   },
   "https://rss.arxiv.org/rss/econ.GN": {
     "etag": "56966d6cadd091ee59aae28d33824a3e7dd900b7f32fa7acf422b4e6dab3310e"
@@ -57,11 +57,11 @@
     "modified": "Sat, 14 Nov 2026 00:01:02 GMT"
   },
   "https://www.404media.co/rss/": {
-    "etag": "W/\"1ba4c-g9lp+BjIcFYH6g6w7H16JB/bonE\""
+    "etag": "W/\"1bc28-92rYJtBPnfIygH5zLXYfZXU6L3o\""
   },
   "https://www.aljazeera.com/xml/rss/all.xml": {
-    "etag": "W/\"72fb4f1ba7b40c1b3520dd7d933cfcd1\"",
-    "modified": "Sat, 14 Nov 2026 15:00:00 GMT"
+    "etag": "W/\"e2a184c89815b3408c566d537152e1f9\"",
+    "modified": "Sat, 14 Nov 2026 19:37:56 GMT"
   },
   "https://www.astralcodexten.com/feed": {
     "etag": "W/\"c3d5a-UXCmIFaQnHmLjvuy7+3celA9sfE\""
@@ -92,7 +92,7 @@
     "modified": "Fri, 13 Nov 2026 17:04:21 GMT"
   },
   "https://www.sciencedaily.com/rss/top/science.xml": {
-    "modified": "Sat, 14 Nov 2026 04:26:34 GMT"
+    "modified": "Sat, 14 Nov 2026 12:48:38 GMT"
   },
   "https://www.sciencenews.org/feed": {
     "etag": "W/\"a01b6701ca7cfc022f3b7db92d5a4192\"",
@@ -109,12 +109,12 @@
     "modified": "Fri, 13 Nov 2026 21:38:09 GMT"
   },
   "https://www.theguardian.com/science/rss": {
-    "etag": "W/\"hash-986741599460555391\""
+    "etag": "W/\"hash-394788283254147844\""
   },
   "https://www.theguardian.com/world/rss": {
     "etag": "W/\"hash-4156600723298105675\""
   },
   "https://www.theverge.com/rss/index.xml": {
-    "etag": "W/\"9fa30c52ef92a43c45889b164735bf12\""
+    "etag": "W/\"9ce3dd35ed73f64bfbb5dd6048e4dfca\""
   }
 }
