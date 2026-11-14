@@ -39,10 +39,10 @@
     "etag": "284bd520ed6cf4907683ffcf3a9295524d5a7c379e931781890f0133ac2a76de"
   },
   "https://rss.arxiv.org/rss/econ.GN": {
-    "etag": "088189c579f93582dacfa5f5f65f668967ca459bc05d3729d07561261a4560e0"
+    "etag": "56966d6cadd091ee59aae28d33824a3e7dd900b7f32fa7acf422b4e6dab3310e"
   },
   "https://rss.arxiv.org/rss/q-bio.PE": {
-    "etag": "407cea0ab1621a4f762177b6a9dfa4b5d4c07f7af714497869d02fd6741dca2d"
+    "etag": "e9292bbd8bb4269c6f7d4a972fb2c66043a3f10aa47f2630e15a49d8be0684c2"
   },
   "https://rss.slashdot.org/Slashdot/slashdotMain": {
     "etag": "W/\"e682-6601d00a90d06\"",
@@ -53,18 +53,18 @@
     "modified": "Fri, 13 Nov 2026 19:00:55 GMT"
   },
   "https://techcrunch.com/feed/": {
-    "etag": "W/\"355ec8cd04a1315d9ef8cdd1aa1ada0b\"",
-    "modified": "Fri, 13 Nov 2026 15:19:58 GMT"
+    "etag": "W/\"59f0dd640adca7a731d232eac35943fd\"",
+    "modified": "Sat, 14 Nov 2026 00:01:02 GMT"
   },
   "https://www.404media.co/rss/": {
     "etag": "W/\"1ba4c-g9lp+BjIcFYH6g6w7H16JB/bonE\""
   },
   "https://www.aljazeera.com/xml/rss/all.xml": {
-    "etag": "W/\"e490942dd5b8d43d8c2b8580aa2cd8c5\"",
-    "modified": "Sat, 14 Nov 2026 01:33:45 GMT"
+    "etag": "W/\"72fb4f1ba7b40c1b3520dd7d933cfcd1\"",
+    "modified": "Sat, 14 Nov 2026 15:00:00 GMT"
   },
   "https://www.astralcodexten.com/feed": {
-    "etag": "W/\"c3d5a-hXBwCZoYICu4S0q2cP/PZ0fsNtQ\""
+    "etag": "W/\"c3d5a-UXCmIFaQnHmLjvuy7+3celA9sfE\""
   },
   "https://www.atlasobscura.com/feeds/latest": {
     "etag": "W/\"2690add3eed388b0a0fc02d40e0ac6b9\""
@@ -77,8 +77,8 @@
     "modified": "Fri, 13 Nov 2026 20:41:58 GMT"
   },
   "https://www.nasa.gov/news-release/feed/": {
-    "etag": "W/\"ef2faee14c19e65e54388f515d7dcfe0\"",
-    "modified": "Fri, 13 Nov 2026 23:20:44 GMT"
+    "etag": "W/\"b3423dfea91337380a0c5e4d4b292291\"",
+    "modified": "Sat, 14 Nov 2026 07:40:23 GMT"
   },
   "https://www.nature.com/nature.rss": {
     "etag": "\"902010fadd0efd3902bd5c4f43adfbe7\""
@@ -112,7 +112,7 @@
     "etag": "W/\"hash-986741599460555391\""
   },
   "https://www.theguardian.com/world/rss": {
-    "etag": "W/\"hash-1738335398769552771\""
+    "etag": "W/\"hash-4156600723298105675\""
   },
   "https://www.theverge.com/rss/index.xml": {
     "etag": "W/\"9fa30c52ef92a43c45889b164735bf12\""
