@@ -17,15 +17,15 @@
     "modified": "Sun, 15 Nov 2026 04:39:25 GMT"
   },
   "https://lobste.rs/rss": {
-    "etag": "\"dmus3wq7t3uo-c5g-gzip\"",
-    "modified": "Sat, 14 Nov 2026 08:08:51 GMT"
+    "etag": "\"dmvunfi6drmj-bvc-gzip\"",
+    "modified": "Sun, 15 Nov 2026 14:21:03 GMT"
   },
   "https://marginalrevolution.com/feed": {
     "etag": "\"25efb84b1fc797746e0b6d3cdb9866e2\"",
     "modified": "Fri, 13 Nov 2026 18:39:00 GMT"
   },
   "https://nautil.us/feed/": {
-    "etag": "W/\"8t33ydbhwo9o5\""
+    "etag": "W/\"11copq9vxbx8iy\""
   },
   "https://news.harvard.edu/gazette/feed/": {
     "etag": "W/\"ad0ed6cbc34aca5d0e0658fb74c3dc10\"",
@@ -36,7 +36,7 @@
     "modified": "Fri, 13 Nov 2026 17:07:48 GMT"
   },
   "https://rss.arxiv.org/rss/cs.AI": {
-    "etag": "5240b2c417ea6e47c2a22821f15dd3f99f23886048a5c5c62671441934f3b0c2"
+    "etag": "86935cfd833b5a9b4b6c6dd1a57d1ab0090b4e227c564b9c5d0184a6d16c5bac"
   },
   "https://rss.arxiv.org/rss/econ.GN": {
     "etag": "56966d6cadd091ee59aae28d33824a3e7dd900b7f32fa7acf422b4e6dab3310e"
@@ -53,8 +53,8 @@
     "modified": "Fri, 13 Nov 2026 19:00:55 GMT"
   },
   "https://techcrunch.com/feed/": {
-    "etag": "W/\"59f0dd640adca7a731d232eac35943fd\"",
-    "modified": "Sat, 14 Nov 2026 00:01:02 GMT"
+    "etag": "W/\"3239e21113093e00408e07859a278706\"",
+    "modified": "Sun, 15 Nov 2026 02:03:06 GMT"
   },
   "https://www.404media.co/rss/": {
     "etag": "W/\"1bc28-92rYJtBPnfIygH5zLXYfZXU6L3o\""
@@ -92,14 +92,14 @@
     "modified": "Fri, 13 Nov 2026 17:04:21 GMT"
   },
   "https://www.sciencedaily.com/rss/top/science.xml": {
-    "modified": "Sat, 14 Nov 2026 12:48:38 GMT"
+    "modified": "Sun, 15 Nov 2026 14:13:42 GMT"
   },
   "https://www.sciencenews.org/feed": {
     "etag": "W/\"d400d58beaa92a838a480d96b8e99e6d\"",
     "modified": "Sat, 14 Nov 2026 00:09:17 GMT"
   },
   "https://www.smithsonianmag.com/rss/latest_articles/": {
-    "modified": "Sun, 15 Nov 2026 06:41:16 GMT"
+    "modified": "Sun, 15 Nov 2026 14:13:01 GMT"
   },
   "https://www.technologyreview.com/feed/": {
     "etag": "W/\"bf9de80d7620c5639a0b43368220de65\"",
