@@ -45,8 +45,8 @@
     "etag": "e9292bbd8bb4269c6f7d4a972fb2c66043a3f10aa47f2630e15a49d8be0684c2"
   },
   "https://rss.slashdot.org/Slashdot/slashdotMain": {
-    "etag": "W/\"11d4c-6604ad65512a3\"",
-    "modified": "Sun, 15 Nov 2026 06:33:20 GMT"
+    "etag": "W/\"12e80-660590d78d5de\"",
+    "modified": "Sun, 15 Nov 2026 23:30:54 GMT"
   },
   "https://spectrum.ieee.org/feeds/feed.rss": {
     "etag": "\"1f4250d3c42eeacf30f86da1db0e993a\"",
@@ -57,7 +57,7 @@
     "modified": "Sun, 15 Nov 2026 18:49:44 GMT"
   },
   "https://www.404media.co/rss/": {
-    "etag": "W/\"1bc28-92rYJtBPnfIygH5zLXYfZXU6L3o\""
+    "etag": "W/\"1fdb3-3fkemyCUUqHJCql4a5GJqypaioE\""
   },
   "https://www.aljazeera.com/xml/rss/all.xml": {
     "etag": "W/\"61021e7e57b4b95271e34ab35e35aa56\"",
@@ -99,7 +99,7 @@
     "modified": "Sat, 14 Nov 2026 00:09:17 GMT"
   },
   "https://www.smithsonianmag.com/rss/latest_articles/": {
-    "modified": "Sun, 15 Nov 2026 14:13:01 GMT"
+    "modified": "Sun, 15 Nov 2026 23:33:55 GMT"
   },
   "https://www.technologyreview.com/feed/": {
     "etag": "W/\"bf9de80d7620c5639a0b43368220de65\"",
@@ -109,10 +109,10 @@
     "modified": "Sat, 14 Nov 2026 21:37:25 GMT"
   },
   "https://www.theguardian.com/science/rss": {
-    "etag": "W/\"hash-5538154594200195175\""
+    "etag": "W/\"hash5827689963329619730\""
   },
   "https://www.theguardian.com/world/rss": {
-    "etag": "W/\"hash1299845971337916467\""
+    "etag": "W/\"hash8217170279080299137\""
   },
   "https://www.theverge.com/rss/index.xml": {
     "etag": "W/\"93c5ee7ff345fb7610d43e7eaa910c41\""
