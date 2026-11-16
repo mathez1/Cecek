@@ -1,16 +1,16 @@
 # Views
 
-Updated 2026-11-15T14:57:03+00:00. 140 posts tracked.
+Updated 2026-11-16T17:25:16+00:00. 140 posts tracked.
 
-**292 views** · 3 likes · 1 replies · 10,912 reposts · 1 bookmarks
+**297 views** · 3 likes · 1 replies · 10,912 reposts · 1 bookmarks
 
 Average 2 views a post. Best so far: 42 (Route du Rhum 1978 margin).
 
 | Posted | Views | Likes | Replies | Reposts | Post |
 |---|---:|---:|---:|---:|---|
-| 2026-11-15 06:47 | 0 | 0 | 0 | 0 | [Gödel kept his private notebooks in Gabelsberger, a German shorthand officially replace...](https://x.com/i/web/status/2121857632378007648) |
-| 2026-11-14 23:59 | 2 | 0 | 0 | 0 | [US reportedly lost measles elimination status (WSJ via Reuters; PAHO hadn't commented)....](https://x.com/i/web/status/2121754823980941559) |
-| 2026-11-14 20:00 | 0 | 0 | 0 | 0 | [Duffy says a router flooded the FAA network on Nov 13, halting US departures. The inspe...](https://x.com/i/web/status/2121694809484054653) |
+| 2026-11-15 06:47 | 1 | 0 | 0 | 0 | [Gödel kept his private notebooks in Gabelsberger, a German shorthand officially replace...](https://x.com/i/web/status/2121857632378007648) |
+| 2026-11-14 23:59 | 5 | 0 | 0 | 0 | [US reportedly lost measles elimination status (WSJ via Reuters; PAHO hadn't commented)....](https://x.com/i/web/status/2121754823980941559) |
+| 2026-11-14 20:00 | 1 | 0 | 0 | 0 | [Duffy says a router flooded the FAA network on Nov 13, halting US departures. The inspe...](https://x.com/i/web/status/2121694809484054653) |
 | 2026-11-14 15:11 | 1 | 0 | 0 | 0 | [In 1930 Georges Claude, the neon-sign millionaire, built an ocean-heat plant in Cuba. I...](https://x.com/i/web/status/2121622149785870741) |
 | 2026-11-14 08:10 | 0 | 0 | 0 | 0 | [Purdue reexamined 46 skulls from First Dynasty royal tombs at Abydos: 18 show probable ...](https://x.com/i/web/status/2121516022696132686) |
 | 2026-11-14 01:53 | 0 | 0 | 0 | 0 | [Curators now tie a Roman bronze leg found in a Scottish bog in 1820 to a statue of Anto...](https://x.com/i/web/status/2121421233279607187) |
