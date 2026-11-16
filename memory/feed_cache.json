@@ -3,8 +3,8 @@
     "etag": "W/\"7fc9eb1bfdaf33200d14d5c60bc665b8\""
   },
   "https://bigthink.com/feed/": {
-    "etag": "W/\"b72e1ce7dba6c95288a35487f8c27f1f\"",
-    "modified": "Sat, 14 Nov 2026 07:20:59 GMT"
+    "etag": "W/\"ab2fdf747f9ac951554656f613dbdff1\"",
+    "modified": "Mon, 16 Nov 2026 00:33:07 GMT"
   },
   "https://feeds.arstechnica.com/arstechnica/index": {
     "etag": "\"40fa21eabe1c5c3cc9ad57b8a166fc67\"",
@@ -21,8 +21,8 @@
     "modified": "Sun, 15 Nov 2026 14:21:03 GMT"
   },
   "https://marginalrevolution.com/feed": {
-    "etag": "\"5c65dd369aeed95a15bb092055d2b331\"",
-    "modified": "Sun, 15 Nov 2026 17:26:25 GMT"
+    "etag": "\"4e51f13e6b1e6f7616828c7ed6be9db3\"",
+    "modified": "Mon, 16 Nov 2026 07:33:14 GMT"
   },
   "https://nautil.us/feed/": {
     "etag": "W/\"asxhlyy9wg8ht\""
@@ -42,7 +42,7 @@
     "etag": "56966d6cadd091ee59aae28d33824a3e7dd900b7f32fa7acf422b4e6dab3310e"
   },
   "https://rss.arxiv.org/rss/q-bio.PE": {
-    "etag": "e9292bbd8bb4269c6f7d4a972fb2c66043a3f10aa47f2630e15a49d8be0684c2"
+    "etag": "78152de7c281d2233f8347d95acc5e069b67b635132f5267d7cc08da03e28f99"
   },
   "https://rss.slashdot.org/Slashdot/slashdotMain": {
     "etag": "W/\"12e80-660590d78d5de\"",
@@ -64,13 +64,13 @@
     "modified": "Sat, 14 Nov 2026 23:40:00 GMT"
   },
   "https://www.astralcodexten.com/feed": {
-    "etag": "W/\"c3d5a-UXCmIFaQnHmLjvuy7+3celA9sfE\""
+    "etag": "W/\"c3d5a-RmZ3Qan0Q7I6JHpWvKYD47etwHE\""
   },
   "https://www.atlasobscura.com/feeds/latest": {
     "etag": "W/\"2690add3eed388b0a0fc02d40e0ac6b9\""
   },
   "https://www.construction-physics.com/feed": {
-    "etag": "W/\"e215d-LhwH+3Q7PR/O3VQ6w6TyuqbxygA\""
+    "etag": "W/\"e215d-IlalZuqiCGjObAWewKV6sY1/cgE\""
   },
   "https://www.economist.com/latest/rss.xml": {
     "etag": "W/\"fd8bd72371dd79a193857dfc1e13e48f\"",
@@ -109,7 +109,7 @@
     "modified": "Sat, 14 Nov 2026 21:37:25 GMT"
   },
   "https://www.theguardian.com/science/rss": {
-    "etag": "W/\"hash-4631474255539854150\""
+    "etag": "W/\"hash-4851644352123197071\""
   },
   "https://www.theguardian.com/world/rss": {
     "etag": "W/\"hash-7551837356484798338\""
