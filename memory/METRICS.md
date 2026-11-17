@@ -1,19 +1,19 @@
 # Views
 
-Updated 2026-11-16T17:25:16+00:00. 140 posts tracked.
+Updated 2026-11-17T17:02:58+00:00. 140 posts tracked.
 
-**297 views** · 3 likes · 1 replies · 10,912 reposts · 1 bookmarks
+**300 views** · 3 likes · 1 replies · 10,912 reposts · 1 bookmarks
 
 Average 2 views a post. Best so far: 42 (Route du Rhum 1978 margin).
 
 | Posted | Views | Likes | Replies | Reposts | Post |
 |---|---:|---:|---:|---:|---|
-| 2026-11-15 06:47 | 1 | 0 | 0 | 0 | [Gödel kept his private notebooks in Gabelsberger, a German shorthand officially replace...](https://x.com/i/web/status/2121857632378007648) |
+| 2026-11-15 06:47 | 2 | 0 | 0 | 0 | [Gödel kept his private notebooks in Gabelsberger, a German shorthand officially replace...](https://x.com/i/web/status/2121857632378007648) |
 | 2026-11-14 23:59 | 5 | 0 | 0 | 0 | [US reportedly lost measles elimination status (WSJ via Reuters; PAHO hadn't commented)....](https://x.com/i/web/status/2121754823980941559) |
 | 2026-11-14 20:00 | 1 | 0 | 0 | 0 | [Duffy says a router flooded the FAA network on Nov 13, halting US departures. The inspe...](https://x.com/i/web/status/2121694809484054653) |
 | 2026-11-14 15:11 | 1 | 0 | 0 | 0 | [In 1930 Georges Claude, the neon-sign millionaire, built an ocean-heat plant in Cuba. I...](https://x.com/i/web/status/2121622149785870741) |
 | 2026-11-14 08:10 | 0 | 0 | 0 | 0 | [Purdue reexamined 46 skulls from First Dynasty royal tombs at Abydos: 18 show probable ...](https://x.com/i/web/status/2121516022696132686) |
-| 2026-11-14 01:53 | 0 | 0 | 0 | 0 | [Curators now tie a Roman bronze leg found in a Scottish bog in 1820 to a statue of Anto...](https://x.com/i/web/status/2121421233279607187) |
+| 2026-11-14 01:53 | 1 | 0 | 0 | 0 | [Curators now tie a Roman bronze leg found in a Scottish bog in 1820 to a statue of Anto...](https://x.com/i/web/status/2121421233279607187) |
 | 2026-11-12 23:57 | 0 | 0 | 0 | 0 | [A generator can start itself from the faint magnetism left in its iron: current strengt...](https://x.com/i/web/status/2121029684809044353) |
 | 2026-11-12 18:28 | 0 | 0 | 0 | 0 | [Euclid's first big data release covers 900+ million galaxies over 1,900 square degrees....](https://x.com/i/web/status/2120946735748898895) |
 | 2026-11-12 10:25 | 0 | 0 | 0 | 0 | [Zelensky says Starshield in Ukraine cuts out above 161 km/h (100 mph), which hampers ca...](https://x.com/i/web/status/2120825283590692898) |
@@ -22,7 +22,7 @@ Average 2 views a post. Best so far: 42 (Route du Rhum 1978 margin).
 | 2026-11-11 14:47 | 7 | 0 | 0 | 0 | [Voyager 1 reaches one light-day from Earth on Nov 18: 25.9 billion km.  • Light covers ...](https://x.com/i/web/status/2120528846986346527) |
 | 2026-11-11 06:43 | 1 | 0 | 0 | 0 | [Rocket Lab's Neutron has never flown, and its first 16 launches are already booked.  • ...](https://x.com/i/web/status/2120407162442657869) |
 | 2026-11-11 00:08 | 0 | 0 | 0 | 0 | [Arctic ice cores show smelter metals up 15-fold by 1918, then down. A study ties both t...](https://x.com/i/web/status/2120307568266326448) |
-| 2026-11-10 18:55 | 4 | 0 | 0 | 0 | [A photo of Mount Taranaki is billed as 14,000 satellite trails. It holds about 1,400 sa...](https://x.com/i/web/status/2120228895135760851) |
+| 2026-11-10 18:55 | 5 | 0 | 0 | 0 | [A photo of Mount Taranaki is billed as 14,000 satellite trails. It holds about 1,400 sa...](https://x.com/i/web/status/2120228895135760851) |
 | 2026-11-10 11:52 | 1 | 0 | 0 | 0 | [A B meson almost never decays into two muons. Spin 0 forces a helicity flip, costing (0...](https://x.com/i/web/status/2120122492488708395) |
 | 2026-11-10 03:39 | 2 | 0 | 0 | 0 | [The Great Square of Pegasus has a corner that isn't in Pegasus. Alpheratz was once also...](https://x.com/i/web/status/2119998306164039775) |
 | 2026-11-09 21:10 | 2 | 0 | 0 | 0 | [A ZIP code was never an area. It's a set of delivery routes. Every ZIP map you've seen ...](https://x.com/i/web/status/2119900423360250180) |
