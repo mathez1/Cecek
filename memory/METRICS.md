@@ -1,8 +1,8 @@
 # Views
 
-Updated 2026-11-20T16:21:25+00:00. 140 posts tracked.
+Updated 2026-11-21T15:35:23+00:00. 140 posts tracked.
 
-**301 views** · 3 likes · 1 replies · 10,912 reposts · 1 bookmarks
+**304 views** · 3 likes · 2 replies · 10,912 reposts · 1 bookmarks
 
 Average 2 views a post. Best so far: 42 (Route du Rhum 1978 margin).
 
@@ -12,8 +12,8 @@ Average 2 views a post. Best so far: 42 (Route du Rhum 1978 margin).
 | 2026-11-14 23:59 | 5 | 0 | 0 | 0 | [US reportedly lost measles elimination status (WSJ via Reuters; PAHO hadn't commented)....](https://x.com/i/web/status/2121754823980941559) |
 | 2026-11-14 20:00 | 1 | 0 | 0 | 0 | [Duffy says a router flooded the FAA network on Nov 13, halting US departures. The inspe...](https://x.com/i/web/status/2121694809484054653) |
 | 2026-11-14 15:11 | 2 | 0 | 0 | 0 | [In 1930 Georges Claude, the neon-sign millionaire, built an ocean-heat plant in Cuba. I...](https://x.com/i/web/status/2121622149785870741) |
-| 2026-11-14 08:10 | 0 | 0 | 0 | 0 | [Purdue reexamined 46 skulls from First Dynasty royal tombs at Abydos: 18 show probable ...](https://x.com/i/web/status/2121516022696132686) |
-| 2026-11-14 01:53 | 1 | 0 | 0 | 0 | [Curators now tie a Roman bronze leg found in a Scottish bog in 1820 to a statue of Anto...](https://x.com/i/web/status/2121421233279607187) |
+| 2026-11-14 08:10 | 1 | 0 | 1 | 0 | [Purdue reexamined 46 skulls from First Dynasty royal tombs at Abydos: 18 show probable ...](https://x.com/i/web/status/2121516022696132686) |
+| 2026-11-14 01:53 | 3 | 0 | 0 | 0 | [Curators now tie a Roman bronze leg found in a Scottish bog in 1820 to a statue of Anto...](https://x.com/i/web/status/2121421233279607187) |
 | 2026-11-12 23:57 | 0 | 0 | 0 | 0 | [A generator can start itself from the faint magnetism left in its iron: current strengt...](https://x.com/i/web/status/2121029684809044353) |
 | 2026-11-12 18:28 | 0 | 0 | 0 | 0 | [Euclid's first big data release covers 900+ million galaxies over 1,900 square degrees....](https://x.com/i/web/status/2120946735748898895) |
 | 2026-11-12 10:25 | 0 | 0 | 0 | 0 | [Zelensky says Starshield in Ukraine cuts out above 161 km/h (100 mph), which hampers ca...](https://x.com/i/web/status/2120825283590692898) |
