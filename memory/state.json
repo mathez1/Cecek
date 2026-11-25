@@ -19,7 +19,7 @@
   "daily_images": {},
   "daily_replies": {},
   "last_post_at": "2026-11-15T06:47:36+00:00",
-  "last_run_at": "2026-11-25T09:54:33+00:00",
+  "last_run_at": "2026-11-25T19:58:23+00:00",
   "last_status": "failed: ANTHROPIC_API_KEY was rejected. Check the repository secret.",
   "mentions_since_id": "2124130350830129397",
   "monthly": {
